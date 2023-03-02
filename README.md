@@ -21,13 +21,15 @@
     Para mantener siempre un control y orden de todos estos datos.
 
 <h3 name="Características-y-tecnologias-de-la-aplicación">Caracteristicas y tecnologias de la aplicacion</h2>
-* Dependencias
-  *   JPA 
-  *   MySQL 
-  *   Swagger 
-  *   Spring web 
-  *   Lombok 
-  *   Mapper
+
+ * Dependencias
+
+   *   JPA 
+   *   MySQL 
+   *   Swagger 
+   *   Spring web 
+   *   Lombok 
+   *   Mapper
 * Tecnología Frontend
   *   React
 * Tecnología Backend
@@ -40,17 +42,23 @@
 
 <h3 name="personas-desarrolladores-y-contribuyentes">Personas desarrolladores y contrubuyentes del proyecto</h2>
 * Hector Sanchez
+
 * Frontend
+
   * Dalma Ponce
   * Damian Bettini
   * Sharon Ostrovky
   * Lautaro Heredia
+  
 * Backend
+
   * Mirna Diaz
   * Carla Marquez
   * Max Sauerbrey
   * Jasbir Singh
+  
 * Base de datos
+
   * Facundo Aguirre
 
 
