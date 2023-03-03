@@ -1,30 +1,47 @@
 package com.proyecto.b.s.service.serviceImpl;
 
 import com.proyecto.b.s.entity.Busqueda;
+import com.proyecto.b.s.repository.BusquedaRepository;
 import com.proyecto.b.s.service.service.BusquedaService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class BusquedaServiceImpl implements BusquedaService {
+    private final BusquedaRepository busquedaRepository;
+
+    public BusquedaServiceImpl(BusquedaRepository busquedaRepository) {
+        this.busquedaRepository = busquedaRepository;
+    }
+
     @Override
     public List<Busqueda> listarBusquedas() {
-        return null;
+        return busquedaRepository.findAll();
     }
 
     @Override
     public Busqueda guardarBusqueda(Busqueda busqueda) {
-        return null;
+        return busquedaRepository.save(busqueda);
     }
 
     @Override
-    public Busqueda actualizarBusqueda(Busqueda busqueda) {
-        return null;
+    public Busqueda actualizarBusqueda(Long id, String estado, String vacante) {
+        Busqueda entity = busquedaRepository.findById(id).orElse(null);
+        if (entity != null) {
+            entity.setEstado(estado);
+            entity.setVacantes(vacante);
+            busquedaRepository.save(entity);
+        }
+        return entity;
     }
-
     @Override
-    public void eliminarBusqueda(Long id) {
-
+    public void eliminarBusqueda(Long id) throws EntityNotFoundException {
+        Busqueda entity = busquedaRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Busqueda no encontrada con id: " + id));
+        if (entity == null) {
+            throw new EntityNotFoundException("Busqueda no encontrada con id: " + id);
+        }
+        busquedaRepository.delete(entity);
     }
 }

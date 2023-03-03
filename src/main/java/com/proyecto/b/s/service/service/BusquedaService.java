@@ -7,6 +7,6 @@ import java.util.List;
 public interface BusquedaService {
     List<Busqueda> listarBusquedas();
     Busqueda guardarBusqueda(Busqueda busqueda);
-    Busqueda actualizarBusqueda(Busqueda busqueda);
+    Busqueda actualizarBusqueda(Long id, String estado, String vacantes);
     void eliminarBusqueda(Long id);
 }
