@@ -7,6 +7,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BusquedaServiceImpl implements BusquedaService {
@@ -27,6 +28,11 @@ public class BusquedaServiceImpl implements BusquedaService {
     }
 
     @Override
+    public Optional<Busqueda> buscaPorId(Long id) {
+        return busquedaRepository.findById(id);
+    }
+
+    @Override
     public Busqueda actualizarBusqueda(Long id, String estado, String vacante) {
         Busqueda entity = busquedaRepository.findById(id).orElse(null);
         if (entity != null) {
@@ -36,6 +42,12 @@ public class BusquedaServiceImpl implements BusquedaService {
         }
         return entity;
     }
+
+    @Override
+    public boolean existePorId(Long id) {
+        return busquedaRepository.existsById(id);
+    }
+
     @Override
     public void eliminarBusqueda(Long id) throws EntityNotFoundException {
         Busqueda entity = busquedaRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Busqueda no encontrada con id: " + id));

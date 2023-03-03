@@ -14,18 +14,18 @@ public class Busqueda {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String linkJb;
-    private String rol;
-    private String seniority;
-    private String skills;
+    //private String linkJb;
+    //private String rol;
+    //private String seniority;
+   //private String skills;
     private String estado;
-    private Date fechaApertura;
-    private String jornadaTrabajo;
-    private String modalidadContratacion;
-    private String posicion;
-    private String remuneracion;
+    //private Date fechaApertura;
+    //private String jornadaTrabajo;
+    //private String modalidadContratacion;
+    //private String posicion;
+    //private String remuneracion;
     private String vacantes;
-    private String observaciones;
+    //private String observaciones;
 
     //Tiene cliente
 }
