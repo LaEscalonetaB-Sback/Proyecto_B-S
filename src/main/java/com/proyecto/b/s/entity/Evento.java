@@ -17,7 +17,6 @@ public class Evento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String formaContacto;
     private String idEntrevista;
     private Date fechaEvento;
 

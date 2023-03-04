@@ -2,6 +2,7 @@ package com.proyecto.b.s.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.SQLDelete;
 
 import java.util.Date;
 @Entity
@@ -17,6 +18,7 @@ public class Persona {
     private Long id;
     private String nombre;
     private String apellido;
+    private String dni;
     private String linkedin;
     private String fuenteContacto;
     private Date fechaContratacion;
@@ -25,7 +27,6 @@ public class Persona {
     private String rol;
     private String recruiter;
     private String seniority;
-    private String dni;
     private String email;
     private String cuil;
     private String telefono;
