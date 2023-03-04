@@ -9,10 +9,11 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-@Table(name = "estado")
-public class Estado {
+@Table(name = "Rol")
+public class Rol {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nombre;
+    private String name;
 }
