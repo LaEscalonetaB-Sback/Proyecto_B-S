@@ -16,4 +16,6 @@ public class Seniority {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
+
+
 }

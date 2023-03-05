@@ -2,8 +2,6 @@ package com.proyecto.b.s.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import java.util.Date;
-import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -11,15 +9,11 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-@Table(name = "entrevista")
-public class Entrevista {
+@Table(name = "Industry")
+public class Industria {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String mailPersona;
-    private String mailRecruiter;
-    private Date fechaEntrevista;
-    private String linkMeet;
-
-
+    private String nombre;
 }

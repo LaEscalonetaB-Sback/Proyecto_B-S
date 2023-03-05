@@ -9,9 +9,8 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-@Table(name = "Industry")
-public class Industry {
-
+@Table(name = "estado")
+public class EstadoBusqueda {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
+import java.util.List;
+
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,10 +20,7 @@ public class Persona {
     private String nombre;
     private String apellido;
     private String linkedin;
-    private String fuenteContacto;
     private Date fechaContratacion;
-    private String estado;
-    private String skills;
     private String rol;
     private String recruiter;
     private String seniority;
@@ -30,5 +29,22 @@ public class Persona {
     private String cuil;
     private String telefono;
     private String remuneracion;
-    private String industria;
+
+
+    @ManyToMany
+    private List<Skill> skills;
+
+    @ManyToMany
+    private List <Industria> industrias;
+
+    @ManyToMany
+    private List<Fuente> fuentes;
+
+    @ManyToMany
+    private List <Rol> roles;
+
+    @ManyToMany
+    private List<EstadoPersona> estadosPersonas;
+
+
 }
