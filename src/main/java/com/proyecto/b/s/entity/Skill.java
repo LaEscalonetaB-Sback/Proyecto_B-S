@@ -3,6 +3,8 @@ package com.proyecto.b.s.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,5 +17,11 @@ public class Skill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Integer id_seniority;
+
+    private String nombre;
+
+    @OneToMany
+    private List<Seniority> seniority;
+
+
 }

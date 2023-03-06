@@ -3,6 +3,8 @@ package com.proyecto.b.s.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.Date;
+import java.util.List;
+
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,18 +16,31 @@ public class Busqueda {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    //private String linkJb;
-    //private String rol;
-    //private String seniority;
-   //private String skills;
-    private String estado;
-    //private Date fechaApertura;
-    //private String jornadaTrabajo;
-    //private String modalidadContratacion;
-    //private String posicion;
-    //private String remuneracion;
+    private String linkJb;
+    private Date fechaApertura;
+    private String jornadaTrabajo;
+    private String modalidadContratacion;
+    private String posicion;
+    private String remuneracion;
     private String vacantes;
-    //private String observaciones;
+    private String observaciones;
 
-    //Tiene cliente
+
+    @ManyToMany()
+    private List<EstadoBusqueda> estadoBusquedas;
+
+    @ManyToMany
+    private List<Skill> skills;
+
+    @OneToOne()
+    private Rol rol;
+
+    @OneToOne()
+    private Cliente cliente;
+
+
+
+
+
+
 }

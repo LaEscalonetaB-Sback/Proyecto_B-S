@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -17,13 +18,28 @@ public class Evento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String formaContacto;
-    private String idEntrevista;
+
     private Date fechaEvento;
 
-    //Tiene busqueda
-    //Tiene persona
-    //Tiene usuario
-    //Tiene entrevista
-    //Tiene estado
+    @OneToMany
+    private List<EventoOpcion> eventos;
+
+    @ManyToOne
+    private Usuario usuario;
+
+    @OneToOne
+    private Persona persona;
+
+    @OneToOne
+    private Busqueda busqueda;
+
+    @OneToMany
+    private List<Entrevista> entrevistas;
+
+
+
+
+
+
+
 }
