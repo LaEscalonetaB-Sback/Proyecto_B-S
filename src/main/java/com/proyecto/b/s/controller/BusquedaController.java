@@ -19,24 +19,22 @@ public class BusquedaController {
 
     //CRUD
     //Lista de busquedas
-    @GetMapping("/")
-    public List<Busqueda> findAll(){
-        return busquedaService.listarBusquedas();
+    @GetMapping("/lista")
+    public List<Busqueda> findAll(@RequestParam(required = false) String cliente,
+                                  @RequestParam(required = false) String rol,
+                                  @RequestParam(required = false) String estado){
+        return busquedaService.listarBusquedas(cliente, rol, estado);
     }
 
     //Encuentra busqueda por id
     @GetMapping("/{id}")
     public ResponseEntity<Busqueda> findOne(@PathVariable Long id){
         Optional<Busqueda> busquedaOpt = busquedaService.buscaPorId(id);
-        if (busquedaOpt.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        } else {
-            return ResponseEntity.ok(busquedaOpt.get());
-        }
+        return busquedaOpt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     //Crear busqueda
-    @PostMapping("/api/crear")
+    @PostMapping("/crear")
     public ResponseEntity<Busqueda> create(@RequestBody Busqueda busqueda){
         if (busqueda.getId() != null){
             return ResponseEntity.badRequest().build();
@@ -46,7 +44,7 @@ public class BusquedaController {
     }
 
     //Actualizar busqueda
-    @PutMapping("/api/actualizar")
+    @PutMapping("/actualizar")
     public ResponseEntity<Busqueda> update(@RequestBody Busqueda busqueda){
         if (busqueda.getId() == null){
             return ResponseEntity.badRequest().build();
@@ -59,7 +57,7 @@ public class BusquedaController {
     }
 
     //Eliminar busqueda por id
-    @DeleteMapping("/api/eliminar/{id}")
+    @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<Busqueda> delete(@PathVariable Long id){
         busquedaService.eliminarBusqueda(id);
         return ResponseEntity.noContent().build();
