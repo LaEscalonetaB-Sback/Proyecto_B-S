@@ -1,9 +1,10 @@
 package com.proyecto.b.s.entity;
 
-import jakarta.persistence.*;
+
 import lombok.*;
 
-import java.util.List;
+import javax.persistence.*;
+
 
 @Entity
 @NoArgsConstructor
