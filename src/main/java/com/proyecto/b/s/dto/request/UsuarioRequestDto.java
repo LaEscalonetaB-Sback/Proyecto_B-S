@@ -2,7 +2,6 @@ package com.proyecto.b.s.dto.request;
 
 public class UsuarioRequestDto {
 
-    private Long id;
     private String email;
     private String clave;
     private String nombre;
@@ -11,21 +10,14 @@ public class UsuarioRequestDto {
     public UsuarioRequestDto() {
     }
 
-    public UsuarioRequestDto(Long id, String email, String clave, String nombre, String apellido) {
-        this.id = id;
+    public UsuarioRequestDto(String email, String clave, String nombre, String apellido) {
         this.email = email;
         this.clave = clave;
         this.nombre = nombre;
         this.apellido = apellido;
     }
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getEmail() {
         return email;

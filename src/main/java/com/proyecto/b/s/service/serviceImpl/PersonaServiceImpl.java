@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PersonaServiceImpl implements PersonaService {
@@ -20,14 +21,20 @@ public class PersonaServiceImpl implements PersonaService {
     }
 
     @Override
-    public List<Persona> listarPersonas() {
-       return personaRepository.findAll();
-    }
-
-    @Override
     public Persona guardarPersona(Persona persona) {
         return personaRepository.save(persona);
     }
+    @Override
+    public List<Persona> listarPersonas() {
+        List <Persona> listaAux = personaRepository.findAll();
+
+        final List<Persona> personasActivas =
+                listaAux.stream()
+                        .filter(persona -> persona.getActivo())
+                        .collect(Collectors.toList());
+        return personasActivas;
+    }
+
 
 
     @Override
@@ -49,18 +56,17 @@ public class PersonaServiceImpl implements PersonaService {
         to.setNombre(from.getNombre());
         to.setDni(from.getDni());
         to.setLinkedin(from.getLinkedin());
-        //to.setFuenteContacto(from.getFuenteContacto());
+        to.setFuentes(from.getFuentes());
         to.setFechaContratacion(from.getFechaContratacion());
-        //to.setEstado(from.getEstado());
-        //to.setSkills(from.getSkills());
-        to.setRol(from.getRol());
+        to.setEstadosPersonas(from.getEstadosPersonas());
+        to.setSkills(from.getSkills());
         to.setRecruiter(from.getRecruiter());
-        //to.setSeniority(from.getSeniority());
+        to.setSeniority(from.getSeniority());
         to.setEmail(from.getEmail());
         to.setCuil(from.getCuil());
         to.setTelefono(from.getTelefono());
         to.setRemuneracion(from.getRemuneracion());
-        to.setIndustria(from.getIndustria());
+        to.setIndustrias(from.getIndustrias());
 
     }
 
@@ -69,7 +75,9 @@ public class PersonaServiceImpl implements PersonaService {
         Persona persona = personaRepository.findById(id)
                 .orElseThrow(()-> new Exception("Persona no encontrada -" + this.getClass().getName()));
 
-        personaRepository.delete(persona);
+//        personaRepository.delete(persona);
+        persona.setActivo(false);
     }
+
 
 }

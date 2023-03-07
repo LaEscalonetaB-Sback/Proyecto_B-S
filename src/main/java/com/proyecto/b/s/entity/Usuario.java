@@ -3,6 +3,7 @@ package com.proyecto.b.s.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,5 +20,5 @@ public class Usuario {
     private String nombre;
     private String apellido;
 
-    //Tine eventos
+
 }

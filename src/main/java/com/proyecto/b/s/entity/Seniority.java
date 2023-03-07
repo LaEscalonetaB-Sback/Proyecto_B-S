@@ -1,7 +1,9 @@
 package com.proyecto.b.s.entity;
 
-import jakarta.persistence.*;
+
 import lombok.*;
+
+import javax.persistence.*;
 
 @Entity
 @NoArgsConstructor
@@ -16,4 +18,5 @@ public class Seniority {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
+
 }

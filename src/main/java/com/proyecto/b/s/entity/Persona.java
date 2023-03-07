@@ -1,10 +1,13 @@
 package com.proyecto.b.s.entity;
 
-import jakarta.persistence.*;
-import lombok.*;
-import org.hibernate.annotations.SQLDelete;
 
+import lombok.*;
+
+
+import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
+
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,16 +23,30 @@ public class Persona {
     private String apellido;
     private String dni;
     private String linkedin;
-    private String fuenteContacto;
     private Date fechaContratacion;
-    private String estado;
-    private String skills;
-    private String rol;
     private String recruiter;
     private String seniority;
     private String email;
     private String cuil;
     private String telefono;
     private String remuneracion;
-    private String industria;
+    private Boolean activo = true;
+
+
+    @ManyToMany
+    private List<Skill> skills;
+
+    @ManyToMany
+    private List <Industria> industrias;
+
+    @ManyToMany
+    private List<Fuente> fuentes;
+
+    @ManyToMany
+    private List <Rol> roles;
+
+    @ManyToMany
+    private List<EstadoPersona> estadosPersonas;
+
+
 }

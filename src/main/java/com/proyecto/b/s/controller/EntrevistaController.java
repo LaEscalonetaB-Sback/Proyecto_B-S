@@ -1,7 +1,8 @@
 package com.proyecto.b.s.controller;
 
-import org.springframework.stereotype.Controller;
 
-@Controller
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
 public class EntrevistaController {
 }

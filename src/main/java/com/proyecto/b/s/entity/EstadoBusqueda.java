@@ -1,7 +1,8 @@
 package com.proyecto.b.s.entity;
 
-import jakarta.persistence.*;
 import lombok.*;
+
+import javax.persistence.*;
 
 @Entity
 @NoArgsConstructor
@@ -9,9 +10,8 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-@Table(name = "Industry")
-public class Industry {
-
+@Table(name = "estado")
+public class EstadoBusqueda {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

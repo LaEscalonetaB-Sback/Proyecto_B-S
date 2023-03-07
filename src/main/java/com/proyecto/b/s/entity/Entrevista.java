@@ -1,8 +1,10 @@
 package com.proyecto.b.s.entity;
 
-import jakarta.persistence.*;
 import lombok.*;
+
+import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -19,5 +21,6 @@ public class Entrevista {
     private String mailRecruiter;
     private Date fechaEntrevista;
     private String linkMeet;
+
 
 }
