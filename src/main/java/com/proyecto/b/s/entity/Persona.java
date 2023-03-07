@@ -1,8 +1,8 @@
 package com.proyecto.b.s.entity;
 
-import jakarta.persistence.*;
 import lombok.*;
 
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
@@ -23,7 +23,7 @@ public class Persona {
     private Date fechaContratacion;
     private String rol;
     private String recruiter;
-    private String seniority;
+    private String seniorityGeneral;
     private String dni;
     private String email;
     private String cuil;

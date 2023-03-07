@@ -1,9 +1,8 @@
 package com.proyecto.b.s.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.persistence.*;
 import lombok.*;
+
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
@@ -14,7 +13,6 @@ import java.util.List;
 @Setter
 @ToString
 @Table(name = "busqueda")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Busqueda {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,4 +43,10 @@ public class Busqueda {
 
     @OneToOne()
     private Cliente cliente;
+
+
+
+
+
+
 }
