@@ -11,17 +11,16 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-@Table(name = "Skill")
+@Table(name = "skill")
 public class Skill {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nombre;
+    private String name;
 
-    @OneToMany
-    private List<Seniority> seniority;
+
 
 
 }
