@@ -11,12 +11,12 @@ import javax.persistence.*;
 @Getter
 @Setter
 @ToString
-@Table(name = "Seniority")
+@Table(name = "seniority")
 public class Seniority {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nombre;
+    private String name;
 
 }

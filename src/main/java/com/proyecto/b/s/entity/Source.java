@@ -1,9 +1,9 @@
 package com.proyecto.b.s.entity;
+//fuente -> source
 
 import lombok.*;
 
 import javax.persistence.*;
-
 
 @Entity
 @NoArgsConstructor
@@ -11,19 +11,12 @@ import javax.persistence.*;
 @Getter
 @Setter
 @ToString
-@Table(name = "skill")
-public class Skill {
+@Table(name = "fuente")
+public class Source {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
-
-
-    @OneToOne
-    private Seniority seniority;
-
-
-
 }
