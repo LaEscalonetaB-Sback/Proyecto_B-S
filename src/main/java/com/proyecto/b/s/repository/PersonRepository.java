@@ -23,7 +23,7 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
     @Query("SELECT p FROM Person p INNER JOIN p.skills s WHERE s.name = :skills")
     List<Person> findBySkill(@Param("skills") String skills);
     @Query ("SELECT p FROM Person p INNER JOIN p.skills s WHERE s.name = :skills AND p.seniorityGeneral = :seniority ")
-    List <Person> findBySenioritySkill (@Param("skills")String skills, @Param("rol")String rol);
+    List <Person> findBySenioritySkill(@Param("skills")String skills, @Param("seniority")String seniority);
     @Query("SELECT p FROM Person p INNER JOIN p.skills s INNER JOIN p.roles r WHERE r.name = :rol AND s.name = :skills")
     List<Person> findByRolSkill(@Param("rol") String rol,@Param("skills")String skills);
     @Query("SELECT p FROM Person p INNER JOIN p.roles r WHERE r.name = :rol AND p.seniorityGeneral =:seniority")
@@ -34,7 +34,7 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
     List<Person> findByNameCompleteSeniority(@Param("seniority")String seniority,@Param("nameComplete") String nameComplete );
     @Query("SELECT p FROM Person p INNER JOIN p.roles r WHERE p.nameComplete = :nameComplete AND r.name = :rol")
     List<Person> findByNameCompleteRol(@Param("nameComplete")String nameComplete, @Param("rol")String rol);
-    @Query("SELECT p FROM Person p INNER JOIN p.roles r INNER JOIN p.skills s WHERE r.name = :rol AND p.seniorityGeneral = :seniority AND s.name = :skills")
+   @Query("SELECT p FROM Person p INNER JOIN p.roles r INNER JOIN p.skills s WHERE r.name = :rol AND p.seniorityGeneral = :seniority AND s.name = :skills")
     List<Person> findByRolSenioritySkill (@Param ("rol") String rol,@Param("seniority") String seniority,@Param ("skills") String skills);
     @Query("SELECT p FROM Person p INNER JOIN p.skills s WHERE p.nameComplete = :nameComplete AND p.seniorityGeneral = :seniority AND s.name = :skills")
     List <Person> findByNameCompleteSenioritySkill (@Param ("nameComplete") String nameComplete,@Param ("seniority") String seniority,@Param ("skills") String skills);
