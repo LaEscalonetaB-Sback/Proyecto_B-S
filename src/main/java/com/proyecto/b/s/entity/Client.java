@@ -1,9 +1,11 @@
 package com.proyecto.b.s.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+
 import java.util.List;
 
 @Entity
@@ -12,16 +14,13 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-@Table(name = "skill")
-public class Skill {
-
+@Table(name = "estado")
+public class EstadoBusqueda {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @OneToOne
-    private Seniority seniority;
-    @ManyToMany(mappedBy = "skills")
+    @ManyToMany(mappedBy = "estadoBusquedas")
     @JsonBackReference
     private List<Busqueda> busquedas;
 }
