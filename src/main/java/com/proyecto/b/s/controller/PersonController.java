@@ -37,7 +37,7 @@ public class PersonController {
     @GetMapping("/{id}")
     public ResponseEntity<Person> findById(@PathVariable Long id) throws Exception {
         Optional<Person> PersonOpt = Optional.ofNullable(personService.obtainPersonId(id));
-        if (PersonOpt.isEmpty()) {
+        if (!PersonOpt.isPresent()) {
             return ResponseEntity.notFound().build();
         } else {
             return ResponseEntity.ok(PersonOpt.get());
