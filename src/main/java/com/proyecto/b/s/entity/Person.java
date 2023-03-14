@@ -2,7 +2,7 @@ package com.proyecto.b.s.entity;
 
 import lombok.*;
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -18,7 +18,7 @@ public class Person {
     private Long id;
     private String nameComplete;
     private String linkedin;
-    private Date dateHiring;
+    private LocalDate dateHiring;
     private String recruiter;
     private String seniorityGeneral;
     private String dni;
@@ -29,19 +29,19 @@ public class Person {
     private boolean active;
 
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.ALL})
     private List<Skill> skills;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.ALL})
     private List <Industry> industries;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.ALL})
     private List<Source> sources;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.ALL})
     private List <Rol> roles;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.ALL})
     private List<StatePerson> statePeople;
 
 

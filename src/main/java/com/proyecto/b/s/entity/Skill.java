@@ -21,9 +21,6 @@ public class Skill {
     private String name;
 
 
-    @OneToOne
-    private Seniority seniority;
-
 
 
 }
