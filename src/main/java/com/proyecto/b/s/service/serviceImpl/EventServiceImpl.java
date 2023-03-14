@@ -8,23 +8,24 @@ import java.util.List;
 
 @Service
 public class EventServiceImpl implements EventService {
+
     @Override
-    public List<Event> listarEventos() {
+    public List<Event> listEvent() {
         return null;
     }
 
     @Override
-    public Event guardarEvento(Event evento) {
+    public Event saveEvent(Event event) {
         return null;
     }
 
     @Override
-    public Event actualizarEvento(Event evento) {
+    public Event updateEvent(Event event) {
         return null;
     }
 
     @Override
-    public void eliminarEvento(Long id) {
+    public void deleteEvent(Long id) {
 
     }
 }

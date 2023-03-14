@@ -1,12 +1,16 @@
 package com.proyecto.b.s.service.service;
 
-import com.proyecto.b.s.entity.Search;
+import com.proyecto.b.s.entity.*;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface SearchService {
-    List<Search> listarBusquedas();
-    Search guardarBusqueda(Search busqueda);
-    Search actualizarBusqueda(Search busqueda);
-    void eliminarBusqueda(Long id);
+    Search saveSearch(Search search);
+    Optional<Search> findById(Long id);
+    //Busqueda actualizarBusqueda(Long id, String estado, int vacantes);
+    boolean existById(Long id);
+    void deleteSearch(Long id);
+    List<Search> listSearch(Client client, Rol rol, StateSearch state, Seniority seniority, String skills);
+
 }

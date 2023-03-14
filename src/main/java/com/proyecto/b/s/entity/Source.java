@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @ToString
-@Table(name = "fuente")
+@Table(name = "source")
 public class Source {
 
     @Id

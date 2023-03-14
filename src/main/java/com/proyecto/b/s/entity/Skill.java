@@ -23,5 +23,5 @@ public class Skill {
     private Seniority seniority;
     @ManyToMany(mappedBy = "skills")
     @JsonBackReference
-    private List<Busqueda> busquedas;
+    private List<Search> search;
 }
