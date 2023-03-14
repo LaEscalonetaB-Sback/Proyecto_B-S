@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/bs/persons")
+@RequestMapping("/bs/person")
 public class PersonController {
 
     private PersonService personService;
@@ -24,7 +24,7 @@ public class PersonController {
 
 
     //Lista de busquedas
-    @GetMapping("/lista")
+    @GetMapping("/list")
     public List<Person> findAll(@RequestParam(required = false) String nameComplete,
                                 @RequestParam(required = false) String rol,
                                 @RequestParam(required = false) String seniority,

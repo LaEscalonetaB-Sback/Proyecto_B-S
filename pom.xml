@@ -91,10 +91,6 @@
 				<configuration>
 					<source>14</source>
 					<target>14</target>
-
-					<source>14</source>
-					<target>14</target>
-
 				</configuration>
 			</plugin>
 		</plugins>

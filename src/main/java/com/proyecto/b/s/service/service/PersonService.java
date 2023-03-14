@@ -1,7 +1,7 @@
 package com.proyecto.b.s.service.service;
 
 import com.proyecto.b.s.entity.Person;
-import com.proyecto.b.s.entity.Persona;
+
 
 import java.util.List;
 

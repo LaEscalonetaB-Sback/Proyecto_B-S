@@ -22,11 +22,11 @@ public class PersonServiceImpl implements PersonService {
     }
 
 
-
     @Override
     public Person create(Person person) {
         return personRepository.save(person);
     }
+
 
     @Override
     public List<Person> list(String nameComplete, String rol, String seniority, String skill){
@@ -84,6 +84,7 @@ public class PersonServiceImpl implements PersonService {
             return "todos";
         }
     }
+
 
 
     @Override
