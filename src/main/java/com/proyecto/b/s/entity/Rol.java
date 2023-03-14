@@ -20,6 +20,6 @@ public class Rol {
     private Long id;
     private String name;
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     private Seniority seniority;
 }
