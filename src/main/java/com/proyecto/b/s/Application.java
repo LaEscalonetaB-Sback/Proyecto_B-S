@@ -14,13 +14,6 @@ public class Application {
 		UserRepository repository= context.getBean(UserRepository.class);
 
 
-	//	Usuario usuario1 = new Usuario(null, "mcarlaalexia@gmail.com", "1234", "Carla", "Marquez");
-	//	Usuario usuario2 = new Usuario (null, "maxsauerbrey@gmail.com","12345","Max","Sauerbrey");
-     //	Usuario usuario3 = new Usuario (null, "lalal@gmail.com","12345","La","Lala");
-
-	//	repository.save(usuario1);
-		//repository.save(usuario2);
-		//repository.save(usuario3);
 	}
 
 }
