@@ -1,6 +1,10 @@
 package com.proyecto.b.s.controller;
 
-import com.proyecto.b.s.entity.Busqueda;
+import com.proyecto.b.s.entity.*;
+import com.proyecto.b.s.repository.ClienteRepository;
+import com.proyecto.b.s.repository.EstadoRepository;
+import com.proyecto.b.s.repository.RolRepository;
+import com.proyecto.b.s.repository.SeniorityRepository;
 import com.proyecto.b.s.service.service.BusquedaService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,18 +16,52 @@ import java.util.Optional;
 @RequestMapping("/bs/busqueda")
 public class BusquedaController {
     private final BusquedaService busquedaService;
-
-    public BusquedaController(BusquedaService busquedaService) {
+    private final ClienteRepository clienteRepository;
+    private final RolRepository rolRepository;
+    private final EstadoRepository estadoRepository;
+    private final SeniorityRepository seniorityRepository;
+    public BusquedaController(BusquedaService busquedaService, ClienteRepository clienteRepository, RolRepository rolRepository, EstadoRepository estadoRepository, SeniorityRepository seniorityRepository) {
         this.busquedaService = busquedaService;
+        this.clienteRepository = clienteRepository;
+        this.rolRepository = rolRepository;
+        this.estadoRepository = estadoRepository;
+        this.seniorityRepository = seniorityRepository;
     }
 
     //CRUD
     //Lista de busquedas
     @GetMapping("/lista")
-    public List<Busqueda> findAll(@RequestParam(required = false) String cliente,
-                                  @RequestParam(required = false) String rol,
-                                  @RequestParam(required = false) String estado){
-        return busquedaService.listarBusquedas(cliente, rol, estado);
+    public ResponseEntity<List<Busqueda>> buscarBusquedas(
+            @RequestParam(required = false) String cliente,
+            @RequestParam(required = false) String rol,
+            @RequestParam(required = false) String estado,
+            @RequestParam(required = false) String seniority,
+            @RequestParam(required = false) String skills) {
+        Cliente clienteObj = null;
+        Rol rolObj = null;
+        EstadoBusqueda estadoObj = null;
+        Seniority seniorityObj = null;
+
+        if (cliente != null) {
+            clienteObj = clienteRepository.findByNombre(cliente);
+        }
+        if (rol != null) {
+            rolObj = rolRepository.findByNombre(rol);
+        }
+        if (estado != null) {
+            estadoObj = estadoRepository.findByNombre(estado);
+        }
+        if (seniority != null) {
+            seniorityObj = seniorityRepository.findByNombre(seniority);
+        }
+
+        List<Busqueda> busquedas = busquedaService.listarBusquedas(clienteObj, rolObj, estadoObj, seniorityObj, skills);
+
+        if (busquedas.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(busquedas);
+        }
     }
 
     //Encuentra busqueda por id

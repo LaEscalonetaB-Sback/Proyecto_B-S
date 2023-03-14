@@ -1,5 +1,7 @@
 package com.proyecto.b.s.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -18,8 +20,7 @@ public class EstadoBusqueda {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
-
-    @JsonIgnore
     @ManyToMany(mappedBy = "estadoBusquedas")
+    @JsonBackReference
     private List<Busqueda> busquedas;
 }

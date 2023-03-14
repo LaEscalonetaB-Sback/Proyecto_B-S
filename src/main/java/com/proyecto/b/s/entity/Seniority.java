@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @ToString
-@Table(name = "Seniority")
+@Table(name = "seniority")
 public class Seniority {
 
     @Id

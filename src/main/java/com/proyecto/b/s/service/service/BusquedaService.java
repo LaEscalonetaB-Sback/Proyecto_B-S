@@ -1,6 +1,6 @@
 package com.proyecto.b.s.service.service;
 
-import com.proyecto.b.s.entity.Busqueda;
+import com.proyecto.b.s.entity.*;
 
 import java.util.Date;
 import java.util.List;
@@ -12,12 +12,6 @@ public interface BusquedaService {
     //Busqueda actualizarBusqueda(Long id, String estado, int vacantes);
     boolean existePorId(Long id);
     void eliminarBusqueda(Long id);
-
-    //QUERYS
-    List<Busqueda> listarBusquedas(String nombre, String rol, String estado);
-    List<Busqueda> encontrarPorNombre(String nombre);
-    List<Busqueda> encocontrarPorRol(String rol);
-    List<Busqueda> encontrarPorEstado(String estado);
-    //Busqueda encontrarPorFecha(Date fecha);
+    List<Busqueda> listarBusquedas(Cliente cliente, Rol rol, EstadoBusqueda estado, Seniority seniority, String skills);
 
 }
