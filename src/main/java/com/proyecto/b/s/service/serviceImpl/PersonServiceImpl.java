@@ -30,24 +30,40 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public List<Person> list(String nameComplete, String rol, String seniority, String skill){
-        return switch (typePerson(nameComplete, rol, seniority, skill)) {
-            case "nameCompleteRolSenioritySkill" -> personRepository.findByNameCompleteRolSenioritySkill(nameComplete, rol, seniority,skill);
-            case "nameCompleteRolSeniority" -> personRepository.findByNameCompleteRolSeniority(nameComplete, rol, seniority);
-            case "nameCompleteRolSkill" -> personRepository.findByNameCompleteRolSkill(nameComplete,rol,skill);
-            case "nameCompleteSenioritySkill" -> personRepository.findByNameCompleteSenioritySkill(nameComplete,seniority,skill);
-            case "rolSenioritySkill" -> personRepository.findByRolSenioritySkill(rol,seniority,skill);
-            case "nameCompleteRol" -> personRepository.findByNameCompleteRol(nameComplete, rol);
-            case "nameCompleteSeniority" -> personRepository.findByNameCompleteSeniority(nameComplete, seniority);
-            case "nameCompleteSkill" -> personRepository.findByNameCompleteSkill(nameComplete,skill);
-            case "rolSeniority" -> personRepository.findByRolSeniority(rol, seniority);
-            case "rolSkill" -> personRepository.findByRolSkill(rol, skill);
-            case "senioritySkill" -> personRepository.findBySenioritySkill(seniority,skill);
-            case "nameComplete" -> personRepository.findByNameComplete(nameComplete);
-            case "rol" -> personRepository.findByRol(rol);
-            case "seniority" -> personRepository.findBySeniority(seniority);
-            case "skill" -> personRepository.findBySkill(skill);
-            default -> personRepository.findAll().stream().filter(Person::isActive).collect(Collectors.toList());
-        };
+        switch (typePerson(nameComplete, rol, seniority, skill)) {
+            case "nameCompleteRolSenioritySkill":
+                return personRepository.findByNameCompleteRolSenioritySkill(nameComplete, rol, seniority, skill);
+            case "nameCompleteRolSeniority":
+                return personRepository.findByNameCompleteRolSeniority(nameComplete, rol, seniority);
+            case "nameCompleteRolSkill":
+                return personRepository.findByNameCompleteRolSkill(nameComplete, rol, skill);
+            case "nameCompleteSenioritySkill":
+                return personRepository.findByNameCompleteSenioritySkill(nameComplete, seniority, skill);
+            case "rolSenioritySkill":
+                return personRepository.findByRolSenioritySkill(rol, seniority, skill);
+            case "nameCompleteRol":
+                return personRepository.findByNameCompleteRol(nameComplete, rol);
+            case "nameCompleteSeniority":
+                return personRepository.findByNameCompleteSeniority(nameComplete, seniority);
+            case "nameCompleteSkill":
+                return personRepository.findByNameCompleteSkill(nameComplete, skill);
+            case "rolSeniority":
+                return personRepository.findByRolSeniority(rol, seniority);
+            case "rolSkill":
+                return personRepository.findByRolSkill(rol, skill);
+            case "senioritySkill":
+                return personRepository.findBySenioritySkill(seniority, skill);
+            case "nameComplete":
+                return personRepository.findByNameComplete(nameComplete);
+            case "rol":
+                return personRepository.findByRol(rol);
+            case "seniority":
+                return personRepository.findBySeniority(seniority);
+            case "skill":
+                return personRepository.findBySkill(skill);
+            default:
+                return personRepository.findAll().stream().filter(Person::isActive).collect(Collectors.toList());
+        }
     }
     private String typePerson(String nameComplete, String rol, String seniority, String skill) {
         if (nameComplete != null && rol != null && seniority != null && skill != null) {
