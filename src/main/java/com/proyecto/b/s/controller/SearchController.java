@@ -17,19 +17,10 @@ import java.util.Optional;
 @RequestMapping("/bs/busqueda")
 public class SearchController {
     private final SearchService searchService;
-    private final ClientRepository clientRepository;
-    private final RolRepository rolRepository;
-    private final StateRepository stateRepository;
-    private final SeniorityRepository seniorityRepository;
 
     public SearchController(SearchService searchService, ClientRepository clientRepository, RolRepository rolRepository, StateRepository stateRepository, SeniorityRepository seniorityRepository) {
         this.searchService = searchService;
-        this.clientRepository = clientRepository;
-        this.rolRepository = rolRepository;
-        this.stateRepository = stateRepository;
-        this.seniorityRepository = seniorityRepository;
     }
-
 
     //CRUD
     //Lista de busquedas
@@ -39,26 +30,8 @@ public class SearchController {
             @RequestParam(required = false) String rol,
             @RequestParam(required = false) String state,
             @RequestParam(required = false) String seniority,
-            @RequestParam(required = false) String skills) {
-        Client clientObj = null;
-        Rol rolObj = null;
-        StateSearch stateObj = null;
-        Seniority seniorityObj = null;
-
-        if (client != null) {
-            clientObj = clientRepository.findByName(client);
-        }
-        if (rol != null) {
-            rolObj = rolRepository.findByName(rol);
-        }
-        if (state != null) {
-            stateObj = stateRepository.findByName(state);
-        }
-        if (seniority != null) {
-            seniorityObj = seniorityRepository.findByName(seniority);
-        }
-
-        List<Search> search = searchService.listSearch(clientObj, rolObj, stateObj, seniorityObj, skills);
+            @RequestParam(required = false) List<String> skills) {
+        List<Search> search = searchService.getSearches(client, rol, state, seniority, skills);
 
         if (search.isEmpty()) {
             return ResponseEntity.noContent().build();
@@ -85,16 +58,15 @@ public class SearchController {
     }
 
     //Actualizar busqueda
-    @PutMapping("/actualizar")
-    public ResponseEntity<Search> update(@RequestBody Search search){
-        if (search.getId() == null){
-            return ResponseEntity.badRequest().build();
-        }
-        if (!searchService.existById(search.getId())){
+    @PutMapping("/actualizar/{id}")
+    public ResponseEntity<Search> update(@PathVariable Long id, @RequestBody Search search) {
+       /* try {
+            Search updatedSearch = searchService.updateSearch(id, search);
+            return ResponseEntity.ok(updatedSearch);
+        } catch (EntityNotFoundException e) {
             return ResponseEntity.notFound().build();
-        }
-        Search result = searchService.saveSearch(search);
-        return ResponseEntity.ok(result);
+        }*/
+        return ResponseEntity.ok().build();
     }
 
     //Eliminar busqueda por id

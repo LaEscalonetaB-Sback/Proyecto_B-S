@@ -1,7 +1,7 @@
 package com.proyecto.b.s.service.serviceImpl;
 
 import com.proyecto.b.s.entity.*;
-import com.proyecto.b.s.repository.SearchRepository;
+import com.proyecto.b.s.repository.*;
 import com.proyecto.b.s.service.service.SearchService;
 import org.springframework.stereotype.Service;
 
@@ -13,15 +13,22 @@ import java.util.stream.Collectors;
 @Service
 public class SearchServiceImpl implements SearchService {
     private final SearchRepository searchRepository;
+    private final ClientRepository clientRepository;
+    private final RolRepository rolRepository;
+    private final StateRepository stateRepository;
+    private final SeniorityRepository seniorityRepository;
 
-    public SearchServiceImpl(SearchRepository searchRepository) {
+    public SearchServiceImpl(SearchRepository searchRepository, ClientRepository clientRepository, RolRepository rolRepository, StateRepository stateRepository, SeniorityRepository seniorityRepository) {
         this.searchRepository = searchRepository;
+        this.clientRepository = clientRepository;
+        this.rolRepository = rolRepository;
+        this.stateRepository = stateRepository;
+        this.seniorityRepository = seniorityRepository;
     }
 
-
     @Override
-    public List<Search> listSearch(Client client, Rol rol, StateSearch state, Seniority seniority, String skills){
-        if (client != null || rol != null || state != null || seniority != null || skills != null){
+    public List<Search> listSearch(Client client, Rol rol, StateSearch state, Seniority seniority, List<String> skills){
+        if (client != null || rol != null || state != null || seniority != null || (skills != null && !skills.isEmpty())){
             String clientName = client != null ? client.getName() : null;
             String rolName = rol != null ? rol.getName() : null;
             String stateName = state != null ? state.getName() : null;
@@ -32,6 +39,29 @@ public class SearchServiceImpl implements SearchService {
                     .filter(Search::isActive)
                     .collect(Collectors.toList());
         }
+    }
+
+    public List<Search> getSearches(String client, String rol, String state, String seniority, List<String> skills) {
+        Client clientObj = null;
+        Rol rolObj = null;
+        StateSearch stateObj = null;
+        Seniority seniorityObj = null;
+
+        if (client != null) {
+            clientObj = clientRepository.findByName(client);
+        }
+        if (rol != null) {
+            rolObj = rolRepository.findByName(rol);
+        }
+        if (state != null) {
+            stateObj = stateRepository.findByName(state);
+        }
+        if (seniority != null) {
+            seniorityObj = seniorityRepository.findByName(seniority);
+        }
+
+        List<Search> search = listSearch(clientObj, rolObj, stateObj, seniorityObj, skills);
+        return search;
     }
 
     @Override
@@ -49,17 +79,25 @@ public class SearchServiceImpl implements SearchService {
         return searchRepository.existsById(id);
     }
 
-    /**
-     @Override
-     public Busqueda actualizarBusqueda(Long id, String estado, int vacante) {
-     Busqueda entity = busquedaRepository.findById(id).orElse(null);
-     if (entity != null) {
-     entity.setEstado(estado);
-     entity.setVacantes(vacante);
-     busquedaRepository.save(entity);
+
+     /*@Override
+     public Search updateSearch(Long id, Search newSearch) throws EntityNotFoundException {
+     Search existingSearch = searchRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Busqueda no encontrada con id: " + id));
+
+     if (existingSearch == null) {
+     throw new EntityNotFoundException("Busqueda no encontrada con id: " + id);
      }
-     return entity;
-     }**/
+
+     // Actualizar las propiedades de la búsqueda existente con los valores de la nueva búsqueda
+     existingSearch.setActive(newSearch.isActive());
+     existingSearch.setRol(newSearch.getRol());
+     existingSearch.setSeniority(newSearch.getSeniority());
+
+     // Guardar los cambios
+     Search updatedSearch = searchRepository.saveSearch(existingSearch);
+
+     return updatedSearch;
+     }*/
 
     @Override
     public void deleteSearch(Long id) throws EntityNotFoundException {

@@ -8,9 +8,10 @@ import java.util.Optional;
 public interface SearchService {
     Search saveSearch(Search search);
     Optional<Search> findById(Long id);
-    //Busqueda actualizarBusqueda(Long id, String estado, int vacantes);
+
+    //Search updateSearch(Long id, Search newSearch);
     boolean existById(Long id);
     void deleteSearch(Long id);
-    List<Search> listSearch(Client client, Rol rol, StateSearch state, Seniority seniority, String skills);
-
+    List<Search> listSearch(Client client, Rol rol, StateSearch state, Seniority seniority, List<String> skills);
+    List<Search> getSearches(String client, String rol, String state, String seniority, List<String> skills);
 }
