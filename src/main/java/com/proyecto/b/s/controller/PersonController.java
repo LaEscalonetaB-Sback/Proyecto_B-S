@@ -1,6 +1,8 @@
 package com.proyecto.b.s.controller;
 
 
+import com.proyecto.b.s.dto.request.PersonRequestDto;
+import com.proyecto.b.s.dto.response.PersonResponseDto;
 import com.proyecto.b.s.entity.Person;
 import com.proyecto.b.s.repository.PersonRepository;
 import com.proyecto.b.s.service.service.PersonService;
@@ -26,10 +28,10 @@ public class PersonController {
 
     //Lista de busquedas
     @GetMapping("/list")
-    public List<Person> findAll(@RequestParam(required = false) String nameComplete,
-                                @RequestParam(required = false) String rol,
-                                @RequestParam(required = false) String seniority,
-                                @RequestParam(required = false) String skill){
+    public List<PersonResponseDto> findAll(@RequestParam(required = false) String nameComplete,
+                                           @RequestParam(required = false) String rol,
+                                           @RequestParam(required = false) String seniority,
+                                           @RequestParam(required = false) String skill){
         return personService.list(nameComplete,rol, seniority,skill);
     }
 
@@ -47,11 +49,8 @@ public class PersonController {
 
     //Crear busqueda
     @PostMapping("/create")
-    public ResponseEntity<Person> create(@RequestBody Person person) throws Exception {
-        if (person.getId() != null){
-            return ResponseEntity.badRequest().build();
-        }
-        Person result = personService.create(person);
+    public ResponseEntity<Person> create(@RequestBody PersonRequestDto personRequestDto) throws Exception {
+        Person result = personService.create(personRequestDto);
         return ResponseEntity.ok(result);
     }
 

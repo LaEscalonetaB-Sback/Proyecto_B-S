@@ -1,12 +1,16 @@
 package com.proyecto.b.s.service.serviceImpl;
 
 
+import com.proyecto.b.s.dto.modelMapper.ModelMapperInterface;
+import com.proyecto.b.s.dto.request.PersonRequestDto;
+import com.proyecto.b.s.dto.response.PersonResponseDto;
 import com.proyecto.b.s.repository.PersonRepository;
 import com.proyecto.b.s.service.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.proyecto.b.s.entity.Person;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,54 +21,70 @@ public class PersonServiceImpl implements PersonService {
     @Autowired
     private PersonRepository personRepository;
 
-    public PersonServiceImpl(PersonRepository personaRepository) {
-        this.personRepository = personaRepository;
+    @Autowired
+    private ModelMapperInterface modelMapperInterface;
+
+    public PersonServiceImpl(PersonRepository personRepository, ModelMapperInterface modelMapperInterface) {
+        this.personRepository = personRepository;
+        this.modelMapperInterface = modelMapperInterface;
     }
 
-
     @Override
-    public Person create(Person person) {
+    public Person create(PersonRequestDto personRequestDto) {
+
+        Person person = modelMapperInterface.personReqDtoToPerson(personRequestDto);
         return personRepository.save(person);
     }
 
 
     @Override
-    public List<Person> list(String nameComplete, String rol, String seniority, String skill){
+    public List<PersonResponseDto> list(String nameComplete, String rol, String seniority, String skill){
         switch (typePerson(nameComplete, rol, seniority, skill)) {
             case "nameCompleteRolSenioritySkill":
-                return personRepository.findByNameCompleteRolSenioritySkill(nameComplete, rol, seniority, skill);
+                return mapping(personRepository.findByNameCompleteRolSenioritySkill(nameComplete, rol, seniority, skill));
             case "nameCompleteRolSeniority":
-                return personRepository.findByNameCompleteRolSeniority(nameComplete, rol, seniority);
+                return mapping(personRepository.findByNameCompleteRolSeniority(nameComplete, rol, seniority));
             case "nameCompleteRolSkill":
-                return personRepository.findByNameCompleteRolSkill(nameComplete, rol, skill);
+                return mapping(personRepository.findByNameCompleteRolSkill(nameComplete, rol, skill));
             case "nameCompleteSenioritySkill":
-                return personRepository.findByNameCompleteSenioritySkill(nameComplete, seniority, skill);
+                return mapping(personRepository.findByNameCompleteSenioritySkill(nameComplete, seniority, skill));
             case "rolSenioritySkill":
-                return personRepository.findByRolSenioritySkill(rol, seniority, skill);
+                return mapping(personRepository.findByRolSenioritySkill(rol, seniority, skill));
             case "nameCompleteRol":
-                return personRepository.findByNameCompleteRol(nameComplete, rol);
+                return mapping(personRepository.findByNameCompleteRol(nameComplete, rol));
             case "nameCompleteSeniority":
-                return personRepository.findByNameCompleteSeniority(nameComplete, seniority);
+                return mapping(personRepository.findByNameCompleteSeniority(nameComplete, seniority));
             case "nameCompleteSkill":
-                return personRepository.findByNameCompleteSkill(nameComplete, skill);
+                return mapping(personRepository.findByNameCompleteSkill(nameComplete, skill));
             case "rolSeniority":
-                return personRepository.findByRolSeniority(rol, seniority);
+                return mapping(personRepository.findByRolSeniority(rol, seniority));
             case "rolSkill":
-                return personRepository.findByRolSkill(rol, skill);
+                return mapping(personRepository.findByRolSkill(rol, skill));
             case "senioritySkill":
-                return personRepository.findBySenioritySkill(seniority, skill);
+                return mapping(personRepository.findBySenioritySkill(seniority, skill));
             case "nameComplete":
-                return personRepository.findByNameComplete(nameComplete);
+                return mapping(personRepository.findByNameComplete(nameComplete));
             case "rol":
-                return personRepository.findByRol(rol);
+                return mapping(personRepository.findByRol(rol));
             case "seniority":
-                return personRepository.findBySeniority(seniority);
+                return mapping(personRepository.findBySeniority(seniority));
             case "skill":
-                return personRepository.findBySkill(skill);
+                return mapping(personRepository.findBySkill(skill));
             default:
-                return personRepository.findAll().stream().filter(Person::isActive).collect(Collectors.toList());
+                return mapping(personRepository.findAll().stream().filter(Person::isActive).collect(Collectors.toList()));
         }
     }
+
+    @Override
+    public List<PersonResponseDto> mapping (List<Person>people){
+        List<PersonResponseDto> peopleDto = new ArrayList<>();
+
+        for (Person p:people) {
+            peopleDto.add(modelMapperInterface.personToPersonResponseDTO(p));
+        }
+        return peopleDto;
+    }
+
     private String typePerson(String nameComplete, String rol, String seniority, String skill) {
         if (nameComplete != null && rol != null && seniority != null && skill != null) {
             return "nameCompleteRolSenioritySkill";
