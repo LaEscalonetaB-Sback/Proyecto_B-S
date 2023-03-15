@@ -27,7 +27,7 @@ public class Person {
     private String cuil;
     private String phoneNumber;
     private String remuneration;
-    private boolean active;
+    private boolean active = true;
 
 
     @ManyToMany(cascade = {CascadeType.ALL})

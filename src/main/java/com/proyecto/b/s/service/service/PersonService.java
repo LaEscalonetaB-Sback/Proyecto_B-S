@@ -1,5 +1,7 @@
 package com.proyecto.b.s.service.service;
 
+import com.proyecto.b.s.dto.request.PersonRequestDto;
+import com.proyecto.b.s.dto.response.PersonResponseDto;
 import com.proyecto.b.s.entity.Person;
 
 
@@ -7,8 +9,10 @@ import java.util.List;
 
 public interface PersonService {
 
-    List<Person> list(String nameComplete, String rol, String seniority, String skill);
-    Person create(Person person) throws Exception;
+    List<PersonResponseDto> list(String nameComplete, String rol, String seniority, String skill);
+    Person create(PersonRequestDto personRequestDto) throws Exception;
+
+    List<PersonResponseDto> mapping(List<Person> people);
 
     boolean existById(Long id) throws Exception;
 
