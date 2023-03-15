@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/bs/person")
+@CrossOrigin("*")
 public class PersonController {
 
     private PersonService personService;
