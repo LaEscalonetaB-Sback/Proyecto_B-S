@@ -1,4 +1,4 @@
-package com.proyecto.b.s.modelMapper;
+package com.proyecto.b.s.dto.modelMapper;
 
 public interface ModelMapperInterface {
 }
