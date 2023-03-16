@@ -28,6 +28,7 @@ public class Person {
     private String cuil;
     private String phoneNumber;
     private String remuneration;
+    private String source;
 
 
     @ManyToMany
