@@ -1,13 +1,8 @@
 package com.proyecto.b.s.dto.request;
 
-import com.proyecto.b.s.entity.Industry;
-import com.proyecto.b.s.entity.Rol;
-import com.proyecto.b.s.entity.Skill;
-import com.proyecto.b.s.entity.Source;
+import com.proyecto.b.s.entity.*;
 import lombok.Data;
 
-import javax.persistence.CascadeType;
-import javax.persistence.ManyToMany;
 import java.util.List;
 
 @Data
@@ -23,17 +18,19 @@ public class PersonRequestDto {
     private String phoneNumber;
     private String remuneration;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
-    private List<Skill> skills;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
-    private List <Industry> industries;
+    private IndustryRequestDto industry;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
-    private List<Source> sources;
+    private SourceRequestDto source;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
-    private List <Rol> roles;
+    private StatePersonRequestDto statePerson;
+
+    private List<RolRequestDto> roles;
+
+    private List<SkillRequestDto> skills;
+
+
+
 
 
 }

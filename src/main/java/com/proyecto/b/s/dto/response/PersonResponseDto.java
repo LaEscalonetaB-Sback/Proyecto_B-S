@@ -3,10 +3,9 @@ package com.proyecto.b.s.dto.response;
 import com.proyecto.b.s.entity.*;
 import lombok.Data;
 
-import javax.persistence.CascadeType;
-import javax.persistence.ManyToMany;
 import java.time.LocalDate;
 import java.util.List;
+
 
 @Data
 public class PersonResponseDto {
@@ -14,7 +13,7 @@ public class PersonResponseDto {
     private Long id; // ???
     private String nameComplete;
     private String linkedin;
-    private LocalDate contactDate = (LocalDate.now());
+    private LocalDate contactDate;
     private String recruiter;
     private String seniorityGeneral;
     private String dni;
@@ -23,20 +22,18 @@ public class PersonResponseDto {
     private String phoneNumber;
     private String remuneration;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
-    private List<Skill> skills;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
-    private List <Industry> industries;
+    private IndustryResponseDto industry;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
-    private List<Source> sources;
+    private SourceResponseDto source;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
-    private List <Rol> roles;
+    private StatePersonResponseDto statePerson;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
-    private List<StatePerson> statePeople;
+    private List<RolResponseDto> roles;
+
+    private List<SkillResponseDto> skills;
+
+
 
 
 }

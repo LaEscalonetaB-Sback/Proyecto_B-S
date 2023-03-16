@@ -1,8 +1,10 @@
 package com.proyecto.b.s.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -20,7 +22,7 @@ public class Person {
     private String name;
     private String lastName;
     private String linkedin;
-    private Date dateHiring;
+    private LocalDate ContactDate = (LocalDate.now());
     private String recruiter;
     private String seniorityGeneral;
     private String dni;
@@ -28,6 +30,7 @@ public class Person {
     private String cuil;
     private String phoneNumber;
     private String remuneration;
+    private Boolean active = true;
 
 
     @ManyToMany(cascade = {CascadeType.ALL})
