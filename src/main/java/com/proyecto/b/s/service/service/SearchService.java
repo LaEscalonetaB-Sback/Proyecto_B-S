@@ -1,5 +1,6 @@
 package com.proyecto.b.s.service.service;
 
+import com.proyecto.b.s.dto.response.SearchResponseDto;
 import com.proyecto.b.s.entity.*;
 
 import java.util.List;
@@ -14,4 +15,5 @@ public interface SearchService {
     void deleteSearch(Long id);
     List<Search> listSearch(Client client, Rol rol, StateSearch state, Seniority seniority, List<String> skills);
     List<Search> getSearches(String client, String rol, String state, String seniority, List<String> skills);
+    List<SearchResponseDto> mapping(List<Search> searches);
 }

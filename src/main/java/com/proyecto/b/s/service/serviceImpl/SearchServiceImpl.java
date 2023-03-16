@@ -1,11 +1,15 @@
 package com.proyecto.b.s.service.serviceImpl;
 
+import com.proyecto.b.s.dto.modelMapper.ModelMapperInterface;
+import com.proyecto.b.s.dto.response.SearchResponseDto;
 import com.proyecto.b.s.entity.*;
 import com.proyecto.b.s.repository.*;
 import com.proyecto.b.s.service.service.SearchService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -17,6 +21,8 @@ public class SearchServiceImpl implements SearchService {
     private final RolRepository rolRepository;
     private final StateRepository stateRepository;
     private final SeniorityRepository seniorityRepository;
+    @Autowired
+    private ModelMapperInterface modelMapperInterface;
 
     public SearchServiceImpl(SearchRepository searchRepository, ClientRepository clientRepository, RolRepository rolRepository, StateRepository stateRepository, SeniorityRepository seniorityRepository) {
         this.searchRepository = searchRepository;
@@ -59,9 +65,17 @@ public class SearchServiceImpl implements SearchService {
         if (seniority != null) {
             seniorityObj = seniorityRepository.findByName(seniority);
         }
+        return listSearch(clientObj, rolObj, stateObj, seniorityObj, skills);
+    }
 
-        List<Search> search = listSearch(clientObj, rolObj, stateObj, seniorityObj, skills);
-        return search;
+    @Override
+    public List<SearchResponseDto> mapping(List<Search> searches) {
+        List<SearchResponseDto> searchDto = new ArrayList<>();
+
+        for (Search s:searches) {
+            searchDto.add(modelMapperInterface.searchToSearchResponseDTO(s));
+        }
+        return searchDto;
     }
 
     @Override
