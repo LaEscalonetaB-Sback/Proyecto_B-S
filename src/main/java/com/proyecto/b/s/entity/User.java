@@ -1,11 +1,8 @@
 package com.proyecto.b.s.entity;
 
-
 import lombok.*;
 import javax.persistence.*;
 import java.util.Collection;
-
-
 
 @Entity
 @NoArgsConstructor
@@ -23,7 +20,6 @@ public class User {
     private String name;
     private String lastName;
 
-
     @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinTable(
             name = "users_roles",
@@ -31,5 +27,4 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "rol_id",referencedColumnName = "id")
     )
     private Collection<Rol> roles;
-
 }

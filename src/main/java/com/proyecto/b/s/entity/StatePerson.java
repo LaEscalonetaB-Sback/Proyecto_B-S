@@ -12,7 +12,6 @@ import javax.persistence.*;
 @ToString
 @Table(name = "statePerson")
 public class StatePerson {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

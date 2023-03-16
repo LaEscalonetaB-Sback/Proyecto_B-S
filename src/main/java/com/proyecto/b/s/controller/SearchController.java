@@ -2,10 +2,6 @@ package com.proyecto.b.s.controller;
 //busqueda -> search
 
 import com.proyecto.b.s.entity.*;
-import com.proyecto.b.s.repository.ClientRepository;
-import com.proyecto.b.s.repository.RolRepository;
-import com.proyecto.b.s.repository.SeniorityRepository;
-import com.proyecto.b.s.repository.StateRepository;
 import com.proyecto.b.s.service.service.SearchService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,10 +11,11 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/bs/busqueda")
+@CrossOrigin("*")
 public class SearchController {
     private final SearchService searchService;
 
-    public SearchController(SearchService searchService, ClientRepository clientRepository, RolRepository rolRepository, StateRepository stateRepository, SeniorityRepository seniorityRepository) {
+    public SearchController(SearchService searchService) {
         this.searchService = searchService;
     }
 

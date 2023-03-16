@@ -13,11 +13,9 @@ import javax.persistence.*;
 @ToString
 @Table(name = "eventList")
 public class EventOption {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
-
 }

@@ -13,14 +13,8 @@ import javax.persistence.*;
 @ToString
 @Table(name = "seniority")
 public class Seniority {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-
-
-
-
-
 }
