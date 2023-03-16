@@ -3,7 +3,7 @@ package com.proyecto.b.s.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
+
 
 @Entity
 @NoArgsConstructor

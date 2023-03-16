@@ -1,6 +1,5 @@
 package com.proyecto.b.s.entity;
 
-
 import lombok.*;
 
 import javax.persistence.*;

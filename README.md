@@ -47,7 +47,7 @@
 
   * Dalma Ponce
   * Damian Bettini
-  * Sharon Ostrovky
+  * Sharon Ostrovsky
   * Lautaro Heredia
   
 * Backend

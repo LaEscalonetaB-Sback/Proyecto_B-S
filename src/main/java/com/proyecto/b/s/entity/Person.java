@@ -28,22 +28,47 @@ public class Person {
     private String cuil;
     private String phoneNumber;
     private String remuneration;
-    private String source;
 
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.ALL})
+
     private List<Skill> skills;
 
-    @ManyToMany
+
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(
+            name = "person_industry",
+            joinColumns = @JoinColumn(name = "person_id"),
+            inverseJoinColumns = @JoinColumn(name = "industry_id")
+    )
+    @JsonManagedReference
     private List <Industry> industries;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(
+            name = "person_source",
+            joinColumns = @JoinColumn(name = "person_id"),
+            inverseJoinColumns = @JoinColumn(name = "source_id")
+    )
+    @JsonManagedReference
     private List<Source> sources;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(
+            name = "person_rol",
+            joinColumns = @JoinColumn(name = "person_id"),
+            inverseJoinColumns = @JoinColumn(name = "rol_id")
+    )
+    @JsonManagedReference
     private List <Rol> roles;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(
+            name = "person_statePerson",
+            joinColumns = @JoinColumn(name = "person_id"),
+            inverseJoinColumns = @JoinColumn(name = "statePerson_id")
+    )
+    @JsonManagedReference
     private List<StatePerson> statePeople;
 
 

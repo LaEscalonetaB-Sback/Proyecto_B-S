@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @ToString
-@Table(name = "state")
+@Table(name = "stateSearch")
 public class StateSearch {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
