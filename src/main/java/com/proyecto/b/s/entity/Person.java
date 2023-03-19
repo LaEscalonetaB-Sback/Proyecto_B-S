@@ -2,6 +2,7 @@ package com.proyecto.b.s.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
@@ -17,7 +18,8 @@ public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nameComplete;
+    private String name;
+    private String lastName;
     private String linkedin;
     private LocalDate dateHiring;
     private String recruiter;
