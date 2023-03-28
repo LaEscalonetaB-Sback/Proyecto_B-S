@@ -35,7 +35,6 @@ public class Search {
     private Rol rol;
     @OneToOne
     private Client client;
-
     @ManyToMany
     @JoinTable(
             name = "search_state_search",
@@ -44,7 +43,6 @@ public class Search {
     )
     @JsonManagedReference
     private List<StateSearch> stateSearch;
-
     @ManyToMany
     @JoinTable(
             name = "search_skill",

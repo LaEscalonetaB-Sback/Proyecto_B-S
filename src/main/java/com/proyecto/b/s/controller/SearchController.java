@@ -16,7 +16,6 @@ import java.util.Optional;
 @CrossOrigin("*")
 public class SearchController {
     private final SearchService searchService;
-
     public SearchController(SearchService searchService) {
         this.searchService = searchService;
     }

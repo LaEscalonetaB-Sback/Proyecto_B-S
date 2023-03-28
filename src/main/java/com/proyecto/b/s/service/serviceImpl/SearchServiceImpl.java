@@ -25,7 +25,6 @@ public class SearchServiceImpl implements SearchService {
     public SearchServiceImpl(SearchRepository searchRepository) {
         this.searchRepository = searchRepository;
     }
-
     @Override
     public List<SearchResponseDto> listSearch(String client, String rol, String state, String seniority, List<String> skills){
         if (client != null || rol != null || state != null || seniority != null || (skills != null && !skills.isEmpty())){
@@ -40,24 +39,21 @@ public class SearchServiceImpl implements SearchService {
                     .collect(Collectors.toList());
         }
     }
-
     @Override
     public Search saveSearch(SearchRequestDto searchRequestDto) {
         Search search = modelMapperInterface.searchReqDtoToSearch(searchRequestDto);
         return searchRepository.save(search);
     }
-
     @Override
     public boolean existById(Long id) {
         return searchRepository.existsById(id);
     }
-
     @Override
     public Search findById(Long id) throws Exception {
         return searchRepository.findById(id).orElseThrow(() -> new Exception("La busqueda no existe"));
     }
-     @Override
-     public Search update(Search fromSearch) throws Exception {
+    @Override
+    public Search update(Search fromSearch) throws Exception {
          Search toSearch = findById(fromSearch.getId());
          mapSearch(fromSearch, toSearch);
          return searchRepository.save(toSearch);
