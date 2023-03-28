@@ -1,6 +1,5 @@
 package com.proyecto.b.s.dto.response;
 
-import com.proyecto.b.s.entity.*;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -10,8 +9,9 @@ import java.util.List;
 @Data
 public class PersonResponseDto {
 
-    private Long id; // ???
-    private String nameComplete;
+    private Long id;
+    private String name;
+    private String lastName;
     private String linkedin;
     private LocalDate contactDate;
     private String recruiter;
@@ -23,16 +23,15 @@ public class PersonResponseDto {
     private String remuneration;
 
 
-    private IndustryResponseDto industry;
+    private List<IndustryResponseDto> industries;
 
-    private SourceResponseDto source;
-
-    private StatePersonResponseDto statePerson;
+    private List<SourceResponseDto> sources;
 
     private List<RolResponseDto> roles;
 
     private List<SkillResponseDto> skills;
 
+    private List<StatePersonResponseDto> statePerson;
 
 
 

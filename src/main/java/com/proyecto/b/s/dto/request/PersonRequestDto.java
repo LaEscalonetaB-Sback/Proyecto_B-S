@@ -1,6 +1,6 @@
 package com.proyecto.b.s.dto.request;
 
-import com.proyecto.b.s.entity.*;
+
 import lombok.Data;
 
 import java.util.List;
@@ -8,7 +8,8 @@ import java.util.List;
 @Data
 public class PersonRequestDto {
 
-    private String nameComplete;
+    private String name;
+    private String lastName;
     private String linkedin;
     private String recruiter;
     private String seniorityGeneral;
@@ -19,11 +20,9 @@ public class PersonRequestDto {
     private String remuneration;
 
 
-    private IndustryRequestDto industry;
+    private List<IndustryRequestDto> industries;
 
-    private SourceRequestDto source;
-
-    private StatePersonRequestDto statePerson;
+    private List<SourceRequestDto> sources;
 
     private List<RolRequestDto> roles;
 

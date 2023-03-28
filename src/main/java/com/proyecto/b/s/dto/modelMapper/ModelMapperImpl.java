@@ -4,12 +4,18 @@ import com.proyecto.b.s.dto.request.PersonRequestDto;
 import com.proyecto.b.s.dto.response.PersonResponseDto;
 import com.proyecto.b.s.entity.Person;
 import org.modelmapper.ModelMapper;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ModelMapperImpl implements ModelMapperInterface{
 
     private ModelMapper modelMapper = new ModelMapper();
+
+    @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
+    }
 
 
     @Override
