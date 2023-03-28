@@ -94,6 +94,7 @@ public class PersonServiceImpl implements PersonService {
         to.setPhoneNumber(from.getPhoneNumber());
         to.setRemuneration(from.getRemuneration());
         to.setIndustries(from.getIndustries());
+        to.setActive(from.getActive());
 
     }
 
