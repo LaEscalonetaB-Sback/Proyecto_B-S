@@ -1,6 +1,8 @@
 package com.proyecto.b.s.controller;
 //busqueda -> search
 
+import com.proyecto.b.s.dto.request.SearchRequestDto;
+import com.proyecto.b.s.dto.response.SearchResponseDto;
 import com.proyecto.b.s.entity.*;
 import com.proyecto.b.s.service.service.SearchService;
 import org.springframework.http.ResponseEntity;
@@ -22,13 +24,13 @@ public class SearchController {
     //CRUD
     //Lista de busquedas
     @GetMapping("/lista")
-    public ResponseEntity<List<Search>> findSearch(
+    public ResponseEntity<List<SearchResponseDto>> findSearch(
             @RequestParam(required = false) String client,
             @RequestParam(required = false) String rol,
             @RequestParam(required = false) String state,
             @RequestParam(required = false) String seniority,
             @RequestParam(required = false) List<String> skills) {
-        List<Search> search = searchService.getSearches(client, rol, state, seniority, skills);
+        List<SearchResponseDto> search = searchService.listSearch(client, rol, state, seniority, skills);
 
         if (search.isEmpty()) {
             return ResponseEntity.noContent().build();
@@ -39,31 +41,29 @@ public class SearchController {
 
     //Encuentra busqueda por id
     @GetMapping("/{id}")
-    public ResponseEntity<Search> findOne(@PathVariable Long id){
-        Optional<Search> searchOpt = searchService.findById(id);
-        return searchOpt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<Search> findOne(@PathVariable Long id) throws Exception {
+        Optional<Search> SearchOpt = Optional.ofNullable(searchService.findById(id));
+        return SearchOpt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     //Crear busqueda
     @PostMapping("/crear")
-    public ResponseEntity<Search> create(@RequestBody Search search){
-        if (search.getId() != null){
-            return ResponseEntity.badRequest().build();
-        }
-        Search result = searchService.saveSearch(search);
+    public ResponseEntity<Search> create(@RequestBody SearchRequestDto searchRequestDto){
+        Search result = searchService.saveSearch(searchRequestDto);
         return ResponseEntity.ok(result);
     }
 
     //Actualizar busqueda
-    @PutMapping("/actualizar/{id}")
-    public ResponseEntity<Search> update(@PathVariable Long id, @RequestBody Search search) {
-       /* try {
-            Search updatedSearch = searchService.updateSearch(id, search);
-            return ResponseEntity.ok(updatedSearch);
-        } catch (EntityNotFoundException e) {
+    @PutMapping("/actualizar")
+    public ResponseEntity<Search> update(@RequestBody Search search) throws Exception {
+        if (search.getId() == null){
+            return ResponseEntity.badRequest().build();
+        }
+        if (!searchService.existById(search.getId())){
             return ResponseEntity.notFound().build();
-        }*/
-        return ResponseEntity.ok().build();
+        }
+        Search result = searchService.update(search);
+        return ResponseEntity.ok(result);
     }
 
     //Eliminar busqueda por id

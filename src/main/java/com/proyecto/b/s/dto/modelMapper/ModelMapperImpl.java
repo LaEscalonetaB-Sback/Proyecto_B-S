@@ -7,11 +7,18 @@ import com.proyecto.b.s.dto.response.SearchResponseDto;
 import com.proyecto.b.s.entity.Person;
 import com.proyecto.b.s.entity.Search;
 import org.modelmapper.ModelMapper;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ModelMapperImpl implements ModelMapperInterface {
-    private ModelMapper modelMapper = new ModelMapper();
+    private final ModelMapper modelMapper = new ModelMapper();
+    @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
+    }
+
+    //Person
     @Override
     public Person personReqDtoToPerson(PersonRequestDto personRequestDto) {
         return modelMapper.map(personRequestDto, Person.class);
@@ -21,11 +28,11 @@ public class ModelMapperImpl implements ModelMapperInterface {
         return modelMapper.map(person, PersonResponseDto.class);
     }
 
+    //Search
     @Override
     public Search searchReqDtoToSearch(SearchRequestDto searchRequestDto) {
         return modelMapper.map(searchRequestDto, Search.class);
     }
-
     @Override
     public SearchResponseDto searchToSearchResponseDTO(Search search) {
         return modelMapper.map(search, SearchResponseDto.class);

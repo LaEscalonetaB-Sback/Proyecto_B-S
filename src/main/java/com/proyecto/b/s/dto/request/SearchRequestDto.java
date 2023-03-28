@@ -17,8 +17,8 @@ public class SearchRequestDto {
     private Integer remuneration; //remuneracion
     private String vacancies; //vacantes
     private String observations; //observaciones
-    private String linkJb;
-    private List<StateSearch> stateSearchList;
+    private String linkJb; //Link job description
+    private List<StateSearch> stateSearchList; //estado de busqueda
     private Rol rol;
     private Seniority seniority;
     private List<Skill> skillList;

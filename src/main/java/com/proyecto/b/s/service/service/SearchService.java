@@ -1,19 +1,16 @@
 package com.proyecto.b.s.service.service;
 
+import com.proyecto.b.s.dto.request.SearchRequestDto;
 import com.proyecto.b.s.dto.response.SearchResponseDto;
 import com.proyecto.b.s.entity.*;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface SearchService {
-    Search saveSearch(Search search);
-    Optional<Search> findById(Long id);
-
-    //Search updateSearch(Long id, Search newSearch);
+    Search saveSearch(SearchRequestDto searchRequestDto);
+    Search findById(Long id) throws Exception;
+    Search update(Search newSearch) throws Exception;
     boolean existById(Long id);
     void deleteSearch(Long id);
-    List<Search> listSearch(Client client, Rol rol, StateSearch state, Seniority seniority, List<String> skills);
-    List<Search> getSearches(String client, String rol, String state, String seniority, List<String> skills);
-    List<SearchResponseDto> mapping(List<Search> searches);
+    List<SearchResponseDto> listSearch(String client, String rol, String state, String seniority, List<String> skills);
 }

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -12,19 +13,20 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
+@Builder
 @Table(name = "search")
 public class Search {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    //private String linkJb;
-    //private Date dateOpening; //fechaApertura
-    //private String dayJob; //jornadaTrabajo
-    //private String modalityHiring; //modalidadTrabajo
-    //private String position; //posicion
-    //private String remuneration; //remuneracion
-    //private String vacancies; //vacantes
-    //private String observations; //observaciones
+    private String linkJb; //
+    private LocalDate dateOpening; //fechaApertura
+    private String dayJob; //jornadaTrabajo
+    private String modalityHiring; //modalidadTrabajo
+    private String position; //posicion
+    private String remuneration; //remuneracion
+    private String vacancies; //vacantes
+    private String observations; //observaciones
     private boolean active;
 
     @OneToOne

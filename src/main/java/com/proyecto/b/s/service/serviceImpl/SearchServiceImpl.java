@@ -1,91 +1,50 @@
 package com.proyecto.b.s.service.serviceImpl;
 
 import com.proyecto.b.s.dto.modelMapper.ModelMapperInterface;
+import com.proyecto.b.s.dto.request.SearchRequestDto;
 import com.proyecto.b.s.dto.response.SearchResponseDto;
 import com.proyecto.b.s.entity.*;
 import com.proyecto.b.s.repository.*;
 import com.proyecto.b.s.service.service.SearchService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class SearchServiceImpl implements SearchService {
     private final SearchRepository searchRepository;
-    private final ClientRepository clientRepository;
-    private final RolRepository rolRepository;
-    private final StateRepository stateRepository;
-    private final SeniorityRepository seniorityRepository;
     @Autowired
     private ModelMapperInterface modelMapperInterface;
+    @Autowired
+    private ModelMapper modelMapper;
 
-    public SearchServiceImpl(SearchRepository searchRepository, ClientRepository clientRepository, RolRepository rolRepository, StateRepository stateRepository, SeniorityRepository seniorityRepository) {
+    public SearchServiceImpl(SearchRepository searchRepository) {
         this.searchRepository = searchRepository;
-        this.clientRepository = clientRepository;
-        this.rolRepository = rolRepository;
-        this.stateRepository = stateRepository;
-        this.seniorityRepository = seniorityRepository;
     }
 
     @Override
-    public List<Search> listSearch(Client client, Rol rol, StateSearch state, Seniority seniority, List<String> skills){
+    public List<SearchResponseDto> listSearch(String client, String rol, String state, String seniority, List<String> skills){
         if (client != null || rol != null || state != null || seniority != null || (skills != null && !skills.isEmpty())){
-            String clientName = client != null ? client.getName() : null;
-            String rolName = rol != null ? rol.getName() : null;
-            String stateName = state != null ? state.getName() : null;
-            String seniorityName = seniority != null ? seniority.getName() : null;
-            return searchRepository.findSearchBy(clientName, rolName, stateName, seniorityName, skills);
+            List<Search> searchList = searchRepository.findSearchBy(client, rol, state, seniority, skills);
+            return searchList.stream()
+                    .map(search -> modelMapper.map(search, SearchResponseDto.class))
+                    .collect(Collectors.toList());
         } else {
-            return searchRepository.findAll().stream()
-                    .filter(Search::isActive)
+            List<Search> searchList = searchRepository.findAll();
+            return searchList.stream()
+                    .map(search -> modelMapper.map(search, SearchResponseDto.class))
                     .collect(Collectors.toList());
         }
     }
 
-    public List<Search> getSearches(String client, String rol, String state, String seniority, List<String> skills) {
-        Client clientObj = null;
-        Rol rolObj = null;
-        StateSearch stateObj = null;
-        Seniority seniorityObj = null;
-
-        if (client != null) {
-            clientObj = clientRepository.findByName(client);
-        }
-        if (rol != null) {
-            rolObj = rolRepository.findByName(rol);
-        }
-        if (state != null) {
-            stateObj = stateRepository.findByName(state);
-        }
-        if (seniority != null) {
-            seniorityObj = seniorityRepository.findByName(seniority);
-        }
-        return listSearch(clientObj, rolObj, stateObj, seniorityObj, skills);
-    }
-
     @Override
-    public List<SearchResponseDto> mapping(List<Search> searches) {
-        List<SearchResponseDto> searchDto = new ArrayList<>();
-
-        for (Search s:searches) {
-            searchDto.add(modelMapperInterface.searchToSearchResponseDTO(s));
-        }
-        return searchDto;
-    }
-
-    @Override
-    public Search saveSearch(Search search) {
+    public Search saveSearch(SearchRequestDto searchRequestDto) {
+        Search search = modelMapperInterface.searchReqDtoToSearch(searchRequestDto);
         return searchRepository.save(search);
-    }
-
-    @Override
-    public Optional<Search> findById(Long id) {
-        return Optional.empty();
     }
 
     @Override
@@ -93,26 +52,32 @@ public class SearchServiceImpl implements SearchService {
         return searchRepository.existsById(id);
     }
 
-
-     /*@Override
-     public Search updateSearch(Long id, Search newSearch) throws EntityNotFoundException {
-     Search existingSearch = searchRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Busqueda no encontrada con id: " + id));
-
-     if (existingSearch == null) {
-     throw new EntityNotFoundException("Busqueda no encontrada con id: " + id);
-     }
-
-     // Actualizar las propiedades de la búsqueda existente con los valores de la nueva búsqueda
-     existingSearch.setActive(newSearch.isActive());
-     existingSearch.setRol(newSearch.getRol());
-     existingSearch.setSeniority(newSearch.getSeniority());
-
-     // Guardar los cambios
-     Search updatedSearch = searchRepository.saveSearch(existingSearch);
-
-     return updatedSearch;
-     }*/
-
+    @Override
+    public Search findById(Long id) throws Exception {
+        return searchRepository.findById(id).orElseThrow(() -> new Exception("La busqueda no existe"));
+    }
+     @Override
+     public Search update(Search fromSearch) throws Exception {
+         Search toSearch = findById(fromSearch.getId());
+         mapSearch(fromSearch, toSearch);
+         return searchRepository.save(toSearch);
+    }
+    protected void mapSearch(Search from, Search to){
+        to.setLinkJb(from.getLinkJb());
+        to.setDateOpening(from.getDateOpening());
+        to.setDayJob(from.getDayJob());
+        to.setModalityHiring(from.getModalityHiring());
+        to.setPosition(from.getPosition());
+        to.setRemuneration(from.getRemuneration());
+        to.setVacancies(from.getVacancies());
+        to.setObservations(from.getRemuneration());
+        to.setActive(from.isActive());
+        to.setSeniority(from.getSeniority());
+        to.setRol(from.getRol());
+        to.setClient(from.getClient());
+        to.setStateSearch(from.getStateSearch());
+        to.setSkills(from.getSkills());
+    }
     @Override
     public void deleteSearch(Long id) throws EntityNotFoundException {
         Search entity = searchRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Busqueda no encontrada con id: " + id));
