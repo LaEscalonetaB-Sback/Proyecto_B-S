@@ -4,7 +4,6 @@ import lombok.Data;
 
 @Data
 public class SourceRequestDto {
-
     Long id;
     String name;
 }

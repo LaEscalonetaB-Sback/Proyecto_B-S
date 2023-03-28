@@ -4,7 +4,6 @@ import lombok.Data;
 
 @Data
 public class SkillRequestDto {
-
        Long id;
        String name;
 }

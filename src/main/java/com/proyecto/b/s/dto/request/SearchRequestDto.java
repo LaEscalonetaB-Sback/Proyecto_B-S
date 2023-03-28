@@ -1,6 +1,6 @@
 package com.proyecto.b.s.dto.request;
 
-import com.proyecto.b.s.entity.*;
+import com.proyecto.b.s.dto.response.*;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -9,17 +9,18 @@ import java.util.List;
 //Lo que recibo del front
 @Data
 public class SearchRequestDto {
-    private Client clientName;
+    private String linkJb;
     private LocalDate dateOpening; //fechaApertura
     private String dayJob; //jornadaTrabajo
     private String modalityHiring; //modalidadTrabajo
     private String position; //posicion
-    private Integer remuneration; //remuneracion
+    private String remuneration; //remuneracion
     private String vacancies; //vacantes
     private String observations; //observaciones
-    private String linkJb; //Link job description
-    private List<StateSearch> stateSearchList; //estado de busqueda
-    private Rol rol;
-    private Seniority seniority;
-    private List<Skill> skillList;
+    private boolean active;
+    private SeniorityResponseDto seniority;
+    private RolResponseDto rol;
+    private ClientRequestDto client;
+    private List<StateSearchResponseDto> stateSearch;
+    private List<SkillResponseDto> skills;
 }

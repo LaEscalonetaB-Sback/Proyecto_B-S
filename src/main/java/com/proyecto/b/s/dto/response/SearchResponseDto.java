@@ -1,6 +1,5 @@
 package com.proyecto.b.s.dto.response;
 
-import com.proyecto.b.s.entity.*;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -19,9 +18,9 @@ public class SearchResponseDto {
     private String vacancies; //vacantes
     private String observations; //observaciones
     private boolean active;
-    private Seniority seniority;
-    private Rol rol;
-    private Client client;
-    private List<StateSearch> stateSearch;
-    private List<Skill> skills;
+    private SeniorityResponseDto seniority;
+    private RolResponseDto rol;
+    private ClientResponseDto client;
+    private List<StateSearchResponseDto> stateSearch;
+    private List<SkillResponseDto> skills;
 }
