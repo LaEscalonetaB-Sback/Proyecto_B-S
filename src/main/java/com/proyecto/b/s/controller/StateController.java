@@ -10,5 +10,4 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/bs/state")
 @CrossOrigin("*")
 public class StateController {
-
 }

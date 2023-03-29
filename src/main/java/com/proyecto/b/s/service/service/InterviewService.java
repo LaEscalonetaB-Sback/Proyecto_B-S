@@ -5,8 +5,8 @@ import com.proyecto.b.s.entity.Interview;
 import java.util.List;
 
 public interface InterviewService {
-    List<Interview> listarEntrevistas();
-    Interview guardarEntrevista(Interview entrevista);
-    Interview actualizarEntrevista(Interview entrevista);
-    void eliminarEntrevista(Long id);
+    List<Interview> listInterview();
+    Interview saveInterview(Interview interview);
+    Interview updateInterview(Interview interview);
+    void deleteInterview(Long id);
 }

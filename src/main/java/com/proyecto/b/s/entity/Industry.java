@@ -12,7 +12,6 @@ import javax.persistence.*;
 @ToString
 @Table(name = "industry")
 public class Industry {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -9,22 +9,18 @@ import java.util.List;
 @Service
 public class InterviewServiceImpl implements InterviewService {
     @Override
-    public List<Interview> listarEntrevistas() {
+    public List<Interview> listInterview() {
         return null;
     }
-
     @Override
-    public Interview guardarEntrevista(Interview entrevista) {
+    public Interview saveInterview(Interview interview) {
         return null;
     }
-
     @Override
-    public Interview actualizarEntrevista(Interview entrevista) {
+    public Interview updateInterview(Interview interview) {
         return null;
     }
-
     @Override
-    public void eliminarEntrevista(Long id) {
-
+    public void deleteInterview(Long id) {
     }
 }
