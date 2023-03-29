@@ -44,9 +44,10 @@ public class SearchServiceImpl implements SearchService {
         }
     }
     @Override
-    public Search saveSearch(SearchRequestDto searchRequestDto) {
+    public SearchResponseDto saveSearch(SearchRequestDto searchRequestDto) {
         Search search = modelMapperInterface.searchReqDtoToSearch(searchRequestDto);
-        return searchRepository.save(search);
+        Search savedSearch = searchRepository.save(search);
+        return modelMapperInterface.searchToSearchResponseDTO(savedSearch);
     }
     @Override
     public boolean existById(Long id) {
