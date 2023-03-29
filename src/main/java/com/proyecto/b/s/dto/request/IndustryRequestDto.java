@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class IndustryRequestDto {
-    Long id;
-    String name;
+    private Long id;
+    private String name;
 }

@@ -14,11 +14,9 @@ import java.util.List;
 @ToString
 @Table(name = "event")
 public class Event {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
 
     private Date dateEvent;
 
@@ -36,11 +34,4 @@ public class Event {
 
     @OneToMany
     private List<Interview> interviews;
-
-
-
-
-
-
-
 }

@@ -5,10 +5,8 @@ import lombok.Data;
 import java.time.LocalDate;
 import java.util.List;
 
-
 @Data
 public class PersonResponseDto {
-
     private Long id;
     private String name;
     private String lastName;
@@ -21,9 +19,7 @@ public class PersonResponseDto {
     private String cuil;
     private String phoneNumber;
     private String remuneration;
-
     private Boolean active;
-
 
     private List<IndustryResponseDto> industries;
 
@@ -34,7 +30,4 @@ public class PersonResponseDto {
     private List<SkillResponseDto> skills;
 
     private List<StatePersonResponseDto> statePerson;
-
-
-
 }

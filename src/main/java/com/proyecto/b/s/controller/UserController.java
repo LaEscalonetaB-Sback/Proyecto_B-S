@@ -13,30 +13,4 @@ import java.util.List;
 @RequestMapping("/bs/user")
 @CrossOrigin("*")
 public class UserController {
-
-    @Autowired
-    UserService userService;
-
-
-    /**
-     * Devuelve todos los usuarios de la base de datos
-     * @return List<Usuario>
-     */
-    @GetMapping("/bys/users")
-    // @Operation(description = "Listar todos los usuarios de la base de datos")
-    public List<User> listarTodasLosUsuarios(){
-        return userService.userList();
-
-    }
-
-    /**
-     * Recibo un usuario y lo guardo en la base de datos
-     * @param userDto
-     * @return Usuario
-     **/
-    @PostMapping("/bys/registro")
-    // @Operation(description = "Recibir un usuario y guardarlo en la base de datos")
-    public User crearUsuario(@RequestBody UserRequestDto userDto) throws Exception {
-        return userService.createUser(userDto);
-    }
 }

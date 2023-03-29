@@ -1,9 +1,10 @@
 package com.proyecto.b.s.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -12,36 +13,41 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
+@Builder
 @Table(name = "search")
 public class Search {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String linkJb;
-    private Date dateOpening; //fechaApertura
+    private String linkJb; //
+    private LocalDate dateOpening; //fechaApertura
     private String dayJob; //jornadaTrabajo
     private String modalityHiring; //modalidadTrabajo
     private String position; //posicion
     private String remuneration; //remuneracion
     private String vacancies; //vacantes
     private String observations; //observaciones
-
-
-    @ManyToMany()
-    private List<StateSearch> stateSearches; //estadoBusqueda
-
-    @ManyToMany
-    private List<Skill> skills;
-
-    @OneToOne()
+    private boolean active = true;
+    @OneToOne(cascade = {CascadeType.ALL})
+    private Seniority seniority;
+    @OneToOne(cascade = {CascadeType.ALL})
     private Rol rol;
-
-    @OneToOne()
+    @OneToOne(cascade = {CascadeType.ALL})
     private Client client;
-
-
-
-
-
-
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(
+            name = "search_state_search",
+            joinColumns = @JoinColumn(name = "search_id"),
+            inverseJoinColumns = @JoinColumn(name = "state_search_id")
+    )
+    @JsonManagedReference
+    private List<StateSearch> stateSearch;
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(
+            name = "search_skill",
+            joinColumns = @JoinColumn(name = "search_id"),
+            inverseJoinColumns = @JoinColumn(name = "skill_id")
+    )
+    @JsonManagedReference
+    private List<Skill> skills;
 }

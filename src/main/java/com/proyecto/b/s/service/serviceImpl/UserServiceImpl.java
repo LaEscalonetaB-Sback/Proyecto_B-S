@@ -1,6 +1,5 @@
 package com.proyecto.b.s.service.serviceImpl;
 
-
 import com.proyecto.b.s.dto.request.UserRequestDto;
 
 import com.proyecto.b.s.repository.UserRepository;
@@ -10,16 +9,12 @@ import com.proyecto.b.s.entity.User;
 
 import org.springframework.stereotype.Service;
 
-
 import java.util.List;
-
 
 @Service
 public class UserServiceImpl implements UserService {
-
     @Autowired
     UserRepository userRepository;
-
 
     @Override
     public List<User> userList() {

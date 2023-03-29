@@ -1,11 +1,13 @@
 package com.proyecto.b.s.service.service;
 
 import com.proyecto.b.s.dto.request.PersonRequestDto;
+import com.proyecto.b.s.dto.request.PersonUpdateRequestDTO;
 import com.proyecto.b.s.dto.request.RolRequestDto;
 import com.proyecto.b.s.dto.response.PersonResponseDto;
 import com.proyecto.b.s.entity.Person;
 
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 public interface PersonService {
@@ -18,7 +20,8 @@ public interface PersonService {
 
     Person obtainPersonId(Long id) throws Exception;
 
-    Person update(Person person) throws Exception;
+
+    PersonResponseDto update(Long Id, PersonUpdateRequestDTO personRequestDto) throws EntityNotFoundException;
 
     void delete(Long id) throws Exception;
 

@@ -2,6 +2,7 @@ package com.proyecto.b.s.controller;
 
 
 import com.proyecto.b.s.dto.request.PersonRequestDto;
+import com.proyecto.b.s.dto.request.PersonUpdateRequestDTO;
 import com.proyecto.b.s.dto.response.PersonResponseDto;
 import com.proyecto.b.s.entity.Person;
 import com.proyecto.b.s.repository.PersonRepository;
@@ -9,6 +10,7 @@ import com.proyecto.b.s.service.service.PersonService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -60,22 +62,20 @@ public class PersonController {
     }
 
     //Actualizar
-    @PutMapping("/update")
-    public ResponseEntity<Person> update(@RequestBody Person person) throws Exception {
-        if (person.getId() == null){
-            return ResponseEntity.badRequest().build();
-        }
-        if (!personService.existById(person.getId())){
-            return ResponseEntity.notFound().build();
-        }
-        Person result = personService.update(person);
-        return ResponseEntity.ok(result);
+    @PutMapping("/update/{Id}")
+    public ResponseEntity<PersonResponseDto> update(@PathVariable Long Id, @RequestBody PersonUpdateRequestDTO personRequestDto) throws Exception {
+       if(!personService.existById(Id)){
+           return ResponseEntity.notFound().build();
+       }
+       PersonResponseDto result = personService.update(Id, personRequestDto);
+       return ResponseEntity.ok(result);
     }
+
 
 
     //Eliminar por id
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Person> deleteById(@PathVariable Long id) throws Exception {
+    public ResponseEntity<PersonResponseDto> deleteById(@PathVariable Long id) throws Exception {
         personService.delete(id);
         return ResponseEntity.noContent().build();
     }

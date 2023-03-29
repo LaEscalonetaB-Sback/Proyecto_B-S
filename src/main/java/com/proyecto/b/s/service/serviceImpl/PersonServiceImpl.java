@@ -3,7 +3,11 @@ package com.proyecto.b.s.service.serviceImpl;
 
 import com.proyecto.b.s.dto.modelMapper.ModelMapperInterface;
 import com.proyecto.b.s.dto.request.PersonRequestDto;
+import com.proyecto.b.s.dto.request.PersonUpdateRequestDTO;
 import com.proyecto.b.s.dto.response.PersonResponseDto;
+import com.proyecto.b.s.entity.Skill;
+import com.proyecto.b.s.entity.Source;
+import com.proyecto.b.s.entity.StatePerson;
 import com.proyecto.b.s.repository.PersonRepository;
 import com.proyecto.b.s.service.service.PersonService;
 import org.modelmapper.ModelMapper;
@@ -11,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.proyecto.b.s.entity.Person;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -72,40 +76,41 @@ public class PersonServiceImpl implements PersonService {
 
 
     @Override
-    public Person update(Person fromPerson) throws Exception {
-        Person toPerson = obtainPersonId(fromPerson.getId());
-        mapPerson(fromPerson, toPerson);
-        return personRepository.save(toPerson);
+    public PersonResponseDto update(Long Id, PersonUpdateRequestDTO personRequestDto) throws EntityNotFoundException {
+        Person person = personRepository.findById(Id).orElseThrow(() -> new EntityNotFoundException("Search not found with id: " +Id));
+        modelMapperInterface.personUpdateReqDtoToPerson(personRequestDto);
+        mapPerson(personRequestDto, person);
+
+        personRepository.save(person);
+        return modelMapperInterface.personToPersonResponseDTO(person);
     }
 
 
-    protected  void mapPerson(Person from, Person to){
-        to.setName(from.getName());
-        to.setLastName(from.getLastName());
-        to.setDni(from.getDni());
-        to.setLinkedin(from.getLinkedin());
-        to.setSources(from.getSources());
-        to.setContactDate(from.getContactDate());
-        to.setStatePeople(from.getStatePeople());
-        to.setSkills(from.getSkills());
-        to.setRecruiter(from.getRecruiter());
-        to.setSeniorityGeneral(from.getSeniorityGeneral());
-        to.setEmail(from.getEmail());
-        to.setCuil(from.getCuil());
-        to.setPhoneNumber(from.getPhoneNumber());
-        to.setRemuneration(from.getRemuneration());
-        to.setIndustries(from.getIndustries());
-        to.setActive(from.getActive());
+    //todo falta mappear las listas :(
+    protected  void mapPerson(PersonUpdateRequestDTO personRequestDto, Person person){
+
+        person.setName(personRequestDto.getName());
+        person.setLastName(personRequestDto.getLastName());
+        person.setDni(personRequestDto.getDni());
+        person.setLinkedin(personRequestDto.getLinkedin());
+        person.setSeniorityGeneral(personRequestDto.getSeniorityGeneral());
+        person.setEmail(personRequestDto.getEmail());
+        person.setPhoneNumber(personRequestDto.getPhoneNumber());
+        person.setRemuneration(personRequestDto.getRemuneration());
+        person.setActive(personRequestDto.getActive());
 
     }
 
     @Override
     public void delete(Long id) throws Exception {
-        Person person = (personRepository.findById(id))
+        Person person = personRepository.findById(id)
                 .orElseThrow(()-> new Exception("Persona no encontrada -" + this.getClass().getName()));
 
         person.setActive(false);
 
+        personRepository.save(person);
+
+        modelMapperInterface.personToPersonResponseDTO(person);
     }
 
 
