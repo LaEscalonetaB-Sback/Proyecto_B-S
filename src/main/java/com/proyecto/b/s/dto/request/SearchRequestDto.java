@@ -1,6 +1,5 @@
 package com.proyecto.b.s.dto.request;
 
-import com.proyecto.b.s.dto.response.*;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -18,9 +17,9 @@ public class SearchRequestDto {
     private String vacancies; //vacantes
     private String observations; //observaciones
     private boolean active;
-    private SeniorityResponseDto seniority;
-    private RolResponseDto rol;
+    private SeniorityRequestDto seniority;
+    private RolRequestDto rol;
     private ClientRequestDto client;
-    private List<StateSearchResponseDto> stateSearch;
-    private List<SkillResponseDto> skills;
+    private List<StateSearchRequestDto> stateSearch;
+    private List<SkillRequestDto> skills;
 }

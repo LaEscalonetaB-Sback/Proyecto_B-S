@@ -22,8 +22,12 @@ public class SearchServiceImpl implements SearchService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public SearchServiceImpl(SearchRepository searchRepository) {
+    public SearchServiceImpl(SearchRepository searchRepository,
+                             ModelMapperInterface modelMapperInterface,
+                             ModelMapper modelMapper) {
         this.searchRepository = searchRepository;
+        this.modelMapperInterface = modelMapperInterface;
+        this.modelMapper = modelMapper;
     }
     @Override
     public List<SearchResponseDto> listSearch(String client, String rol, String state, String seniority, List<String> skills){
@@ -81,5 +85,6 @@ public class SearchServiceImpl implements SearchService {
             throw new EntityNotFoundException("Busqueda no encontrada con id: " + id);
         }
         entity.setActive(false);
+        searchRepository.save(entity);
     }
 }

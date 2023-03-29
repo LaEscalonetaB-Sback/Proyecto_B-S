@@ -19,8 +19,6 @@ public class Skill {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @OneToOne
-    private Seniority seniority;
     @ManyToMany(mappedBy = "skills")
     @JsonBackReference
     private List<Search> search;

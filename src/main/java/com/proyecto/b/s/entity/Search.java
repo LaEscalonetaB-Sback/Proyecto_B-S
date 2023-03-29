@@ -27,15 +27,14 @@ public class Search {
     private String remuneration; //remuneracion
     private String vacancies; //vacantes
     private String observations; //observaciones
-    private boolean active;
-
-    @OneToOne
+    private boolean active = true;
+    @OneToOne(cascade = {CascadeType.ALL})
     private Seniority seniority;
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     private Rol rol;
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     private Client client;
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
             name = "search_state_search",
             joinColumns = @JoinColumn(name = "search_id"),
@@ -43,7 +42,7 @@ public class Search {
     )
     @JsonManagedReference
     private List<StateSearch> stateSearch;
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
             name = "search_skill",
             joinColumns = @JoinColumn(name = "search_id"),

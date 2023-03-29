@@ -22,7 +22,7 @@ public class SearchController {
 
     //CRUD
     //Lista de busquedas
-    @GetMapping("/lista")
+    @GetMapping("/list")
     public ResponseEntity<List<SearchResponseDto>> findSearch(
             @RequestParam(required = false) String client,
             @RequestParam(required = false) String rol,
@@ -46,14 +46,14 @@ public class SearchController {
     }
 
     //Crear busqueda
-    @PostMapping("/crear")
+    @PostMapping("/create")
     public ResponseEntity<Search> create(@RequestBody SearchRequestDto searchRequestDto){
         Search result = searchService.saveSearch(searchRequestDto);
         return ResponseEntity.ok(result);
     }
 
     //Actualizar busqueda
-    @PutMapping("/actualizar")
+    @PutMapping("/update")
     public ResponseEntity<Search> update(@RequestBody Search search) throws Exception {
         if (search.getId() == null){
             return ResponseEntity.badRequest().build();
@@ -66,7 +66,7 @@ public class SearchController {
     }
 
     //Eliminar busqueda por id
-    @DeleteMapping("/eliminar/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Search> delete(@PathVariable Long id){
         searchService.deleteSearch(id);
         return ResponseEntity.noContent().build();
