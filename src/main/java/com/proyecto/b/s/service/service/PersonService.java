@@ -23,5 +23,4 @@ public interface PersonService {
     void delete(Long id) throws Exception;
 
 
-
 }

@@ -22,6 +22,8 @@ public class PersonResponseDto {
     private String phoneNumber;
     private String remuneration;
 
+    private Boolean active;
+
 
     private List<IndustryResponseDto> industries;
 

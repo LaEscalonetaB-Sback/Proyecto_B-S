@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.proyecto.b.s.entity.Person;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -100,12 +101,13 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public void delete(Long id) throws Exception {
-        Person person = personRepository.findById(id)
+        Person person = (personRepository.findById(id))
                 .orElseThrow(()-> new Exception("Persona no encontrada -" + this.getClass().getName()));
 
-//        personaRepository.delete(persona);
         person.setActive(false);
+
     }
+
 
 
 }
