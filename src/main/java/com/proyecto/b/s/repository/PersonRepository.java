@@ -16,17 +16,16 @@ import java.util.List;
 public interface PersonRepository extends JpaRepository<Person, Long> {
 
 
-    @Query(value = "SELECT p FROM Person p "
-            + "LEFT JOIN p.roles r "
-            + "LEFT JOIN p.skills s "
-            + "WHERE "
-            + "(:name IS NULL OR p.name = :name) AND "
-            + "(:lastName IS NULL OR p.lastName = :lastName) AND "
-            + "(:seniorityGeneral IS NULL OR p.seniorityGeneral = :seniorityGeneral) AND "
-            + "(COALESCE(:roles, NULL) IS NULL OR EXISTS"
-            + "(SELECT 1 FROM p.roles r2 WHERE r2.name IN (:roles))) AND "
-            + "(COALESCE(:skills, NULL) IS NULL OR EXISTS "
-            + "(SELECT 1 FROM p.skills s2 WHERE s2.name IN (:skills)))")
+    @Query(value = "SELECT DISTINCT p FROM Person p " +
+            "LEFT JOIN p.roles r " +
+            "LEFT JOIN p.skills s " +
+            "WHERE (:name IS NULL OR p.name = :name) " +
+            "AND (:lastName IS NULL OR p.lastName = :lastName) " +
+            "AND (:seniorityGeneral IS NULL OR p.seniorityGeneral = :seniorityGeneral) " +
+            "AND (COALESCE(:roles, NULL) IS NULL OR EXISTS " +
+            "(SELECT 1 FROM p.roles r2 WHERE r2.name IN (:roles))) " +
+            "AND (COALESCE(:skills, NULL) IS NULL OR EXISTS " +
+            "(SELECT 1 FROM p.skills s2 WHERE s2.name IN (:skills)))")
 
 
     List<Person> searchPerson(

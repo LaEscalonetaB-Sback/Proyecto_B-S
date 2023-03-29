@@ -1,6 +1,7 @@
 package com.proyecto.b.s.dto.modelMapper;
 
 import com.proyecto.b.s.dto.request.PersonRequestDto;
+import com.proyecto.b.s.dto.request.PersonUpdateRequestDTO;
 import com.proyecto.b.s.dto.response.PersonResponseDto;
 import com.proyecto.b.s.entity.Person;
 import org.modelmapper.ModelMapper;
@@ -20,6 +21,12 @@ public class ModelMapperImpl implements ModelMapperInterface{
 
     @Override
     public Person personReqDtoToPerson(PersonRequestDto personRequestDto){
+        return modelMapper.map(personRequestDto, Person.class);
+    }
+
+
+    @Override
+    public Person personUpdateReqDtoToPerson(PersonUpdateRequestDTO personRequestDto){
         return modelMapper.map(personRequestDto, Person.class);
     }
 
