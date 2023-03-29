@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/bs/busqueda")
+@RequestMapping("/bs/search")
 @CrossOrigin("*")
 public class SearchController {
     private final SearchService searchService;
@@ -54,17 +54,6 @@ public class SearchController {
     }
 
     //Actualizar busqueda
-    /**@PutMapping("/update")
-    public ResponseEntity<Search> update(@RequestBody Search search) throws Exception {
-        if (search.getId() == null){
-            return ResponseEntity.badRequest().build();
-        }
-        if (!searchService.existById(search.getId())){
-            return ResponseEntity.notFound().build();
-        }
-        Search result = searchService.update(search);
-        return ResponseEntity.ok(result);
-    }**/
     @PutMapping("/update/{searchId}")
     public ResponseEntity<SearchResponseDto> update(@PathVariable Long searchId, @RequestBody SearchRequestDto searchRequestDto) throws EntityNotFoundException {
         if (!searchService.existById(searchId)) {
