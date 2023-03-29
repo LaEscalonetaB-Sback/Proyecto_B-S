@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public interface SearchRepository extends JpaRepository<Search, Long> {
-    @Query(value = "SELECT b FROM Search b "
+    @Query(value = "SELECT DISTINCT b FROM Search b "
             + "LEFT JOIN b.stateSearch eb "
             + "LEFT JOIN b.skills s "
             + "WHERE "
