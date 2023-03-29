@@ -57,26 +57,11 @@ public class SearchServiceImpl implements SearchService {
         return searchRepository.findById(id).orElseThrow(() -> new Exception("La busqueda no existe"));
     }
     @Override
-    public Search update(Search fromSearch) throws Exception {
-         Search toSearch = findById(fromSearch.getId());
-         mapSearch(fromSearch, toSearch);
-         return searchRepository.save(toSearch);
-    }
-    protected void mapSearch(Search from, Search to){
-        to.setLinkJb(from.getLinkJb());
-        to.setDateOpening(from.getDateOpening());
-        to.setDayJob(from.getDayJob());
-        to.setModalityHiring(from.getModalityHiring());
-        to.setPosition(from.getPosition());
-        to.setRemuneration(from.getRemuneration());
-        to.setVacancies(from.getVacancies());
-        to.setObservations(from.getRemuneration());
-        to.setActive(from.isActive());
-        to.setSeniority(from.getSeniority());
-        to.setRol(from.getRol());
-        to.setClient(from.getClient());
-        to.setStateSearch(from.getStateSearch());
-        to.setSkills(from.getSkills());
+    public SearchResponseDto update(Long searchId, SearchRequestDto searchRequestDto) throws EntityNotFoundException {
+        Search search = searchRepository.findById(searchId).orElseThrow(() -> new EntityNotFoundException("Search not found with id: " + searchId));
+        modelMapper.map(searchRequestDto, search);
+        searchRepository.save(search);
+        return modelMapper.map(search, SearchResponseDto.class);
     }
     @Override
     public void deleteSearch(Long id) throws EntityNotFoundException {

@@ -11,18 +11,5 @@ public interface ModelMapperInterface {
     Search searchReqDtoToSearch(SearchRequestDto searchRequestDto);
     SearchResponseDto searchToSearchResponseDTO(Search search);
 
-    Client clientReqDtoToClient(ClientRequestDto clientRequestDto);
-    ClientResponseDto clientToClientResponseDTO(Client client);
 
-    Rol rolReqDtoToClient(RolRequestDto rolRequestDto);
-    RolResponseDto rolToRolResponseDTO(Rol rol);
-
-    Seniority seniorityReqDtoToClient(SeniorityRequestDto seniorityRequestDto);
-    SeniorityResponseDto seniorityToSeniorityResponseDTO(Seniority seniority);
-
-    StateSearch stateSearchReqDtoToStateSearch(StateSearchRequestDto stateSearchRequestDto);
-    StateSearchResponseDto stateSearchToStateSearchResponseDTO(StateSearch stateSearch);
-
-    Skill skillReqDtoToSkill(SkillRequestDto skillRequestDto);
-    SkillResponseDto skillToSkillReponseDTO(Skill skill);
 }

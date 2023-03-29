@@ -8,6 +8,7 @@ import com.proyecto.b.s.service.service.SearchService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,7 +54,7 @@ public class SearchController {
     }
 
     //Actualizar busqueda
-    @PutMapping("/update")
+    /**@PutMapping("/update")
     public ResponseEntity<Search> update(@RequestBody Search search) throws Exception {
         if (search.getId() == null){
             return ResponseEntity.badRequest().build();
@@ -62,6 +63,14 @@ public class SearchController {
             return ResponseEntity.notFound().build();
         }
         Search result = searchService.update(search);
+        return ResponseEntity.ok(result);
+    }**/
+    @PutMapping("/update/{searchId}")
+    public ResponseEntity<SearchResponseDto> update(@PathVariable Long searchId, @RequestBody SearchRequestDto searchRequestDto) throws EntityNotFoundException {
+        if (!searchService.existById(searchId)) {
+            return ResponseEntity.notFound().build();
+        }
+        SearchResponseDto result = searchService.update(searchId, searchRequestDto);
         return ResponseEntity.ok(result);
     }
 
