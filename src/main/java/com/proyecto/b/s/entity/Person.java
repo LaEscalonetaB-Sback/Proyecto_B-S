@@ -31,8 +31,17 @@ public class Person {
     private String remuneration;
     private Boolean active = true;
 
+
+
     @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(
+            name = "person_skill",
+            joinColumns = @JoinColumn(name = "person_id"),
+            inverseJoinColumns = @JoinColumn(name = "skill_id")
+    )
+    @JsonManagedReference
     private List<Skill> skills;
+
 
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(

@@ -26,8 +26,8 @@ public class ModelMapperImpl implements ModelMapperInterface {
     }
 
     @Override
-    public <HEAD> Person personUpdateReqDtoToPerson(PersonUpdateRequestDTO personRequestDto) {
-        return null;
+    public Person personUpdateReqDtoToPerson(PersonUpdateRequestDTO personRequestDto) {
+        return modelMapper.map(personRequestDto,Person.class);
     }
 
     @Override
