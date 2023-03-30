@@ -30,8 +30,14 @@ public class Person {
     private Boolean active = true;
 
 
-    @ManyToMany(cascade = {CascadeType.ALL})
 
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(
+            name = "person_skill",
+            joinColumns = @JoinColumn(name = "person_id"),
+            inverseJoinColumns = @JoinColumn(name = "skill_id")
+    )
+    @JsonManagedReference
     private List<Skill> skills;
 
 
@@ -70,6 +76,4 @@ public class Person {
     )
     @JsonManagedReference
     private List<StatePerson> statePeople;
-
-
 }

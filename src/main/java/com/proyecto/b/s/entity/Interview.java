@@ -21,6 +21,4 @@ public class Interview {
     private String emailRecruiter;
     private Date dateInterview;
     private String linkMeet;
-
-
 }

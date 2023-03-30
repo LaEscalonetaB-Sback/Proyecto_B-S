@@ -5,8 +5,8 @@ import com.proyecto.b.s.entity.Client;
 import java.util.List;
 
 public interface ClientService {
-    List<Client> listarClientes();
-    Client guardarCliente(Client client);
-    Client actualizarCliente(Client client);
-    void eliminarCliente(Long id);
+    List<Client> listClient();
+    Client saveClient(Client client);
+    Client updateClient(Client client);
+    void deleteClient(Long id);
 }

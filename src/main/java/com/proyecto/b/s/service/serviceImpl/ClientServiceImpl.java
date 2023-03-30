@@ -9,22 +9,22 @@ import java.util.List;
 @Service
 public class ClientServiceImpl implements ClientService {
     @Override
-    public List<Client> listarClientes() {
+    public List<Client> listClient() {
         return null;
     }
 
     @Override
-    public Client guardarCliente(Client client) {
+    public Client saveClient(Client client) {
         return null;
     }
 
     @Override
-    public Client actualizarCliente(Client client) {
+    public Client updateClient(Client client) {
         return null;
     }
 
     @Override
-    public void eliminarCliente(Long id) {
+    public void deleteClient(Long id) {
 
     }
 }

@@ -13,10 +13,8 @@ import javax.persistence.*;
 @ToString
 @Table(name = "source")
 public class Source {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
 }
