@@ -4,5 +4,6 @@ import lombok.Data;
 
 @Data
 public class ClientRequestDto {
+    private Long id;
     private String name;
 }
