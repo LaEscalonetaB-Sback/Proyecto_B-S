@@ -2,6 +2,7 @@ package com.proyecto.b.s.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
@@ -17,9 +18,10 @@ public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nameComplete;
+    private String name;
+    private String lastName;
     private String linkedin;
-    private LocalDate dateHiring;
+    private LocalDate ContactDate = (LocalDate.now());
     private String recruiter;
     private String seniorityGeneral;
     private String dni;
@@ -29,17 +31,8 @@ public class Person {
     private String remuneration;
     private Boolean active = true;
 
-
-
     @ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(
-            name = "person_skill",
-            joinColumns = @JoinColumn(name = "person_id"),
-            inverseJoinColumns = @JoinColumn(name = "skill_id")
-    )
-    @JsonManagedReference
     private List<Skill> skills;
-
 
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(

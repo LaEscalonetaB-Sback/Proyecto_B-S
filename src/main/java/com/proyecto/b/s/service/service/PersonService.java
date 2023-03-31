@@ -2,7 +2,6 @@ package com.proyecto.b.s.service.service;
 
 import com.proyecto.b.s.dto.request.PersonRequestDto;
 import com.proyecto.b.s.dto.request.PersonUpdateRequestDTO;
-import com.proyecto.b.s.dto.request.RolRequestDto;
 import com.proyecto.b.s.dto.response.PersonResponseDto;
 import com.proyecto.b.s.entity.Person;
 

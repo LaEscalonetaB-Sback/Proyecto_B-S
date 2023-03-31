@@ -1,6 +1,6 @@
 package com.proyecto.b.s.dto.modelMapper;
 
-import com.proyecto.b.s.dto.request.*;
+import com.proyecto.b.s.dto.request.SearchRequestDto;
 import com.proyecto.b.s.dto.response.*;
 import com.proyecto.b.s.entity.*;
 import com.proyecto.b.s.dto.request.PersonRequestDto;
