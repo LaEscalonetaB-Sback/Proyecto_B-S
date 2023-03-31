@@ -17,8 +17,7 @@ public interface ModelMapperInterface {
 
     PersonResponseDto personToPersonResponseDTO(Person person);
 
-    Search searchReqDtoToSearch(SearchRequestDto searchRequestDto);
-    SearchResponseDto searchToSearchResponseDTO(Search search);
+
 
 
 }

@@ -35,13 +35,5 @@ public class ModelMapperImpl implements ModelMapperInterface {
         return modelMapper.map(person, PersonResponseDto.class);
     }
 
-    //Search
-    @Override
-    public Search searchReqDtoToSearch(SearchRequestDto searchRequestDto) {
-        return modelMapper.map(searchRequestDto, Search.class);
-    }
-    @Override
-    public SearchResponseDto searchToSearchResponseDTO(Search search) {
-        return modelMapper.map(search, SearchResponseDto.class);
-    }
+
 }
