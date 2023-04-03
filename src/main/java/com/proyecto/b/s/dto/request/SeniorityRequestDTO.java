@@ -2,8 +2,7 @@ package com.proyecto.b.s.dto.request;
 
 import lombok.Data;
 
-
 @Data
-public class StateSearchRequestDto {
+public class SeniorityRequestDTO {
     private String name;
 }

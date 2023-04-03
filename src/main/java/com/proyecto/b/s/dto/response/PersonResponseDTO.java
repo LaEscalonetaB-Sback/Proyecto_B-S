@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Data
-public class PersonResponseDto {
+public class PersonResponseDTO {
     private Long id;
     private String name;
     private String lastName;
@@ -21,13 +21,13 @@ public class PersonResponseDto {
     private String remuneration;
     private Boolean active;
 
-    private List<IndustryResponseDto> industries;
+    private List<IndustryResponseDTO> industries;
 
-    private List<SourceResponseDto> sources;
+    private List<SourceResponseDTO> sources;
 
-    private List<RolResponseDto> roles;
+    private List<RolResponseDTO> roles;
 
-    private List<SkillResponseDto> skills;
+    private List<SkillResponseDTO> skills;
 
-    private List<StatePersonResponseDto> statePeople;
+    private List<StatePersonResponseDTO> statePeople;
 }

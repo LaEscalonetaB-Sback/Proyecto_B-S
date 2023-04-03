@@ -7,7 +7,7 @@ import java.util.List;
 
 //Lo que le envio de respuesta al front
 @Data
-public class SearchResponseDto {
+public class SearchResponseDTO {
     private Long id;
     private String linkJb;
     private LocalDate dateOpening; //fechaApertura
@@ -18,9 +18,9 @@ public class SearchResponseDto {
     private String vacancies; //vacantes
     private String observations; //observaciones
     private boolean active;
-    private SeniorityResponseDto seniority;
-    private RolResponseDto rol;
-    private ClientResponseDto client;
-    private List<StateSearchResponseDto> stateSearch;
-    private List<SkillResponseDto> skills;
+    private SeniorityResponseDTO seniority;
+    private RolResponseDTO rol;
+    private ClientResponseDTO client;
+    private List<StateSearchResponseDTO> stateSearch;
+    private List<SkillResponseDTO> skills;
 }
