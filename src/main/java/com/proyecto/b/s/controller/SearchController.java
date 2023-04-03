@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/bs/search")
-@CrossOrigin("*")
+@CrossOrigin(value = "*")
 public class SearchController {
     private final SearchService searchService;
     public SearchController(SearchService searchService) {
