@@ -3,5 +3,6 @@ package com.proyecto.b.s.dto.response;
 import lombok.Data;
 
 @Data
-public class RolUserResponseDto {
+public class UserResponseDTO {
+
 }

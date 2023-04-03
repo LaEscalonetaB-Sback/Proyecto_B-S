@@ -1,9 +1,10 @@
-package com.proyecto.b.s.dto.request;
+package com.proyecto.b.s.dto.response;
 
 import lombok.Data;
 
 @Data
-public class SourceRequestDto {
+public class RolResponseDTO {
+
     private Long id;
     private String name;
 }

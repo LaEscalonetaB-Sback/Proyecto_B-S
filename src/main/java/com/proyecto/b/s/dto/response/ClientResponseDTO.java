@@ -2,9 +2,9 @@ package com.proyecto.b.s.dto.response;
 
 import lombok.Data;
 
-
 @Data
-public class StateSearchResponseDto {
+public class ClientResponseDTO {
+
     private Long id;
     private String name;
 }
