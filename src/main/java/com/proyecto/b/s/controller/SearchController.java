@@ -28,7 +28,7 @@ public class SearchController {
             @RequestParam(required = false) String client,
             @RequestParam(required = false) String rol,
             @RequestParam(required = false) String state,
-            @RequestParam(required = false) String seniority,
+            @RequestParam(required = false) List<String> seniority,
             @RequestParam(required = false) List<String> skills) {
         List<SearchResponseDto> search = searchService.listSearch(client, rol, state, seniority, skills);
 
