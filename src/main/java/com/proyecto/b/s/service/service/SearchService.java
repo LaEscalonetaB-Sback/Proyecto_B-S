@@ -13,5 +13,5 @@ public interface SearchService {
     SearchResponseDto update(Long searchId, SearchRequestDto searchRequestDto) throws EntityNotFoundException;
     boolean existById(Long id);
     void deleteSearch(Long id);
-    List<SearchResponseDto> listSearch(String client, String rol, String state, String seniority, List<String> skills);
+    List<SearchResponseDto> listSearch(String client, String rol, String state, List<String> seniority, List<String> skills);
 }

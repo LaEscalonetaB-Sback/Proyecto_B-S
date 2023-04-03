@@ -30,6 +30,20 @@ public class SearchServiceImpl implements SearchService {
         this.modelMapper = modelMapper;
     }
     @Override
+    public List<SearchResponseDto> listSearch(String client, String rol, String state, List<String> seniority, List<String> skills) {
+        if (client != null || rol != null || state != null || (seniority != null && !seniority.isEmpty()) || (skills != null && !skills.isEmpty())) {
+            List<Search> searchList = searchRepository.findSearchBy(client, rol, state, seniority, skills);
+            return searchList.stream()
+                    .map(search -> modelMapper.map(search, SearchResponseDto.class))
+                    .collect(Collectors.toList());
+        } else {
+            List<Search> searchList = searchRepository.findAll();
+            return searchList.stream()
+                    .map(search -> modelMapper.map(search, SearchResponseDto.class))
+                    .collect(Collectors.toList());
+        }
+    }
+    /*@Override
     public List<SearchResponseDto> listSearch(String client, String rol, String state, String seniority, List<String> skills){
         if (client != null || rol != null || state != null || seniority != null || (skills != null && !skills.isEmpty())){
             List<Search> searchList = searchRepository.findSearchBy(client, rol, state, seniority, skills);
@@ -42,7 +56,7 @@ public class SearchServiceImpl implements SearchService {
                     .map(search -> modelMapper.map(search, SearchResponseDto.class))
                     .collect(Collectors.toList());
         }
-    }
+    }*/
     @Override
     public SearchResponseDto saveSearch(SearchRequestDto searchRequestDto) {
         Search search = modelMapperInterface.searchReqDtoToSearch(searchRequestDto);
