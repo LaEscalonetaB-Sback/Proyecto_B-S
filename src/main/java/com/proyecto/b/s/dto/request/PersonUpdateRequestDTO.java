@@ -1,7 +1,6 @@
 package com.proyecto.b.s.dto.request;
 
 
-import com.proyecto.b.s.entity.StatePerson;
 import lombok.Data;
 
 import java.util.List;
@@ -30,7 +29,7 @@ public class PersonUpdateRequestDTO {
 
     private List<SkillRequestDto> skills;
 
-    private List<StatePersonRequestDto> people;
+    private List<StatePersonRequestDto> statePeople;
 
 
 

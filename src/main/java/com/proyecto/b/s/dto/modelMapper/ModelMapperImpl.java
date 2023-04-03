@@ -1,15 +1,13 @@
 package com.proyecto.b.s.dto.modelMapper;
 
-import com.proyecto.b.s.dto.request.*;
+import com.proyecto.b.s.dto.request.PersonRequestDto;
+import com.proyecto.b.s.dto.request.PersonUpdateRequestDTO;
+import com.proyecto.b.s.dto.request.SearchRequestDto;
 import com.proyecto.b.s.dto.response.*;
 import com.proyecto.b.s.entity.*;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-
-import java.lang.reflect.Type;
-import java.util.List;
 
 @Component
 public class ModelMapperImpl implements ModelMapperInterface {

@@ -4,4 +4,6 @@ import lombok.Data;
 
 @Data
 public class StatePersonRequestDto {
+    private Long id;
+    private String name;
 }

@@ -29,5 +29,5 @@ public class PersonResponseDto {
 
     private List<SkillResponseDto> skills;
 
-    private List<StatePersonResponseDto> statePerson;
+    private List<StatePersonResponseDto> statePeople;
 }

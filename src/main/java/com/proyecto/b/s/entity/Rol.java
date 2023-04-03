@@ -19,6 +19,6 @@ public class Rol {
     private Long id;
     private String name;
 
-    @OneToOne(cascade = {CascadeType.ALL})
-    private Seniority seniority;
+//    @OneToOne(cascade = {CascadeType.ALL})
+//    private Seniority seniority;
 }

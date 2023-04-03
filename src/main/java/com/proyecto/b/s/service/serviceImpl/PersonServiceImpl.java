@@ -4,18 +4,17 @@ package com.proyecto.b.s.service.serviceImpl;
 import com.proyecto.b.s.dto.modelMapper.ModelMapperInterface;
 import com.proyecto.b.s.dto.request.PersonRequestDto;
 import com.proyecto.b.s.dto.request.PersonUpdateRequestDTO;
+import com.proyecto.b.s.dto.request.SkillRequestDto;
 import com.proyecto.b.s.dto.response.PersonResponseDto;
-import com.proyecto.b.s.entity.Skill;
-import com.proyecto.b.s.entity.Source;
-import com.proyecto.b.s.entity.StatePerson;
+import com.proyecto.b.s.entity.*;
 import com.proyecto.b.s.repository.PersonRepository;
 import com.proyecto.b.s.service.service.PersonService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.proyecto.b.s.entity.Person;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -85,20 +84,9 @@ public class PersonServiceImpl implements PersonService {
         return modelMapperInterface.personToPersonResponseDTO(person);
     }
 
-
-    //todo falta mappear las listas :(
-    protected  void mapPerson(PersonUpdateRequestDTO personRequestDto, Person person){
-
-        person.setName(personRequestDto.getName());
-        person.setLastName(personRequestDto.getLastName());
-        person.setDni(personRequestDto.getDni());
-        person.setLinkedin(personRequestDto.getLinkedin());
-        person.setSeniorityGeneral(personRequestDto.getSeniorityGeneral());
-        person.setEmail(personRequestDto.getEmail());
-        person.setPhoneNumber(personRequestDto.getPhoneNumber());
-        person.setRemuneration(personRequestDto.getRemuneration());
-        person.setActive(personRequestDto.getActive());
-
+    public void mapPerson(PersonUpdateRequestDTO personRequestDto, Person person) {
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.map(personRequestDto, person);
     }
 
     @Override
@@ -112,7 +100,5 @@ public class PersonServiceImpl implements PersonService {
 
         modelMapperInterface.personToPersonResponseDTO(person);
     }
-
-
 
 }
