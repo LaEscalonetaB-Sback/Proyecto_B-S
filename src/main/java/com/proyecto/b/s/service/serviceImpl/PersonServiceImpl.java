@@ -84,52 +84,10 @@ public class PersonServiceImpl implements PersonService {
         return modelMapperInterface.personToPersonResponseDTO(person);
     }
 
-//    public void mapPerson(PersonUpdateRequestDTO personRequestDto, Person person) {
-//        ModelMapper modelMapper = new ModelMapper();
-//        modelMapper.map(personRequestDto, person);
-//    }
-
-    //todo falta mappear las listas :(
-    protected  void mapPerson(PersonUpdateRequestDTO personRequestDto, Person person){
-
-        person.setName(personRequestDto.getName());
-        person.setLastName(personRequestDto.getLastName());
-        person.setLinkedin(personRequestDto.getLinkedin());
-        person.setRecruiter(personRequestDto.getRecruiter());
-        person.setSeniorityGeneral(personRequestDto.getSeniorityGeneral());
-        person.setDni(personRequestDto.getDni());
-        person.setEmail(personRequestDto.getEmail());
-//        person.setCuil(personRequestDto.getCuil());
-        person.setPhoneNumber(personRequestDto.getPhoneNumber());
-        person.setRemuneration(personRequestDto.getRemuneration());
-        person.setActive(personRequestDto.getActive());
-
-//        List<Industry> industries = personRequestDto.getIndustries().stream()
-//                .map(industryDto -> new Industry(industryDto.getId(),industryDto.getName()))
-//                .collect(Collectors.toList());
-//        person.setIndustries(industries);
-
-        List <Source> sources = personRequestDto.getSources().stream()
-                .map(sourceDto -> new Source(sourceDto.getId(),sourceDto.getName()))
-                .collect(Collectors.toList());
-        person.setSources(sources);
-
-        List <Rol> roles = personRequestDto.getRoles().stream()
-                .map(rolDto -> new Rol(rolDto.getId(),rolDto.getName()))
-                .collect(Collectors.toList());
-        person.setRoles(roles);
-
-        List<Skill> skills = personRequestDto.getSkills().stream()
-                .map(skillDto -> new Skill(skillDto.getId(),skillDto.getName()))
-                .collect(Collectors.toList());
-        person.setSkills(skills);
-
-//        List<StatePerson> statePerson = personRequestDto.getStatePerson().stream()
-//                .map(stateDto -> new StatePerson(stateDto.getId(),stateDto.getName()))
-//                .collect(Collectors.toList());
-//        person.setStatePeople(statePerson);
+    public void mapPerson(PersonUpdateRequestDTO personRequestDto, Person person) {
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.map(personRequestDto, person);
     }
-
 
     @Override
     public void delete(Long id) throws Exception {
