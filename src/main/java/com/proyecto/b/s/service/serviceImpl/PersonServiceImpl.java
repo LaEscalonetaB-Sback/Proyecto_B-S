@@ -2,17 +2,14 @@ package com.proyecto.b.s.service.serviceImpl;
 
 
 import com.proyecto.b.s.dto.modelMapper.ModelMapperInterface;
-import com.proyecto.b.s.dto.request.PersonRequestDto;
+import com.proyecto.b.s.dto.request.PersonRequestDTO;
 import com.proyecto.b.s.dto.request.PersonUpdateRequestDTO;
-import com.proyecto.b.s.dto.response.PersonResponseDto;
-import com.proyecto.b.s.entity.Skill;
-import com.proyecto.b.s.entity.Source;
-import com.proyecto.b.s.entity.StatePerson;
+import com.proyecto.b.s.dto.response.PersonResponseDTO;
+import com.proyecto.b.s.entity.*;
 import com.proyecto.b.s.repository.PersonRepository;
 import com.proyecto.b.s.service.service.PersonService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.proyecto.b.s.entity.Person;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -39,7 +36,7 @@ public class PersonServiceImpl implements PersonService {
 
 
     @Override
-    public Person create(PersonRequestDto personRequestDto) {
+    public Person create(PersonRequestDTO personRequestDto) {
         Person person = modelMapperInterface.personReqDtoToPerson(personRequestDto);
 
         return personRepository.save(person);
@@ -47,18 +44,18 @@ public class PersonServiceImpl implements PersonService {
 
 
     @Override
-    public List<PersonResponseDto> search(String name, String lastName, String seniorityGeneral, List<String> roles, List<String> skills) {
+    public List<PersonResponseDTO> search(String name, String lastName, String seniorityGeneral, List<String> roles, List<String> skills) {
 
         if (name == null && lastName == null && seniorityGeneral == null && roles == null && skills == null) {
             List<Person> personList = personRepository.findAll();
             return personList.stream()
-                    .map(person -> modelMapper.map(person, PersonResponseDto.class))
+                    .map(person -> modelMapper.map(person, PersonResponseDTO.class))
                     .collect(Collectors.toList());
         } else {
 
             List<Person> personList = personRepository.searchPerson(name, lastName, seniorityGeneral, roles, skills);
             return personList.stream()
-                    .map(person -> modelMapper.map(person, PersonResponseDto.class))
+                    .map(person -> modelMapper.map(person, PersonResponseDTO.class))
                     .collect(Collectors.toList());
         }
     }
@@ -76,7 +73,7 @@ public class PersonServiceImpl implements PersonService {
 
 
     @Override
-    public PersonResponseDto update(Long Id, PersonUpdateRequestDTO personRequestDto) throws EntityNotFoundException {
+    public PersonResponseDTO update(Long Id, PersonUpdateRequestDTO personRequestDto) throws EntityNotFoundException {
         Person person = personRepository.findById(Id).orElseThrow(() -> new EntityNotFoundException("Search not found with id: " +Id));
         modelMapperInterface.personUpdateReqDtoToPerson(personRequestDto);
         mapPerson(personRequestDto, person);
@@ -85,20 +82,9 @@ public class PersonServiceImpl implements PersonService {
         return modelMapperInterface.personToPersonResponseDTO(person);
     }
 
-
-    //todo falta mappear las listas :(
-    protected  void mapPerson(PersonUpdateRequestDTO personRequestDto, Person person){
-
-        person.setName(personRequestDto.getName());
-        person.setLastName(personRequestDto.getLastName());
-        person.setDni(personRequestDto.getDni());
-        person.setLinkedin(personRequestDto.getLinkedin());
-        person.setSeniorityGeneral(personRequestDto.getSeniorityGeneral());
-        person.setEmail(personRequestDto.getEmail());
-        person.setPhoneNumber(personRequestDto.getPhoneNumber());
-        person.setRemuneration(personRequestDto.getRemuneration());
-        person.setActive(personRequestDto.getActive());
-
+    public void mapPerson(PersonUpdateRequestDTO personRequestDto, Person person) {
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.map(personRequestDto, person);
     }
 
     @Override
@@ -112,7 +98,5 @@ public class PersonServiceImpl implements PersonService {
 
         modelMapperInterface.personToPersonResponseDTO(person);
     }
-
-
 
 }

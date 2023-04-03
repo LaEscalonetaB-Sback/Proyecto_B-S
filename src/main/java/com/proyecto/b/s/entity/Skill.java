@@ -19,7 +19,9 @@ public class Skill {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @ManyToMany(mappedBy = "skills")
-    @JsonBackReference
-    private List<Search> search;
+
+//    @ManyToMany(mappedBy = "skills")
+//    @JsonBackReference
+//    private List<Search> search;
+
 }

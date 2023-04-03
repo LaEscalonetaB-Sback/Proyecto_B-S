@@ -1,8 +1,8 @@
 package com.proyecto.b.s.controller;
 //busqueda -> search
 
-import com.proyecto.b.s.dto.request.SearchRequestDto;
-import com.proyecto.b.s.dto.response.SearchResponseDto;
+import com.proyecto.b.s.dto.request.SearchRequestDTO;
+import com.proyecto.b.s.dto.response.SearchResponseDTO;
 import com.proyecto.b.s.entity.*;
 import com.proyecto.b.s.service.service.SearchService;
 import org.springframework.http.ResponseEntity;
@@ -24,13 +24,13 @@ public class SearchController {
     //CRUD
     //Lista de busquedas
     @GetMapping("/list")
-    public ResponseEntity<List<SearchResponseDto>> findSearch(
+    public ResponseEntity<List<SearchResponseDTO>> findSearch(
             @RequestParam(required = false) String client,
             @RequestParam(required = false) String rol,
             @RequestParam(required = false) String state,
             @RequestParam(required = false) List<String> seniority,
             @RequestParam(required = false) List<String> skills) {
-        List<SearchResponseDto> search = searchService.listSearch(client, rol, state, seniority, skills);
+        List<SearchResponseDTO> search = searchService.listSearch(client, rol, state, seniority, skills);
 
         if (search.isEmpty()) {
             return ResponseEntity.noContent().build();
@@ -48,18 +48,18 @@ public class SearchController {
 
     //Crear busqueda
     @PostMapping("/create")
-    public ResponseEntity<SearchResponseDto> create(@RequestBody SearchRequestDto searchRequestDto){
-        SearchResponseDto result = searchService.saveSearch(searchRequestDto);
+    public ResponseEntity<SearchResponseDTO> create(@RequestBody SearchRequestDTO searchRequestDto){
+        SearchResponseDTO result = searchService.saveSearch(searchRequestDto);
         return ResponseEntity.ok(result);
     }
 
     //Actualizar busqueda
     @PutMapping("/update/{searchId}")
-    public ResponseEntity<SearchResponseDto> update(@PathVariable Long searchId, @RequestBody SearchRequestDto searchRequestDto) throws EntityNotFoundException {
+    public ResponseEntity<SearchResponseDTO> update(@PathVariable Long searchId, @RequestBody SearchRequestDTO searchRequestDto) throws EntityNotFoundException {
         if (!searchService.existById(searchId)) {
             return ResponseEntity.notFound().build();
         }
-        SearchResponseDto result = searchService.update(searchId, searchRequestDto);
+        SearchResponseDTO result = searchService.update(searchId, searchRequestDto);
         return ResponseEntity.ok(result);
     }
 

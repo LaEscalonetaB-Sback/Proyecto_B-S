@@ -1,10 +1,11 @@
-package com.proyecto.b.s.dto.response;
+package com.proyecto.b.s.dto.request;
 
 import lombok.Data;
 
 
 @Data
-public class StateSearchResponseDto {
+public class StateSearchRequestDTO {
+
     private Long id;
     private String name;
 }
