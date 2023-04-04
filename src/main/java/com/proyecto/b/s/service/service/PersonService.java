@@ -13,7 +13,7 @@ public interface PersonService {
 
     Person create(PersonRequestDto personRequestDto) throws Exception;
 
-    List<PersonResponseDto> search(String name, String lastName, String seniorityGeneral, List<String> roles, List<String> skills);
+    List<PersonResponseDto> search(String name, String lastName, List<String> seniorityGeneral, List<String> roles, List<String> skills);
 
     boolean existById(Long id) throws Exception;
 

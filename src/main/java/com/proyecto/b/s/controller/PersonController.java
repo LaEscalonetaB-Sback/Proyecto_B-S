@@ -32,7 +32,7 @@ public class PersonController {
     public ResponseEntity<List<PersonResponseDto>> searchPerson(
             @RequestParam(value = "name", required = false) String name,
             @RequestParam(value = "lastName", required = false) String lastName,
-            @RequestParam(value = "seniorityGeneral", required = false) String seniorityGeneral,
+            @RequestParam(value = "seniorityGeneral", required = false) List<String>  seniorityGeneral,
             @RequestParam(value = "roles", required = false) List<String> roles,
             @RequestParam(value = "skills", required = false) List<String> skills) {
 

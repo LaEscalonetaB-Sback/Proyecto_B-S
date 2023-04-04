@@ -46,7 +46,7 @@ public class PersonServiceImpl implements PersonService {
 
 
     @Override
-    public List<PersonResponseDto> search(String name, String lastName, String seniorityGeneral, List<String> roles, List<String> skills) {
+    public List<PersonResponseDto> search(String name, String lastName, List<String> seniorityGeneral, List<String> roles, List<String> skills) {
 
         if (name == null && lastName == null && seniorityGeneral == null && roles == null && skills == null) {
             List<Person> personList = personRepository.findAll();
