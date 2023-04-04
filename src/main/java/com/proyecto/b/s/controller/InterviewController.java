@@ -5,12 +5,13 @@ package com.proyecto.b.s.controller;
 import com.proyecto.b.s.dto.request.InterviewRequestDTO;
 import com.proyecto.b.s.dto.response.InterviewResponseDTO;
 import com.proyecto.b.s.entity.Interview;
-import com.proyecto.b.s.entity.Search;
 import com.proyecto.b.s.service.service.InterviewService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -22,6 +23,23 @@ public class InterviewController {
 
     public InterviewController(InterviewService interviewService) {
         this.interviewService = interviewService;
+    }
+
+    //CRUD
+    //Lista de busquedas
+    @GetMapping("/list")
+    public ResponseEntity<List<InterviewResponseDTO>> findInterview(
+            @RequestParam(required = false) String entrevistador,
+            @RequestParam(required = false) LocalDate fecha,
+            @RequestParam(required = false) Long idPersona,
+            @RequestParam(required = false) Long idBusqueda) {
+        List<InterviewResponseDTO> interview = interviewService.listInterview(entrevistador, fecha, idPersona, idBusqueda);
+
+        if (interview.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(interview);
+        }
     }
 
     //Encuentra entrevista por id
@@ -50,7 +68,7 @@ public class InterviewController {
 
     //Eliminar entrevista por id
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Search> delete(@PathVariable Long id) {
+    public ResponseEntity<Interview> delete(@PathVariable Long id) {
         interviewService.deleteInterview(id);
         return ResponseEntity.noContent().build();
     }

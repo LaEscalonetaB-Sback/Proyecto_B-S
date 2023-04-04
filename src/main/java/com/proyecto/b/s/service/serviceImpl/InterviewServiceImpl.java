@@ -6,6 +6,7 @@ import com.proyecto.b.s.entity.Interview;
 import com.proyecto.b.s.service.service.InterviewService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -21,7 +22,7 @@ public class InterviewServiceImpl implements InterviewService {
     }
 
     @Override
-    public List<Interview> listInterview() {
+    public List<InterviewResponseDTO> listInterview(String entrevistador, LocalDate fecha, Long idPersona, Long idBusqueda) {
         return null;
     }
     @Override
