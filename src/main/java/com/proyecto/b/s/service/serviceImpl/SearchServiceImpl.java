@@ -3,6 +3,7 @@ package com.proyecto.b.s.service.serviceImpl;
 import com.proyecto.b.s.dto.modelMapper.ModelMapperInterface;
 import com.proyecto.b.s.dto.request.SearchRequestDTO;
 import com.proyecto.b.s.dto.response.SearchResponseDTO;
+
 import com.proyecto.b.s.entity.*;
 import com.proyecto.b.s.repository.*;
 import com.proyecto.b.s.service.service.SearchService;
@@ -30,8 +31,8 @@ public class SearchServiceImpl implements SearchService {
         this.modelMapper = modelMapper;
     }
     @Override
-    public List<SearchResponseDTO> listSearch(String client, String rol, String state, String seniority, List<String> skills){
-        if (client != null || rol != null || state != null || seniority != null || (skills != null && !skills.isEmpty())){
+    public List<SearchResponseDTO> listSearch(String client, String rol, String state, List<String> seniority, List<String> skills) {
+        if (client != null || rol != null || state != null || (seniority != null && !seniority.isEmpty()) || (skills != null && !skills.isEmpty())) {
             List<Search> searchList = searchRepository.findSearchBy(client, rol, state, seniority, skills);
             return searchList.stream()
                     .map(search -> modelMapper.map(search, SearchResponseDTO.class))
@@ -43,6 +44,20 @@ public class SearchServiceImpl implements SearchService {
                     .collect(Collectors.toList());
         }
     }
+    /*@Override
+    public List<SearchResponseDto> listSearch(String client, String rol, String state, String seniority, List<String> skills){
+        if (client != null || rol != null || state != null || seniority != null || (skills != null && !skills.isEmpty())){
+            List<Search> searchList = searchRepository.findSearchBy(client, rol, state, seniority, skills);
+            return searchList.stream()
+                    .map(search -> modelMapper.map(search, SearchResponseDto.class))
+                    .collect(Collectors.toList());
+        } else {
+            List<Search> searchList = searchRepository.findAll();
+            return searchList.stream()
+                    .map(search -> modelMapper.map(search, SearchResponseDto.class))
+                    .collect(Collectors.toList());
+        }
+    }*/
     @Override
     public SearchResponseDTO saveSearch(SearchRequestDTO searchRequestDto) {
         Search search = modelMapperInterface.searchReqDtoToSearch(searchRequestDto);

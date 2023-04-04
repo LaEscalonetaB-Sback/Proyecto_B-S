@@ -42,7 +42,6 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>8.0.32</version>
 		</dependency>
 
 		<dependency>
@@ -79,12 +78,7 @@
 			<version>1.6.4</version>
 		</dependency>
 
-		<!-- Para Maven -->
-		<dependency>
-			<groupId>org.modelmapper</groupId>
-			<artifactId>modelmapper</artifactId>
-			<version>2.4.4</version>
-		</dependency>
+
 
 	</dependencies>
 

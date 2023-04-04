@@ -18,4 +18,6 @@ public class EventOption {
     private Long id;
 
     private String name;
+
+    private String value;
 }
