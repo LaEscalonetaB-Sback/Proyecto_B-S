@@ -12,7 +12,7 @@ import java.util.List;
 @Service
 public class InterviewServiceImpl implements InterviewService {
     @Override
-    public Interview findById(Long id) throws Exception {
+    public Interview findById(Long id) {
         return null;
     }
 

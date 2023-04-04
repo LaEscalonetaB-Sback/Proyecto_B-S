@@ -3,7 +3,6 @@ package com.proyecto.b.s.service.service;
 import com.proyecto.b.s.dto.request.InterviewRequestDTO;
 import com.proyecto.b.s.dto.response.InterviewResponseDTO;
 import com.proyecto.b.s.entity.Interview;
-import com.proyecto.b.s.entity.Search;
 
 import java.time.LocalDate;
 import java.util.List;
