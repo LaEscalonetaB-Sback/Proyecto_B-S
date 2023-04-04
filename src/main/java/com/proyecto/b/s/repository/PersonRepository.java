@@ -31,7 +31,7 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
     List<Person> searchPerson(
             @Param("name") String name,
             @Param("lastName") String lastName,
-            @Param("seniorityGeneral") String seniorityGeneral,
+            @Param("seniorityGeneral") List<String> seniorityGeneral,
             @Param("roles") List<String> roles,
             @Param("skills") List<String> skills);
 

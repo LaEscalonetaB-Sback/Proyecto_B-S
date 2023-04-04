@@ -3,5 +3,6 @@ package com.proyecto.b.s.dto.request;
 import lombok.Data;
 
 @Data
-public class EventRequestDto {
+public class ClientRequestDTO {
+    private String name;
 }
