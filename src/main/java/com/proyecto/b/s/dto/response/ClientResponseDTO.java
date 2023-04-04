@@ -3,7 +3,7 @@ package com.proyecto.b.s.dto.response;
 import lombok.Data;
 
 @Data
-public class SourceResponseDto {
+public class ClientResponseDTO {
     private Long id;
     private String name;
 }

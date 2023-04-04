@@ -1,6 +1,6 @@
 package com.proyecto.b.s.service.serviceImpl;
 
-import com.proyecto.b.s.dto.request.UserRequestDto;
+import com.proyecto.b.s.dto.request.UserRequestDTO;
 
 import com.proyecto.b.s.repository.UserRepository;
 import com.proyecto.b.s.service.service.UserService;
@@ -22,17 +22,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User createUser(UserRequestDto userDto) throws Exception {
+    public User createUser(UserRequestDTO userDto) throws Exception {
         return null;
     }
 
     @Override
-    public Boolean validationEmail(UserRequestDto userDto) throws Exception {
+    public Boolean validationEmail(UserRequestDTO userDto) throws Exception {
         return null;
     }
 
     @Override
-    public Boolean validationPassword(UserRequestDto userDto) throws Exception {
+    public Boolean validationPassword(UserRequestDTO userDto) throws Exception {
         return null;
     }
 }

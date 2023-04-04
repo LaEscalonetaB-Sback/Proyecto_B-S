@@ -21,15 +21,15 @@ public class PersonUpdateRequestDTO {
     private Boolean active;
 
 
-    private List<IndustryRequestDto> industries;
+    private List<IndustryRequestDTO> industries;
 
-    private List<SourceRequestDto> sources;
+    private List<SourceRequestDTO> sources;
 
-    private List<RolRequestDto> roles;
+    private List<RolRequestDTO> roles;
 
-    private List<SkillRequestDto> skills;
+    private List<SkillRequestDTO> skills;
 
-    private List<StatePersonRequestDto> statePeople;
+    private List<StatePersonRequestDTO> statePeople;
 
 
 

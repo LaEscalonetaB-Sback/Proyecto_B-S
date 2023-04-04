@@ -17,12 +17,13 @@ public interface SearchRepository extends JpaRepository<Search, Long> {
             + "(:client IS NULL OR b.client.name = :client) AND "
             + "(:rol IS NULL OR b.rol.name = :rol) AND "
             + "(:state IS NULL OR eb.name = :state) AND "
-            + "(:seniority IS NULL OR b.seniority.name = :seniority) AND "
+            + "(COALESCE(:seniority, NULL) IS NULL OR EXISTS "
+            + "(SELECT 1 FROM b.seniority sen WHERE sen.name IN (:seniority))) AND "
             + "(COALESCE(:skills, NULL) IS NULL OR EXISTS "
             + "(SELECT 1 FROM b.skills s2 WHERE s2.name IN (:skills)))")
     List<Search> findSearchBy(@Param("client") String client,
                               @Param("rol") String rol,
                               @Param("state") String state,
-                              @Param("seniority") String seniority,
+                              @Param("seniority") List<String> seniority,
                               @Param("skills") List<String> skills);
 }

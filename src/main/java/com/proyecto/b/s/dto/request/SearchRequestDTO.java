@@ -7,7 +7,7 @@ import java.util.List;
 
 //Lo que recibo del front
 @Data
-public class SearchRequestDto {
+public class SearchRequestDTO {
     private String linkJb;
     private LocalDate dateOpening; //fechaApertura
     private String dayJob; //jornadaTrabajo
@@ -17,9 +17,9 @@ public class SearchRequestDto {
     private String vacancies; //vacantes
     private String observations; //observaciones
     private boolean active;
-    private SeniorityRequestDto seniority;
-    private RolRequestDto rol;
-    private ClientRequestDto client;
-    private List<StateSearchRequestDto> stateSearch;
-    private List<SkillRequestDto> skills;
+    private SeniorityRequestDTO seniority;
+    private RolRequestDTO rol;
+    private ClientRequestDTO client;
+    private List<StateSearchRequestDTO> stateSearch;
+    private List<SkillRequestDTO> skills;
 }
