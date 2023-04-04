@@ -13,11 +13,8 @@ public interface PersonService {
 
     Person create(PersonRequestDTO personRequestDto) throws Exception;
 
-<<<<<<< HEAD
-    List<PersonResponseDto> search(String name, String lastName, List<String> seniorityGeneral, List<String> roles, List<String> skills);
-=======
-    List<PersonResponseDTO> search(String name, String lastName, String seniorityGeneral, List<String> roles, List<String> skills);
->>>>>>> ee8e20ca6786360970fbbf1102b0a63dc46ec98a
+    List<PersonResponseDTO> search(String name, String lastName,List<String> seniorityGeneral, List<String> roles, List<String> skills);
+
 
     boolean existById(Long id) throws Exception;
 

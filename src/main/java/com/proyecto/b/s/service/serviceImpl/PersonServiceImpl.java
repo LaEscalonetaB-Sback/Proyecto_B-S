@@ -44,11 +44,7 @@ public class PersonServiceImpl implements PersonService {
 
 
     @Override
-<<<<<<< HEAD
-    public List<PersonResponseDto> search(String name, String lastName, List<String> seniorityGeneral, List<String> roles, List<String> skills) {
-=======
-    public List<PersonResponseDTO> search(String name, String lastName, String seniorityGeneral, List<String> roles, List<String> skills) {
->>>>>>> ee8e20ca6786360970fbbf1102b0a63dc46ec98a
+    public List<PersonResponseDTO> search(String name, String lastName, List<String> seniorityGeneral, List<String> roles, List<String> skills) {
 
         if (name == null && lastName == null && seniorityGeneral == null && roles == null && skills == null) {
             List<Person> personList = personRepository.findAll();
