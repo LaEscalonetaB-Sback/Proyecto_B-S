@@ -58,9 +58,9 @@ public class InterviewController {
     //Actualizar entrevista
     @PutMapping("/update/{id}")
     public ResponseEntity<InterviewResponseDTO> update(@PathVariable Long id, @RequestBody InterviewRequestDTO interviewRequestDto) throws Exception {
-      /*  if (!interviewService.existById(id)) {
+        if (!interviewService.existById(id)) {
             return ResponseEntity.notFound().build();
-        }*/
+        }
         InterviewResponseDTO result = interviewService.updateInterview(id, interviewRequestDto);
         return ResponseEntity.ok(result);
     }

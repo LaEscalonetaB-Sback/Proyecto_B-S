@@ -21,4 +21,5 @@ public class Interview {
     private String emailRecruiter;
     private LocalDate dateInterview;
     private String linkMeet;
+    private boolean active = true;
 }

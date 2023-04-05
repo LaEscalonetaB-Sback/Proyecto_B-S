@@ -10,8 +10,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class InterviewServiceImpl implements InterviewService {
@@ -36,12 +38,22 @@ public class InterviewServiceImpl implements InterviewService {
 
     @Override
     public boolean existById(Long id) {
-        return false;
+        return interviewRepository.existsById(id);
     }
 
     @Override
     public List<InterviewResponseDTO> listInterview(String entrevistador, LocalDate fecha, Long idPersona, Long idBusqueda) {
-        return null;
+        if (entrevistador != null || fecha != null || idPersona != null || idBusqueda != null) {
+            List<Interview> interviewsList = interviewRepository.findAll();  // findInterviewBy(entrevistador, fecha, idPersona, idBusqueda);
+            return interviewsList.stream()
+                    .map(interview -> modelMapper.map(interview, InterviewResponseDTO.class))
+                    .collect(Collectors.toList());
+        } else {
+            List<Interview> interviewsList = interviewRepository.findAll();
+            return interviewsList.stream()
+                    .map(interview -> modelMapper.map(interview, InterviewResponseDTO.class))
+                    .collect(Collectors.toList());
+        }
     }
 
     @Override
@@ -55,7 +67,7 @@ public class InterviewServiceImpl implements InterviewService {
 
     @Override
     public InterviewResponseDTO updateInterview(Long id, InterviewRequestDTO interviewRequestDTO) throws Exception {
-        Interview updatedInterview = interviewRepository.findById(id).orElseThrow(() -> new Exception("La busqueda no existe"));
+        Interview updatedInterview = interviewRepository.findById(id).orElseThrow(() -> new Exception("La entrevista no existe"));
         modelMapper.map(interviewRequestDTO, updatedInterview);
         interviewRepository.save(updatedInterview);
 
@@ -65,5 +77,11 @@ public class InterviewServiceImpl implements InterviewService {
 
     @Override
     public void deleteInterview(Long id) {
+        Interview entity = interviewRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Entrevista no encontrada con id: " + id));
+        if (entity == null) {
+            throw new EntityNotFoundException("Entrevista no encontrada con id: " + id);
+        }
+        entity.setActive(false);
+        interviewRepository.save(entity);
     }
 }
