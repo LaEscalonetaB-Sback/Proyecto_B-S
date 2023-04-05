@@ -29,8 +29,13 @@ public class Event {
     @OneToOne
     private Person person;
 
-    @OneToOne
-    private Search search;
+    @ManyToMany
+    @JoinTable(
+            name = "event_search",
+            joinColumns = @JoinColumn(name = "event_id"),
+            inverseJoinColumns = @JoinColumn(name = "search_id")
+    )
+    private List<Search> search;
 
     @OneToMany
     private List<Interview> interviews;

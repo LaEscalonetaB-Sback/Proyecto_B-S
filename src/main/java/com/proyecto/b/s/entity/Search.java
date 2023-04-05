@@ -28,6 +28,8 @@ public class Search {
     private String vacancies; //vacantes
     private String observations; //observaciones
     private boolean active = true;
+    @ManyToMany(mappedBy = "search")
+    private List<Event> events;
     @OneToOne(cascade = {CascadeType.ALL})
     private Seniority seniority;
     @OneToOne(cascade = {CascadeType.ALL})

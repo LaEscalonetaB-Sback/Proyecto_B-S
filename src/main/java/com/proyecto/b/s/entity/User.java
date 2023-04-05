@@ -3,6 +3,7 @@ package com.proyecto.b.s.entity;
 import lombok.*;
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -19,6 +20,8 @@ public class User {
     private String password;
     private String name;
     private String lastName;
+    @OneToMany(mappedBy = "user")
+    private List<Event> events;
 
     @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinTable(
