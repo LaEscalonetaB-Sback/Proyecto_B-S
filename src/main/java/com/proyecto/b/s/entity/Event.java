@@ -3,7 +3,7 @@ package com.proyecto.b.s.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -18,18 +18,20 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Date dateEvent;
+    private LocalDate dateEvent;
 
-    @OneToMany
+    private boolean active = true;
+
+    @OneToMany(cascade = {CascadeType.ALL})
     private List<EventOption> events;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     private User user;
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     private Person person;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
             name = "event_search",
             joinColumns = @JoinColumn(name = "event_id"),
@@ -37,6 +39,6 @@ public class Event {
     )
     private List<Search> search;
 
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.ALL})
     private List<Interview> interviews;
 }

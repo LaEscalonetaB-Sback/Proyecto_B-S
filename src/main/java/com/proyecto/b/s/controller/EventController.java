@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,10 +26,19 @@ public class EventController {
     //CRUD
     //Lista de Evento
     @GetMapping("/list")
-    public ResponseEntity<List<SearchResponseDTO>> findSearch() {
-        return null;
-    }
+    public ResponseEntity<List<EventResponseDTO>> findSearch(
+            @RequestParam(required = false) LocalDate date,
+            @RequestParam(required = false) Long person,
+            @RequestParam(required = false) Long user,
+            @RequestParam(required = false) Long search){
+        List<EventResponseDTO> event = eventService.listEvent(date, person, user, search);
 
+        if (event.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(event);
+        }
+    }
 
     //Encuentra Evento por id
     @GetMapping("/{id}")

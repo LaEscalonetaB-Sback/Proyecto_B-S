@@ -4,7 +4,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -12,16 +12,15 @@ import java.util.List;
 @Setter
 public class EventRequestDTO {
 
-    private Date dateEvent;
+    private LocalDate dateEvent;
 
     private List<EventOptionRequestDTO> events;
 
-    private Long user;
+    private UserRequestDTO user;
 
-    private Long person;
+    private PersonRequestDTO person;
 
-
-    //private List<Search> search;
+    private SearchRequestDTO search;
 
 
     //private List<Interview> interviews;
