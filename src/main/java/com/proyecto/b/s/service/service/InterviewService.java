@@ -12,6 +12,6 @@ public interface InterviewService {
     boolean existById(Long id);
     List<InterviewResponseDTO> listInterview(String entrevistador, LocalDate fecha, Long idPersona, Long idBusqueda);
     InterviewResponseDTO saveInterview(InterviewRequestDTO interviewRequestDTO);
-    InterviewResponseDTO updateInterview(Long id, InterviewRequestDTO interviewRequestDTO);
+    InterviewResponseDTO updateInterview(Long id, InterviewRequestDTO interviewRequestDTO) throws Exception;
     void deleteInterview(Long id);
 }

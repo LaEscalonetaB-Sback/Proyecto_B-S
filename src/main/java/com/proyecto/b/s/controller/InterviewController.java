@@ -9,7 +9,6 @@ import com.proyecto.b.s.service.service.InterviewService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.EntityNotFoundException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -58,10 +57,10 @@ public class InterviewController {
 
     //Actualizar entrevista
     @PutMapping("/update/{id}")
-    public ResponseEntity<InterviewResponseDTO> update(@PathVariable Long id, @RequestBody InterviewRequestDTO interviewRequestDto) throws EntityNotFoundException {
-        if (!interviewService.existById(id)) {
+    public ResponseEntity<InterviewResponseDTO> update(@PathVariable Long id, @RequestBody InterviewRequestDTO interviewRequestDto) throws Exception {
+      /*  if (!interviewService.existById(id)) {
             return ResponseEntity.notFound().build();
-        }
+        }*/
         InterviewResponseDTO result = interviewService.updateInterview(id, interviewRequestDto);
         return ResponseEntity.ok(result);
     }
