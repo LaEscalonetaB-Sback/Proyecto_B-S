@@ -1,13 +1,22 @@
 package com.proyecto.b.s.service.service;
 
 
+import com.proyecto.b.s.dto.request.EventRequestDTO;
+import com.proyecto.b.s.dto.response.EventResponseDTO;
 import com.proyecto.b.s.entity.Event;
 
 import java.util.List;
 
 public interface EventService {
-    List<Event> listEvent();
-    Event saveEvent(Event event);
-    Event updateEvent(Event event);
+    List<EventResponseDTO> listEvent();
+
+    EventResponseDTO saveEvent(EventRequestDTO eventRequestDTO);
+
+    EventResponseDTO updateEvent(Long eventId, EventRequestDTO eventRequestDTO);
+
     void deleteEvent(Long id);
+
+    Event findById(Long id) throws Exception;
+
+    boolean existById(Long id);
 }
