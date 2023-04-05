@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ModelMapperImpl implements ModelMapperInterface {
     private final ModelMapper modelMapper = new ModelMapper();
+
     @Bean
     public ModelMapper modelMapper() {
         return new ModelMapper();
@@ -30,7 +31,7 @@ public class ModelMapperImpl implements ModelMapperInterface {
 
     @Override
     public Person personUpdateReqDtoToPerson(PersonUpdateRequestDTO personRequestDto) {
-        return modelMapper.map(personRequestDto,Person.class);
+        return modelMapper.map(personRequestDto, Person.class);
     }
 
     @Override
@@ -43,6 +44,7 @@ public class ModelMapperImpl implements ModelMapperInterface {
     public Search searchReqDtoToSearch(SearchRequestDTO searchRequestDto) {
         return modelMapper.map(searchRequestDto, Search.class);
     }
+
     @Override
     public SearchResponseDTO searchToSearchResponseDTO(Search search) {
         return modelMapper.map(search, SearchResponseDTO.class);
@@ -55,6 +57,6 @@ public class ModelMapperImpl implements ModelMapperInterface {
 
     @Override
     public InterviewResponseDTO interviewToInterviewResponseDto(Interview interview) {
-        return modelMapper.map(interview,InterviewResponseDTO.class);
+        return modelMapper.map(interview, InterviewResponseDTO.class);
     }
 }

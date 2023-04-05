@@ -9,7 +9,6 @@ import com.proyecto.b.s.service.service.InterviewService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,12 +26,8 @@ public class InterviewController {
     //CRUD
     //Lista de busquedas
     @GetMapping("/list")
-    public ResponseEntity<List<InterviewResponseDTO>> findInterview(
-            @RequestParam(required = false) String entrevistador,
-            @RequestParam(required = false) LocalDate fecha,
-            @RequestParam(required = false) Long idPersona,
-            @RequestParam(required = false) Long idBusqueda) {
-        List<InterviewResponseDTO> interview = interviewService.listInterview(entrevistador, fecha, idPersona, idBusqueda);
+    public ResponseEntity<List<InterviewResponseDTO>> findInterview() {
+        List<InterviewResponseDTO> interview = interviewService.listInterview();
 
         if (interview.isEmpty()) {
             return ResponseEntity.noContent().build();

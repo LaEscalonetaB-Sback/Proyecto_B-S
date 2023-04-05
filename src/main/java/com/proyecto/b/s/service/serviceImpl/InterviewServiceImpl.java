@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,18 +41,11 @@ public class InterviewServiceImpl implements InterviewService {
     }
 
     @Override
-    public List<InterviewResponseDTO> listInterview(String entrevistador, LocalDate fecha, Long idPersona, Long idBusqueda) {
-        if (entrevistador != null || fecha != null || idPersona != null || idBusqueda != null) {
-            List<Interview> interviewsList = interviewRepository.findAll();  // findInterviewBy(entrevistador, fecha, idPersona, idBusqueda);
-            return interviewsList.stream()
-                    .map(interview -> modelMapper.map(interview, InterviewResponseDTO.class))
-                    .collect(Collectors.toList());
-        } else {
-            List<Interview> interviewsList = interviewRepository.findAll();
-            return interviewsList.stream()
-                    .map(interview -> modelMapper.map(interview, InterviewResponseDTO.class))
-                    .collect(Collectors.toList());
-        }
+    public List<InterviewResponseDTO> listInterview() {
+        List<Interview> interviewsList = interviewRepository.findAll();
+        return interviewsList.stream()
+                .map(interview -> modelMapper.map(interview, InterviewResponseDTO.class))
+                .collect(Collectors.toList());
     }
 
     @Override
