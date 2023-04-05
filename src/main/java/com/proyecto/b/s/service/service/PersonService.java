@@ -8,6 +8,7 @@ import com.proyecto.b.s.entity.Person;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Optional;
 
 public interface PersonService {
 
@@ -19,11 +20,8 @@ public interface PersonService {
     boolean existById(Long id) throws Exception;
 
     Person obtainPersonId(Long id) throws Exception;
-
-
     PersonResponseDTO update(Long Id, PersonUpdateRequestDTO personRequestDto) throws EntityNotFoundException;
 
     void delete(Long id) throws Exception;
-
 
 }
