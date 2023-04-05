@@ -3,9 +3,8 @@ package com.proyecto.b.s.service.serviceImpl;
 import com.proyecto.b.s.dto.modelMapper.ModelMapperInterface;
 import com.proyecto.b.s.dto.request.SearchRequestDTO;
 import com.proyecto.b.s.dto.response.SearchResponseDTO;
-
-import com.proyecto.b.s.entity.*;
-import com.proyecto.b.s.repository.*;
+import com.proyecto.b.s.entity.Search;
+import com.proyecto.b.s.repository.SearchRepository;
 import com.proyecto.b.s.service.service.SearchService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +29,7 @@ public class SearchServiceImpl implements SearchService {
         this.modelMapperInterface = modelMapperInterface;
         this.modelMapper = modelMapper;
     }
+
     @Override
     public List<SearchResponseDTO> listSearch(String client, String rol, String state, List<String> seniority, List<String> skills) {
         if (client != null || rol != null || state != null || (seniority != null && !seniority.isEmpty()) || (skills != null && !skills.isEmpty())) {
@@ -44,34 +44,24 @@ public class SearchServiceImpl implements SearchService {
                     .collect(Collectors.toList());
         }
     }
-    /*@Override
-    public List<SearchResponseDto> listSearch(String client, String rol, String state, String seniority, List<String> skills){
-        if (client != null || rol != null || state != null || seniority != null || (skills != null && !skills.isEmpty())){
-            List<Search> searchList = searchRepository.findSearchBy(client, rol, state, seniority, skills);
-            return searchList.stream()
-                    .map(search -> modelMapper.map(search, SearchResponseDto.class))
-                    .collect(Collectors.toList());
-        } else {
-            List<Search> searchList = searchRepository.findAll();
-            return searchList.stream()
-                    .map(search -> modelMapper.map(search, SearchResponseDto.class))
-                    .collect(Collectors.toList());
-        }
-    }*/
+
     @Override
     public SearchResponseDTO saveSearch(SearchRequestDTO searchRequestDto) {
         Search search = modelMapperInterface.searchReqDtoToSearch(searchRequestDto);
         Search savedSearch = searchRepository.save(search);
         return modelMapperInterface.searchToSearchResponseDTO(savedSearch);
     }
+
     @Override
     public boolean existById(Long id) {
         return searchRepository.existsById(id);
     }
+
     @Override
     public Search findById(Long id) throws Exception {
         return searchRepository.findById(id).orElseThrow(() -> new Exception("La busqueda no existe"));
     }
+
     @Override
     public SearchResponseDTO update(Long searchId, SearchRequestDTO searchRequestDto) throws EntityNotFoundException {
         Search search = searchRepository.findById(searchId).orElseThrow(() -> new EntityNotFoundException("Search not found with id: " + searchId));
@@ -79,6 +69,7 @@ public class SearchServiceImpl implements SearchService {
         searchRepository.save(search);
         return modelMapper.map(search, SearchResponseDTO.class);
     }
+
     @Override
     public void deleteSearch(Long id) throws EntityNotFoundException {
         Search entity = searchRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Busqueda no encontrada con id: " + id));
