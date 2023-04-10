@@ -1,5 +1,6 @@
 package com.proyecto.b.s.dto.modelMapper;
 
+import com.proyecto.b.s.dto.request.ClientRequestDTO;
 import com.proyecto.b.s.dto.request.PersonRequestDTO;
 import com.proyecto.b.s.dto.request.PersonUpdateRequestDTO;
 import com.proyecto.b.s.dto.request.SearchRequestDTO;
@@ -41,5 +42,15 @@ public class ModelMapperImpl implements ModelMapperInterface {
     @Override
     public SearchResponseDTO searchToSearchResponseDTO(Search search) {
         return modelMapper.map(search, SearchResponseDTO.class);
+    }
+
+    @Override
+    public Client clientReqDTOToClient(ClientRequestDTO clientRequestDTO){
+        return modelMapper.map(clientRequestDTO, Client.class);
+    }
+
+    @Override
+    public ClientResponseDTO clientToClientResponseDTO(Client client){
+        return modelMapper.map(client, ClientResponseDTO.class);
     }
 }

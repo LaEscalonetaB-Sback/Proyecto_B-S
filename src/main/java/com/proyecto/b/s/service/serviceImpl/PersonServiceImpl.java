@@ -6,6 +6,7 @@ import com.proyecto.b.s.dto.request.PersonRequestDTO;
 import com.proyecto.b.s.dto.request.PersonUpdateRequestDTO;
 import com.proyecto.b.s.dto.response.PersonResponseDTO;
 import com.proyecto.b.s.entity.*;
+import com.proyecto.b.s.exception.PersonAlreadyExistsException;
 import com.proyecto.b.s.repository.PersonRepository;
 import com.proyecto.b.s.service.service.PersonService;
 import org.modelmapper.ModelMapper;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,14 +39,30 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Person create(PersonRequestDTO personRequestDto) {
-        Person person = modelMapperInterface.personReqDtoToPerson(personRequestDto);
+        try {
+            Optional<Person> existingPerson = personRepository.findByDniOrCuilOrEmailOrLinkedin(
+                    personRequestDto.getDni(),
+                    personRequestDto.getCuil(),
+                    personRequestDto.getEmail(),
+                    personRequestDto.getLinkedin()
+            );
 
-        return personRepository.save(person);
+            if (existingPerson.isPresent()) {
+                throw new PersonAlreadyExistsException("Ya existe una persona con el mismo DNI, CUIL, correo electrónico o LinkedIn: " + existingPerson.get().getName());
+            }
+
+            Person person = modelMapperInterface.personReqDtoToPerson(personRequestDto);
+            return personRepository.save(person);
+        } catch (PersonAlreadyExistsException ex) {
+            // Manejar la excepción de persona existente lanzando una excepción personalizada
+            throw new RuntimeException("No se pudo crear la persona: " + ex.getMessage(), ex);
+        }
     }
 
 
+
     @Override
-    public List<PersonResponseDTO> search(String name, String lastName, String seniorityGeneral, List<String> roles, List<String> skills) {
+    public List<PersonResponseDTO> search(String name, String lastName, List<String> seniorityGeneral, List<String> roles, List<String> skills) {
 
         if (name == null && lastName == null && seniorityGeneral == null && roles == null && skills == null) {
             List<Person> personList = personRepository.findAll();

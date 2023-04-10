@@ -1,8 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.proyecto.b.s.ApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.35 s <<< FAILURE! - in com.proyecto.b.s.ApplicationTests
-contextLoads  Time elapsed: 0.009 s  <<< ERROR!
-java.lang.NoClassDefFoundError: org/springframework/boot/SpringApplicationAotProcessor
-Caused by: java.lang.ClassNotFoundException: org.springframework.boot.SpringApplicationAotProcessor
-
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.036 s - in com.proyecto.b.s.ApplicationTests

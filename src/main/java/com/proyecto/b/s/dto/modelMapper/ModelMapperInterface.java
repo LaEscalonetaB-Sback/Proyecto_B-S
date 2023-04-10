@@ -1,5 +1,6 @@
 package com.proyecto.b.s.dto.modelMapper;
 
+import com.proyecto.b.s.dto.request.ClientRequestDTO;
 import com.proyecto.b.s.dto.request.SearchRequestDTO;
 import com.proyecto.b.s.dto.response.*;
 import com.proyecto.b.s.entity.*;
@@ -21,4 +22,7 @@ public interface ModelMapperInterface {
     SearchResponseDTO searchToSearchResponseDTO(Search search);
 
 
+    Client clientReqDTOToClient(ClientRequestDTO clientRequestDTO);
+
+    ClientResponseDTO clientToClientResponseDTO(Client client);
 }
