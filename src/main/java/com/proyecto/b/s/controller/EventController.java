@@ -2,7 +2,6 @@ package com.proyecto.b.s.controller;
 
 import com.proyecto.b.s.dto.request.EventRequestDTO;
 import com.proyecto.b.s.dto.response.EventResponseDTO;
-import com.proyecto.b.s.dto.response.SearchResponseDTO;
 import com.proyecto.b.s.entity.Event;
 import com.proyecto.b.s.service.service.EventService;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +29,7 @@ public class EventController {
             @RequestParam(required = false) LocalDate date,
             @RequestParam(required = false) Long person,
             @RequestParam(required = false) Long user,
-            @RequestParam(required = false) Long search){
+            @RequestParam(required = false) Long search) {
         List<EventResponseDTO> event = eventService.listEvent(date, person, user, search);
 
         if (event.isEmpty()) {
