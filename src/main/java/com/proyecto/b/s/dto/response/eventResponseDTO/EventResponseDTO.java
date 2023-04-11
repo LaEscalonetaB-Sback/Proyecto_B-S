@@ -23,5 +23,4 @@ public class EventResponseDTO {
   //  private List<SearchRequestDTO> search;
 
 
-    //private List<InterviewResponseDTO> interviews;
 }
