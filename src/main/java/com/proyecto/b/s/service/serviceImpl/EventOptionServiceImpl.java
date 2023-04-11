@@ -3,6 +3,7 @@ package com.proyecto.b.s.service.serviceImpl;
 import com.proyecto.b.s.dto.modelMapper.ModelMapperInterface;
 import com.proyecto.b.s.dto.request.eventRequestDTO.EventOptionForEventRequestDTO;
 import com.proyecto.b.s.dto.response.eventResponseDTO.EventOptionForEventResponseDTO;
+import com.proyecto.b.s.entity.Answer;
 import com.proyecto.b.s.entity.EventOption;
 import com.proyecto.b.s.repository.EventOptionRepository;
 import com.proyecto.b.s.service.service.EventOptionService;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -72,9 +74,41 @@ public class EventOptionServiceImpl implements EventOptionService {
         return eventOptionRepository.findById(id).orElseThrow(() -> new Exception("La busqueda no existe"));
     }
 
-
     @Override
     public boolean existById(Long id) {
         return eventOptionRepository.existsById(id);
     }
+
+    /*private List<Answer> filter(List<EventOption> eventOptions, List<Long> ids){
+        List<Answer> filteredAnswers = new ArrayList<>();
+        for (EventOption event: eventOptions) {
+            switch (event.getName()){
+                case "Agenda entrevista":
+                    List<Answer> answers = event.getFeedback();
+                    for (Answer answer : answers) {
+                        if (ids.contains(answer.getId())) {
+                            filteredAnswers.add(answer);
+                        }
+                    }
+                    break;
+                case "Entrevista B&S grupal": return event.getFeedback();
+                case "Entrevista B&S": return event.getFeedback();
+                case "Entrevista técnica": return event.getFeedback();
+                case "Envio comercial": return event.getFeedback();
+                case "Reciclaje": return event.getFeedback();
+                case "Feedback comercial": return event.getFeedback();
+                case "Envío a cliente": return event.getFeedback();
+                case "Feedback cliente": return event.getFeedback();
+                case "Entrevista cliente": return event.getFeedback();
+                case "Envío propuesta": return event.getFeedback();
+                case "Respuesta Propuesta": return event.getFeedback();
+                case "Desiste candidato": return event.getFeedback();
+                case "Desiste cliente": return event.getFeedback();
+            }
+        }
+        return filteredAnswers;
+    }*/
+
+
+
 }

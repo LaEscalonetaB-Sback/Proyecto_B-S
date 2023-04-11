@@ -1,8 +1,10 @@
 package com.proyecto.b.s.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -17,4 +19,8 @@ public class Answer {
     private Long id;
 
     private String name;
+
+    @ManyToMany(mappedBy = "value")
+    @JsonBackReference
+    private List<EventOption> eventOptions;
 }
