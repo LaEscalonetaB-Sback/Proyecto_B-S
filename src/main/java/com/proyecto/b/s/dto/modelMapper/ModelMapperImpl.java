@@ -1,15 +1,11 @@
 package com.proyecto.b.s.dto.modelMapper;
 
-import com.proyecto.b.s.dto.request.InterviewRequestDTO;
-import com.proyecto.b.s.dto.request.PersonRequestDTO;
-import com.proyecto.b.s.dto.request.PersonUpdateRequestDTO;
-import com.proyecto.b.s.dto.request.SearchRequestDTO;
-import com.proyecto.b.s.dto.response.InterviewResponseDTO;
-import com.proyecto.b.s.dto.response.PersonResponseDTO;
-import com.proyecto.b.s.dto.response.SearchResponseDTO;
-import com.proyecto.b.s.entity.Interview;
-import com.proyecto.b.s.entity.Person;
-import com.proyecto.b.s.entity.Search;
+import com.proyecto.b.s.dto.request.*;
+import com.proyecto.b.s.dto.request.eventRequestDTO.EventOptionForEventRequestDTO;
+import com.proyecto.b.s.dto.request.eventRequestDTO.EventRequestDTO;
+import com.proyecto.b.s.dto.response.*;
+import com.proyecto.b.s.dto.response.eventResponseDTO.EventOptionForEventResponseDTO;
+import com.proyecto.b.s.entity.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
@@ -58,5 +54,25 @@ public class ModelMapperImpl implements ModelMapperInterface {
     @Override
     public InterviewResponseDTO interviewToInterviewResponseDto(Interview interview) {
         return modelMapper.map(interview, InterviewResponseDTO.class);
+    }
+
+    @Override
+    public Event eventSaveRequestDtoToEvent(EventRequestDTO eventRequestDTO) {
+        return modelMapper.map(eventRequestDTO, Event.class);
+    }
+
+    @Override
+    public EventResponseDTO eventToEventResponseDto(Event event) {
+        return modelMapper.map(event, EventResponseDTO.class);
+    }
+
+    @Override
+    public EventOption eventOptionRequestDtoToEventOption(EventOptionForEventRequestDTO eventRequestDTO) {
+        return  modelMapper.map(eventRequestDTO, EventOption.class);
+    }
+
+    @Override
+    public EventOptionForEventResponseDTO eventOptionToEvenOptionResponseDto(EventOption event) {
+        return modelMapper.map(event, EventOptionForEventResponseDTO.class);
     }
 }

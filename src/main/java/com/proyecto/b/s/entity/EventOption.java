@@ -15,9 +15,13 @@ import javax.persistence.*;
 public class EventOption {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id;//1
 
-    private String name;
+    private String name;//entrevista bys grupal
 
-    private String value;
+    private String value;//feedback "pasa siguiente"
+
+    private boolean active = true;
+
+
 }

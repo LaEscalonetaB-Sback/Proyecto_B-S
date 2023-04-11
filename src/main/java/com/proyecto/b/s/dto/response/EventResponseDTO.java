@@ -1,6 +1,5 @@
 package com.proyecto.b.s.dto.response;
 
-import com.proyecto.b.s.dto.request.EventOptionRequestDTO;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
