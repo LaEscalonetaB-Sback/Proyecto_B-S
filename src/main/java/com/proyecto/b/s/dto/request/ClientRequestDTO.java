@@ -7,4 +7,5 @@ import lombok.Data;
 public class ClientRequestDTO {
 
     private String name;
+    private Integer cuit;
 }

@@ -10,6 +10,7 @@ import com.proyecto.b.s.service.service.PersonService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,12 +28,13 @@ public class PersonController {
     }
 
 
+    //Lista de personas
     //Lista de busquedas
     @GetMapping("/list")
     public ResponseEntity<List<PersonResponseDTO>> searchPerson(
             @RequestParam(value = "name", required = false) String name,
             @RequestParam(value = "lastName", required = false) String lastName,
-            @RequestParam(value = "seniorityGeneral", required = false) List<String>  seniorityGeneral,
+            @RequestParam(value = "seniorityGeneral", required = false) List<String> seniorityGeneral,
             @RequestParam(value = "roles", required = false) List<String> roles,
             @RequestParam(value = "skills", required = false) List<String> skills) {
 
@@ -54,7 +56,7 @@ public class PersonController {
 
     //Crear busqueda
     @PostMapping("/create")
-    public ResponseEntity<Person> create(@RequestBody PersonRequestDTO personRequestDto) throws Exception {
+    public ResponseEntity<Person> create(@RequestBody @Valid PersonRequestDTO personRequestDto) throws Exception {
         Person result = personService.create(personRequestDto);
         return ResponseEntity.ok(result);
     }
@@ -68,7 +70,6 @@ public class PersonController {
        PersonResponseDTO result = personService.update(Id, personRequestDto);
        return ResponseEntity.ok(result);
     }
-
 
 
     //Eliminar por id
