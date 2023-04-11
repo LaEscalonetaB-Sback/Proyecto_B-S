@@ -72,7 +72,7 @@ public class Person {
             inverseJoinColumns = @JoinColumn(name = "rol_id")
     )
     @JsonManagedReference
-    private List <Rol> roles; //todo
+    private List < Rol> roles; //todo
 
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(

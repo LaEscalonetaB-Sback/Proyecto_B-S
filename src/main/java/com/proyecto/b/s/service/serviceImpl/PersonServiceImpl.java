@@ -38,15 +38,15 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public Person create(PersonRequestDTO personRequestDto) {
 
-            Optional<Person> existingPerson = personRepository.findByDniOrCuilOrEmailOrLinkedin(
-                    personRequestDto.getDni(),
-                    personRequestDto.getCuil(),
-                    personRequestDto.getEmail(),
-                    personRequestDto.getLinkedin()
-            );
+        Optional<Person> existingPerson = personRepository.findByDniOrCuilOrEmailOrLinkedin(
+                personRequestDto.getDni() != null ? personRequestDto.getDni() : "",
+                personRequestDto.getCuil() != null ? personRequestDto.getCuil() : "",
+                personRequestDto.getEmail() != null ? personRequestDto.getEmail() : "",
+                personRequestDto.getLinkedin() != null ? personRequestDto.getLinkedin() : ""
+        );
 
             if (existingPerson.isPresent()) {
-                throw new RuntimeException("Ya existe una persona con el mismo DNI, CUIL, correo electrónico o LinkedIn: " + existingPerson.get().getName() + existingPerson.get().getLastName());
+                throw new RuntimeException("Ya existe una persona con el mismo DNI, CUIL, correo electrónico o LinkedIn: " + existingPerson.get().getName() + " "+ existingPerson.get().getLastName());
             }
 
 

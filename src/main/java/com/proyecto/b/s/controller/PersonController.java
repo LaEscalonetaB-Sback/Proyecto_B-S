@@ -71,7 +71,6 @@ public class PersonController {
     }
 
 
-
     //Eliminar por id
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<PersonResponseDTO> deleteById(@PathVariable Long id) throws Exception {
