@@ -26,7 +26,7 @@ public class EventController {
     //CRUD
     //Lista de Evento
     @GetMapping("/list")
-    public ResponseEntity<List<EventResponseDTO>> findSearch(
+    public ResponseEntity<List<EventResponseDTO>> findEvent(
             @RequestParam(required = false) LocalDate date,
             @RequestParam(required = false) Long person,
             @RequestParam(required = false) Long user,
