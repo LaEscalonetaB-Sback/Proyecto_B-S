@@ -6,7 +6,6 @@ import com.proyecto.b.s.dto.request.PersonRequestDTO;
 import com.proyecto.b.s.dto.request.PersonUpdateRequestDTO;
 import com.proyecto.b.s.dto.response.PersonResponseDTO;
 import com.proyecto.b.s.entity.*;
-import com.proyecto.b.s.exception.PersonAlreadyExistsException;
 import com.proyecto.b.s.repository.PersonRepository;
 import com.proyecto.b.s.service.service.PersonService;
 import org.modelmapper.ModelMapper;
@@ -36,29 +35,27 @@ public class PersonServiceImpl implements PersonService {
         this.modelMapperInterface = modelMapperInterface;
     }
 
-
     @Override
     public Person create(PersonRequestDTO personRequestDto) {
-        try {
-            Optional<Person> existingPerson = personRepository.findByDniOrCuilOrEmailOrLinkedin(
-                    personRequestDto.getDni(),
-                    personRequestDto.getCuil(),
-                    personRequestDto.getEmail(),
-                    personRequestDto.getLinkedin()
-            );
+
+        Optional<Person> existingPerson = personRepository.findByDniOrCuilOrEmailOrLinkedin(
+                personRequestDto.getDni() != null ? personRequestDto.getDni() : "",
+                personRequestDto.getCuil() != null ? personRequestDto.getCuil() : "",
+                personRequestDto.getEmail() != null ? personRequestDto.getEmail() : "",
+                personRequestDto.getLinkedin() != null ? personRequestDto.getLinkedin() : ""
+        );
 
             if (existingPerson.isPresent()) {
-                throw new PersonAlreadyExistsException("Ya existe una persona con el mismo DNI, CUIL, correo electrónico o LinkedIn: " + existingPerson.get().getName());
+                throw new RuntimeException("Ya existe una persona con el mismo DNI, CUIL, correo electrónico o LinkedIn: " + existingPerson.get().getName() + " "+ existingPerson.get().getLastName());
             }
+
 
             Person person = modelMapperInterface.personReqDtoToPerson(personRequestDto);
             return personRepository.save(person);
-        } catch (PersonAlreadyExistsException ex) {
-            // Manejar la excepción de persona existente lanzando una excepción personalizada
-            throw new RuntimeException("No se pudo crear la persona: " + ex.getMessage(), ex);
-        }
-    }
 
+
+
+        }
 
 
     @Override

@@ -3,7 +3,7 @@ package com.proyecto.b.s.controller;
 
 import com.proyecto.b.s.dto.request.ClientRequestDTO;
 import com.proyecto.b.s.dto.response.ClientResponseDTO;
-import com.proyecto.b.s.dto.response.PersonResponseDTO;
+
 import com.proyecto.b.s.entity.Client;
 import com.proyecto.b.s.repository.ClientRepository;
 import com.proyecto.b.s.service.service.ClientService;
