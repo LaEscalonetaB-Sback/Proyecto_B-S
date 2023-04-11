@@ -1,0 +1,14 @@
+insert into event_list (id,active,name) values (1,true, 'Agenda entrevista B&S');
+insert into event_list (id,active,name) values (2,true, 'Entrevista B&S grupal');
+insert into event_list (id,active,name) values (3,true, 'Entrevista B&S');
+insert into event_list (id,active,name) values (4,true, 'Entrevista técnica');
+insert into event_list (id,active,name) values (5,true, 'Envio comercial');
+insert into event_list (id,active,name) values (6,true, 'Reciclaje');
+insert into event_list (id,active,name) values (7,true, 'Feedback comercial');
+insert into event_list (id,active,name) values (8,true, 'Envío a cliente');
+insert into event_list (id,active,name) values (9,true, 'Feedback cliente');
+insert into event_list (id,active,name) values (10,true, 'Entrevista cliente');
+insert into event_list (id,active,name) values (11,true, 'Envío propuesta');
+insert into event_list (id,active,name) values (12,true, 'Respuesta Propuesta');
+insert into event_list (id,active,name) values (13,true, 'Desiste candidato');
+insert into event_list (id,active,name) values (14,true, 'Desiste cliente');
