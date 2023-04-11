@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -34,13 +35,27 @@ public class PersonServiceImpl implements PersonService {
         this.modelMapperInterface = modelMapperInterface;
     }
 
-
     @Override
     public Person create(PersonRequestDTO personRequestDto) {
-        Person person = modelMapperInterface.personReqDtoToPerson(personRequestDto);
 
-        return personRepository.save(person);
-    }
+        Optional<Person> existingPerson = personRepository.findByDniOrCuilOrEmailOrLinkedin(
+                personRequestDto.getDni() != null ? personRequestDto.getDni() : "",
+                personRequestDto.getCuil() != null ? personRequestDto.getCuil() : "",
+                personRequestDto.getEmail() != null ? personRequestDto.getEmail() : "",
+                personRequestDto.getLinkedin() != null ? personRequestDto.getLinkedin() : ""
+        );
+
+            if (existingPerson.isPresent()) {
+                throw new RuntimeException("Ya existe una persona con el mismo DNI, CUIL, correo electrónico o LinkedIn: " + existingPerson.get().getName() + " "+ existingPerson.get().getLastName());
+            }
+
+
+            Person person = modelMapperInterface.personReqDtoToPerson(personRequestDto);
+            return personRepository.save(person);
+
+
+
+        }
 
 
     @Override

@@ -10,12 +10,12 @@ import com.proyecto.b.s.entity.*;
 public interface ModelMapperInterface {
     Person personReqDtoToPerson(PersonRequestDTO personRequestDto);
 
-
     Person personUpdateReqDtoToPerson(PersonUpdateRequestDTO personRequestDto);
 
     PersonResponseDTO personToPersonResponseDTO(Person person);
 
     Search searchReqDtoToSearch(SearchRequestDTO searchRequestDto);
+
     SearchResponseDTO searchToSearchResponseDTO(Search search);
 
     Interview interviewSaveRequestDtoToInterview(InterviewRequestDTO interviewRequestDTO);
@@ -28,6 +28,10 @@ public interface ModelMapperInterface {
 
     EventOption eventOptionRequestDtoToEventOption(EventOptionForEventRequestDTO eventRequestDTO);
 
-   EventOptionForEventResponseDTO eventOptionToEvenOptionResponseDto(EventOption event);
+    EventOptionForEventResponseDTO eventOptionToEvenOptionResponseDto(EventOption event);
+
+    Client clientReqDTOToClient(ClientRequestDTO clientRequestDTO);
+
+    ClientResponseDTO clientToClientResponseDTO(Client client);
 
 }

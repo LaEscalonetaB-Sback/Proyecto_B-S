@@ -5,6 +5,7 @@ import lombok.Data;
 import java.time.LocalDate;
 import java.util.List;
 
+
 //Lo que le envio de respuesta al front
 @Data
 public class SearchResponseDTO {
@@ -23,4 +24,5 @@ public class SearchResponseDTO {
     private ClientResponseDTO client;
     private List<StateSearchResponseDTO> stateSearch;
     private List<SkillResponseDTO> skills;
+
 }

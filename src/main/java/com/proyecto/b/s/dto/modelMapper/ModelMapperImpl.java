@@ -68,11 +68,21 @@ public class ModelMapperImpl implements ModelMapperInterface {
 
     @Override
     public EventOption eventOptionRequestDtoToEventOption(EventOptionForEventRequestDTO eventRequestDTO) {
-        return  modelMapper.map(eventRequestDTO, EventOption.class);
+        return modelMapper.map(eventRequestDTO, EventOption.class);
     }
 
     @Override
     public EventOptionForEventResponseDTO eventOptionToEvenOptionResponseDto(EventOption event) {
         return modelMapper.map(event, EventOptionForEventResponseDTO.class);
+    }
+
+    public Client clientReqDTOToClient(ClientRequestDTO clientRequestDTO) {
+        return modelMapper.map(clientRequestDTO, Client.class);
+    }
+
+    @Override
+    public ClientResponseDTO clientToClientResponseDTO(Client client) {
+        return modelMapper.map(client, ClientResponseDTO.class);
+
     }
 }
