@@ -4,7 +4,6 @@ package com.proyecto.b.s.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -21,8 +20,13 @@ public class EventOption {
 
     private String name;
 
+    @JoinTable(
+            name = "event_option_answer",
+            joinColumns = @JoinColumn(name = "event_option_id"),
+            inverseJoinColumns = @JoinColumn(name = "answer_id")
+    )
     @ManyToMany
-    private List<Answer> value;
+    private List<Answer> feedback;
 
     private boolean active = true;
 }
