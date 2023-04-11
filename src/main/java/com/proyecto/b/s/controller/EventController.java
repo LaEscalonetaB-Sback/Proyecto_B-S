@@ -1,13 +1,12 @@
 package com.proyecto.b.s.controller;
 
-import com.proyecto.b.s.dto.request.EventRequestDTO;
-import com.proyecto.b.s.dto.response.EventResponseDTO;
+import com.proyecto.b.s.dto.request.eventRequestDTO.EventRequestDTO;
+import com.proyecto.b.s.dto.response.eventResponseDTO.EventResponseDTO;
 import com.proyecto.b.s.entity.Event;
 import com.proyecto.b.s.service.service.EventService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.EntityNotFoundException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -55,7 +54,7 @@ public class EventController {
 
     //Actualizar Evento
     @PutMapping("/update/{searchId}")
-    public ResponseEntity<EventResponseDTO> update(@PathVariable Long eventId, @RequestBody EventRequestDTO eventRequestDTO)  throws Exception  {
+    public ResponseEntity<EventResponseDTO> update(@PathVariable Long eventId, @RequestBody EventRequestDTO eventRequestDTO) throws Exception {
         if (!eventService.existById(eventId)) {
             return ResponseEntity.notFound().build();
         }

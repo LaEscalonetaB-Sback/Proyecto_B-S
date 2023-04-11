@@ -2,10 +2,8 @@ package com.proyecto.b.s.service.serviceImpl;
 
 import com.proyecto.b.s.dto.modelMapper.ModelMapperInterface;
 import com.proyecto.b.s.dto.request.eventRequestDTO.EventRequestDTO;
-import com.proyecto.b.s.dto.response.EventResponseDTO;
-import com.proyecto.b.s.dto.response.SearchResponseDTO;
+import com.proyecto.b.s.dto.response.eventResponseDTO.EventResponseDTO;
 import com.proyecto.b.s.entity.Event;
-import com.proyecto.b.s.entity.Search;
 import com.proyecto.b.s.repository.EventRepository;
 import com.proyecto.b.s.service.service.EventService;
 import com.proyecto.b.s.service.service.InterviewService;
