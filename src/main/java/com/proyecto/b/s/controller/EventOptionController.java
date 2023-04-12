@@ -34,6 +34,7 @@ public class EventOptionController {
         return eventOptionService.getAnswersByEventOptionName(eventOptionName);
     }
 
+    //Lista de EventOptions
     @GetMapping("/options")
     public List<String> getEventOptionNames() {
         return eventOptionService.getEventOptionNames();

@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PersonForEventResponseDTO {
-
+    private Long id;
     private String name;
     private String lastName;
     private String linkedin;
@@ -20,18 +20,8 @@ public class PersonForEventResponseDTO {
     private String cuil;
     private String phoneNumber;
     private String remuneration;
-
-
- //   private List<IndustryRequestDTO> industries;
-
- //   private List<SourceRequestDTO> sources;
-
-  //  private List<RolRequestDTO> roles;
-
-  //  private List<SkillRequestDTO> skills;
-
-
-
-
-
+    //private List<IndustryRequestDTO> industries;
+    //private List<SourceRequestDTO> sources;
+    //private List<RolRequestDTO> roles;
+    //private List<SkillRequestDTO> skills;
 }

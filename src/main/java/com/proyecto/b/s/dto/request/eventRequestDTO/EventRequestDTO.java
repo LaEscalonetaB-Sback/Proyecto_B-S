@@ -1,30 +1,26 @@
 package com.proyecto.b.s.dto.request.eventRequestDTO;
 
-import com.proyecto.b.s.dto.request.SearchRequestDTO;
-import com.proyecto.b.s.dto.response.InterviewResponseDTO;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDate;
 
 @Data
 @Getter
 @Setter
 public class EventRequestDTO {
 
-    private Date dateEvent;
+    private LocalDate dateEvent;
 
-    private List<EventOptionForEventRequestDTO> events;
+    private EventOptionForEventRequestDTO events;
 
     private UserForEventRequestDTO user;
 
     private PersonForEventRequestDTO person;
 
+    // private List<SearchRequestDTO> search;
 
-   // private List<SearchRequestDTO> search;
 
-
-   // private List<InterviewResponseDTO> interviews;
+    // private List<InterviewResponseDTO> interviews;
 }

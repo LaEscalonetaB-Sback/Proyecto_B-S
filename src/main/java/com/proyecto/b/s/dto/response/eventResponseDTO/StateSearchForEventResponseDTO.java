@@ -9,7 +9,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class StateSearchForEventResponseDTO {
-
     private Long id;
     private String name;
 }

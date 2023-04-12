@@ -14,12 +14,11 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class EventOptionServiceImpl implements EventOptionService {
-    @Autowired
-    private EventOptionRepository eventOptionRepository;
+
+    private final EventOptionRepository eventOptionRepository;
 
     @Autowired
     private ModelMapperInterface modelMapperInterface;
@@ -31,14 +30,6 @@ public class EventOptionServiceImpl implements EventOptionService {
         this.eventOptionRepository = eventOptionRepository;
         this.modelMapperInterface = modelMapperInterface;
     }
-
-    /*@Override
-    public List<EventOptionForEventResponseDTO> listEventoption() {
-        List<EventOption> eventOptionList = eventOptionRepository.findAll();
-        return eventOptionList.stream()
-                .map(eventOption -> modelMapper.map(eventOption, EventOptionForEventResponseDTO.class))
-                .collect(Collectors.toList());
-    }*/
 
     @Override
     public List<Answer> getAnswersByEventOptionName(String eventOptionName) {
@@ -69,14 +60,13 @@ public class EventOptionServiceImpl implements EventOptionService {
         eventOptionRepository.save(updateEventOption);
 
         return modelMapper.map(updateEventOption, EventOptionForEventResponseDTO.class);
-
     }
 
     @Override
     public void deleteEventOption(Long id) {
         EventOption entity = eventOptionRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Opcion de Evento no encontrada con id: " + id));
         if (entity == null) {
-            throw new EntityNotFoundException("Entrevista no encontrada con id: " + id);
+            throw new EntityNotFoundException("no encontrado con id: " + id);
         }
         entity.setActive(false);
         eventOptionRepository.save(entity);

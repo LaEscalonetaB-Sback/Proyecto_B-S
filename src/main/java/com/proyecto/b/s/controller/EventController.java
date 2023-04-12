@@ -3,7 +3,9 @@ package com.proyecto.b.s.controller;
 import com.proyecto.b.s.dto.request.eventRequestDTO.EventRequestDTO;
 import com.proyecto.b.s.dto.response.eventResponseDTO.EventResponseDTO;
 import com.proyecto.b.s.entity.Event;
+import com.proyecto.b.s.repository.EventRepository;
 import com.proyecto.b.s.service.service.EventService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,10 +17,14 @@ import java.util.Optional;
 @RequestMapping("/bs/event")
 @CrossOrigin("*")
 public class EventController {
+    @Autowired
     private final EventService eventService;
+    @Autowired
+    private final EventRepository eventRepository;
 
-    public EventController(EventService eventService) {
-        this.eventService = EventController.this.eventService;
+    public EventController(EventService eventService, EventRepository eventRepository) {
+        this.eventRepository = eventRepository;
+        this.eventService = eventService;
     }
 
     //CRUD
@@ -30,7 +36,6 @@ public class EventController {
             @RequestParam(required = false) Long user,
             @RequestParam(required = false) Long search) {
         List<EventResponseDTO> event = eventService.listEvent(date, person, user, search);
-
         if (event.isEmpty()) {
             return ResponseEntity.noContent().build();
         } else {
