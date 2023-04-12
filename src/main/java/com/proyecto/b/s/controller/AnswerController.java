@@ -12,6 +12,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/bs/answer")
 @CrossOrigin("*")
+
+// TODO: 11/4/2023 eliminar answer controller ya que no se utiliza
 public class AnswerController {
 
     private final AnswerService answerService;

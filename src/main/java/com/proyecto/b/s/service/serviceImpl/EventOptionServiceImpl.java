@@ -32,20 +32,34 @@ public class EventOptionServiceImpl implements EventOptionService {
         this.modelMapperInterface = modelMapperInterface;
     }
 
-    @Override
+    /*@Override
     public List<EventOptionForEventResponseDTO> listEventoption() {
         List<EventOption> eventOptionList = eventOptionRepository.findAll();
         return eventOptionList.stream()
                 .map(eventOption -> modelMapper.map(eventOption, EventOptionForEventResponseDTO.class))
                 .collect(Collectors.toList());
+    }*/
+
+    @Override
+    public List<Answer> getAnswersByEventOptionName(String eventOptionName) {
+        return eventOptionRepository.findAnswersByEventOptionName(eventOptionName);
+    }
+
+    @Override
+    public List<String> getEventOptionNames() {
+        List<String> optionNames = new ArrayList<>();
+        List<EventOption> eventOptions = eventOptionRepository.findAll();
+        for (EventOption eventOption : eventOptions) {
+            optionNames.add(eventOption.getName());
+        }
+        return optionNames;
     }
 
     @Override
     public EventOptionForEventResponseDTO saveEventOption(EventOptionForEventRequestDTO eventRequestDTO) {
         EventOption newEventOption = modelMapperInterface.eventOptionRequestDtoToEventOption(eventRequestDTO);
         eventOptionRepository.save(newEventOption);
-        EventOptionForEventResponseDTO newEventOptionResDto = modelMapperInterface.eventOptionToEvenOptionResponseDto(newEventOption);
-        return newEventOptionResDto;
+        return modelMapperInterface.eventOptionToEvenOptionResponseDto(newEventOption);
     }
 
     @Override
@@ -78,37 +92,4 @@ public class EventOptionServiceImpl implements EventOptionService {
     public boolean existById(Long id) {
         return eventOptionRepository.existsById(id);
     }
-
-    /*private List<Answer> filter(List<EventOption> eventOptions, List<Long> ids){
-        List<Answer> filteredAnswers = new ArrayList<>();
-        for (EventOption event: eventOptions) {
-            switch (event.getName()){
-                case "Agenda entrevista":
-                    List<Answer> answers = event.getFeedback();
-                    for (Answer answer : answers) {
-                        if (ids.contains(answer.getId())) {
-                            filteredAnswers.add(answer);
-                        }
-                    }
-                    break;
-                case "Entrevista B&S grupal": return event.getFeedback();
-                case "Entrevista B&S": return event.getFeedback();
-                case "Entrevista técnica": return event.getFeedback();
-                case "Envio comercial": return event.getFeedback();
-                case "Reciclaje": return event.getFeedback();
-                case "Feedback comercial": return event.getFeedback();
-                case "Envío a cliente": return event.getFeedback();
-                case "Feedback cliente": return event.getFeedback();
-                case "Entrevista cliente": return event.getFeedback();
-                case "Envío propuesta": return event.getFeedback();
-                case "Respuesta Propuesta": return event.getFeedback();
-                case "Desiste candidato": return event.getFeedback();
-                case "Desiste cliente": return event.getFeedback();
-            }
-        }
-        return filteredAnswers;
-    }*/
-
-
-
 }
