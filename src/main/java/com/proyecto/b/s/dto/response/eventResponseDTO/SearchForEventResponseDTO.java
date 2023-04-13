@@ -13,6 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 public class SearchForEventResponseDTO {
+    private Long id;
     private String linkJb;
     private LocalDate dateOpening; //fechaApertura
     private String dayJob; //jornadaTrabajo
@@ -25,6 +26,6 @@ public class SearchForEventResponseDTO {
     private SeniorityRequestDTO seniority;
     private RolRequestDTO rol;
     private ClientRequestDTO client;
-    private List<StateSearchRequestDTO> stateSearch;
-    private List<SkillRequestDTO> skills;
+    //private List<StateSearchRequestDTO> stateSearch;
+    //private List<SkillRequestDTO> skills;
 }

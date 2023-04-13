@@ -4,9 +4,6 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -54,7 +51,7 @@ public class Person {
             inverseJoinColumns = @JoinColumn(name = "industry_id")
     )
     @JsonManagedReference
-    private List <Industry> industries;
+    private List<Industry> industries;
 
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
@@ -72,7 +69,7 @@ public class Person {
             inverseJoinColumns = @JoinColumn(name = "rol_id")
     )
     @JsonManagedReference
-    private List < Rol> roles; //todo
+    private List<Rol> roles; //todo
 
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(

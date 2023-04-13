@@ -9,5 +9,4 @@ import lombok.Setter;
 @Setter
 public class SkillForEventRequestDTO {
        private Long id;
-       private String name;
 }

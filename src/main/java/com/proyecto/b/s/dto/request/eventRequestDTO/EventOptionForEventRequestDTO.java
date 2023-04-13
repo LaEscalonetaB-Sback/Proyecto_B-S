@@ -8,8 +8,5 @@ import lombok.Setter;
 @Getter
 @Setter
 public class EventOptionForEventRequestDTO {
-    private Long id;
     private String name;
-
-    private String value;
 }

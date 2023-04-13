@@ -20,7 +20,7 @@ public class Answer {
 
     private String name;
 
-    @ManyToMany(mappedBy = "value")
+    @ManyToMany(mappedBy = "feedback")
     @JsonBackReference
     private List<EventOption> eventOptions;
 }
