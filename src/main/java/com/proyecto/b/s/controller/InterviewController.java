@@ -1,7 +1,6 @@
 package com.proyecto.b.s.controller;
 //intrevista -> interview
 
-
 import com.proyecto.b.s.dto.request.InterviewRequestDTO;
 import com.proyecto.b.s.dto.response.InterviewResponseDTO;
 import com.proyecto.b.s.entity.Interview;

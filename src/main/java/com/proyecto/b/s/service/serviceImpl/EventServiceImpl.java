@@ -2,9 +2,13 @@ package com.proyecto.b.s.service.serviceImpl;
 
 import com.proyecto.b.s.dto.modelMapper.ModelMapperInterface;
 import com.proyecto.b.s.dto.request.eventRequestDTO.EventRequestDTO;
+import com.proyecto.b.s.dto.request.eventRequestDTO.SearchForEventRequestDTO;
 import com.proyecto.b.s.dto.response.eventResponseDTO.EventResponseDTO;
 import com.proyecto.b.s.entity.Event;
-import com.proyecto.b.s.repository.EventRepository;
+import com.proyecto.b.s.entity.Person;
+import com.proyecto.b.s.entity.Search;
+import com.proyecto.b.s.entity.User;
+import com.proyecto.b.s.repository.*;
 import com.proyecto.b.s.service.service.EventService;
 import com.proyecto.b.s.service.service.InterviewService;
 import com.proyecto.b.s.service.service.SearchService;
@@ -14,12 +18,17 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class EventServiceImpl implements EventService {
-
+    private final UserRepository userRepository;
+    private final PersonRepository personRepository;
+    private final SearchRepository searchRepository;
+    private final InterviewRepository interviewRepository;
     private final EventRepository eventRepository;
     @Autowired
     private ModelMapperInterface modelMapperInterface;
@@ -34,9 +43,13 @@ public class EventServiceImpl implements EventService {
 
 
 
-    public EventServiceImpl(EventRepository eventRepository,
+    public EventServiceImpl(UserRepository userRepository, PersonRepository personRepository, SearchRepository searchRepository, InterviewRepository interviewRepository, EventRepository eventRepository,
                             ModelMapperInterface modelMapperInterface,
                             ModelMapper modelMapper) {
+        this.userRepository = userRepository;
+        this.personRepository = personRepository;
+        this.searchRepository = searchRepository;
+        this.interviewRepository = interviewRepository;
         this.eventRepository = eventRepository;
         this.modelMapperInterface = modelMapperInterface;
         this.modelMapper = modelMapper;
@@ -59,12 +72,27 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public EventResponseDTO saveEvent(EventRequestDTO eventRequestDTO) {
+        Long idPerson = eventRequestDTO.getPerson().getId();
+        Person newPerson = personRepository.getReferenceById(idPerson);
+
+        Long idUser = eventRequestDTO.getUser().getId();
+        User newUser = userRepository.getReferenceById(idUser);
+
+        List<SearchForEventRequestDTO> ids = eventRequestDTO.getSearch();
+        List<Search> idSearches = new ArrayList<>();
+        for(SearchForEventRequestDTO aux : ids){
+            Search search = searchRepository.getReferenceById(aux.getId());
+            idSearches.add(search);
+        }
 
         Event newEvent = modelMapperInterface.eventSaveRequestDtoToEvent(eventRequestDTO);
-        eventRepository.save(newEvent);
-        EventResponseDTO newEventResDto = modelMapperInterface.eventToEventResponseDto(newEvent);
+        newEvent.setPerson(newPerson);
+        newEvent.setUser(newUser);
+        newEvent.setSearch(idSearches);
 
-        return newEventResDto;
+        eventRepository.save(newEvent);
+
+        return modelMapperInterface.eventToEventResponseDto(newEvent);
     }
 
     @Override

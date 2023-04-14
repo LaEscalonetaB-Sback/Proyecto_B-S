@@ -58,7 +58,7 @@ public class EventController {
     }
 
     //Actualizar Evento
-    @PutMapping("/update/{searchId}")
+    @PutMapping("/update/{eventId}")
     public ResponseEntity<EventResponseDTO> update(@PathVariable Long eventId, @RequestBody EventRequestDTO eventRequestDTO) throws Exception {
         if (!eventService.existById(eventId)) {
             return ResponseEntity.notFound().build();
