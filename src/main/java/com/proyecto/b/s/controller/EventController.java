@@ -7,6 +7,7 @@ import com.proyecto.b.s.entity.Event;
 import com.proyecto.b.s.repository.EventRepository;
 import com.proyecto.b.s.service.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,11 +33,12 @@ public class EventController {
     //Lista de Evento
     @GetMapping("/list")
     public ResponseEntity<List<EventResponseDTO>> findEvent(
-            @RequestParam(required = false) LocalDate date,
+            @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date,
             @RequestParam(required = false) Long person,
             @RequestParam(required = false) Long user,
             @RequestParam(required = false) Long search) {
         List<EventResponseDTO> event = eventService.listEvent(date, person, user, search);
+
         if (event.isEmpty()) {
             return ResponseEntity.noContent().build();
         } else {

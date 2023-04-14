@@ -28,7 +28,6 @@ public class EventServiceImpl implements EventService {
     private final UserRepository userRepository;
     private final PersonRepository personRepository;
     private final SearchRepository searchRepository;
-    private final InterviewRepository interviewRepository;
     private final EventRepository eventRepository;
     @Autowired
     private ModelMapperInterface modelMapperInterface;
@@ -48,7 +47,6 @@ public class EventServiceImpl implements EventService {
         this.userRepository = userRepository;
         this.personRepository = personRepository;
         this.searchRepository = searchRepository;
-        this.interviewRepository = interviewRepository;
         this.eventRepository = eventRepository;
         this.modelMapperInterface = modelMapperInterface;
         this.modelMapper = modelMapper;
