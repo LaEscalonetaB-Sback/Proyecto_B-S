@@ -2,6 +2,7 @@ package com.proyecto.b.s.service.serviceImpl;
 
 import com.proyecto.b.s.dto.modelMapper.ModelMapperInterface;
 import com.proyecto.b.s.dto.request.eventRequestDTO.EventRequestDTO;
+import com.proyecto.b.s.dto.request.eventRequestDTO.EventUpdateRequestDTO;
 import com.proyecto.b.s.dto.request.eventRequestDTO.SearchForEventRequestDTO;
 import com.proyecto.b.s.dto.response.eventResponseDTO.EventResponseDTO;
 import com.proyecto.b.s.entity.Event;
@@ -20,7 +21,6 @@ import javax.persistence.EntityNotFoundException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -40,7 +40,6 @@ public class EventServiceImpl implements EventService {
 
     @Autowired
     private InterviewService interviewService;
-
 
 
     public EventServiceImpl(UserRepository userRepository, PersonRepository personRepository, SearchRepository searchRepository, InterviewRepository interviewRepository, EventRepository eventRepository,
@@ -80,7 +79,7 @@ public class EventServiceImpl implements EventService {
 
         List<SearchForEventRequestDTO> ids = eventRequestDTO.getSearch();
         List<Search> idSearches = new ArrayList<>();
-        for(SearchForEventRequestDTO aux : ids){
+        for (SearchForEventRequestDTO aux : ids) {
             Search search = searchRepository.getReferenceById(aux.getId());
             idSearches.add(search);
         }
@@ -96,15 +95,21 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public EventResponseDTO updateEvent(Long eventId, EventRequestDTO eventRequestDTO) throws Exception {
+    public EventResponseDTO updateEvent(Long eventId, EventUpdateRequestDTO eventUpdateRequestDTO) throws Exception {
+
+        Long idUser = eventUpdateRequestDTO.getUser().getId();
+        User newUser = userRepository.getReferenceById(idUser);
+
+
         Event updatedEvent = eventRepository.findById(eventId).orElseThrow(() -> new Exception("La entrevista no existe"));
-        modelMapper.map(eventRequestDTO, updatedEvent);
+        modelMapper.map(eventUpdateRequestDTO, Event.class);
 
-
+        updatedEvent.setDateEvent(eventUpdateRequestDTO.getDateEvent());
+        updatedEvent.setUser(newUser);
 
         eventRepository.save(updatedEvent);
 
-        return modelMapper.map(updatedEvent, EventResponseDTO.class);
+        return modelMapperInterface.eventToEventResponseDto(updatedEvent);
 
     }
 

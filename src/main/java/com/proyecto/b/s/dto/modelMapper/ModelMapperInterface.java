@@ -3,6 +3,7 @@ package com.proyecto.b.s.dto.modelMapper;
 import com.proyecto.b.s.dto.request.*;
 import com.proyecto.b.s.dto.request.eventRequestDTO.EventOptionForEventRequestDTO;
 import com.proyecto.b.s.dto.request.eventRequestDTO.EventRequestDTO;
+import com.proyecto.b.s.dto.request.eventRequestDTO.EventUpdateRequestDTO;
 import com.proyecto.b.s.dto.response.ClientResponseDTO;
 import com.proyecto.b.s.dto.response.InterviewResponseDTO;
 import com.proyecto.b.s.dto.response.PersonResponseDTO;
@@ -27,6 +28,8 @@ public interface ModelMapperInterface {
     InterviewResponseDTO interviewToInterviewResponseDto(Interview interview);
 
     Event eventSaveRequestDtoToEvent(EventRequestDTO eventRequestDTO);
+
+    Event eventUpdateRequestDtoToEvent(EventUpdateRequestDTO eventUpdateRequestDTO);
 
     EventResponseDTO eventToEventResponseDto(Event event);
 

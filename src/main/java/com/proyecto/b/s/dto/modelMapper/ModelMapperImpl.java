@@ -3,6 +3,7 @@ package com.proyecto.b.s.dto.modelMapper;
 import com.proyecto.b.s.dto.request.*;
 import com.proyecto.b.s.dto.request.eventRequestDTO.EventOptionForEventRequestDTO;
 import com.proyecto.b.s.dto.request.eventRequestDTO.EventRequestDTO;
+import com.proyecto.b.s.dto.request.eventRequestDTO.EventUpdateRequestDTO;
 import com.proyecto.b.s.dto.response.ClientResponseDTO;
 import com.proyecto.b.s.dto.response.InterviewResponseDTO;
 import com.proyecto.b.s.dto.response.PersonResponseDTO;
@@ -63,6 +64,11 @@ public class ModelMapperImpl implements ModelMapperInterface {
     @Override
     public Event eventSaveRequestDtoToEvent(EventRequestDTO eventRequestDTO) {
         return modelMapper.map(eventRequestDTO, Event.class);
+    }
+
+    @Override
+    public Event eventUpdateRequestDtoToEvent(EventUpdateRequestDTO eventUpdateRequestDTO) {
+        return modelMapper.map(eventUpdateRequestDTO, Event.class);
     }
 
     @Override

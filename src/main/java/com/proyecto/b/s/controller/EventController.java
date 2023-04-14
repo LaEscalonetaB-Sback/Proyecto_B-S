@@ -1,6 +1,7 @@
 package com.proyecto.b.s.controller;
 
 import com.proyecto.b.s.dto.request.eventRequestDTO.EventRequestDTO;
+import com.proyecto.b.s.dto.request.eventRequestDTO.EventUpdateRequestDTO;
 import com.proyecto.b.s.dto.response.eventResponseDTO.EventResponseDTO;
 import com.proyecto.b.s.entity.Event;
 import com.proyecto.b.s.repository.EventRepository;
@@ -59,11 +60,11 @@ public class EventController {
 
     //Actualizar Evento
     @PutMapping("/update/{eventId}")
-    public ResponseEntity<EventResponseDTO> update(@PathVariable Long eventId, @RequestBody EventRequestDTO eventRequestDTO) throws Exception {
+    public ResponseEntity<EventResponseDTO> update(@PathVariable Long eventId, @RequestBody EventUpdateRequestDTO eventUpdateRequestDTO) throws Exception {
         if (!eventService.existById(eventId)) {
             return ResponseEntity.notFound().build();
         }
-        EventResponseDTO result = eventService.updateEvent(eventId, eventRequestDTO);
+        EventResponseDTO result = eventService.updateEvent(eventId, eventUpdateRequestDTO);
         return ResponseEntity.ok(result);
     }
 
