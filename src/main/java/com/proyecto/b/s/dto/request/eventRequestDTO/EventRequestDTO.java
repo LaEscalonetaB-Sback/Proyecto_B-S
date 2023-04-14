@@ -1,10 +1,12 @@
 package com.proyecto.b.s.dto.request.eventRequestDTO;
 
+import com.proyecto.b.s.dto.request.SearchRequestDTO;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Getter
@@ -19,7 +21,7 @@ public class EventRequestDTO {
 
     private PersonForEventRequestDTO person;
 
-    // private List<SearchRequestDTO> search;
+     private List<SearchForEventRequestDTO> search;
 
 
     // private List<InterviewResponseDTO> interviews;

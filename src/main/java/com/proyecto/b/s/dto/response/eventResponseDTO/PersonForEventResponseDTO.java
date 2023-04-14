@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Data
 @Getter
 @Setter
@@ -20,8 +22,8 @@ public class PersonForEventResponseDTO {
     private String cuil;
     private String phoneNumber;
     private String remuneration;
-    //private List<IndustryRequestDTO> industries;
-    //private List<SourceRequestDTO> sources;
-    //private List<RolRequestDTO> roles;
-    //private List<SkillRequestDTO> skills;
+    private List<IndustryForEventResponseDTO> industries;
+    private List<SourceForEventResponseDTO> sources;
+    private List<RolForEventResponseDTO> roles;
+    private List<SkillForEventResponseDTO> skills;
 }

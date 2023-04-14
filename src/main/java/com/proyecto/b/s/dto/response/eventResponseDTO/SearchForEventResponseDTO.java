@@ -1,6 +1,5 @@
 package com.proyecto.b.s.dto.response.eventResponseDTO;
 
-import com.proyecto.b.s.dto.request.*;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,9 +22,9 @@ public class SearchForEventResponseDTO {
     private String vacancies; //vacantes
     private String observations; //observaciones
     private boolean active;
-    private SeniorityRequestDTO seniority;
-    private RolRequestDTO rol;
-    private ClientRequestDTO client;
-    //private List<StateSearchRequestDTO> stateSearch;
-    //private List<SkillRequestDTO> skills;
+    private SeniorityForEventResponseDTO seniority;
+    private RolForEventResponseDTO rol;
+    private ClientForEventResponseDTO client;
+    private List<StateSearchForEventResponseDTO> stateSearch;
+    private List<SkillForEventResponseDTO> skills;
 }
