@@ -1,6 +1,5 @@
 package com.proyecto.b.s.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -50,7 +49,6 @@ public class Person {
             joinColumns = @JoinColumn(name = "person_id"),
             inverseJoinColumns = @JoinColumn(name = "industry_id")
     )
-    @JsonManagedReference
     private List<Industry> industries;
 
     @ManyToMany(cascade = {CascadeType.ALL})
@@ -59,7 +57,6 @@ public class Person {
             joinColumns = @JoinColumn(name = "person_id"),
             inverseJoinColumns = @JoinColumn(name = "source_id")
     )
-    @JsonManagedReference
     private List<Source> sources;
 
     @ManyToMany(cascade = {CascadeType.ALL})
@@ -68,7 +65,6 @@ public class Person {
             joinColumns = @JoinColumn(name = "person_id"),
             inverseJoinColumns = @JoinColumn(name = "rol_id")
     )
-    @JsonManagedReference
     private List<Rol> roles; //todo
 
     @ManyToMany(cascade = {CascadeType.ALL})
@@ -77,6 +73,5 @@ public class Person {
             joinColumns = @JoinColumn(name = "person_id"),
             inverseJoinColumns = @JoinColumn(name = "statePerson_id")
     )
-    @JsonManagedReference
     private List<StatePerson> statePeople;
 }

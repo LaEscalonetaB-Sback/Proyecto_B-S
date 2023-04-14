@@ -7,7 +7,7 @@ import lombok.Setter;
 @Data
 @Getter
 @Setter
-public class UserForEventResponseTO {
+public class UserForEventResponseDTO {
     private String email;
     private String name;
     private String lastName;

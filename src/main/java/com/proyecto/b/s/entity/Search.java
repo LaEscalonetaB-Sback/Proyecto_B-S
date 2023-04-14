@@ -1,5 +1,6 @@
 package com.proyecto.b.s.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
@@ -28,8 +29,9 @@ public class Search {
     private String vacancies; //vacantes
     private String observations; //observaciones
     private boolean active = true;
-    //@ManyToMany(mappedBy = "search")
-    //private List<Event> events;
+    @ManyToMany(mappedBy = "search")
+    @JsonBackReference
+    private List<Event> events;
     @OneToOne(cascade = {CascadeType.ALL})
     private Seniority seniority;
     @OneToOne(cascade = {CascadeType.ALL})
@@ -50,6 +52,5 @@ public class Search {
             joinColumns = @JoinColumn(name = "search_id"),
             inverseJoinColumns = @JoinColumn(name = "skill_id")
     )
-    @JsonManagedReference
     private List<Skill> skills;
 }

@@ -1,6 +1,6 @@
 package com.proyecto.b.s.entity;
 
-
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -25,6 +25,7 @@ public class EventOption {
             joinColumns = @JoinColumn(name = "event_option_id"),
             inverseJoinColumns = @JoinColumn(name = "answer_id")
     )
+    @JsonManagedReference
     @ManyToMany
     private List<Answer> feedback;
 

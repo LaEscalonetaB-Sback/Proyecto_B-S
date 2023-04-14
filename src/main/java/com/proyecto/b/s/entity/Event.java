@@ -1,5 +1,6 @@
 package com.proyecto.b.s.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -32,6 +33,7 @@ public class Event {
     private Person person;
 
     @ManyToMany(cascade = {CascadeType.ALL})
+    @JsonManagedReference
     @JoinTable(
             name = "event_search",
             joinColumns = @JoinColumn(name = "event_id"),

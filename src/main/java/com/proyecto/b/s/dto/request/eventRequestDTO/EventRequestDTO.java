@@ -1,6 +1,5 @@
 package com.proyecto.b.s.dto.request.eventRequestDTO;
 
-import com.proyecto.b.s.dto.request.SearchRequestDTO;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,8 +20,8 @@ public class EventRequestDTO {
 
     private PersonForEventRequestDTO person;
 
-     private List<SearchForEventRequestDTO> search;
+    private List<SearchForEventRequestDTO> search;
 
-
-    // private List<InterviewResponseDTO> interviews;
+    // TODO: 14/4/2023 Enlazar el google meet para crear la entrevista
+    // private List<InterviewRequestDTO> interviews;
 }

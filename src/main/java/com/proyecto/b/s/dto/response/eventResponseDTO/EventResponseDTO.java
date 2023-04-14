@@ -13,7 +13,7 @@ import java.util.List;
 public class EventResponseDTO {
     private LocalDate dateEvent;
     private List<EventOptionForEventResponseDTO> events;
-    private UserForEventResponseTO user;
+    private UserForEventResponseDTO user;
     private PersonForEventResponseDTO person;
     private List<SearchForEventResponseDTO> search;
 }
