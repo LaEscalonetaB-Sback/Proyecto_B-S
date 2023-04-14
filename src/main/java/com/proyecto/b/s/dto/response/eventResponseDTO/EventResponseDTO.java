@@ -15,5 +15,5 @@ public class EventResponseDTO {
     private List<EventOptionForEventResponseDTO> events;
     private UserForEventResponseTO user;
     private PersonForEventResponseDTO person;
-    //private List<SearchForEventResponseDTO> search;
+    private List<SearchForEventResponseDTO> search;
 }

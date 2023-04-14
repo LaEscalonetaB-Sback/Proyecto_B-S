@@ -58,7 +58,7 @@ public class EventOptionController {
 
     // TODO: 11/4/2023 eliminar update del eventOption
     //Actualizar Evento
-    @PutMapping("/update/{searchId}")
+    @PutMapping("/update/{eventId}")
     public ResponseEntity<EventOptionForEventResponseDTO> update(@PathVariable Long eventId, @RequestBody EventOptionForEventRequestDTO eventRequestDTO) throws Exception {
         if (!eventOptionService.existById(eventId)) {
             return ResponseEntity.notFound().build();
