@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.FutureOrPresent;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -19,6 +20,8 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @FutureOrPresent(message ="La fecha indicada para el evento no debe ser anterior al dia de hoy ")
+    @Column(nullable = false)
     private LocalDate dateEvent;
 
     private boolean active = true;
