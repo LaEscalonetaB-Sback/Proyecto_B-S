@@ -20,6 +20,5 @@ public class SearchRequestDTO {
     private SeniorityRequestDTO seniority;
     private RolRequestDTO rol;
     private ClientRequestDTO client;
-    //private List<StateSearchRequestDTO> stateSearch;
     private List<SkillRequestDTO> skills;
 }
