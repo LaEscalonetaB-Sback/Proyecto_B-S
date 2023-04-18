@@ -1,4 +1,4 @@
-package com.proyecto.b.s.dto.response;
+package com.proyecto.b.s.dto.response.SearchResponseDTO;
 
 import lombok.Data;
 
@@ -19,10 +19,10 @@ public class SearchResponseDTO {
     private String vacancies; //vacantes
     private String observations; //observaciones
     private boolean active;
-    private SeniorityResponseDTO seniority;
-    private RolResponseDTO rol;
-    private ClientResponseDTO client;
+    private SeniorityForSearchResponseDTO seniority;
+    private RolForSearchResponseDTO rol;
+    private ClientForSearchResponseDTO client;
     private List<StateSearchResponseDTO> stateSearch;
-    private List<SkillResponseDTO> skills;
+    private List<SkillForSearchResponseDTO> skills;
 
 }
