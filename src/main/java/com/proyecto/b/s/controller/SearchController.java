@@ -1,9 +1,9 @@
 package com.proyecto.b.s.controller;
 //busqueda -> search
 
-import com.proyecto.b.s.dto.request.SearchRequestDTO.SearchRequestDTO;
-import com.proyecto.b.s.dto.response.SearchResponseDTO.SearchResponseDTO;
-import com.proyecto.b.s.entity.*;
+import com.proyecto.b.s.dto.request.searchRequestDTO.SearchRequestDTO;
+import com.proyecto.b.s.dto.response.searchResponseDTO.SearchResponseDTO;
+import com.proyecto.b.s.entity.Search;
 import com.proyecto.b.s.service.service.SearchService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +17,7 @@ import java.util.Optional;
 @CrossOrigin(value = "*")
 public class SearchController {
     private final SearchService searchService;
+
     public SearchController(SearchService searchService) {
         this.searchService = searchService;
     }
@@ -48,7 +49,7 @@ public class SearchController {
 
     //Crear busqueda
     @PostMapping("/create")
-    public ResponseEntity<SearchResponseDTO> create(@RequestBody SearchRequestDTO searchRequestDto){
+    public ResponseEntity<SearchResponseDTO> create(@RequestBody SearchRequestDTO searchRequestDto) {
         SearchResponseDTO result = searchService.saveSearch(searchRequestDto);
         return ResponseEntity.ok(result);
     }
@@ -65,7 +66,7 @@ public class SearchController {
 
     //Eliminar busqueda por id
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Search> delete(@PathVariable Long id){
+    public ResponseEntity<Search> delete(@PathVariable Long id) {
         searchService.deleteSearch(id);
         return ResponseEntity.noContent().build();
     }

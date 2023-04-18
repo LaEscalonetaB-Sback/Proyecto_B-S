@@ -1,13 +1,15 @@
-package com.proyecto.b.s.dto.request;
+package com.proyecto.b.s.dto.response.searchResponseDTO;
 
 import lombok.Data;
 
 import java.time.LocalDate;
 import java.util.List;
 
-//Lo que recibo del front
+
+//Lo que le envio de respuesta al front
 @Data
-public class SearchRequestDTO {
+public class SearchResponseDTO {
+    private Long id;
     private String linkJb;
     private LocalDate dateOpening; //fechaApertura
     private String dayJob; //jornadaTrabajo
@@ -17,8 +19,10 @@ public class SearchRequestDTO {
     private String vacancies; //vacantes
     private String observations; //observaciones
     private boolean active;
-    private SeniorityRequestDTO seniority;
-    private RolRequestDTO rol;
-    private ClientRequestDTO client;
-    private List<SkillRequestDTO> skills;
+    private SeniorityForSearchResponseDTO seniority;
+    private RolForSearchResponseDTO rol;
+    private ClientForSearchResponseDTO client;
+    private List<StateSearchResponseDTO> stateSearch;
+    private List<SkillForSearchResponseDTO> skills;
+
 }
