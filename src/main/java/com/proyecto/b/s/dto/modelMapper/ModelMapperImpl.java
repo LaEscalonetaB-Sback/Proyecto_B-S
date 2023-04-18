@@ -1,7 +1,9 @@
 package com.proyecto.b.s.dto.modelMapper;
 
 import com.proyecto.b.s.dto.request.*;
+import com.proyecto.b.s.dto.request.SearchRequestDTO.SearchRequestDTO;
 import com.proyecto.b.s.dto.response.*;
+import com.proyecto.b.s.dto.response.SearchResponseDTO.SearchResponseDTO;
 import com.proyecto.b.s.entity.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
