@@ -1,12 +1,8 @@
 package com.proyecto.b.s.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -53,8 +49,7 @@ public class Person {
             joinColumns = @JoinColumn(name = "person_id"),
             inverseJoinColumns = @JoinColumn(name = "industry_id")
     )
-    @JsonManagedReference
-    private List <Industry> industries;
+    private List<Industry> industries;
 
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
@@ -62,7 +57,6 @@ public class Person {
             joinColumns = @JoinColumn(name = "person_id"),
             inverseJoinColumns = @JoinColumn(name = "source_id")
     )
-    @JsonManagedReference
     private List<Source> sources;
 
     @ManyToMany(cascade = {CascadeType.ALL})
@@ -71,8 +65,7 @@ public class Person {
             joinColumns = @JoinColumn(name = "person_id"),
             inverseJoinColumns = @JoinColumn(name = "rol_id")
     )
-    @JsonManagedReference
-    private List < Rol> roles; //todo
+    private List<Rol> roles; //todo
 
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
@@ -80,6 +73,5 @@ public class Person {
             joinColumns = @JoinColumn(name = "person_id"),
             inverseJoinColumns = @JoinColumn(name = "statePerson_id")
     )
-    @JsonManagedReference
     private List<StatePerson> statePeople;
 }

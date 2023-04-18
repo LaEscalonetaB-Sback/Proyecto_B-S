@@ -1,9 +1,16 @@
 package com.proyecto.b.s.dto.modelMapper;
 
 import com.proyecto.b.s.dto.request.*;
-import com.proyecto.b.s.dto.request.SearchRequestDTO.SearchRequestDTO;
-import com.proyecto.b.s.dto.response.*;
-import com.proyecto.b.s.dto.response.SearchResponseDTO.SearchResponseDTO;
+import com.proyecto.b.s.dto.request.eventRequestDTO.EventOptionForEventRequestDTO;
+import com.proyecto.b.s.dto.request.eventRequestDTO.EventRequestDTO;
+import com.proyecto.b.s.dto.request.eventRequestDTO.EventUpdateRequestDTO;
+import com.proyecto.b.s.dto.request.searchRequestDTO.SearchRequestDTO;
+import com.proyecto.b.s.dto.response.ClientResponseDTO;
+import com.proyecto.b.s.dto.response.InterviewResponseDTO;
+import com.proyecto.b.s.dto.response.PersonResponseDTO;
+import com.proyecto.b.s.dto.response.eventResponseDTO.EventOptionForEventResponseDTO;
+import com.proyecto.b.s.dto.response.eventResponseDTO.EventResponseDTO;
+import com.proyecto.b.s.dto.response.searchResponseDTO.SearchResponseDTO;
 import com.proyecto.b.s.entity.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
@@ -12,6 +19,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ModelMapperImpl implements ModelMapperInterface {
     private final ModelMapper modelMapper = new ModelMapper();
+
     @Bean
     public ModelMapper modelMapper() {
         return new ModelMapper();
@@ -25,7 +33,7 @@ public class ModelMapperImpl implements ModelMapperInterface {
 
     @Override
     public Person personUpdateReqDtoToPerson(PersonUpdateRequestDTO personRequestDto) {
-        return modelMapper.map(personRequestDto,Person.class);
+        return modelMapper.map(personRequestDto, Person.class);
     }
 
     @Override
@@ -38,6 +46,7 @@ public class ModelMapperImpl implements ModelMapperInterface {
     public Search searchReqDtoToSearch(SearchRequestDTO searchRequestDto) {
         return modelMapper.map(searchRequestDto, Search.class);
     }
+
     @Override
     public SearchResponseDTO searchToSearchResponseDTO(Search search) {
         return modelMapper.map(search, SearchResponseDTO.class);
@@ -54,12 +63,37 @@ public class ModelMapperImpl implements ModelMapperInterface {
     }
 
     @Override
-    public Client clientReqDTOToClient(ClientRequestDTO clientRequestDTO){
+    public Event eventSaveRequestDtoToEvent(EventRequestDTO eventRequestDTO) {
+        return modelMapper.map(eventRequestDTO, Event.class);
+    }
+
+    @Override
+    public Event eventUpdateRequestDtoToEvent(EventUpdateRequestDTO eventUpdateRequestDTO) {
+        return modelMapper.map(eventUpdateRequestDTO, Event.class);
+    }
+
+    @Override
+    public EventResponseDTO eventToEventResponseDto(Event event) {
+        return modelMapper.map(event, EventResponseDTO.class);
+    }
+
+    @Override
+    public EventOption eventOptionRequestDtoToEventOption(EventOptionForEventRequestDTO eventRequestDTO) {
+        return modelMapper.map(eventRequestDTO, EventOption.class);
+    }
+
+    @Override
+    public EventOptionForEventResponseDTO eventOptionToEvenOptionResponseDto(EventOption event) {
+        return modelMapper.map(event, EventOptionForEventResponseDTO.class);
+    }
+
+    public Client clientReqDTOToClient(ClientRequestDTO clientRequestDTO) {
         return modelMapper.map(clientRequestDTO, Client.class);
     }
 
     @Override
-    public ClientResponseDTO clientToClientResponseDTO(Client client){
+    public ClientResponseDTO clientToClientResponseDTO(Client client) {
         return modelMapper.map(client, ClientResponseDTO.class);
+
     }
 }

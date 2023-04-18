@@ -3,7 +3,6 @@ package com.proyecto.b.s.controller;
 
 import com.proyecto.b.s.dto.request.ClientRequestDTO;
 import com.proyecto.b.s.dto.response.ClientResponseDTO;
-
 import com.proyecto.b.s.entity.Client;
 import com.proyecto.b.s.repository.ClientRepository;
 import com.proyecto.b.s.service.service.ClientService;
@@ -21,17 +20,14 @@ public class ClientController {
 
     ClientRepository clientRepository;
 
-    public ClientController(ClientService clientService, ClientRepository clientRepository){
+    public ClientController(ClientService clientService, ClientRepository clientRepository) {
         this.clientService = clientService;
         this.clientRepository = clientRepository;
     }
 
-
-
-
     /**
      * creamos cliente
-     * **/
+     **/
     @PostMapping("/create")
     public ResponseEntity<Client> create(@RequestBody ClientRequestDTO clientRequestDto) throws Exception {
         Client result = clientService.saveClient(clientRequestDto);

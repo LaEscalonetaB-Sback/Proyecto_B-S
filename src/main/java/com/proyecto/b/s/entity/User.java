@@ -20,8 +20,8 @@ public class User {
     private String password;
     private String name;
     private String lastName;
-    @OneToMany(mappedBy = "user")
-    private List<Event> events;
+    //@OneToMany(mappedBy = "user")
+    //private List<Event> events;
 
     @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinTable(
