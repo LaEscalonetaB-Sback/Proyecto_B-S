@@ -1,4 +1,4 @@
-package com.proyecto.b.s.dto.response;
+package com.proyecto.b.s.dto.response.SearchResponseDTO;
 
 import lombok.Data;
 

@@ -2,7 +2,7 @@ package com.proyecto.b.s.controller;
 
 import com.proyecto.b.s.dto.request.EventRequestDTO;
 import com.proyecto.b.s.dto.response.EventResponseDTO;
-import com.proyecto.b.s.dto.response.SearchResponseDTO;
+import com.proyecto.b.s.dto.response.SearchResponseDTO.SearchResponseDTO;
 import com.proyecto.b.s.entity.Event;
 import com.proyecto.b.s.service.service.EventService;
 import org.springframework.http.ResponseEntity;

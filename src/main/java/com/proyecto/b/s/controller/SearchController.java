@@ -1,8 +1,8 @@
 package com.proyecto.b.s.controller;
 //busqueda -> search
 
-import com.proyecto.b.s.dto.request.SearchRequestDTO;
-import com.proyecto.b.s.dto.response.SearchResponseDTO;
+import com.proyecto.b.s.dto.request.SearchRequestDTO.SearchRequestDTO;
+import com.proyecto.b.s.dto.response.SearchResponseDTO.SearchResponseDTO;
 import com.proyecto.b.s.entity.*;
 import com.proyecto.b.s.service.service.SearchService;
 import org.springframework.http.ResponseEntity;
