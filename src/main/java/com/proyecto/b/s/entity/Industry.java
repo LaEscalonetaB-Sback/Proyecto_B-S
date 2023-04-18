@@ -16,4 +16,5 @@ public class Industry {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    private Boolean active = true;
 }

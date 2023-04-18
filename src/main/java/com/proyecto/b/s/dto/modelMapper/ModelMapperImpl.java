@@ -5,9 +5,7 @@ import com.proyecto.b.s.dto.request.eventRequestDTO.EventOptionForEventRequestDT
 import com.proyecto.b.s.dto.request.eventRequestDTO.EventRequestDTO;
 import com.proyecto.b.s.dto.request.eventRequestDTO.EventUpdateRequestDTO;
 import com.proyecto.b.s.dto.request.searchRequestDTO.SearchRequestDTO;
-import com.proyecto.b.s.dto.response.ClientResponseDTO;
-import com.proyecto.b.s.dto.response.InterviewResponseDTO;
-import com.proyecto.b.s.dto.response.PersonResponseDTO;
+import com.proyecto.b.s.dto.response.*;
 import com.proyecto.b.s.dto.response.eventResponseDTO.EventOptionForEventResponseDTO;
 import com.proyecto.b.s.dto.response.eventResponseDTO.EventResponseDTO;
 import com.proyecto.b.s.dto.response.searchResponseDTO.SearchResponseDTO;
@@ -96,4 +94,26 @@ public class ModelMapperImpl implements ModelMapperInterface {
         return modelMapper.map(client, ClientResponseDTO.class);
 
     }
+
+    @Override
+    public Industry industryReqDTOToindustry(IndustryRequestDTO industryRequestDTO) {
+        return modelMapper.map(industryRequestDTO, Industry.class);
+    }
+
+    @Override
+    public IndustryResponseDTO industryToIndustryResponseDTO(Industry industry) {
+        return modelMapper.map(industry, IndustryResponseDTO.class);
+    }
+
+    @Override
+    public Rol rolReqDTOToRol(RolRequestDTO rolRequestDTO) {
+        return modelMapper.map(rolRequestDTO, Rol.class);
+    }
+
+    @Override
+    public RolResponseDTO rolToRolResponseDTO(Rol rol) {
+        return modelMapper.map(rol, RolResponseDTO.class);
+    }
+
+
 }
