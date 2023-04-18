@@ -112,7 +112,7 @@ public class SearchServiceImpl implements SearchService {
 
     @Override
     public SearchResponseDTO update(Long searchId, SearchRequestDTO searchRequestDto) throws EntityNotFoundException {
-        Search search = searchRepository.findById(searchId).orElseThrow(() -> new EntityNotFoundException("Search not found with id: " + searchId));
+        Search search = searchRepository.findById(searchId).orElseThrow(() -> new EntityNotFoundException("Busqueda no encontrada con id: " + searchId));
         modelMapper.map(searchRequestDto, search);
         searchRepository.save(search);
         return modelMapper.map(search, SearchResponseDTO.class);
