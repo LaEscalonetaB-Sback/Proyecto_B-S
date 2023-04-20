@@ -5,9 +5,7 @@ import com.proyecto.b.s.dto.request.eventRequestDTO.EventOptionForEventRequestDT
 import com.proyecto.b.s.dto.request.eventRequestDTO.EventRequestDTO;
 import com.proyecto.b.s.dto.request.eventRequestDTO.EventUpdateRequestDTO;
 import com.proyecto.b.s.dto.request.searchRequestDTO.SearchRequestDTO;
-import com.proyecto.b.s.dto.response.ClientResponseDTO;
-import com.proyecto.b.s.dto.response.InterviewResponseDTO;
-import com.proyecto.b.s.dto.response.PersonResponseDTO;
+import com.proyecto.b.s.dto.response.*;
 import com.proyecto.b.s.dto.response.eventResponseDTO.EventOptionForEventResponseDTO;
 import com.proyecto.b.s.dto.response.eventResponseDTO.EventResponseDTO;
 import com.proyecto.b.s.dto.response.searchResponseDTO.SearchResponseDTO;
@@ -41,5 +39,13 @@ public interface ModelMapperInterface {
     Client clientReqDTOToClient(ClientRequestDTO clientRequestDTO);
 
     ClientResponseDTO clientToClientResponseDTO(Client client);
+
+    Industry industryReqDTOToindustry(IndustryRequestDTO industryRequestDTO);
+
+    IndustryResponseDTO industryToIndustryResponseDTO(Industry industry);
+
+    Rol rolReqDTOToRol(RolRequestDTO rolRequestDTO);
+
+    RolResponseDTO rolToRolResponseDTO(Rol rol);
 
 }

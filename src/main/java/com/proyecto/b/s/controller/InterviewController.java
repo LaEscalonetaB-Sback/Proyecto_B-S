@@ -23,7 +23,7 @@ public class InterviewController {
     }
 
     //CRUD
-    //Lista de busquedas
+    //Lista de entrevistas
     @GetMapping("/list")
     public ResponseEntity<List<InterviewResponseDTO>> findInterview() {
         List<InterviewResponseDTO> interview = interviewService.listInterview();

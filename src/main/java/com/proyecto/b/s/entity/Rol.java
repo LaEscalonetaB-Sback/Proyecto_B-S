@@ -18,6 +18,7 @@ public class Rol {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    private Boolean active = true;
 
 //    @OneToOne(cascade = {CascadeType.ALL})
 //    private Seniority seniority;
