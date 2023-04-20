@@ -36,13 +36,13 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public Person create(PersonRequestDTO personRequestDto) {
+    public PersonResponseDTO create(PersonRequestDTO personRequestDto) {
 
         Optional<Person> existingPerson = personRepository.findByDniOrCuilOrEmailOrLinkedin(
-                personRequestDto.getDni() != null ? personRequestDto.getDni() : "",
-                personRequestDto.getCuil() != null ? personRequestDto.getCuil() : "",
-                personRequestDto.getEmail() != null ? personRequestDto.getEmail() : "",
-                personRequestDto.getLinkedin() != null ? personRequestDto.getLinkedin() : ""
+                personRequestDto.getDni() != "" ? personRequestDto.getDni() : null,
+                personRequestDto.getCuil() != "" ? personRequestDto.getCuil() : null,
+                personRequestDto.getEmail() != "" ? personRequestDto.getEmail() : null,
+                personRequestDto.getLinkedin() != "" ? personRequestDto.getLinkedin() : null
         );
 
             if (existingPerson.isPresent()) {
@@ -51,11 +51,11 @@ public class PersonServiceImpl implements PersonService {
 
 
             Person person = modelMapperInterface.personReqDtoToPerson(personRequestDto);
-            return personRepository.save(person);
+            Person personAdd = personRepository.save(person);
+            return modelMapperInterface.personToPersonResponseDTO(personAdd);
 
+    }
 
-
-        }
 
 
     @Override
@@ -89,7 +89,7 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public PersonResponseDTO update(Long Id, PersonUpdateRequestDTO personRequestDto) throws EntityNotFoundException {
-        Person person = personRepository.findById(Id).orElseThrow(() -> new EntityNotFoundException("Search not found with id: " +Id));
+        Person person = personRepository.findById(Id).orElseThrow(() -> new EntityNotFoundException("Persona no encontrada con id: " +Id));
         modelMapperInterface.personUpdateReqDtoToPerson(personRequestDto);
         mapPerson(personRequestDto, person);
 
