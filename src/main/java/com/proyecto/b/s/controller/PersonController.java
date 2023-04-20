@@ -55,8 +55,8 @@ public class PersonController {
 
     //Crear busqueda
     @PostMapping("/create")
-    public ResponseEntity<Person> create(@RequestBody @Valid PersonRequestDTO personRequestDto) throws Exception {
-        Person result = personService.create(personRequestDto);
+    public ResponseEntity<PersonResponseDTO> create(@RequestBody @Valid PersonRequestDTO personRequestDto) throws Exception {
+        PersonResponseDTO result = personService.create(personRequestDto);
         return ResponseEntity.ok(result);
     }
 

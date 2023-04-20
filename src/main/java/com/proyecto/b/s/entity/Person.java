@@ -4,9 +4,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -23,29 +21,46 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //@Pattern(regexp = "[a-zA-Z ]{2,64}", message = "El nombre debe contener solo letras y no debe estar vacio.")
+    @Size(min = 2,message = "Debe ingresar un nombre mayor a 2 caracteres.")
+    @Pattern(regexp = "[a-zA-Z ]*$", message ="Debe ingresar un nombre sin números.")
     private String name;
-    //@NotBlank(message ="El apellido no puede estar vacio")
 
+    @Size(min = 2,message =  "Debe ingresar un apellido mayor a 2 caracteres.")
+    @Pattern(regexp = "[a-zA-Z ]*$", message ="Debe ingresar un apellido sin números." )
     private String lastName;
-    //@NotBlank(message ="El linkedin no puede estar vacio")
+
+    @NotEmpty(message ="El linkedin no puede estar vacio")
     private String linkedin;
+
     private LocalDate ContactDate = (LocalDate.now());
-    //@NotBlank(message ="El linkedin no puede estar vacio")
+
+
+    @Pattern(regexp = "[a-zA-Z ]*$", message ="Debe ingresar el nombre del recruiter sin números." )
     private String recruiter;
-    //@NotBlank(message ="El seniority no puede estar vacio")
+
+    @NotEmpty(message ="El seniority no puede estar vacio.")
     private String seniorityGeneral;
+
+    @Pattern(regexp = "^[0-9]*$" ,message="El dni no puede contener letras.")
     private String dni;
-    //@NotNull
-    //@Pattern(regexp = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@" + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$", message ="email ingresado invalido")
+
+    @Email
     private String email;
+
+    @Pattern(regexp = "^[0-9]*$" ,message="El cuil no puede contener letras.")
     private String cuil;
+
+    @Pattern(regexp = "^[0-9]*$" ,message="El número de telefono no puede contener letras.")
     private String phoneNumber;
+
+    @Pattern(regexp = "^[0-9]*$" ,message="La remuneración no puede contener letras.")
     private String remuneration;
+
     private Boolean active = true;
 
     @ManyToMany(cascade = {CascadeType.ALL})
-    private List<Skill> skills; //todo
+    @NotEmpty(message = "Debe ingresar al menos una skill.")
+    private List<Skill> skills;
 
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
@@ -72,7 +87,8 @@ public class Person {
             inverseJoinColumns = @JoinColumn(name = "rol_id")
     )
     @JsonManagedReference
-    private List < Rol> roles; //todo
+    @NotEmpty(message = "Debe ingresar al menos un rol.")
+    private List < Rol> roles;
 
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(

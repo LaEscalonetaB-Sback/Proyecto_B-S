@@ -32,4 +32,5 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
             @Param("skills") List<String> skills);
 
     Optional<Person> findByDniOrCuilOrEmailOrLinkedin(String dni, String cuil, String email, String linkedin);
+
 }
