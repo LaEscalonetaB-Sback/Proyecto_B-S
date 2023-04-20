@@ -1,10 +1,9 @@
 package com.proyecto.b.s.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
 
 
 @Entity
@@ -14,6 +13,7 @@ import java.util.List;
 @Setter
 @ToString
 @Table(name = "skill")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Skill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
