@@ -9,7 +9,7 @@ import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 public interface SearchService {
-    SearchResponseDTO saveSearch(SearchRequestDTO searchRequestDto);
+    SearchResponseDTO saveSearch(SearchRequestDTO searchRequestDto) throws Exception;
     Search findById(Long id) throws Exception;
     SearchResponseDTO update(Long searchId, SearchRequestDTO searchRequestDto) throws EntityNotFoundException;
     boolean existById(Long id);

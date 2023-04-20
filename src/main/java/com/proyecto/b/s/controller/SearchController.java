@@ -6,15 +6,18 @@ import com.proyecto.b.s.dto.response.searchResponseDTO.SearchResponseDTO;
 import com.proyecto.b.s.entity.Search;
 import com.proyecto.b.s.service.service.SearchService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/bs/search")
 @CrossOrigin(value = "*")
+@Validated
 public class SearchController {
     private final SearchService searchService;
 
@@ -49,7 +52,7 @@ public class SearchController {
 
     //Crear busqueda
     @PostMapping("/create")
-    public ResponseEntity<SearchResponseDTO> create(@RequestBody SearchRequestDTO searchRequestDto) {
+    public ResponseEntity<SearchResponseDTO> create(@RequestBody @Valid SearchRequestDTO searchRequestDto) throws Exception{
         SearchResponseDTO result = searchService.saveSearch(searchRequestDto);
         return ResponseEntity.ok(result);
     }

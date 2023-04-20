@@ -46,15 +46,15 @@ public class Search {
     @JsonBackReference
     private List<Event> events;
 
-    @NotEmpty(message = "Seniority cannot be null")
+    @NotNull(message = "Seniority cannot be null")
     @OneToOne()
     private Seniority seniority;
 
-    @NotEmpty(message = "Rol cannot be null")
+    @NotNull(message = "Rol cannot be null")
     @OneToOne()
     private Rol rol;
 
-    @NotEmpty(message = "Client cannot be null")
+    @NotNull(message = "Client cannot be null")
     @OneToOne()
     private Client client;
 
@@ -67,7 +67,7 @@ public class Search {
     @JsonManagedReference
     private List<StateSearch> stateSearch;
 
-    @NotEmpty(message = "Skill cannot be null")
+    @NotNull(message = "Skill cannot be null")
     @ManyToMany()
     @JoinTable(
             name = "search_skill",
