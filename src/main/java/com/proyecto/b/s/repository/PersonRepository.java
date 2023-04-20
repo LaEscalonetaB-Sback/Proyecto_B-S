@@ -3,13 +3,10 @@ package com.proyecto.b.s.repository;
 
 import com.proyecto.b.s.entity.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.awt.print.Pageable;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,8 +14,7 @@ import java.util.Optional;
 @Repository
 public interface PersonRepository extends JpaRepository<Person, Long> {
 
-
-    @Query(value = "SELECT DISTINCT p FROM com.proyecto.b.s.entity.Person p " +
+    @Query(value = "SELECT DISTINCT p FROM Person p " +
             "LEFT JOIN p.roles r " +
             "LEFT JOIN p.skills s " +
             "WHERE (:name IS NULL OR p.name LIKE CONCAT('%', :name, '%')) " +
@@ -27,9 +23,9 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
             "AND (COALESCE(:roles, NULL) IS NULL OR r.name IN (:roles)) " +
             "AND (COALESCE(:skills, NULL) IS NULL OR s.name IN (:skills))" +
             "AND NOT EXISTS (" +
-            "    SELECT skill.name FROM com.proyecto.b.s.entity.Skill skill WHERE skill.name IN (:skills)" +
+            "    SELECT skill.name FROM Skill skill WHERE skill.name IN (:skills)" +
             "    AND skill.name NOT IN (" +
-            "        SELECT personSkill.name FROM com.proyecto.b.s.entity.Person person" +
+            "        SELECT personSkill.name FROM Person person" +
             "        JOIN person.skills personSkill" +
             "        WHERE person.id = p.id" +
             "        AND personSkill.name IN (:skills)" +
@@ -44,8 +40,4 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
 
 
     Optional<Person> findByDniOrCuilOrEmailOrLinkedin(String dni, String cuil, String email, String linkedin);
-
-
-
-
 }
