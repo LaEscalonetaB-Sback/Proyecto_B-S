@@ -23,13 +23,23 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
             "AND (:lastName IS NULL OR p.lastName LIKE CONCAT('%', :lastName, '%')) " +
             "AND (COALESCE(:seniorityGeneral, NULL) IS NULL OR p.seniorityGeneral IN (:seniorityGeneral)) " +
             "AND (COALESCE(:roles, NULL) IS NULL OR r.name IN (:roles)) " +
-            "AND (COALESCE(:skills, NULL) IS NULL OR s.name IN (:skills))")
+            "AND (COALESCE(:skills, NULL) IS NULL OR s.name IN (:skills))" +
+            "AND NOT EXISTS (" +
+            "    SELECT skill.name FROM Skill skill WHERE skill.name IN (:skills)" +
+            "    AND skill.name NOT IN (" +
+            "        SELECT personSkill.name FROM Person person" +
+            "        JOIN person.skills personSkill" +
+            "        WHERE person.id = p.id" +
+            "        AND personSkill.name IN (:skills)" +
+            "    )" +
+            ") ")
     List<Person> searchPerson(
             @Param("name") String name,
             @Param("lastName") String lastName,
             @Param("seniorityGeneral") List<String> seniorityGeneral,
             @Param("roles") List<String> roles,
             @Param("skills") List<String> skills);
+
 
     Optional<Person> findByDniOrCuilOrEmailOrLinkedin(String dni, String cuil, String email, String linkedin);
 

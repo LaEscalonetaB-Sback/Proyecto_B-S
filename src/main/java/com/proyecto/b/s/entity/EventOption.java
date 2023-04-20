@@ -1,9 +1,10 @@
 package com.proyecto.b.s.entity;
 
-
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -19,5 +20,14 @@ public class EventOption {
 
     private String name;
 
-    private String value;
+    @JoinTable(
+            name = "event_option_answer",
+            joinColumns = @JoinColumn(name = "event_option_id"),
+            inverseJoinColumns = @JoinColumn(name = "answer_id")
+    )
+    @JsonManagedReference
+    @ManyToMany
+    private List<Answer> feedback;
+
+    private boolean active = true;
 }

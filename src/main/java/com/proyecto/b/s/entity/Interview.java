@@ -3,7 +3,7 @@ package com.proyecto.b.s.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 
 @Entity
@@ -19,6 +19,7 @@ public class Interview {
     private Long id;
     private String emailPerson;
     private String emailRecruiter;
-    private Date dateInterview;
+    private LocalDate dateInterview;
     private String linkMeet;
+    private boolean active = true;
 }

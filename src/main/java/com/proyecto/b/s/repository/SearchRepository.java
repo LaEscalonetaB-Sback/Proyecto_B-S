@@ -2,6 +2,7 @@ package com.proyecto.b.s.repository;
 
 import com.proyecto.b.s.entity.Search;
 import org.springframework.data.jpa.repository.JpaRepository;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -10,6 +11,7 @@ import java.util.List;
 
 @Repository
 public interface SearchRepository extends JpaRepository<Search, Long> {
+
     @Query(value = "SELECT DISTINCT b FROM Search b "
             + "LEFT JOIN b.stateSearch eb "
             + "LEFT JOIN b.skills s "
@@ -26,4 +28,5 @@ public interface SearchRepository extends JpaRepository<Search, Long> {
                               @Param("state") String state,
                               @Param("seniority") List<String> seniority,
                               @Param("skills") List<String> skills);
+
 }

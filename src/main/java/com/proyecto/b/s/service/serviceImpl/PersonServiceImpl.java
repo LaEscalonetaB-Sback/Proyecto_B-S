@@ -2,17 +2,14 @@ package com.proyecto.b.s.service.serviceImpl;
 
 
 import com.proyecto.b.s.dto.modelMapper.ModelMapperInterface;
-import com.proyecto.b.s.dto.request.PersonRequestDTO;
-import com.proyecto.b.s.dto.request.PersonUpdateRequestDTO;
-import com.proyecto.b.s.dto.request.SkillRequestDTO;
+import com.proyecto.b.s.dto.request.personRequestDTO.*;
 import com.proyecto.b.s.dto.response.PersonResponseDTO;
 import com.proyecto.b.s.entity.*;
-import com.proyecto.b.s.repository.PersonRepository;
+import com.proyecto.b.s.repository.*;
 import com.proyecto.b.s.service.service.PersonService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
@@ -26,6 +23,18 @@ public class PersonServiceImpl implements PersonService {
 
     @Autowired
     private PersonRepository personRepository;
+
+    @Autowired
+    private SkillRepository skillRepository;
+
+    @Autowired
+    private IndustryRepository industryRepository;
+
+    @Autowired
+    private SourceRepository sourceRepository;
+
+    @Autowired
+    private RolRepository rolRepository;
 
     @Autowired
     private ModelMapperInterface modelMapperInterface;
@@ -52,20 +61,42 @@ public class PersonServiceImpl implements PersonService {
             throw new RuntimeException("Ya existe una persona con el mismo DNI, CUIL, correo electrónico o LinkedIn: " + existingPerson.get().getName() + " "+ existingPerson.get().getLastName());
         }
 
+        List<SkillForPersonRequestDTO> skillsName = personRequestDto.getSkills();
+        List <Skill> skills = new ArrayList<>();
+        for(SkillForPersonRequestDTO aux : skillsName){
+            Skill skill = skillRepository.findByName(aux.getName());
+            skills.add(skill);
+        }
+
+        List<IndustryForPersonRequestDTO> industryName = personRequestDto.getIndustries();
+        List <Industry> industries = new ArrayList<>();
+        for (IndustryForPersonRequestDTO aux : industryName) {
+            Industry industry = industryRepository.findByName(aux.getName());
+            industries.add(industry);
+        }
+
+        List<SourceForPersonRequestDTO> sourceName= personRequestDto.getSources();
+        List <Source> sources = new ArrayList<>();
+        for (SourceForPersonRequestDTO aux: sourceName) {
+            Source source = sourceRepository.findByName(aux.getName());
+            sources.add(source);
+        }
+        List <RolForPersonRequestDTO> rolName = personRequestDto.getRoles();
+        List <Rol> roles = new ArrayList<>();
+        for (RolForPersonRequestDTO aux : rolName) {
+            Rol rol = rolRepository.findByName (aux.getName());
+            roles.add(rol);
+        }
+
         Person person = modelMapper.map(personRequestDto, Person.class);
 
-        List<SkillRequestDTO> skillsDTO = personRequestDto.getSkills();
-        List <Skill> skills = new ArrayList<>();
-
-//        for(SkillRequestDTO aux : skillsDTO){
-//            Skill skill =
-//        }
+        person.setSkills(skills);
+        person.setIndustries(industries);
+        person.setSources(sources);
+        person.setRoles(roles);
 
         Person savedPerson = personRepository.save(person);
         return modelMapper.map(savedPerson,PersonResponseDTO.class);
-
-//        Person person = modelMapperInterface.personReqDtoToPerson(personRequestDto);
-//        return personRepository.save(person);
 
     }
 

@@ -1,9 +1,9 @@
 package com.proyecto.b.s.service.service;
 
 
-import com.proyecto.b.s.dto.request.SearchRequestDTO;
-import com.proyecto.b.s.dto.response.SearchResponseDTO;
-import com.proyecto.b.s.entity.*;
+import com.proyecto.b.s.dto.request.searchRequestDTO.SearchRequestDTO;
+import com.proyecto.b.s.dto.response.searchResponseDTO.SearchResponseDTO;
+import com.proyecto.b.s.entity.Search;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;

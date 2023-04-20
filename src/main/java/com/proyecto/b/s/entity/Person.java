@@ -34,7 +34,6 @@ public class Person {
 
     private LocalDate ContactDate = (LocalDate.now());
 
-
     @Pattern(regexp = "[a-zA-Z ]*$", message ="Debe ingresar el nombre del recruiter sin números." )
     private String recruiter;
 
@@ -58,11 +57,11 @@ public class Person {
 
     private Boolean active = true;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany
     @NotEmpty(message = "Debe ingresar al menos una skill.")
     private List<Skill> skills;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany
     @JoinTable(
             name = "person_industry",
             joinColumns = @JoinColumn(name = "person_id"),
@@ -71,7 +70,7 @@ public class Person {
     @JsonManagedReference
     private List <Industry> industries;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany
     @JoinTable(
             name = "person_source",
             joinColumns = @JoinColumn(name = "person_id"),
@@ -80,7 +79,7 @@ public class Person {
     @JsonManagedReference
     private List<Source> sources;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany
     @JoinTable(
             name = "person_rol",
             joinColumns = @JoinColumn(name = "person_id"),
@@ -97,5 +96,5 @@ public class Person {
             inverseJoinColumns = @JoinColumn(name = "statePerson_id")
     )
     @JsonManagedReference
-    private List<StatePerson> statePeople;
+    private List<StatePerson> statePeople; //todo preguntar si depende del evento o es algo particular de la persona
 }
