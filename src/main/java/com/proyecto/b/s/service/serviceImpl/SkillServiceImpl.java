@@ -5,6 +5,7 @@ import com.proyecto.b.s.dto.response.SkillResponseDTO;
 import com.proyecto.b.s.entity.Skill;
 import com.proyecto.b.s.repository.SkillRepository;
 import com.proyecto.b.s.service.service.SkillService;
+import com.proyecto.b.s.utils.HelperValidator;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,8 @@ public class SkillServiceImpl implements SkillService {
     @Override
     public List<SkillResponseDTO> list() {
         List<Skill> skills = skillRepository.findAll();
+        HelperValidator.isEmptyList(skills);
+
         List<SkillResponseDTO> skillResponseDTOS = new ArrayList<>();
 
         for (Skill aux : skills) {

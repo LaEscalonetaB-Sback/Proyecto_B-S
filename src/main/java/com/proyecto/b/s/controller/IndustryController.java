@@ -7,9 +7,11 @@ import com.proyecto.b.s.entity.Industry;
 import com.proyecto.b.s.repository.IndustryRepository;
 import com.proyecto.b.s.service.service.IndustryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLOutput;
 import java.util.List;
 import java.util.Optional;
 
@@ -60,7 +62,7 @@ public class IndustryController {
 
     //Eliminar Industry por id
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Event> delete(@PathVariable Long id) {
+    public ResponseEntity<Event> delete(@PathVariable Long id) throws Exception {
         industryService.deleteIndustry(id);
         return ResponseEntity.noContent().build();
     }

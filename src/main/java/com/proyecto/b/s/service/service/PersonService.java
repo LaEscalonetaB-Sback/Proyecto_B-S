@@ -20,7 +20,7 @@ public interface PersonService {
     boolean existById(Long id) throws Exception;
 
     Person obtainPersonId(Long id) throws Exception;
-    PersonResponseDTO update(Long Id, PersonUpdateRequestDTO personRequestDto) throws EntityNotFoundException;
+    PersonResponseDTO update(Long Id, PersonUpdateRequestDTO personRequestDto) throws EntityNotFoundException, Exception;
 
     void delete(Long id) throws Exception;
 

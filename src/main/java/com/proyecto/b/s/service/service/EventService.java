@@ -16,7 +16,7 @@ public interface EventService {
 
     EventResponseDTO updateEvent(Long eventId, EventUpdateRequestDTO eventUpdateRequestDTO) throws Exception;
 
-    void deleteEvent(Long id);
+    void deleteEvent(Long id) throws Exception;
 
     Event findById(Long id) throws Exception;
 

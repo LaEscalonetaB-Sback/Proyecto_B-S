@@ -5,6 +5,7 @@ import com.proyecto.b.s.dto.response.SourceResponseDTO;
 import com.proyecto.b.s.entity.Source;
 import com.proyecto.b.s.repository.SourceRepository;
 import com.proyecto.b.s.service.service.SourceService;
+import com.proyecto.b.s.utils.HelperValidator;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -61,6 +62,7 @@ public class SourceServiceImpl implements SourceService {
     @Override
     public List<SourceResponseDTO> list() {
         List<Source> sources = sourceRepository.findAll();
+        HelperValidator.isEmptyList(sources);
         List<SourceResponseDTO> sourceResponseDTOS = new ArrayList<>();
 
         for (Source aux : sources) {

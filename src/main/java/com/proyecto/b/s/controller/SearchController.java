@@ -56,7 +56,7 @@ public class SearchController {
 
     //Actualizar busqueda
     @PutMapping("/update/{searchId}")
-    public ResponseEntity<SearchResponseDTO> update(@PathVariable Long searchId, @RequestBody SearchRequestDTO searchRequestDto) throws EntityNotFoundException {
+    public ResponseEntity<SearchResponseDTO> update(@PathVariable Long searchId, @RequestBody SearchRequestDTO searchRequestDto) throws Exception {
         if (!searchService.existById(searchId)) {
             return ResponseEntity.notFound().build();
         }
@@ -66,7 +66,7 @@ public class SearchController {
 
     //Eliminar busqueda por id
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Search> delete(@PathVariable Long id) {
+    public ResponseEntity<Search> delete(@PathVariable Long id) throws Exception {
         searchService.deleteSearch(id);
         return ResponseEntity.noContent().build();
     }

@@ -21,7 +21,7 @@ public class AnswerController {
         this.answerService = answerService;
     }
 
-    @GetMapping
+    @GetMapping("/list")
     public ResponseEntity<List<Answer>> findAnswerList() {
         return ResponseEntity.status(HttpStatus.OK).body(answerService.listAnswer());
     }

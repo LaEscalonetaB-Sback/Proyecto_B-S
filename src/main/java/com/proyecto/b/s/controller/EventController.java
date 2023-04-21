@@ -72,7 +72,7 @@ public class EventController {
 
     //Eliminar Evento por id
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Event> delete(@PathVariable Long id) {
+    public ResponseEntity<Event> delete(@PathVariable Long id)throws Exception {
         eventService.deleteEvent(id);
         return ResponseEntity.noContent().build();
     }

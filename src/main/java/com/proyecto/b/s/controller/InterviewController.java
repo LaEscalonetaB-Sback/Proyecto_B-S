@@ -61,7 +61,7 @@ public class InterviewController {
 
     //Eliminar entrevista por id
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Interview> delete(@PathVariable Long id) {
+    public ResponseEntity<Interview> delete(@PathVariable Long id) throws Exception {
         interviewService.deleteInterview(id);
         return ResponseEntity.noContent().build();
     }

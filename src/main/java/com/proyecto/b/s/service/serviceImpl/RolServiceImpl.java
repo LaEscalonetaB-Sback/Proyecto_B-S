@@ -4,8 +4,10 @@ import com.proyecto.b.s.dto.modelMapper.ModelMapperInterface;
 import com.proyecto.b.s.dto.request.RolRequestDTO;
 import com.proyecto.b.s.dto.response.RolResponseDTO;
 import com.proyecto.b.s.entity.Rol;
+import com.proyecto.b.s.exception.InvalidResourceException;
 import com.proyecto.b.s.repository.RolRepository;
 import com.proyecto.b.s.service.service.RolService;
+import com.proyecto.b.s.utils.HelperValidator;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,7 +34,7 @@ public class RolServiceImpl implements RolService {
 
     @Override
     public Rol findById(Long id) throws Exception {
-        return rolRepository.findById(id).orElseThrow(() -> new Exception("Rol no encontrado"));
+        return rolRepository.findById(id).orElseThrow(() -> new InvalidResourceException("Rol no encontrado con id: " + id));
     }
 
     @Override
@@ -42,8 +44,10 @@ public class RolServiceImpl implements RolService {
 
     @Override
     public List<RolResponseDTO> listRol() {
-        List<Rol> RolList = rolRepository.findAll();
-        return RolList.stream()
+        List<Rol> rolList = rolRepository.findAll();
+        HelperValidator.isEmptyList(rolList);
+
+        return rolList.stream()
                 .map(rol -> modelMapper.map(rol, RolResponseDTO.class))
                 .collect(Collectors.toList());
     }
@@ -56,8 +60,8 @@ public class RolServiceImpl implements RolService {
     }
 
     @Override
-    public RolResponseDTO updateRol(Long id, RolRequestDTO rolRequestDTO) throws Exception {
-        Rol updateRol = rolRepository.findById(id).orElseThrow(() -> new Exception("La entrevista no existe"));
+    public RolResponseDTO updateRol(Long id, RolRequestDTO rolRequestDTO) throws Exception{
+        Rol updateRol = findById(id);
         modelMapper.map(rolRequestDTO, updateRol);
         rolRepository.save(updateRol);
 
@@ -65,11 +69,8 @@ public class RolServiceImpl implements RolService {
     }
 
     @Override
-    public void deleteRol(Long id) {
-        Rol entity = rolRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Rol no encontrado con id: " + id));
-        if (entity == null) {
-            throw new EntityNotFoundException("Rol no encontrado con id: " + id);
-        }
+    public void deleteRol(Long id) throws Exception{
+        Rol entity = findById(id);
         entity.setActive(false);
         rolRepository.save(entity);
     }

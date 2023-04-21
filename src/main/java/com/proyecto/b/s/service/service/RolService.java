@@ -20,5 +20,5 @@ public interface RolService {
 
     RolResponseDTO updateRol(Long id, RolRequestDTO rolRequestDTO) throws Exception;
 
-    void deleteRol(Long id);
+    void deleteRol(Long id) throws Exception;
 }

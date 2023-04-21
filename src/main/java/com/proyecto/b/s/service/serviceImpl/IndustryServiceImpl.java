@@ -4,8 +4,10 @@ import com.proyecto.b.s.dto.modelMapper.ModelMapperInterface;
 import com.proyecto.b.s.dto.request.IndustryRequestDTO;
 import com.proyecto.b.s.dto.response.IndustryResponseDTO;
 import com.proyecto.b.s.entity.Industry;
+import com.proyecto.b.s.exception.InvalidResourceException;
 import com.proyecto.b.s.repository.IndustryRepository;
 import com.proyecto.b.s.service.service.IndustryService;
+import com.proyecto.b.s.utils.HelperValidator;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,7 +34,7 @@ public class IndustryServiceImpl implements IndustryService {
 
     @Override
     public Industry findById(Long id) throws Exception {
-        return industryRepository.findById(id).orElseThrow(() -> new Exception("Industria no encontrada"));
+        return industryRepository.findById(id).orElseThrow(() -> new InvalidResourceException("Industria no encontrada con id: " + id));
     }
 
     @Override
@@ -43,22 +45,24 @@ public class IndustryServiceImpl implements IndustryService {
     @Override
     public List<IndustryResponseDTO> listIndustry() {
         List<Industry> industryList = industryRepository.findAll();
+        HelperValidator.isEmptyList(industryList);
+
         return industryList.stream()
                 .map(industry -> modelMapper.map(industry, IndustryResponseDTO.class))
                 .collect(Collectors.toList());
-
     }
 
     @Override
     public IndustryResponseDTO saveIndustry(IndustryRequestDTO industryRequestDTO) {
         Industry newIndustry = modelMapperInterface.industryReqDTOToindustry(industryRequestDTO);
         industryRepository.save(newIndustry);
+
         return modelMapperInterface.industryToIndustryResponseDTO(newIndustry);
     }
 
     @Override
     public IndustryResponseDTO updateIndustry(Long id, IndustryRequestDTO industryRequestDTO) throws Exception {
-        Industry updateIndustry = industryRepository.findById(id).orElseThrow(() -> new Exception("La industria no existe"));
+        Industry updateIndustry = findById(id);
         modelMapper.map(industryRequestDTO, updateIndustry);
         industryRepository.save(updateIndustry);
 
@@ -66,11 +70,8 @@ public class IndustryServiceImpl implements IndustryService {
     }
 
     @Override
-    public void deleteIndustry(Long id) {
-        Industry entity = industryRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Industria no encontrada con id: " + id));
-        if (entity == null) {
-            throw new EntityNotFoundException("Industria no encontrada con id: " + id);
-        }
+    public void deleteIndustry(Long id) throws Exception{
+        Industry entity = findById(id);
         entity.setActive(false);
         industryRepository.save(entity);
     }

@@ -1,11 +1,15 @@
 package com.proyecto.b.s.exception;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import javax.validation.ConstraintViolationException;
 import java.util.HashMap;
@@ -24,7 +28,7 @@ public class Exception {
         return errorMap;
     }
 
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+   @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(RuntimeException.class)
     @ResponseBody
     public Map<String, String> PersonAlreadyExistsException(RuntimeException ex) {
@@ -32,4 +36,15 @@ public class Exception {
         errorMap.put("Error", ex.getMessage());
         return errorMap;
     }
+
+   @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(InvalidResourceException.class)
+   @ResponseBody
+   public Map<String, String> InvalidResourceException(RuntimeException ex) {
+       Map<String, String> errorMap = new HashMap<>();
+       errorMap.put("Error", ex.getMessage());
+       return errorMap;
+   }
+
+
 }

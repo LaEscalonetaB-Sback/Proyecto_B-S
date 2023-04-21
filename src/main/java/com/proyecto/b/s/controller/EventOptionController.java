@@ -70,7 +70,7 @@ public class EventOptionController {
     // TODO: 11/4/2023 eliminar eliminar evento por id
     //Eliminar Evento por id
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Event> delete(@PathVariable Long id) {
+    public ResponseEntity<Event> delete(@PathVariable Long id)throws Exception {
         eventOptionService.deleteEventOption(id);
         return ResponseEntity.noContent().build();
     }

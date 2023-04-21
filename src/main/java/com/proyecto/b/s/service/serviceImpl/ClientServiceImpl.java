@@ -4,8 +4,10 @@ import com.proyecto.b.s.dto.modelMapper.ModelMapperInterface;
 import com.proyecto.b.s.dto.request.ClientRequestDTO;
 import com.proyecto.b.s.dto.response.ClientResponseDTO;
 import com.proyecto.b.s.entity.Client;
+import com.proyecto.b.s.exception.InvalidResourceException;
 import com.proyecto.b.s.repository.ClientRepository;
 import com.proyecto.b.s.service.service.ClientService;
+import com.proyecto.b.s.utils.HelperValidator;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,12 +37,14 @@ public class ClientServiceImpl implements ClientService {
 
         if (name == null && cuit == null) {
             List<Client> clientList = clientRepository.findAll();
+            HelperValidator.isEmptyList(clientList);
             return clientList.stream()
                     .map(client -> modelMapper.map(client, ClientResponseDTO.class))
                     .collect(Collectors.toList());
         } else {
 
             List<Client> clientList = clientRepository.searchBy(name, cuit);
+            HelperValidator.isEmptyList(clientList);
             return clientList.stream()
                     .map(client -> modelMapper.map(client, ClientResponseDTO.class))
                     .collect(Collectors.toList());
@@ -54,12 +58,10 @@ public class ClientServiceImpl implements ClientService {
         return clientRepository.save(client);
     }
 
-
-
     @Override
     public void deleteClient(Long id) throws Exception {
         Client client = clientRepository.findById(id)
-                .orElseThrow(()-> new Exception("Client not found -" + this.getClass().getName()));
+                .orElseThrow(() -> new InvalidResourceException("Client not found -" + this.getClass().getName()));
 
         client.setActive(false);
 

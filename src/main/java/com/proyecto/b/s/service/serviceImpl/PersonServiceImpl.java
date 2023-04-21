@@ -5,9 +5,11 @@ import com.proyecto.b.s.dto.modelMapper.ModelMapperInterface;
 import com.proyecto.b.s.dto.request.PersonRequestDTO;
 import com.proyecto.b.s.dto.request.PersonUpdateRequestDTO;
 import com.proyecto.b.s.dto.response.PersonResponseDTO;
-import com.proyecto.b.s.entity.*;
+import com.proyecto.b.s.entity.Person;
+import com.proyecto.b.s.exception.InvalidResourceException;
 import com.proyecto.b.s.repository.PersonRepository;
 import com.proyecto.b.s.service.service.PersonService;
+import com.proyecto.b.s.utils.HelperValidator;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,30 +47,30 @@ public class PersonServiceImpl implements PersonService {
                 personRequestDto.getLinkedin() != null ? personRequestDto.getLinkedin() : ""
         );
 
-            if (existingPerson.isPresent()) {
-                throw new RuntimeException("Ya existe una persona con el mismo DNI, CUIL, correo electrónico o LinkedIn: " + existingPerson.get().getName() + " "+ existingPerson.get().getLastName());
-            }
-
-
-            Person person = modelMapperInterface.personReqDtoToPerson(personRequestDto);
-            return personRepository.save(person);
-
-
-
+        if (existingPerson.isPresent()) {
+            throw new RuntimeException("Ya existe una persona con el mismo DNI, CUIL, correo electrónico o LinkedIn: " + existingPerson.get().getName() + " " + existingPerson.get().getLastName());
         }
 
+
+        Person person = modelMapperInterface.personReqDtoToPerson(personRequestDto);
+        return personRepository.save(person);
+    }
 
     @Override
     public List<PersonResponseDTO> search(String name, String lastName, List<String> seniorityGeneral, List<String> roles, List<String> skills) {
 
         if (name == null && lastName == null && seniorityGeneral == null && roles == null && skills == null) {
             List<Person> personList = personRepository.findAll();
+            HelperValidator.isEmptyList(personList);
+
             return personList.stream()
                     .map(person -> modelMapper.map(person, PersonResponseDTO.class))
                     .collect(Collectors.toList());
         } else {
 
             List<Person> personList = personRepository.searchPerson(name, lastName, seniorityGeneral, roles, skills);
+            HelperValidator.isEmptyList(personList);
+
             return personList.stream()
                     .map(person -> modelMapper.map(person, PersonResponseDTO.class))
                     .collect(Collectors.toList());
@@ -82,14 +84,12 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Person obtainPersonId(Long id) throws Exception {
-    Person person = personRepository.findById(id).orElseThrow(() -> new Exception("La persona no existe"));
-    return person;
-}
-
+        return personRepository.findById(id).orElseThrow(() -> new InvalidResourceException("Persona no encontrada -" + this.getClass().getName()));
+    }
 
     @Override
-    public PersonResponseDTO update(Long Id, PersonUpdateRequestDTO personRequestDto) throws EntityNotFoundException {
-        Person person = personRepository.findById(Id).orElseThrow(() -> new EntityNotFoundException("Search not found with id: " +Id));
+    public PersonResponseDTO update(Long Id, PersonUpdateRequestDTO personRequestDto) throws Exception {
+        Person person = obtainPersonId(Id);
         modelMapperInterface.personUpdateReqDtoToPerson(personRequestDto);
         mapPerson(personRequestDto, person);
 
@@ -104,13 +104,9 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public void delete(Long id) throws Exception {
-        Person person = personRepository.findById(id)
-                .orElseThrow(()-> new Exception("Persona no encontrada -" + this.getClass().getName()));
-
+        Person person = obtainPersonId(id);
         person.setActive(false);
-
         personRepository.save(person);
-
         modelMapperInterface.personToPersonResponseDTO(person);
     }
 

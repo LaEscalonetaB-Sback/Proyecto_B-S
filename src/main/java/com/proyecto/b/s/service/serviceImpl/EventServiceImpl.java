@@ -9,10 +9,12 @@ import com.proyecto.b.s.entity.Event;
 import com.proyecto.b.s.entity.Person;
 import com.proyecto.b.s.entity.Search;
 import com.proyecto.b.s.entity.User;
+import com.proyecto.b.s.exception.InvalidResourceException;
 import com.proyecto.b.s.repository.*;
 import com.proyecto.b.s.service.service.EventService;
 import com.proyecto.b.s.service.service.InterviewService;
 import com.proyecto.b.s.service.service.SearchService;
+import com.proyecto.b.s.utils.HelperValidator;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,11 +58,15 @@ public class EventServiceImpl implements EventService {
     public List<EventResponseDTO> listEvent(LocalDate date, Long person, Long user, Long search) {
         if (date != null || person != null || user != null || search != null) {
             List<Event> eventList = eventRepository.findEventBy(date, person, user, search);
+            HelperValidator.isEmptyList(eventList);
+
             return eventList.stream()
                     .map(event -> modelMapper.map(event, EventResponseDTO.class))
                     .collect(Collectors.toList());
         } else {
             List<Event> eventList = eventRepository.findAll();
+            HelperValidator.isEmptyList(eventList);
+
             return eventList.stream()
                     .map(event -> modelMapper.map(event, EventResponseDTO.class))
                     .collect(Collectors.toList());
@@ -98,8 +104,7 @@ public class EventServiceImpl implements EventService {
         Long idUser = eventUpdateRequestDTO.getUser().getId();
         User newUser = userRepository.getReferenceById(idUser);
 
-
-        Event updatedEvent = eventRepository.findById(eventId).orElseThrow(() -> new Exception("La entrevista no existe"));
+        Event updatedEvent = findById(eventId);
         modelMapper.map(eventUpdateRequestDTO, Event.class);
 
         updatedEvent.setDateEvent(eventUpdateRequestDTO.getDateEvent());
@@ -112,18 +117,15 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public void deleteEvent(Long id) {
-        Event entity = eventRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Evento no encontrado con id: " + id));
-        if (entity == null) {
-            throw new EntityNotFoundException("Evento no encontrado con id: " + id);
-        }
+    public void deleteEvent(Long id) throws Exception {
+        Event entity = findById(id);
         entity.setActive(false);
         eventRepository.save(entity);
     }
 
     @Override
     public Event findById(Long id) throws Exception {
-        return eventRepository.findById(id).orElseThrow(() -> new Exception("Evento no encontrado"));
+        return eventRepository.findById(id).orElseThrow(() -> new InvalidResourceException("Evento no encontrado con id: " + id));
     }
 
     @Override

@@ -60,7 +60,7 @@ public class RolController {
 
     //Eliminar Rol por id
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Event> delete(@PathVariable Long id) {
+    public ResponseEntity<Event> delete(@PathVariable Long id) throws Exception {
         rolService.deleteRol(id);
         return ResponseEntity.noContent().build();
     }
