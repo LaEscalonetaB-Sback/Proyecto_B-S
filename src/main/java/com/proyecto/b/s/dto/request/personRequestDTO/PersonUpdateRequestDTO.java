@@ -1,6 +1,7 @@
-package com.proyecto.b.s.dto.request;
+package com.proyecto.b.s.dto.request.personRequestDTO;
 
 
+import com.proyecto.b.s.dto.request.*;
 import lombok.Data;
 
 import java.util.List;

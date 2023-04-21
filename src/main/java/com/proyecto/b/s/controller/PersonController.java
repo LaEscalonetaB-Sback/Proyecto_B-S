@@ -1,8 +1,8 @@
 package com.proyecto.b.s.controller;
 
 
-import com.proyecto.b.s.dto.request.PersonRequestDTO;
-import com.proyecto.b.s.dto.request.PersonUpdateRequestDTO;
+import com.proyecto.b.s.dto.request.personRequestDTO.PersonRequestDTO;
+import com.proyecto.b.s.dto.request.personRequestDTO.PersonUpdateRequestDTO;
 
 import com.proyecto.b.s.dto.response.PersonResponseDTO;
 import com.proyecto.b.s.entity.Person;

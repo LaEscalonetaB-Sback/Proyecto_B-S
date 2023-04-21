@@ -1,11 +1,9 @@
-package com.proyecto.b.s.dto.request;
-
+package com.proyecto.b.s.dto.request.searchRequestDTO;
 
 import lombok.Data;
 
 import java.time.LocalDate;
 import java.util.List;
-
 
 //Lo que recibo del front
 @Data
@@ -19,10 +17,9 @@ public class SearchRequestDTO {
     private String vacancies; //vacantes
     private String observations; //observaciones
     private boolean active;
-    private SeniorityRequestDTO seniority;
-    private RolRequestDTO rol;
-    private ClientRequestDTO client;
+    private SeniorityForSearchRequestDTO seniority;
+    private RolForSearchRequestDTO rol;
+    private ClientForSearchRequestDTO client;
     private List<StateSearchRequestDTO> stateSearch;
-    private List<SkillRequestDTO> skills;
-
+    private List<SkillForSearchRequestDTO> skills;
 }

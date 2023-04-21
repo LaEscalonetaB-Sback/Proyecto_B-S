@@ -1,14 +1,17 @@
-package com.proyecto.b.s.dto.response;
+package com.proyecto.b.s.dto.response.eventResponseDTO;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.List;
 
-
-//Lo que le envio de respuesta al front
+//Lo que recibo del front
 @Data
-public class SearchResponseDTO {
+@Getter
+@Setter
+public class SearchForEventResponseDTO {
     private Long id;
     private String linkJb;
     private LocalDate dateOpening; //fechaApertura
@@ -19,10 +22,9 @@ public class SearchResponseDTO {
     private String vacancies; //vacantes
     private String observations; //observaciones
     private boolean active;
-    private SeniorityResponseDTO seniority;
-    private RolResponseDTO rol;
-    private ClientResponseDTO client;
-    private List<StateSearchResponseDTO> stateSearch;
-    private List<SkillResponseDTO> skills;
-
+    private SeniorityForEventResponseDTO seniority;
+    private RolForEventResponseDTO rol;
+    private ClientForEventResponseDTO client;
+    private List<StateSearchForEventResponseDTO> stateSearch;
+    private List<SkillForEventResponseDTO> skills;
 }
