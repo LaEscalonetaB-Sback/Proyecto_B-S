@@ -21,5 +21,6 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
             @Param("name") String name,
             @Param("cuit") Integer cuit);
 
-
+    /*@Query("SELECT CASE WHEN COUNT(c) > 0 THEN true ELSE false END FROM Client c WHERE c.name = :name")
+    boolean existsByName(@Param("name") String name);*/
 }

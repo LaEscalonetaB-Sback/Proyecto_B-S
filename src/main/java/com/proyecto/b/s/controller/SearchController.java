@@ -36,11 +36,7 @@ public class SearchController {
             @RequestParam(required = false) List<String> skills) {
         List<SearchResponseDTO> search = searchService.listSearch(client, rol, state, seniority, skills);
 
-        if (search.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.ok(search);
-        }
+        return ResponseEntity.ok(search);
     }
 
     //Encuentra busqueda por id
