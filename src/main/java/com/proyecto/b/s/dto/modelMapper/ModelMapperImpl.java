@@ -4,6 +4,8 @@ import com.proyecto.b.s.dto.request.*;
 import com.proyecto.b.s.dto.request.eventRequestDTO.EventOptionForEventRequestDTO;
 import com.proyecto.b.s.dto.request.eventRequestDTO.EventRequestDTO;
 import com.proyecto.b.s.dto.request.eventRequestDTO.EventUpdateRequestDTO;
+import com.proyecto.b.s.dto.request.personRequestDTO.PersonRequestDTO;
+import com.proyecto.b.s.dto.request.personRequestDTO.PersonUpdateRequestDTO;
 import com.proyecto.b.s.dto.request.searchRequestDTO.SearchRequestDTO;
 import com.proyecto.b.s.dto.response.*;
 import com.proyecto.b.s.dto.response.eventResponseDTO.EventOptionForEventResponseDTO;

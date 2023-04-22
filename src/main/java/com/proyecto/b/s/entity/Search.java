@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -20,25 +22,43 @@ public class Search {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String linkJb; //
+
     private LocalDate dateOpening; //fechaApertura
+
     private String dayJob; //jornadaTrabajo
+
     private String modalityHiring; //modalidadTrabajo
+
     private String position; //posicion
+
     private String remuneration; //remuneracion
+
+    @NotEmpty(message = "Vacancie cannot be null")
     private String vacancies; //vacantes
+
     private String observations; //observaciones
+
     private boolean active = true;
+
     @ManyToMany(mappedBy = "search")
     @JsonBackReference
     private List<Event> events;
-    @OneToOne(cascade = {CascadeType.ALL})
+
+    @NotNull(message = "Seniority cannot be null")
+    @OneToOne()
     private Seniority seniority;
-    @OneToOne(cascade = {CascadeType.ALL})
+
+    @NotNull(message = "Rol cannot be null")
+    @OneToOne()
     private Rol rol;
-    @OneToOne(cascade = {CascadeType.ALL})
+
+    @NotNull(message = "Client cannot be null")
+    @OneToOne()
     private Client client;
-    @ManyToMany(cascade = {CascadeType.ALL})
+
+    @ManyToMany()
     @JoinTable(
             name = "search_state_search",
             joinColumns = @JoinColumn(name = "search_id"),
@@ -46,7 +66,9 @@ public class Search {
     )
     @JsonManagedReference
     private List<StateSearch> stateSearch;
-    @ManyToMany(cascade = {CascadeType.ALL})
+
+    @NotNull(message = "Skill cannot be null")
+    @ManyToMany()
     @JoinTable(
             name = "search_skill",
             joinColumns = @JoinColumn(name = "search_id"),
