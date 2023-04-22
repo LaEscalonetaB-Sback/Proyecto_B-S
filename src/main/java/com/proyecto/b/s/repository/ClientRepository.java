@@ -1,7 +1,6 @@
 package com.proyecto.b.s.repository;
 
 import com.proyecto.b.s.entity.Client;
-import com.proyecto.b.s.entity.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

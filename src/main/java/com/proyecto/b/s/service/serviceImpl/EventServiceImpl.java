@@ -5,18 +5,14 @@ import com.proyecto.b.s.dto.request.eventRequestDTO.EventRequestDTO;
 import com.proyecto.b.s.dto.request.eventRequestDTO.EventUpdateRequestDTO;
 import com.proyecto.b.s.dto.request.eventRequestDTO.SearchForEventRequestDTO;
 import com.proyecto.b.s.dto.response.eventResponseDTO.EventResponseDTO;
-import com.proyecto.b.s.entity.Event;
-import com.proyecto.b.s.entity.Person;
-import com.proyecto.b.s.entity.Search;
-import com.proyecto.b.s.entity.User;
-import com.proyecto.b.s.exception.InvalidResourceException;
-import com.proyecto.b.s.repository.*;
+import com.proyecto.b.s.entity.*;
+import com.proyecto.b.s.repository.EventRepository;
+import com.proyecto.b.s.repository.PersonRepository;
+import com.proyecto.b.s.repository.SearchRepository;
+import com.proyecto.b.s.repository.UserRepository;
 import com.proyecto.b.s.service.service.EventService;
-import com.proyecto.b.s.service.service.InterviewService;
-import com.proyecto.b.s.service.service.SearchService;
 import com.proyecto.b.s.utils.HelperValidator;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -31,19 +27,11 @@ public class EventServiceImpl implements EventService {
     private final PersonRepository personRepository;
     private final SearchRepository searchRepository;
     private final EventRepository eventRepository;
-    @Autowired
-    private ModelMapperInterface modelMapperInterface;
-    @Autowired
-    private ModelMapper modelMapper;
-
-    @Autowired
-    private SearchService service;
-
-    @Autowired
-    private InterviewService interviewService;
+    private final ModelMapperInterface modelMapperInterface;
+    private final ModelMapper modelMapper;
 
 
-    public EventServiceImpl(UserRepository userRepository, PersonRepository personRepository, SearchRepository searchRepository, InterviewRepository interviewRepository, EventRepository eventRepository,
+    public EventServiceImpl(UserRepository userRepository, PersonRepository personRepository, SearchRepository searchRepository, EventRepository eventRepository,
                             ModelMapperInterface modelMapperInterface,
                             ModelMapper modelMapper) {
         this.userRepository = userRepository;
@@ -75,6 +63,13 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public EventResponseDTO saveEvent(EventRequestDTO eventRequestDTO) {
+        Event newEvent = getEvent(eventRequestDTO);
+        eventRepository.save(newEvent);
+
+        return modelMapperInterface.eventToEventResponseDto(newEvent);
+    }
+
+    private Event getEvent(EventRequestDTO eventRequestDTO) {
         Long idPerson = eventRequestDTO.getPerson().getId();
         Person newPerson = personRepository.getReferenceById(idPerson);
 
@@ -93,14 +88,18 @@ public class EventServiceImpl implements EventService {
         newEvent.setUser(newUser);
         newEvent.setSearch(idSearches);
 
-        eventRepository.save(newEvent);
-
-        return modelMapperInterface.eventToEventResponseDto(newEvent);
+        return newEvent;
     }
 
     @Override
     public EventResponseDTO updateEvent(Long eventId, EventUpdateRequestDTO eventUpdateRequestDTO) throws Exception {
+        Event updatedEvent = getUpdatedEvent(eventId, eventUpdateRequestDTO);
+        eventRepository.save(updatedEvent);
 
+        return modelMapperInterface.eventToEventResponseDto(updatedEvent);
+    }
+
+    private Event getUpdatedEvent(Long eventId, EventUpdateRequestDTO eventUpdateRequestDTO) throws Exception {
         Long idUser = eventUpdateRequestDTO.getUser().getId();
         User newUser = userRepository.getReferenceById(idUser);
 
@@ -110,10 +109,7 @@ public class EventServiceImpl implements EventService {
         updatedEvent.setDateEvent(eventUpdateRequestDTO.getDateEvent());
         updatedEvent.setUser(newUser);
 
-        eventRepository.save(updatedEvent);
-
-        return modelMapperInterface.eventToEventResponseDto(updatedEvent);
-
+        return updatedEvent;
     }
 
     @Override
@@ -125,7 +121,8 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public Event findById(Long id) throws Exception {
-        return eventRepository.findById(id).orElseThrow(() -> new InvalidResourceException("Evento no encontrado con id: " + id));
+
+        return eventRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Evento no encontrada con id: " + id));
     }
 
     @Override

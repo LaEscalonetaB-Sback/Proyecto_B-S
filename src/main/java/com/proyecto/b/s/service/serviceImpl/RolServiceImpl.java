@@ -9,22 +9,16 @@ import com.proyecto.b.s.repository.RolRepository;
 import com.proyecto.b.s.service.service.RolService;
 import com.proyecto.b.s.utils.HelperValidator;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class RolServiceImpl implements RolService {
-    @Autowired
-    private RolRepository rolRepository;
-    @Autowired
-    private ModelMapperInterface modelMapperInterface;
-
-    @Autowired
-    private ModelMapper modelMapper;
+    private final RolRepository rolRepository;
+    private final ModelMapperInterface modelMapperInterface;
+    private final ModelMapper modelMapper;
 
     public RolServiceImpl(RolRepository rolRepository, ModelMapperInterface modelMapperInterface, ModelMapper modelMapper) {
         this.rolRepository = rolRepository;
@@ -56,11 +50,12 @@ public class RolServiceImpl implements RolService {
     public RolResponseDTO saveRol(RolRequestDTO rolRequestDTO) {
         Rol newRol = modelMapperInterface.rolReqDTOToRol(rolRequestDTO);
         rolRepository.save(newRol);
+
         return modelMapperInterface.rolToRolResponseDTO(newRol);
     }
 
     @Override
-    public RolResponseDTO updateRol(Long id, RolRequestDTO rolRequestDTO) throws Exception{
+    public RolResponseDTO updateRol(Long id, RolRequestDTO rolRequestDTO) throws Exception {
         Rol updateRol = findById(id);
         modelMapper.map(rolRequestDTO, updateRol);
         rolRepository.save(updateRol);
@@ -69,7 +64,7 @@ public class RolServiceImpl implements RolService {
     }
 
     @Override
-    public void deleteRol(Long id) throws Exception{
+    public void deleteRol(Long id) throws Exception {
         Rol entity = findById(id);
         entity.setActive(false);
         rolRepository.save(entity);

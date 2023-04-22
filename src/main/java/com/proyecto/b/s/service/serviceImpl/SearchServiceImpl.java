@@ -11,10 +11,8 @@ import com.proyecto.b.s.repository.*;
 import com.proyecto.b.s.service.service.SearchService;
 import com.proyecto.b.s.utils.HelperValidator;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,10 +25,8 @@ public class SearchServiceImpl implements SearchService {
     private final ClientRepository clientRepository;
     private final StateSearchRepository stateSearchRepository;
     private final SkillRepository skillRepository;
-    @Autowired
-    private ModelMapperInterface modelMapperInterface;
-    @Autowired
-    private ModelMapper modelMapper;
+    private final ModelMapperInterface modelMapperInterface;
+    private final ModelMapper modelMapper;
 
     public SearchServiceImpl(SearchRepository searchRepository,
                              SeniorityRepository seniorityRepository,
@@ -71,6 +67,13 @@ public class SearchServiceImpl implements SearchService {
 
     @Override
     public SearchResponseDTO saveSearch(SearchRequestDTO searchRequestDto) {
+        Search search = getSearch(searchRequestDto);
+
+        Search savedSearch = searchRepository.save(search);
+        return modelMapperInterface.searchToSearchResponseDTO(savedSearch);
+    }
+
+    private Search getSearch(SearchRequestDTO searchRequestDto) {
         String seniorityName = searchRequestDto.getSeniority().getName();
         Seniority seniorityEntity = seniorityRepository.findByName(seniorityName);
 
@@ -102,8 +105,7 @@ public class SearchServiceImpl implements SearchService {
         search.setStateSearch(stateSearches);
         search.setSkills(skills);
 
-        Search savedSearch = searchRepository.save(search);
-        return modelMapperInterface.searchToSearchResponseDTO(savedSearch);
+        return search;
     }
 
     @Override

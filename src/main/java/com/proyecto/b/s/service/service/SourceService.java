@@ -12,9 +12,9 @@ public interface SourceService {
 
     Source findById(Long id) throws Exception;
 
-    SourceResponseDTO update(Long searchId, SourceRequestDTO sourceRequestDTO) throws EntityNotFoundException;
+    SourceResponseDTO update(Long searchId, SourceRequestDTO sourceRequestDTO) throws Exception;
 
-    void delete(Long id);
+    void delete(Long id) throws Exception;
 
     List<SourceResponseDTO> list();
 

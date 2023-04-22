@@ -9,22 +9,16 @@ import com.proyecto.b.s.repository.IndustryRepository;
 import com.proyecto.b.s.service.service.IndustryService;
 import com.proyecto.b.s.utils.HelperValidator;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class IndustryServiceImpl implements IndustryService {
-    @Autowired
-    private IndustryRepository industryRepository;
-    @Autowired
-    private ModelMapperInterface modelMapperInterface;
-
-    @Autowired
-    private ModelMapper modelMapper;
+    private final IndustryRepository industryRepository;
+    private final ModelMapperInterface modelMapperInterface;
+    private final ModelMapper modelMapper;
 
     public IndustryServiceImpl(IndustryRepository industryRepository, ModelMapperInterface modelMapperInterface, ModelMapper modelMapper) {
         this.industryRepository = industryRepository;
@@ -70,7 +64,7 @@ public class IndustryServiceImpl implements IndustryService {
     }
 
     @Override
-    public void deleteIndustry(Long id) throws Exception{
+    public void deleteIndustry(Long id) throws Exception {
         Industry entity = findById(id);
         entity.setActive(false);
         industryRepository.save(entity);

@@ -4,14 +4,10 @@ import com.proyecto.b.s.dto.request.IndustryRequestDTO;
 import com.proyecto.b.s.dto.response.IndustryResponseDTO;
 import com.proyecto.b.s.entity.Event;
 import com.proyecto.b.s.entity.Industry;
-import com.proyecto.b.s.repository.IndustryRepository;
 import com.proyecto.b.s.service.service.IndustryService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.SQLOutput;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,13 +15,9 @@ import java.util.Optional;
 @RequestMapping("/bs/industry")
 @CrossOrigin("*")
 public class IndustryController {
-    @Autowired
     private final IndustryService industryService;
-    @Autowired
-    private final IndustryRepository industryRepository;
 
-    public IndustryController(IndustryService industryService, IndustryRepository industryRepository) {
-        this.industryRepository = industryRepository;
+    public IndustryController(IndustryService industryService) {
         this.industryService = industryService;
     }
 

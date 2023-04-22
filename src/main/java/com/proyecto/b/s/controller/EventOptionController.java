@@ -5,9 +5,7 @@ import com.proyecto.b.s.dto.response.eventResponseDTO.EventOptionForEventRespons
 import com.proyecto.b.s.entity.Answer;
 import com.proyecto.b.s.entity.Event;
 import com.proyecto.b.s.entity.EventOption;
-import com.proyecto.b.s.repository.EventOptionRepository;
 import com.proyecto.b.s.service.service.EventOptionService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,12 +17,9 @@ import java.util.Optional;
 @CrossOrigin("*")
 public class EventOptionController {
     private final EventOptionService eventOptionService;
-    @Autowired
-    private EventOptionRepository eventOptionRepository;
 
-    public EventOptionController(EventOptionService eventOptionService, EventOptionRepository eventOptionRepository) {
+    public EventOptionController(EventOptionService eventOptionService) {
         this.eventOptionService = eventOptionService;
-        this.eventOptionRepository = eventOptionRepository;
     }
 
     //CRUD
@@ -70,7 +65,7 @@ public class EventOptionController {
     // TODO: 11/4/2023 eliminar eliminar evento por id
     //Eliminar Evento por id
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Event> delete(@PathVariable Long id)throws Exception {
+    public ResponseEntity<Event> delete(@PathVariable Long id) throws Exception {
         eventOptionService.deleteEventOption(id);
         return ResponseEntity.noContent().build();
     }

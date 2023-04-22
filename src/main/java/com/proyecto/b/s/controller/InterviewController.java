@@ -39,6 +39,7 @@ public class InterviewController {
     @GetMapping("/{id}")
     public ResponseEntity<Interview> findOne(@PathVariable Long id) throws Exception {
         Optional<Interview> SearchOpt = Optional.ofNullable(interviewService.findById(id));
+
         return SearchOpt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
@@ -46,16 +47,15 @@ public class InterviewController {
     @PostMapping("/create")
     public ResponseEntity<InterviewResponseDTO> create(@RequestBody InterviewRequestDTO interviewRequestDto) {
         InterviewResponseDTO result = interviewService.saveInterview(interviewRequestDto);
+
         return ResponseEntity.ok(result);
     }
 
     //Actualizar entrevista
     @PutMapping("/update/{id}")
     public ResponseEntity<InterviewResponseDTO> update(@PathVariable Long id, @RequestBody InterviewRequestDTO interviewRequestDto) throws Exception {
-        if (!interviewService.existById(id)) {
-            return ResponseEntity.notFound().build();
-        }
         InterviewResponseDTO result = interviewService.updateInterview(id, interviewRequestDto);
+
         return ResponseEntity.ok(result);
     }
 
@@ -63,6 +63,7 @@ public class InterviewController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Interview> delete(@PathVariable Long id) throws Exception {
         interviewService.deleteInterview(id);
+
         return ResponseEntity.noContent().build();
     }
 }

@@ -11,10 +11,8 @@ import com.proyecto.b.s.repository.PersonRepository;
 import com.proyecto.b.s.service.service.PersonService;
 import com.proyecto.b.s.utils.HelperValidator;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -22,24 +20,25 @@ import java.util.stream.Collectors;
 @Service
 
 public class PersonServiceImpl implements PersonService {
+    private final PersonRepository personRepository;
+    private final ModelMapperInterface modelMapperInterface;
+    private final ModelMapper modelMapper;
 
-    @Autowired
-    private PersonRepository personRepository;
-
-    @Autowired
-    private ModelMapperInterface modelMapperInterface;
-
-    @Autowired
-    private ModelMapper modelMapper;
-
-    public PersonServiceImpl(PersonRepository personRepository, ModelMapperInterface modelMapperInterface) {
+    public PersonServiceImpl(PersonRepository personRepository, ModelMapperInterface modelMapperInterface, ModelMapper modelMapper) {
         this.personRepository = personRepository;
         this.modelMapperInterface = modelMapperInterface;
+        this.modelMapper = modelMapper;
     }
 
     @Override
     public Person create(PersonRequestDTO personRequestDto) {
+        existPerson(personRequestDto);
+        Person person = modelMapperInterface.personReqDtoToPerson(personRequestDto);
 
+        return personRepository.save(person);
+    }
+
+    private void existPerson(PersonRequestDTO personRequestDto) {
         Optional<Person> existingPerson = personRepository.findByDniOrCuilOrEmailOrLinkedin(
                 personRequestDto.getDni() != null ? personRequestDto.getDni() : "",
                 personRequestDto.getCuil() != null ? personRequestDto.getCuil() : "",
@@ -50,10 +49,6 @@ public class PersonServiceImpl implements PersonService {
         if (existingPerson.isPresent()) {
             throw new RuntimeException("Ya existe una persona con el mismo DNI, CUIL, correo electrónico o LinkedIn: " + existingPerson.get().getName() + " " + existingPerson.get().getLastName());
         }
-
-
-        Person person = modelMapperInterface.personReqDtoToPerson(personRequestDto);
-        return personRepository.save(person);
     }
 
     @Override
@@ -83,8 +78,8 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public Person obtainPersonId(Long id) throws Exception {
-        return personRepository.findById(id).orElseThrow(() -> new InvalidResourceException("Persona no encontrada -" + this.getClass().getName()));
+    public Person obtainPersonId(Long id) {
+        return personRepository.findById(id).orElseThrow(() -> new InvalidResourceException("Persona no encontrada con el id: " + id));
     }
 
     @Override
@@ -92,8 +87,8 @@ public class PersonServiceImpl implements PersonService {
         Person person = obtainPersonId(Id);
         modelMapperInterface.personUpdateReqDtoToPerson(personRequestDto);
         mapPerson(personRequestDto, person);
-
         personRepository.save(person);
+
         return modelMapperInterface.personToPersonResponseDTO(person);
     }
 
@@ -109,5 +104,4 @@ public class PersonServiceImpl implements PersonService {
         personRepository.save(person);
         modelMapperInterface.personToPersonResponseDTO(person);
     }
-
 }

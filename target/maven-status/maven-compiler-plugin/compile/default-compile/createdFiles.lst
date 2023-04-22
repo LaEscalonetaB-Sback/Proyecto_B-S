@@ -11,6 +11,7 @@ com\proyecto\b\s\dto\request\eventRequestDTO\SkillForEventRequestDTO.class
 com\proyecto\b\s\dto\response\eventResponseDTO\SourceForEventResponseDTO.class
 com\proyecto\b\s\dto\request\eventRequestDTO\SourceForEventRequestDTO.class
 com\proyecto\b\s\dto\response\eventResponseDTO\EventOptionForEventResponseDTO.class
+com\proyecto\b\s\utils\HelperValidator.class
 com\proyecto\b\s\dto\request\eventRequestDTO\StateSearchForEventRequestDTO.class
 com\proyecto\b\s\entity\StateSearch.class
 com\proyecto\b\s\dto\request\searchRequestDTO\SeniorityForSearchRequestDTO.class
@@ -72,6 +73,7 @@ com\proyecto\b\s\dto\response\eventResponseDTO\SearchForEventResponseDTO.class
 com\proyecto\b\s\service\serviceImpl\UserServiceImpl.class
 com\proyecto\b\s\entity\Search$SearchBuilder.class
 com\proyecto\b\s\repository\SeniorityRepository.class
+com\proyecto\b\s\exception\InvalidResourceException.class
 com\proyecto\b\s\service\service\SkillService.class
 com\proyecto\b\s\controller\IndustryController.class
 com\proyecto\b\s\dto\request\eventRequestDTO\PersonForEventRequestDTO.class

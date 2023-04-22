@@ -12,9 +12,9 @@ public interface SkillService {
 
     Skill findById(Long id) throws Exception;
 
-    SkillResponseDTO update(Long searchId, SkillRequestDTO skillRequestDto) throws EntityNotFoundException;
+    SkillResponseDTO update(Long searchId, SkillRequestDTO skillRequestDto) throws Exception;
 
-    void delete(Long id);
+    void delete(Long id) throws Exception;
 
     List<SkillResponseDTO> list();
 

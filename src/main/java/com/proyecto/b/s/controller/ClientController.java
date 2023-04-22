@@ -15,9 +15,7 @@ import java.util.List;
 @RequestMapping("/bs/client")
 @CrossOrigin("*")
 public class ClientController {
-
     ClientService clientService;
-
     ClientRepository clientRepository;
 
     public ClientController(ClientService clientService, ClientRepository clientRepository) {
@@ -25,9 +23,6 @@ public class ClientController {
         this.clientRepository = clientRepository;
     }
 
-    /**
-     * creamos cliente
-     **/
     @PostMapping("/create")
     public ResponseEntity<Client> create(@RequestBody ClientRequestDTO clientRequestDto) throws Exception {
         Client result = clientService.saveClient(clientRequestDto);
@@ -43,7 +38,6 @@ public class ClientController {
         List<ClientResponseDTO> clients = clientService.searchClient(name, cuit);
         return ResponseEntity.ok(clients);
     }
-
 
     //Eliminar por id
     @DeleteMapping("/delete/{id}")

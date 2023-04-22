@@ -1,5 +1,4 @@
 package com.proyecto.b.s.controller;
-//busqueda -> search
 
 import com.proyecto.b.s.dto.request.searchRequestDTO.SearchRequestDTO;
 import com.proyecto.b.s.dto.response.searchResponseDTO.SearchResponseDTO;
@@ -8,7 +7,6 @@ import com.proyecto.b.s.service.service.SearchService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,17 +31,14 @@ public class SearchController {
             @RequestParam(required = false) List<String> skills) {
         List<SearchResponseDTO> search = searchService.listSearch(client, rol, state, seniority, skills);
 
-        if (search.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.ok(search);
-        }
+        return ResponseEntity.ok(search);
     }
 
     //Encuentra busqueda por id
     @GetMapping("/{id}")
     public ResponseEntity<Search> findOne(@PathVariable Long id) throws Exception {
         Optional<Search> SearchOpt = Optional.ofNullable(searchService.findById(id));
+
         return SearchOpt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
@@ -51,16 +46,15 @@ public class SearchController {
     @PostMapping("/create")
     public ResponseEntity<SearchResponseDTO> create(@RequestBody SearchRequestDTO searchRequestDto) {
         SearchResponseDTO result = searchService.saveSearch(searchRequestDto);
+
         return ResponseEntity.ok(result);
     }
 
     //Actualizar busqueda
     @PutMapping("/update/{searchId}")
     public ResponseEntity<SearchResponseDTO> update(@PathVariable Long searchId, @RequestBody SearchRequestDTO searchRequestDto) throws Exception {
-        if (!searchService.existById(searchId)) {
-            return ResponseEntity.notFound().build();
-        }
         SearchResponseDTO result = searchService.update(searchId, searchRequestDto);
+
         return ResponseEntity.ok(result);
     }
 
@@ -68,6 +62,7 @@ public class SearchController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Search> delete(@PathVariable Long id) throws Exception {
         searchService.deleteSearch(id);
+
         return ResponseEntity.noContent().build();
     }
 }
