@@ -2,8 +2,8 @@ package com.proyecto.b.s.service.serviceImpl;
 
 
 import com.proyecto.b.s.dto.modelMapper.ModelMapperInterface;
-import com.proyecto.b.s.dto.request.PersonRequestDTO;
-import com.proyecto.b.s.dto.request.PersonUpdateRequestDTO;
+import com.proyecto.b.s.dto.request.personRequestDTO.PersonRequestDTO;
+import com.proyecto.b.s.dto.request.personRequestDTO.PersonUpdateRequestDTO;
 import com.proyecto.b.s.dto.response.PersonResponseDTO;
 import com.proyecto.b.s.entity.Person;
 import com.proyecto.b.s.exception.InvalidResourceException;
@@ -31,11 +31,11 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public Person create(PersonRequestDTO personRequestDto) {
+    public PersonResponseDTO create(PersonRequestDTO personRequestDto) {
         existPerson(personRequestDto);
         Person person = modelMapperInterface.personReqDtoToPerson(personRequestDto);
-
-        return personRepository.save(person);
+        Person personSave = personRepository.save(person);
+        return modelMapperInterface.personToPersonResponseDTO(personSave);
     }
 
     private void existPerson(PersonRequestDTO personRequestDto) {
@@ -78,13 +78,13 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public Person obtainPersonId(Long id) {
+    public Person findById(Long id) {
         return personRepository.findById(id).orElseThrow(() -> new InvalidResourceException("Persona no encontrada con el id: " + id));
     }
 
     @Override
     public PersonResponseDTO update(Long Id, PersonUpdateRequestDTO personRequestDto) throws Exception {
-        Person person = obtainPersonId(Id);
+        Person person = findById(Id);
         modelMapperInterface.personUpdateReqDtoToPerson(personRequestDto);
         mapPerson(personRequestDto, person);
         personRepository.save(person);
@@ -99,7 +99,7 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public void delete(Long id) throws Exception {
-        Person person = obtainPersonId(id);
+        Person person = findById(id);
         person.setActive(false);
         personRepository.save(person);
         modelMapperInterface.personToPersonResponseDTO(person);

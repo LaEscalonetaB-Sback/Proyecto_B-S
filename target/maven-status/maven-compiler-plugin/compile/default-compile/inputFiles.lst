@@ -12,7 +12,6 @@ C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\entity\User
 C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\service\serviceImpl\SourceServiceImpl.java
 C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\controller\PersonController.java
 C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\response\eventResponseDTO\SeniorityForEventResponseDTO.java
-C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\request\StatePersonRequestDTO.java
 C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\entity\Skill.java
 C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\service\serviceImpl\ClientServiceImpl.java
 C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\request\ClientRequestDTO.java
@@ -66,6 +65,7 @@ C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\service\ser
 C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\request\eventRequestDTO\InterviewForEventRequestDTO.java
 C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\service\service\IndustryService.java
 C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\service\service\SkillService.java
+C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\request\personRequestDTO\PersonUpdateRequestDTO.java
 C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\request\SourceRequestDTO.java
 C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\request\IndustryRequestDTO.java
 C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\repository\InterviewRepository.java
@@ -77,20 +77,22 @@ C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\request
 C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\request\eventRequestDTO\EventOptionForEventRequestDTO.java
 C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\request\eventRequestDTO\SeniorityForEventRequestDTO.java
 C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\service\service\StateService.java
-C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\request\PersonRequestDTO.java
+C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\request\personRequestDTO\StatePersonRequestDTO.java
 C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\service\serviceImpl\IndustryServiceImpl.java
 C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\Application.java
 C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\request\searchRequestDTO\RolForSearchRequestDTO.java
 C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\response\StatePersonResponseDTO.java
 C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\service\serviceImpl\InterviewServiceImpl.java
 C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\controller\ClientController.java
-C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\request\PersonUpdateRequestDTO.java
+C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\request\personRequestDTO\IndustryForPersonRequestDTO.java
+C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\request\personRequestDTO\SkillForPersonRequestDTO.java
 C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\response\IndustryResponseDTO.java
 C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\response\eventResponseDTO\PersonForEventResponseDTO.java
 C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\response\InterviewResponseDTO.java
 C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\repository\UserRepository.java
 C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\request\eventRequestDTO\SkillForEventRequestDTO.java
 C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\entity\Client.java
+C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\request\personRequestDTO\RolForPersonRequestDTO.java
 C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\controller\UserController.java
 C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\repository\EventOptionRepository.java
 C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\repository\IndustryRepository.java
@@ -112,6 +114,7 @@ C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\exception\I
 C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\entity\Interview.java
 C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\service\service\PersonService.java
 C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\response\eventResponseDTO\SearchForEventResponseDTO.java
+C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\request\personRequestDTO\SourceForPersonRequestDTO.java
 C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\response\eventResponseDTO\StatePersonForEventResponseDTO.java
 C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\request\eventRequestDTO\PersonForEventRequestDTO.java
 C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\request\searchRequestDTO\StateSearchRequestDTO.java
@@ -139,5 +142,6 @@ C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\respons
 C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\request\eventRequestDTO\EventUpdateRequestDTO.java
 C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\request\eventRequestDTO\StateSearchForEventRequestDTO.java
 C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\response\SkillResponseDTO.java
+C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\request\personRequestDTO\PersonRequestDTO.java
 C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\response\eventResponseDTO\InterviewForEventResponseDTO.java
 C:\Users\jcsingh\Desktop\Proyecto_B-S\src\main\java\com\proyecto\b\s\repository\StateSearchRepository.java

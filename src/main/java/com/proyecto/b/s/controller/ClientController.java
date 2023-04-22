@@ -1,5 +1,4 @@
 package com.proyecto.b.s.controller;
-//Cliente -> Client
 
 import com.proyecto.b.s.dto.request.ClientRequestDTO;
 import com.proyecto.b.s.dto.response.ClientResponseDTO;

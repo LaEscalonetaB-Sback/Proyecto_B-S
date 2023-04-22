@@ -1,8 +1,6 @@
 package com.proyecto.b.s.controller;
 
-
-import com.proyecto.b.s.dto.request.PersonRequestDTO;
-import com.proyecto.b.s.dto.request.PersonUpdateRequestDTO;
+import com.proyecto.b.s.dto.request.personRequestDTO.*;
 import com.proyecto.b.s.dto.response.PersonResponseDTO;
 import com.proyecto.b.s.entity.Person;
 import com.proyecto.b.s.service.service.PersonService;
@@ -41,15 +39,15 @@ public class PersonController {
     //Encontrar por id
     @GetMapping("/{id}")
     public ResponseEntity<Person> findById(@PathVariable Long id) throws Exception {
-        Optional<Person> PersonOpt = Optional.ofNullable(personService.obtainPersonId(id));
+        Optional<Person> PersonOpt = Optional.ofNullable(personService.findById(id));
 
         return PersonOpt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     //Crear busqueda
     @PostMapping("/create")
-    public ResponseEntity<Person> create(@RequestBody @Valid PersonRequestDTO personRequestDto) throws Exception {
-        Person result = personService.create(personRequestDto);
+    public ResponseEntity<PersonResponseDTO> create(@RequestBody @Valid PersonRequestDTO personRequestDto) throws Exception {
+        PersonResponseDTO result = personService.create(personRequestDto);
 
         return ResponseEntity.ok(result);
     }

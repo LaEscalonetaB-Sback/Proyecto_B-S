@@ -44,7 +44,7 @@ public class SearchController {
 
     //Crear busqueda
     @PostMapping("/create")
-    public ResponseEntity<SearchResponseDTO> create(@RequestBody SearchRequestDTO searchRequestDto) {
+    public ResponseEntity<SearchResponseDTO> create(@RequestBody SearchRequestDTO searchRequestDto) throws Exception {
         SearchResponseDTO result = searchService.saveSearch(searchRequestDto);
 
         return ResponseEntity.ok(result);
