@@ -5,12 +5,15 @@ import com.proyecto.b.s.dto.request.eventRequestDTO.EventRequestDTO;
 import com.proyecto.b.s.dto.request.eventRequestDTO.EventUpdateRequestDTO;
 import com.proyecto.b.s.dto.request.eventRequestDTO.SearchForEventRequestDTO;
 import com.proyecto.b.s.dto.response.eventResponseDTO.EventResponseDTO;
-import com.proyecto.b.s.entity.*;
+import com.proyecto.b.s.entity.Event;
+import com.proyecto.b.s.entity.Person;
+import com.proyecto.b.s.entity.Search;
+import com.proyecto.b.s.entity.User;
 import com.proyecto.b.s.repository.EventRepository;
-import com.proyecto.b.s.repository.PersonRepository;
-import com.proyecto.b.s.repository.SearchRepository;
-import com.proyecto.b.s.repository.UserRepository;
 import com.proyecto.b.s.service.service.EventService;
+import com.proyecto.b.s.service.service.PersonService;
+import com.proyecto.b.s.service.service.SearchService;
+import com.proyecto.b.s.service.service.UserService;
 import com.proyecto.b.s.utils.HelperValidator;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -23,20 +26,22 @@ import java.util.stream.Collectors;
 
 @Service
 public class EventServiceImpl implements EventService {
-    private final UserRepository userRepository;
-    private final PersonRepository personRepository;
-    private final SearchRepository searchRepository;
     private final EventRepository eventRepository;
+    private final UserService userService;
+    private final PersonService personService;
+    private final SearchService searchService;
     private final ModelMapperInterface modelMapperInterface;
     private final ModelMapper modelMapper;
 
-
-    public EventServiceImpl(UserRepository userRepository, PersonRepository personRepository, SearchRepository searchRepository, EventRepository eventRepository,
+    public EventServiceImpl(UserService userService,
+                            PersonService personService,
+                            SearchService searchService,
+                            EventRepository eventRepository,
                             ModelMapperInterface modelMapperInterface,
                             ModelMapper modelMapper) {
-        this.userRepository = userRepository;
-        this.personRepository = personRepository;
-        this.searchRepository = searchRepository;
+        this.userService = userService;
+        this.personService = personService;
+        this.searchService = searchService;
         this.eventRepository = eventRepository;
         this.modelMapperInterface = modelMapperInterface;
         this.modelMapper = modelMapper;
@@ -62,24 +67,24 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public EventResponseDTO saveEvent(EventRequestDTO eventRequestDTO) {
+    public EventResponseDTO saveEvent(EventRequestDTO eventRequestDTO) throws Exception {
         Event newEvent = getEvent(eventRequestDTO);
         eventRepository.save(newEvent);
 
         return modelMapperInterface.eventToEventResponseDto(newEvent);
     }
 
-    private Event getEvent(EventRequestDTO eventRequestDTO) {
+    private Event getEvent(EventRequestDTO eventRequestDTO) throws Exception {
         Long idPerson = eventRequestDTO.getPerson().getId();
-        Person newPerson = personRepository.getReferenceById(idPerson);
+        Person newPerson = personService.findById(idPerson);
 
         Long idUser = eventRequestDTO.getUser().getId();
-        User newUser = userRepository.getReferenceById(idUser);
+        User newUser = userService.findById(idUser);
 
         List<SearchForEventRequestDTO> ids = eventRequestDTO.getSearch();
         List<Search> idSearches = new ArrayList<>();
         for (SearchForEventRequestDTO aux : ids) {
-            Search search = searchRepository.getReferenceById(aux.getId());
+            Search search = searchService.findById(aux.getId());
             idSearches.add(search);
         }
 
@@ -101,7 +106,7 @@ public class EventServiceImpl implements EventService {
 
     private Event getUpdatedEvent(Long eventId, EventUpdateRequestDTO eventUpdateRequestDTO) throws Exception {
         Long idUser = eventUpdateRequestDTO.getUser().getId();
-        User newUser = userRepository.getReferenceById(idUser);
+        User newUser = userService.findById(idUser);
 
         Event updatedEvent = findById(eventId);
         modelMapper.map(eventUpdateRequestDTO, Event.class);

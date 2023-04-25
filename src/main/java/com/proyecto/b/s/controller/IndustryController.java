@@ -25,6 +25,7 @@ public class IndustryController {
     //Lista de industrias
     @GetMapping("/list")
     public ResponseEntity<List<IndustryResponseDTO>> findIndustry() {
+
         return ResponseEntity.ok(industryService.listIndustry());
     }
 
@@ -32,6 +33,7 @@ public class IndustryController {
     @GetMapping("/{id}")
     public ResponseEntity<Industry> findOne(@PathVariable Long id) throws Exception {
         Optional<Industry> SearchOpt = Optional.ofNullable(industryService.findById(id));
+
         return SearchOpt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
@@ -39,16 +41,15 @@ public class IndustryController {
     @PostMapping("/create")
     public ResponseEntity<IndustryResponseDTO> create(@RequestBody IndustryRequestDTO industryRequestDto) {
         IndustryResponseDTO result = industryService.saveIndustry(industryRequestDto);
+
         return ResponseEntity.ok(result);
     }
 
     //Actualizar Industry
     @PutMapping("/update/{industryId}")
     public ResponseEntity<IndustryResponseDTO> update(@PathVariable Long industryId, @RequestBody IndustryRequestDTO industryRequestDTO) throws Exception {
-        if (!industryService.existById(industryId)) {
-            return ResponseEntity.notFound().build();
-        }
         IndustryResponseDTO result = industryService.updateIndustry(industryId, industryRequestDTO);
+
         return ResponseEntity.ok(result);
     }
 
@@ -56,6 +57,7 @@ public class IndustryController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Event> delete(@PathVariable Long id) throws Exception {
         industryService.deleteIndustry(id);
+
         return ResponseEntity.noContent().build();
     }
 }

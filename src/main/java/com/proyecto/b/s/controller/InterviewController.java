@@ -1,5 +1,4 @@
 package com.proyecto.b.s.controller;
-//intrevista -> interview
 
 import com.proyecto.b.s.dto.request.InterviewRequestDTO;
 import com.proyecto.b.s.dto.response.InterviewResponseDTO;
@@ -28,11 +27,7 @@ public class InterviewController {
     public ResponseEntity<List<InterviewResponseDTO>> findInterview() {
         List<InterviewResponseDTO> interview = interviewService.listInterview();
 
-        if (interview.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.ok(interview);
-        }
+        return ResponseEntity.ok(interview);
     }
 
     //Encuentra entrevista por id

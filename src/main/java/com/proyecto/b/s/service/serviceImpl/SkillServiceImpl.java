@@ -48,6 +48,7 @@ public class SkillServiceImpl implements SkillService {
     public SkillResponseDTO save(SkillRequestDTO skillRequestDto) {
         Skill skill = modelMapper.map(skillRequestDto, Skill.class);
         skillRepository.save(skill);
+
         return modelMapper.map(skill, SkillResponseDTO.class);
     }
 
@@ -65,6 +66,12 @@ public class SkillServiceImpl implements SkillService {
         skillRepository.save(skill);
 
         return modelMapper.map(skill, SkillResponseDTO.class);
+    }
+
+    @Override
+    public Skill findByName(String name) {
+
+        return skillRepository.findByName(name);
     }
 
     @Override

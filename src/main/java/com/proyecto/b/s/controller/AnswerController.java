@@ -12,7 +12,6 @@ import java.util.List;
 @RequestMapping("/bs/answer")
 @CrossOrigin("*")
 
-// TODO: 11/4/2023 eliminar answer controller ya que no se utiliza
 public class AnswerController {
 
     private final AnswerService answerService;
@@ -23,12 +22,13 @@ public class AnswerController {
 
     @GetMapping("/list")
     public ResponseEntity<List<Answer>> findAnswerList() {
+
         return ResponseEntity.status(HttpStatus.OK).body(answerService.listAnswer());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Answer> findAnswerById(@PathVariable Long id) throws Exception {
+
         return ResponseEntity.status(HttpStatus.OK).body(answerService.findById(id));
     }
-
 }

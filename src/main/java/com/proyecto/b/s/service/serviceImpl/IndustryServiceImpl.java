@@ -28,6 +28,7 @@ public class IndustryServiceImpl implements IndustryService {
 
     @Override
     public Industry findById(Long id) throws Exception {
+
         return industryRepository.findById(id).orElseThrow(() -> new InvalidResourceException("Industria no encontrada con id: " + id));
     }
 

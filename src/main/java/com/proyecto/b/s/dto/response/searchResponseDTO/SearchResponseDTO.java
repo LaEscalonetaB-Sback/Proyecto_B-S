@@ -5,8 +5,6 @@ import lombok.Data;
 import java.time.LocalDate;
 import java.util.List;
 
-
-//Lo que le envio de respuesta al front
 @Data
 public class SearchResponseDTO {
     private Long id;
@@ -14,7 +12,7 @@ public class SearchResponseDTO {
     private LocalDate dateOpening; //fechaApertura
     private String dayJob; //jornadaTrabajo
     private String modalityHiring; //modalidadTrabajo
-    private String position; //posicion
+    private String nameSearch; //posicion
     private String remuneration; //remuneracion
     private String vacancies; //vacantes
     private String observations; //observaciones

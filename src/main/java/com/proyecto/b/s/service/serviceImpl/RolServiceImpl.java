@@ -64,6 +64,12 @@ public class RolServiceImpl implements RolService {
     }
 
     @Override
+    public Rol findByName(String name) {
+
+        return rolRepository.findByName(name);
+    }
+
+    @Override
     public void deleteRol(Long id) throws Exception {
         Rol entity = findById(id);
         entity.setActive(false);

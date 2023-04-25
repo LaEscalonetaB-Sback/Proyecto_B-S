@@ -5,6 +5,7 @@ import com.proyecto.b.s.dto.response.PersonResponseDTO;
 import com.proyecto.b.s.entity.Person;
 import com.proyecto.b.s.service.service.PersonService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -35,7 +36,6 @@ public class PersonController {
         return ResponseEntity.ok(persons);
     }
 
-
     //Encontrar por id
     @GetMapping("/{id}")
     public ResponseEntity<Person> findById(@PathVariable Long id) throws Exception {
@@ -59,7 +59,6 @@ public class PersonController {
 
         return ResponseEntity.ok(result);
     }
-
 
     //Eliminar por id
     @DeleteMapping("/delete/{id}")

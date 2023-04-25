@@ -3,12 +3,11 @@ package com.proyecto.b.s.service.serviceImpl;
 import com.proyecto.b.s.dto.modelMapper.ModelMapperInterface;
 import com.proyecto.b.s.dto.request.searchRequestDTO.SearchRequestDTO;
 import com.proyecto.b.s.dto.request.searchRequestDTO.SkillForSearchRequestDTO;
-import com.proyecto.b.s.dto.request.searchRequestDTO.StateSearchRequestDTO;
 import com.proyecto.b.s.dto.response.searchResponseDTO.SearchResponseDTO;
 import com.proyecto.b.s.entity.*;
 import com.proyecto.b.s.exception.InvalidResourceException;
-import com.proyecto.b.s.repository.*;
-import com.proyecto.b.s.service.service.SearchService;
+import com.proyecto.b.s.repository.SearchRepository;
+import com.proyecto.b.s.service.service.*;
 import com.proyecto.b.s.utils.HelperValidator;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -20,28 +19,25 @@ import java.util.stream.Collectors;
 @Service
 public class SearchServiceImpl implements SearchService {
     private final SearchRepository searchRepository;
-    private final SeniorityRepository seniorityRepository;
-    private final RolRepository rolRepository;
-    private final ClientRepository clientRepository;
-    private final StateSearchRepository stateSearchRepository;
-    private final SkillRepository skillRepository;
+    private final SeniorityService seniorityService;
+    private final RolService rolService;
+    private final ClientService clientService;
+    private final SkillService skillService;
     private final ModelMapperInterface modelMapperInterface;
     private final ModelMapper modelMapper;
 
     public SearchServiceImpl(SearchRepository searchRepository,
-                             SeniorityRepository seniorityRepository,
-                             RolRepository rolRepository,
-                             ClientRepository clientRepository,
-                             StateSearchRepository stateSearchRepository,
-                             SkillRepository skillRepository,
+                             SeniorityService seniorityService,
+                             RolService rolService,
+                             ClientService clientService,
+                             SkillService skillService,
                              ModelMapperInterface modelMapperInterface,
                              ModelMapper modelMapper) {
         this.searchRepository = searchRepository;
-        this.seniorityRepository = seniorityRepository;
-        this.rolRepository = rolRepository;
-        this.clientRepository = clientRepository;
-        this.stateSearchRepository = stateSearchRepository;
-        this.skillRepository = skillRepository;
+        this.seniorityService = seniorityService;
+        this.rolService = rolService;
+        this.clientService = clientService;
+        this.skillService = skillService;
         this.modelMapperInterface = modelMapperInterface;
         this.modelMapper = modelMapper;
     }
@@ -68,32 +64,25 @@ public class SearchServiceImpl implements SearchService {
     @Override
     public SearchResponseDTO saveSearch(SearchRequestDTO searchRequestDto) {
         Search search = getSearch(searchRequestDto);
-
         Search savedSearch = searchRepository.save(search);
+
         return modelMapperInterface.searchToSearchResponseDTO(savedSearch);
     }
 
     private Search getSearch(SearchRequestDTO searchRequestDto) {
         String seniorityName = searchRequestDto.getSeniority().getName();
-        Seniority seniorityEntity = seniorityRepository.findByName(seniorityName);
+        Seniority seniorityEntity = seniorityService.findByName(seniorityName);
 
         String rolName = searchRequestDto.getRol().getName();
-        Rol rolEntity = rolRepository.findByName(rolName);
+        Rol rolEntity = rolService.findByName(rolName);
 
         String clientName = searchRequestDto.getClient().getName();
-        Client clientEntity = clientRepository.findByName(clientName);
-
-        List<StateSearchRequestDTO> stateSearchName = searchRequestDto.getStateSearch();
-        List<StateSearch> stateSearches = new ArrayList<>();
-        for (StateSearchRequestDTO aux : stateSearchName) {
-            StateSearch stateSearch = stateSearchRepository.findByName(aux.getName());
-            stateSearches.add(stateSearch);
-        }
+        Client clientEntity = clientService.findByName(clientName);
 
         List<SkillForSearchRequestDTO> skillsName = searchRequestDto.getSkills();
         List<Skill> skills = new ArrayList<>();
         for (SkillForSearchRequestDTO aux : skillsName) {
-            Skill skill = skillRepository.findByName(aux.getName());
+            Skill skill = skillService.findByName(aux.getName());
             skills.add(skill);
         }
 
@@ -102,7 +91,6 @@ public class SearchServiceImpl implements SearchService {
         search.setSeniority(seniorityEntity);
         search.setRol(rolEntity);
         search.setClient(clientEntity);
-        search.setStateSearch(stateSearches);
         search.setSkills(skills);
 
         return search;
@@ -115,6 +103,7 @@ public class SearchServiceImpl implements SearchService {
 
     @Override
     public Search findById(Long id) throws Exception {
+
         return searchRepository.findById(id).orElseThrow(() -> new InvalidResourceException("Busqueda no encontrada con id: " + id));
     }
 

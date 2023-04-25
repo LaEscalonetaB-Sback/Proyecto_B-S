@@ -1,6 +1,5 @@
 package com.proyecto.b.s.service.serviceImpl;
 
-
 import com.proyecto.b.s.dto.modelMapper.ModelMapperInterface;
 import com.proyecto.b.s.dto.request.personRequestDTO.PersonRequestDTO;
 import com.proyecto.b.s.dto.request.personRequestDTO.PersonUpdateRequestDTO;
@@ -35,6 +34,7 @@ public class PersonServiceImpl implements PersonService {
         existPerson(personRequestDto);
         Person person = modelMapperInterface.personReqDtoToPerson(personRequestDto);
         Person personSave = personRepository.save(person);
+
         return modelMapperInterface.personToPersonResponseDTO(personSave);
     }
 
@@ -53,7 +53,6 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public List<PersonResponseDTO> search(String name, String lastName, List<String> seniorityGeneral, List<String> roles, List<String> skills) {
-
         if (name == null && lastName == null && seniorityGeneral == null && roles == null && skills == null) {
             List<Person> personList = personRepository.findAll();
             HelperValidator.isEmptyList(personList);
@@ -62,7 +61,6 @@ public class PersonServiceImpl implements PersonService {
                     .map(person -> modelMapper.map(person, PersonResponseDTO.class))
                     .collect(Collectors.toList());
         } else {
-
             List<Person> personList = personRepository.searchPerson(name, lastName, seniorityGeneral, roles, skills);
             HelperValidator.isEmptyList(personList);
 
@@ -92,7 +90,7 @@ public class PersonServiceImpl implements PersonService {
         return modelMapperInterface.personToPersonResponseDTO(person);
     }
 
-    public void mapPerson(PersonUpdateRequestDTO personRequestDto, Person person) {
+    private void mapPerson(PersonUpdateRequestDTO personRequestDto, Person person) {
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.map(personRequestDto, person);
     }
@@ -102,6 +100,5 @@ public class PersonServiceImpl implements PersonService {
         Person person = findById(id);
         person.setActive(false);
         personRepository.save(person);
-        modelMapperInterface.personToPersonResponseDTO(person);
     }
 }

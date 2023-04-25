@@ -4,7 +4,6 @@ import com.proyecto.b.s.dto.request.SkillRequestDTO;
 import com.proyecto.b.s.dto.response.SkillResponseDTO;
 import com.proyecto.b.s.entity.Skill;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 public interface SkillService {
@@ -17,6 +16,8 @@ public interface SkillService {
     void delete(Long id) throws Exception;
 
     List<SkillResponseDTO> list();
+
+    Skill findByName(String name);
 
     boolean existById(Long id);
 }

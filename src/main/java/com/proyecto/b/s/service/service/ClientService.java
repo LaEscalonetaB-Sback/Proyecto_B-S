@@ -13,6 +13,7 @@ public interface ClientService {
 
     Client saveClient(ClientRequestDTO clientRequestDTO);
 
+    Client findByName(String name);
 
     void deleteClient(Long id) throws Exception;
 }

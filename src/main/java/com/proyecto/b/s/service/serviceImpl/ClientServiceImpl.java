@@ -7,7 +7,6 @@ import com.proyecto.b.s.entity.Client;
 import com.proyecto.b.s.repository.ClientRepository;
 import com.proyecto.b.s.service.service.ClientService;
 import com.proyecto.b.s.utils.HelperValidator;
-import lombok.SneakyThrows;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +29,6 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public List<ClientResponseDTO> searchClient(String name, Integer cuit) {
-
         if (name == null && cuit == null) {
             List<Client> clientList = clientRepository.findAll();
             HelperValidator.isEmptyList(clientList);
@@ -60,13 +58,17 @@ public class ClientServiceImpl implements ClientService {
         return clientRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Cliente no encontrado con id: " + id));
     }
 
-    @SneakyThrows
     @Override
-    public void deleteClient(Long id) {
+    public Client findByName(String name) {
+
+        return clientRepository.findByName(name);
+    }
+
+    @Override
+    public void deleteClient(Long id) throws Exception {
         Client client = findById(id);
         client.setActive(false);
         clientRepository.save(client);
-
         modelMapperInterface.clientToClientResponseDTO(client);
     }
 }

@@ -6,7 +6,6 @@ import com.proyecto.b.s.entity.Source;
 import com.proyecto.b.s.repository.SourceRepository;
 import com.proyecto.b.s.service.service.SourceService;
 import com.proyecto.b.s.utils.HelperValidator;
-import lombok.SneakyThrows;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -39,7 +38,7 @@ public class SourceServiceImpl implements SourceService {
     }
 
     @Override
-    public SourceResponseDTO update(Long id, SourceRequestDTO sourceRequestDTO) throws Exception{
+    public SourceResponseDTO update(Long id, SourceRequestDTO sourceRequestDTO) throws Exception {
         Source source = findById(id);
         String sourceNameOrigin = sourceRequestDTO.getName();
         source.setName(sourceNameOrigin);
@@ -49,7 +48,7 @@ public class SourceServiceImpl implements SourceService {
     }
 
     @Override
-    public void delete(Long id) throws Exception{
+    public void delete(Long id) throws Exception {
         Source entity = findById(id);
         sourceRepository.delete(entity);
     }

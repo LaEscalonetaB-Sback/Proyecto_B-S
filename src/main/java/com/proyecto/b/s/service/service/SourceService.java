@@ -4,7 +4,6 @@ import com.proyecto.b.s.dto.request.SourceRequestDTO;
 import com.proyecto.b.s.dto.response.SourceResponseDTO;
 import com.proyecto.b.s.entity.Source;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 public interface SourceService {

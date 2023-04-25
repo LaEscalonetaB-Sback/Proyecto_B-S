@@ -7,7 +7,6 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
 
-//Lo que recibo del front
 @Data
 public class SearchRequestDTO {
     private String linkJb;
@@ -18,16 +17,14 @@ public class SearchRequestDTO {
 
     private String modalityHiring; //modalidadTrabajo
 
-    private String position; //posicion
+    private String nameSearch;
 
-    private String remuneration; //remuneracion
+    private String remuneration;
 
     @NotEmpty(message = "Vacancie cannot be null")
-    private String vacancies; //vacantes
+    private String vacancies;
 
-    private String observations; //observaciones
-
-    private boolean active;
+    private String observations;
 
     @NotNull(message = "Seniority cannot be null")
     private SeniorityForSearchRequestDTO seniority;
@@ -38,9 +35,6 @@ public class SearchRequestDTO {
     @NotNull(message = "Client cannot be null")
     private ClientForSearchRequestDTO client;
 
-    private List<StateSearchRequestDTO> stateSearch;
-
     @NotNull(message = "Skill cannot be null")
     private List<SkillForSearchRequestDTO> skills;
-
 }
