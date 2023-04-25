@@ -3,6 +3,7 @@ package com.proyecto.b.s.service.serviceImpl;
 import com.proyecto.b.s.entity.StateSearch;
 import com.proyecto.b.s.repository.StateSearchRepository;
 import com.proyecto.b.s.service.service.StateSearchService;
+import com.proyecto.b.s.utils.HelperValidator;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,8 +18,10 @@ public class StateSearchServiceImpl implements StateSearchService {
 
     @Override
     public List<StateSearch> list() {
+        List<StateSearch> stateSearch = stateSearchRepository.findAll();
+        HelperValidator.isEmptyList(stateSearch);
 
-        return stateSearchRepository.findAll();
+        return stateSearch;
     }
 
     @Override

@@ -28,6 +28,7 @@ public class RolServiceImpl implements RolService {
 
     @Override
     public Rol findById(Long id) throws Exception {
+
         return rolRepository.findById(id).orElseThrow(() -> new InvalidResourceException("Rol no encontrado con id: " + id));
     }
 
