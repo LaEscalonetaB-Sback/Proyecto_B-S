@@ -4,6 +4,7 @@ package com.proyecto.b.s.controller;
 import com.proyecto.b.s.entity.Person;
 import com.proyecto.b.s.repository.PersonRepository;
 import com.proyecto.b.s.service.service.PersonService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,10 +32,13 @@ public class PersonController {
                                 @RequestParam(required = false) String skill){
         return personService.list(nameComplete,rol, seniority,skill);
     }
-
+    @GetMapping
+    public List<Person> getAllPerson(){
+        return personService.getAllPerson();
+    }
 
     //Encontrar por id
-    @GetMapping("/{id}")
+    //@GetMapping("/{id}")
     public ResponseEntity<Person> findById(@PathVariable Long id) throws Exception {
         Optional<Person> PersonOpt = Optional.ofNullable(personService.obtainPersonId(id));
         if (PersonOpt.isEmpty()) {
@@ -43,15 +47,25 @@ public class PersonController {
             return ResponseEntity.ok(PersonOpt.get());
         }
     }
+    @GetMapping("{id}")
+    public ResponseEntity<Person> getPersonById(@PathVariable("id") long personId){
+        return personService.getPersonById(personId)
+                .map(ResponseEntity::ok)
+                .orElseGet(()-> ResponseEntity.notFound().build());
+    }
 
     //Crear busqueda
     @PostMapping("/create")
     public ResponseEntity<Person> create(@RequestBody Person person) throws Exception {
-        if (person.getId() != null){
+       if (person.getId() != null){
             return ResponseEntity.badRequest().build();
         }
-        Person result = personService.create(person);
-        return ResponseEntity.ok(result);
+       Person result = personService.create(person); return ResponseEntity.ok(result);
+    }
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Person createPerson(@RequestBody Person person){
+        return personService.create(person);
     }
 
     //Actualizar
@@ -66,12 +80,37 @@ public class PersonController {
         Person result = personService.update(person);
         return ResponseEntity.ok(result);
     }
+    @PutMapping("{id}")
+    public ResponseEntity<Person> updatePerson(@PathVariable("id") long personId,
+                                               @RequestBody Person person){
+        return personService.getPersonById(personId)
+                .map(savedPerson->{
+                    savedPerson.setNameComplete(person.getNameComplete());
+                    savedPerson.setLinkedin(person.getLinkedin());
+                    savedPerson.setRecruiter(person.getRecruiter());
+                    savedPerson.setSeniorityGeneral(person.getSeniorityGeneral());
+                    savedPerson.setDni(person.getDni());
+                    savedPerson.setEmail(person.getEmail());
+                    savedPerson.setCuil(person.getCuil());
+                    savedPerson.setPhoneNumber(person.getPhoneNumber());
+                    savedPerson.setRemuneration(person.getRemuneration());
 
+                    Person updatedPerson = personService.updatePerson(savedPerson);
+                    return new ResponseEntity<>(updatedPerson, HttpStatus.OK);
+                })
+                .orElseGet(()-> ResponseEntity.notFound().build());
+
+    }
 
     //Eliminar por id
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Person> deleteById(@PathVariable Long id) throws Exception {
         personService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deletePerson(@PathVariable("id") long personId){
+        personService.deletePerson(personId);
+        return new ResponseEntity<String>("Person deleted successfully!", HttpStatus.OK);
     }
 }

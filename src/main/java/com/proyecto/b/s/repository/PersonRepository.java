@@ -9,13 +9,23 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface PersonRepository extends JpaRepository<Person, Long> {
+    Optional<Person> findByEmail(String email);
 
+    // Define custom query using JPQL with index params
+    @Query ("SELECT p FROM Person p WHERE p.nameComplete =?1 and p.recruiter=?2")
+    Person findByJPQL(String nameComplete, String recruiter);
+
+    // Define custom query using JPQL with name params
+    @Query ("SELECT p FROM Person p WHERE p.nameComplete =:nameComplete and p.recruiter=:recruiter")
+    Person findByJPQLNamedParams(@Param("nameComplete") String nameComplete, @Param("recruiter")String recruiter);
 
     @Query ("SELECT p FROM Person p WHERE p.nameComplete = :nameComplete")
     List<Person> findByNameComplete(@Param("nameComplete") String nameComplete);
+
     @Query("SELECT p FROM Person p INNER JOIN p.roles r WHERE r.name = :rol")
     List<Person> findByRol(@Param("rol") String rol);
     @Query("SELECT p FROM Person p WHERE p.seniorityGeneral = :seniority")

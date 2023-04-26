@@ -1,6 +1,7 @@
 package com.proyecto.b.s.service.serviceImpl;
 
 
+import com.proyecto.b.s.exception.ResourceNotFoundException;
 import com.proyecto.b.s.repository.PersonRepository;
 import com.proyecto.b.s.service.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,13 +9,13 @@ import com.proyecto.b.s.entity.Person;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 
 public class PersonServiceImpl implements PersonService {
 
-    @Autowired
     private PersonRepository personRepository;
 
     public PersonServiceImpl(PersonRepository personaRepository) {
@@ -24,9 +25,32 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Person create(Person person) {
+        Optional<Person> savedPerson = personRepository.findByEmail(person.getEmail());
+        if(savedPerson.isPresent()){
+            throw new ResourceNotFoundException("Person already exist with given email:" + person.getEmail());
+        }
         return personRepository.save(person);
     }
 
+    @Override
+    public List<Person> getAllPerson() {
+        return personRepository.findAll();
+    }
+
+    @Override
+    public Optional<Person> getPersonById(long id) {
+        return personRepository.findById(id);
+    }
+
+    @Override
+    public Person updatePerson(Person updatePerson) {
+        return personRepository.save(updatePerson);
+    }
+
+    @Override
+    public void deletePerson(long id) {
+        personRepository.deleteById(id);
+    }
 
     @Override
     public List<Person> list(String nameComplete, String rol, String seniority, String skill){

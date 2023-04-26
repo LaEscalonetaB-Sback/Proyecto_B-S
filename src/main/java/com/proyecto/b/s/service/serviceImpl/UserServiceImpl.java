@@ -16,10 +16,11 @@ import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
-
     @Autowired
-    UserRepository userRepository;
-
+    private UserRepository userRepository;
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public List<User> userList() {

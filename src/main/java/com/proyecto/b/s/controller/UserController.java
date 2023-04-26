@@ -2,6 +2,8 @@ package com.proyecto.b.s.controller;
 
 import com.proyecto.b.s.dto.request.UserRequestDto;
 import com.proyecto.b.s.entity.User;
+import com.proyecto.b.s.repository.PersonRepository;
+import com.proyecto.b.s.repository.UserRepository;
 import com.proyecto.b.s.service.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -12,9 +14,8 @@ import java.util.List;
 @RestController
 public class UserController {
 
-    @Autowired
-    UserService userService;
-
+    private UserService userService;
+    private UserRepository userRepository;
 
     /**
      * Devuelve todos los usuarios de la base de datos
