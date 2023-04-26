@@ -15,7 +15,7 @@ import java.util.Optional;
 @CrossOrigin("*")
 public class InterviewController {
 
-    final private InterviewService interviewService;
+    private final InterviewService interviewService;
 
     public InterviewController(InterviewService interviewService) {
         this.interviewService = interviewService;
