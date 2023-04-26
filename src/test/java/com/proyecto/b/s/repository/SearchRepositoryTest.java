@@ -1,91 +1,115 @@
 package com.proyecto.b.s.repository;
 
 import com.proyecto.b.s.entity.Search;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.modelmapper.internal.util.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
 class SearchRepositoryTest {
     @Autowired
     private SearchRepository searchRepository;
-    private Search search;
 
-    @BeforeEach
-    public void setup() {
-        search = Search.builder()
-                .id(1L)
-                .dateOpening(LocalDate.now())
-                .remuneration("250")
-                .linkJb("linkDePrueba.com")
-                .vacancies("20")
-                .modalityHiring("Hibrido")
-                .observations("Busqueda de prueba")
-                .position("Java developer")
+    @DisplayName("Test for exist search")
+    @Transactional
+    @Test
+    void testExistSearch() {
+        Search search = Search.builder()
+                .position("Java Developer")
                 .build();
+        Search savedSearch = searchRepository.save(search);
+        boolean exist = searchRepository.existsById(savedSearch.getId());
+
+        assertTrue(exist);
+
+        boolean notExist = searchRepository.existsById(-1L);
+
+        assertFalse(notExist);
     }
 
-    private Search save() {
-        return searchRepository.save(search);
-    }
+    @DisplayName("Test for update search")
+    @Transactional
+    @Test
+    void checkUpdate() {
+        Search search1 = Search.builder()
+                .id(1L)
+                .position("JAVA")
+                .build();
 
-    private void delete() {
-        searchRepository.delete(search);
-    }
+        searchRepository.save(search1);
 
-    private List<Search> list() {
-        return searchRepository.findAll();
-    }
+        Optional<Search> s = searchRepository.findById(1L);
+        assertTrue(s.isPresent());
 
-    private Search findById(Long id) {
-        return searchRepository.getReferenceById(id);
+        s.get().setPosition("FULL-STACK");
+        searchRepository.save(s.get());
+
+        Optional<Search> updatedSearch = searchRepository.findById(1L);
+        assertTrue(updatedSearch.isPresent());
+
+        assertEquals("FULL-STACK", updatedSearch.get().getPosition());
     }
 
     @DisplayName("Test for save search")
+    @Transactional
     @Test
-    void saveSearch() {
-        Search saved = save();
+    void testSaveSearch() {
+        Search search = Search.builder()
+                .position("Java Developer")
+                .build();
+        Search savedSearch = searchRepository.save(search);
 
-        assertThat(saved).isNotNull();
-        assertThat(saved.getId()).isPositive();
-    }
-
-    @DisplayName("Test for exist search")
-    @Test
-    void existSearch() {
-        save();
-        boolean exist = searchRepository.existsById(1L);
-
-        assertTrue(exist);
+        assertThat(savedSearch).isNotNull();
+        assertThat(savedSearch.getId()).isNotNull().isPositive();
     }
 
     @DisplayName("Test for list search empty")
+    @Transactional
     @Test
-    void checkEmpty() {
+    void testListSearchesEmpty() {
         List<Search> searches = searchRepository.findAll();
+        assertTrue(searches.isEmpty());
+    }
 
-        assertThat(searches.size()).isEqualTo(0);
+    @DisplayName("Test for list search not empty")
+    @Transactional
+    @Test
+    void testListSearchesNotEmpty() {
+        Search search = Search.builder()
+                .id(1L)
+                .position("Java Developer")
+                .build();
+        searchRepository.save(search);
+
+        List<Search> searches = searchRepository.findAll();
+        assertFalse(searches.isEmpty());
     }
 
     @DisplayName("Test for delete search")
+    @Transactional
     @Test
-    void checkDelete() {
-        Search searchSave = searchRepository.save(search);
-        Assert.notNull(searchSave);
+    void testDeleteSearch() {
+        Search search = Search.builder()
+                .id(1L)
+                .position("Java Developer")
+                .build();
 
-        searchRepository.delete(searchSave);
+        Search savedSearch = searchRepository.save(search);
+        assertNotNull(savedSearch);
 
-        assertThat(list().size()).isEqualTo(0);
+        searchRepository.delete(savedSearch);
+
+        Optional<Search> deletedSearch = searchRepository.findById(1L);
+        assertFalse(deletedSearch.isPresent());
     }
 }
