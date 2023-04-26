@@ -4,6 +4,8 @@ import com.proyecto.b.s.dto.modelMapper.ModelMapperInterface;
 import com.proyecto.b.s.dto.request.ClientRequestDTO;
 import com.proyecto.b.s.dto.response.ClientResponseDTO;
 import com.proyecto.b.s.entity.Client;
+import com.proyecto.b.s.entity.Skill;
+import com.proyecto.b.s.exception.InvalidResourceException;
 import com.proyecto.b.s.repository.ClientRepository;
 import com.proyecto.b.s.service.service.ClientService;
 import com.proyecto.b.s.utils.HelperValidator;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -61,7 +64,8 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public Client findByName(String name) {
 
-        return clientRepository.findByName(name);
+        return Optional.ofNullable(clientRepository.findByName(name))
+                .orElseThrow(()-> new InvalidResourceException("Cliente no encontrado con el nombre" + name));
     }
 
     @Override

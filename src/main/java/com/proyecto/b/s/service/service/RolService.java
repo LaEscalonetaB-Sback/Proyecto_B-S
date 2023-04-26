@@ -17,7 +17,7 @@ public interface RolService {
 
     RolResponseDTO updateRol(Long id, RolRequestDTO rolRequestDTO) throws Exception;
 
-    Rol findByName(String name);
+    Rol findByName(String name) ;
 
     void deleteRol(Long id) throws Exception;
 }

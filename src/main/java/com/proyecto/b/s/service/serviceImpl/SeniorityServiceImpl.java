@@ -1,6 +1,7 @@
 package com.proyecto.b.s.service.serviceImpl;
 
 import com.proyecto.b.s.dto.response.SeniorityResponseDTO;
+import com.proyecto.b.s.entity.Rol;
 import com.proyecto.b.s.entity.Seniority;
 import com.proyecto.b.s.exception.InvalidResourceException;
 import com.proyecto.b.s.repository.SeniorityRepository;
@@ -10,6 +11,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -41,6 +43,7 @@ public class SeniorityServiceImpl implements SeniorityService {
     @Override
     public Seniority findByName(String name) {
 
-        return seniorityRepository.findByName(name);
+        return Optional.ofNullable(seniorityRepository.findByName(name))
+                .orElseThrow(()-> new InvalidResourceException("Seniority no encontrado con el nombre" + name));
     }
 }

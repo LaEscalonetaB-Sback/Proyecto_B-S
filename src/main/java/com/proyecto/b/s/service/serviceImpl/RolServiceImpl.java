@@ -4,6 +4,7 @@ import com.proyecto.b.s.dto.modelMapper.ModelMapperInterface;
 import com.proyecto.b.s.dto.request.RolRequestDTO;
 import com.proyecto.b.s.dto.response.RolResponseDTO;
 import com.proyecto.b.s.entity.Rol;
+import com.proyecto.b.s.entity.Skill;
 import com.proyecto.b.s.exception.InvalidResourceException;
 import com.proyecto.b.s.repository.RolRepository;
 import com.proyecto.b.s.service.service.RolService;
@@ -12,6 +13,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -67,7 +69,8 @@ public class RolServiceImpl implements RolService {
     @Override
     public Rol findByName(String name) {
 
-        return rolRepository.findByName(name);
+        return Optional.ofNullable(rolRepository.findByName(name))
+                .orElseThrow(()-> new InvalidResourceException("Rol no encontrado con el nombre" + name));
     }
 
     @Override

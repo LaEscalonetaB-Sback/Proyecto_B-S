@@ -3,6 +3,7 @@ package com.proyecto.b.s.service.serviceImpl;
 import com.proyecto.b.s.dto.request.SkillRequestDTO;
 import com.proyecto.b.s.dto.response.SkillResponseDTO;
 import com.proyecto.b.s.entity.Skill;
+import com.proyecto.b.s.exception.InvalidResourceException;
 import com.proyecto.b.s.repository.SkillRepository;
 import com.proyecto.b.s.service.service.SkillService;
 import com.proyecto.b.s.utils.HelperValidator;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SkillServiceImpl implements SkillService {
@@ -71,7 +73,8 @@ public class SkillServiceImpl implements SkillService {
     @Override
     public Skill findByName(String name) {
 
-        return skillRepository.findByName(name);
+        return Optional.ofNullable(skillRepository.findByName(name))
+                .orElseThrow(()-> new InvalidResourceException("Skill no encontrada con el nombre" + name));
     }
 
     @Override
