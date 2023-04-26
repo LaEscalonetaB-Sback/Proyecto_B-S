@@ -35,7 +35,7 @@ public class Search {
 
     private String remuneration; //remuneracion
 
-    @NotEmpty(message = "Vacancie cannot be null")
+    //@NotEmpty(message = "Vacancie cannot be null")
     private String vacancies; //vacantes
 
     private String observations; //observaciones
@@ -46,15 +46,15 @@ public class Search {
     @JsonBackReference
     private List<Event> events;
 
-    @NotNull(message = "Seniority cannot be null")
+    //@NotNull(message = "Seniority cannot be null")
     @OneToOne()
     private Seniority seniority;
 
-    @NotNull(message = "Rol cannot be null")
+    //@NotNull(message = "Rol cannot be null")
     @OneToOne()
     private Rol rol;
 
-    @NotNull(message = "Client cannot be null")
+    //@NotNull(message = "Client cannot be null")
     @OneToOne()
     private Client client;
 
@@ -67,7 +67,7 @@ public class Search {
     @JsonManagedReference
     private List<StateSearch> stateSearch;
 
-    @NotNull(message = "Skill cannot be null")
+    //@NotNull(message = "Skill cannot be null")
     @ManyToMany()
     @JoinTable(
             name = "search_skill",

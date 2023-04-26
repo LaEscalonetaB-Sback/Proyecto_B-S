@@ -22,25 +22,24 @@ public class SearchRequestDTO {
 
     private String remuneration; //remuneracion
 
-    @NotEmpty(message = "Vacancie cannot be null")
+    //@NotEmpty(message = "Vacancie cannot be null")
     private String vacancies; //vacantes
 
     private String observations; //observaciones
 
     private boolean active;
 
-    @NotNull(message = "Seniority cannot be null")
+    //@NotNull(message = "Seniority cannot be null")
     private SeniorityForSearchRequestDTO seniority;
 
-    @NotNull(message = "Rol cannot be null")
+    //@NotNull(message = "Rol cannot be null")
     private RolForSearchRequestDTO rol;
 
-    @NotNull(message = "Client cannot be null")
+    //@NotNull(message = "Client cannot be null")
     private ClientForSearchRequestDTO client;
 
     private List<StateSearchRequestDTO> stateSearch;
 
-    @NotNull(message = "Skill cannot be null")
+    //@NotNull(message = "Skill cannot be null")
     private List<SkillForSearchRequestDTO> skills;
-
 }
