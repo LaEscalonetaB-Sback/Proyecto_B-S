@@ -8,17 +8,16 @@ import com.proyecto.b.s.entity.Event;
 import java.time.LocalDate;
 import java.util.List;
 
-    public interface EventService {
-        List<EventResponseDTO> listEvent(LocalDate date, Long person, Long user, Long search);
+public interface EventService {
+    List<EventResponseDTO> listEvent(LocalDate date, Long person, Long user, Long search);
 
-        EventResponseDTO saveEvent(EventRequestDTO eventRequestDTO);
+    EventResponseDTO saveEvent(EventRequestDTO eventRequestDTO) throws Exception;
 
-        EventResponseDTO updateEvent(Long eventId, EventUpdateRequestDTO eventUpdateRequestDTO) throws Exception;
+    EventResponseDTO updateEvent(Long eventId, EventUpdateRequestDTO eventUpdateRequestDTO) throws Exception;
 
-        void deleteEvent(Long id);
+    void deleteEvent(Long id) throws Exception;
 
-        Event findById(Long id) throws Exception;
+    Event findById(Long id) throws Exception;
 
-        boolean existById(Long id);
-    }
-
+    boolean existById(Long id);
+}

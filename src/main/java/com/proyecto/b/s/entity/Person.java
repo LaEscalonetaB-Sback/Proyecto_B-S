@@ -55,7 +55,6 @@ public class Person {
     @Pattern(regexp = "^[0-9]*$" ,message="El número de telefono no puede contener letras.")
     private String phoneNumber;
 
-    @Pattern(regexp = "^[0-9]*$" ,message="La remuneración no puede contener letras.")
     private String remuneration;
 
     private Boolean active = true;
