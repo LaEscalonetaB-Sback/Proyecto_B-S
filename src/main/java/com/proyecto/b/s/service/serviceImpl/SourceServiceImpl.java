@@ -2,7 +2,9 @@ package com.proyecto.b.s.service.serviceImpl;
 
 import com.proyecto.b.s.dto.request.SourceRequestDTO;
 import com.proyecto.b.s.dto.response.SourceResponseDTO;
+import com.proyecto.b.s.entity.Industry;
 import com.proyecto.b.s.entity.Source;
+import com.proyecto.b.s.exception.InvalidResourceException;
 import com.proyecto.b.s.repository.SourceRepository;
 import com.proyecto.b.s.service.service.SourceService;
 import com.proyecto.b.s.utils.HelperValidator;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SourceServiceImpl implements SourceService {
@@ -70,5 +73,11 @@ public class SourceServiceImpl implements SourceService {
     @Override
     public boolean existById(Long id) {
         return sourceRepository.existsById(id);
+    }
+
+    @Override
+    public Source findByName(String name) {
+        return Optional.ofNullable(sourceRepository.findByName(name))
+                .orElseThrow(()-> new InvalidResourceException("Fuente no encontrada con el nombre " + name + "."));
     }
 }

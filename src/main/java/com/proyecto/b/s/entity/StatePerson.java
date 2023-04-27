@@ -10,6 +10,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @ToString
+@Builder
 @Table(name = "statePerson")
 public class StatePerson {
     @Id

@@ -4,7 +4,6 @@ import com.proyecto.b.s.dto.modelMapper.ModelMapperInterface;
 import com.proyecto.b.s.dto.request.RolRequestDTO;
 import com.proyecto.b.s.dto.response.RolResponseDTO;
 import com.proyecto.b.s.entity.Rol;
-import com.proyecto.b.s.entity.Skill;
 import com.proyecto.b.s.exception.InvalidResourceException;
 import com.proyecto.b.s.repository.RolRepository;
 import com.proyecto.b.s.service.service.RolService;
@@ -68,9 +67,8 @@ public class RolServiceImpl implements RolService {
 
     @Override
     public Rol findByName(String name) {
-
         return Optional.ofNullable(rolRepository.findByName(name))
-                .orElseThrow(()-> new InvalidResourceException("Rol no encontrado con el nombre" + name));
+                .orElseThrow(()-> new InvalidResourceException("Rol no encontrado con el nombre " + name + "."));
     }
 
     @Override

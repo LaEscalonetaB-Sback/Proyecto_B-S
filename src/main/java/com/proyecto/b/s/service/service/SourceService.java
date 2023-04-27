@@ -18,4 +18,5 @@ public interface SourceService {
     List<SourceResponseDTO> list();
 
     boolean existById(Long id);
+    Source findByName(String name);
 }

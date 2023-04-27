@@ -72,9 +72,8 @@ public class SkillServiceImpl implements SkillService {
 
     @Override
     public Skill findByName(String name) {
-
         return Optional.ofNullable(skillRepository.findByName(name))
-                .orElseThrow(()-> new InvalidResourceException("Skill no encontrada con el nombre" + name));
+                .orElseThrow(()-> new InvalidResourceException("Skill no encontrada con el nombre " + name + "."));
     }
 
     @Override

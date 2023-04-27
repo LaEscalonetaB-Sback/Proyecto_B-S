@@ -1,17 +1,18 @@
 package com.proyecto.b.s.service.serviceImpl;
 
 import com.proyecto.b.s.dto.modelMapper.ModelMapperInterface;
-import com.proyecto.b.s.dto.request.personRequestDTO.PersonRequestDTO;
-import com.proyecto.b.s.dto.request.personRequestDTO.PersonUpdateRequestDTO;
+import com.proyecto.b.s.dto.request.personRequestDTO.*;
 import com.proyecto.b.s.dto.response.PersonResponseDTO;
-import com.proyecto.b.s.entity.Person;
+import com.proyecto.b.s.entity.*;
 import com.proyecto.b.s.exception.InvalidResourceException;
 import com.proyecto.b.s.repository.PersonRepository;
-import com.proyecto.b.s.service.service.PersonService;
+import com.proyecto.b.s.service.service.*;
 import com.proyecto.b.s.utils.HelperValidator;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -20,30 +21,78 @@ import java.util.stream.Collectors;
 
 public class PersonServiceImpl implements PersonService {
     private final PersonRepository personRepository;
+    private final SkillService skillService;
+    private final IndustryService industryService;
+    private final SourceService sourceService;
+    private final RolService rolService;
     private final ModelMapperInterface modelMapperInterface;
     private final ModelMapper modelMapper;
 
-    public PersonServiceImpl(PersonRepository personRepository, ModelMapperInterface modelMapperInterface, ModelMapper modelMapper) {
+    public PersonServiceImpl(PersonRepository personRepository,
+                             ModelMapperInterface modelMapperInterface,
+                             ModelMapper modelMapper,
+                             SkillService skillService,
+                             IndustryService industryService,
+                             SourceService sourceService,
+                             RolService rolService) {
         this.personRepository = personRepository;
         this.modelMapperInterface = modelMapperInterface;
         this.modelMapper = modelMapper;
+        this.skillService = skillService;
+        this.industryService= industryService;
+        this.sourceService= sourceService;
+        this.rolService= rolService;
     }
 
     @Override
     public PersonResponseDTO create(PersonRequestDTO personRequestDto) {
         existPerson(personRequestDto);
-        Person person = modelMapperInterface.personReqDtoToPerson(personRequestDto);
-        Person personSave = personRepository.save(person);
+        Person person = getPerson(personRequestDto);
+        Person savedPerson = personRepository.save(person);
+        return modelMapperInterface.personToPersonResponseDTO(savedPerson);
+    }
 
-        return modelMapperInterface.personToPersonResponseDTO(personSave);
+    private Person getPerson(PersonRequestDTO personRequestDto) {
+        List<SkillForPersonRequestDTO> skillsName = personRequestDto.getSkills();
+        List <Skill> skills = new ArrayList<>();
+        for(SkillForPersonRequestDTO aux : skillsName){
+            Skill skill = skillService.findByName(aux.getName());
+            skills.add(skill);
+        }
+
+        List<IndustryForPersonRequestDTO> industryName = personRequestDto.getIndustries();
+        List <Industry> industries = new ArrayList<>();
+        for (IndustryForPersonRequestDTO aux : industryName) {
+            Industry industry = industryService.findByName(aux.getName());
+            industries.add(industry);
+        }
+
+        List<SourceForPersonRequestDTO> sourceName= personRequestDto.getSources();
+        List <Source> sources = new ArrayList<>();
+        for (SourceForPersonRequestDTO aux: sourceName) {
+            Source source = sourceService.findByName(aux.getName());
+            sources.add(source);
+        }
+        List <RolForPersonRequestDTO> rolName = personRequestDto.getRoles();
+        List <Rol> roles = new ArrayList<>();
+        for (RolForPersonRequestDTO aux : rolName) {
+            Rol rol = rolService.findByName (aux.getName());
+            roles.add(rol);
+        }
+        Person person = modelMapperInterface.personReqDtoToPerson(personRequestDto);
+        person.setSkills(skills);
+        person.setIndustries(industries);
+        person.setSources(sources);
+        person.setRoles(roles);
+        return person;
     }
 
     private void existPerson(PersonRequestDTO personRequestDto) {
         Optional<Person> existingPerson = personRepository.findByDniOrCuilOrEmailOrLinkedin(
-                personRequestDto.getDni() != null ? personRequestDto.getDni() : "",
-                personRequestDto.getCuil() != null ? personRequestDto.getCuil() : "",
-                personRequestDto.getEmail() != null ? personRequestDto.getEmail() : "",
-                personRequestDto.getLinkedin() != null ? personRequestDto.getLinkedin() : ""
+                personRequestDto.getDni() != "" ? personRequestDto.getDni() : null,
+                personRequestDto.getCuil() != "" ? personRequestDto.getCuil() : null,
+                personRequestDto.getEmail() != "" ? personRequestDto.getEmail() : null,
+                personRequestDto.getLinkedin() != "" ? personRequestDto.getLinkedin() : null
         );
 
         if (existingPerson.isPresent()) {
