@@ -24,35 +24,35 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Size(min = 2,message = "Debe ingresar un nombre mayor a 2 caracteres.")
-    @Pattern(regexp = "[a-zA-Z ]*$", message ="Debe ingresar un nombre sin números.")
+    @Size(min = 2, message = "Debe ingresar un nombre mayor a 2 caracteres.")
+    @Pattern(regexp = "[a-zA-Z ]*$", message = "Debe ingresar un nombre sin números.")
     private String name;
 
-    @Size(min = 2,message =  "Debe ingresar un apellido mayor a 2 caracteres.")
-    @Pattern(regexp = "[a-zA-Z ]*$", message ="Debe ingresar un apellido sin números." )
+    @Size(min = 2, message = "Debe ingresar un apellido mayor a 2 caracteres.")
+    @Pattern(regexp = "[a-zA-Z ]*$", message = "Debe ingresar un apellido sin números.")
     private String lastName;
 
-    @NotEmpty(message ="El linkedin no puede estar vacio")
+    @NotEmpty(message = "El linkedin no puede estar vacio")
     private String linkedin;
 
     private LocalDate ContactDate = (LocalDate.now());
 
-    @Pattern(regexp = "[a-zA-Z ]*$", message ="Debe ingresar el nombre del recruiter sin números." )
+    @Pattern(regexp = "[a-zA-Z ]*$", message = "Debe ingresar el nombre del recruiter sin números.")
     private String recruiter;
 
-    @NotEmpty(message ="El seniority no puede estar vacio.")
+    @NotEmpty(message = "El seniority no puede estar vacio.")
     private String seniorityGeneral;
 
-    @Pattern(regexp = "^[0-9]*$" ,message="El dni no puede contener letras.")
+    @Pattern(regexp = "^[0-9]*$", message = "El dni no puede contener letras.")
     private String dni;
 
     @Email
     private String email;
 
-    @Pattern(regexp = "^[0-9]*$" ,message="El cuil no puede contener letras.")
+    @Pattern(regexp = "^[0-9]*$", message = "El cuil no puede contener letras.")
     private String cuil;
 
-    @Pattern(regexp = "^[0-9]*$" ,message="El número de telefono no puede contener letras.")
+    @Pattern(regexp = "^[0-9]*$", message = "El número de telefono no puede contener letras.")
     private String phoneNumber;
 
     private String remuneration;
@@ -70,7 +70,7 @@ public class Person {
             inverseJoinColumns = @JoinColumn(name = "industry_id")
     )
     @JsonManagedReference
-    private List <Industry> industries;
+    private List<Industry> industries;
 
     @ManyToMany
     @JoinTable(
@@ -89,7 +89,7 @@ public class Person {
     )
     @JsonManagedReference
     @NotEmpty(message = "Debe ingresar al menos un rol.")
-    private List < Rol> roles;
+    private List<Rol> roles;
 
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(

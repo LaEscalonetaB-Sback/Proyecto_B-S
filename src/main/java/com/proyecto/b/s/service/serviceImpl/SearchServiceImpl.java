@@ -98,6 +98,7 @@ public class SearchServiceImpl implements SearchService {
 
     @Override
     public boolean existById(Long id) {
+
         return searchRepository.existsById(id);
     }
 

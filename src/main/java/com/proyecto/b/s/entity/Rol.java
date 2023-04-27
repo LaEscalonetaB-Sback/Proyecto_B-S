@@ -1,10 +1,8 @@
 package com.proyecto.b.s.entity;
 
-
 import lombok.*;
 
 import javax.persistence.*;
-
 
 @Entity
 @NoArgsConstructor
@@ -20,7 +18,4 @@ public class Rol {
     private Long id;
     private String name;
     private Boolean active = true;
-
-//    @OneToOne(cascade = {CascadeType.ALL})
-//    private Seniority seniority;
 }

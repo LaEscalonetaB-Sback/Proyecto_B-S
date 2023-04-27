@@ -14,7 +14,6 @@ import java.util.Optional;
 @RequestMapping("/bs/interview")
 @CrossOrigin("*")
 public class InterviewController {
-
     private final InterviewService interviewService;
 
     public InterviewController(InterviewService interviewService) {

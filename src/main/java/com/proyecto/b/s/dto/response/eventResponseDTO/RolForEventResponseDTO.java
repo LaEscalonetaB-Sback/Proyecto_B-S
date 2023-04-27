@@ -4,7 +4,6 @@ import lombok.Data;
 
 @Data
 public class RolForEventResponseDTO {
-
     private Long id;
     private String name;
 }

@@ -77,6 +77,7 @@ public class EventOptionServiceImpl implements EventOptionService {
 
     @Override
     public boolean existById(Long id) {
+
         return eventOptionRepository.existsById(id);
     }
 }

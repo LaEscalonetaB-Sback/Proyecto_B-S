@@ -8,7 +8,6 @@ import com.proyecto.b.s.entity.EventOption;
 import java.util.List;
 
 public interface EventOptionService {
-    //List<EventOptionForEventResponseDTO> listEventoption();
     List<Answer> getAnswersByEventOptionName(String eventOptionName);
 
     List<String> getEventOptionNames();

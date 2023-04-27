@@ -17,7 +17,6 @@ import java.util.Optional;
 
 @Service
 public class SkillServiceImpl implements SkillService {
-
     private final SkillRepository skillRepository;
     private final ModelMapper modelMapper;
 
@@ -43,6 +42,7 @@ public class SkillServiceImpl implements SkillService {
 
     @Override
     public boolean existById(Long id) {
+
         return skillRepository.existsById(id);
     }
 
@@ -72,8 +72,9 @@ public class SkillServiceImpl implements SkillService {
 
     @Override
     public Skill findByName(String name) {
+
         return Optional.ofNullable(skillRepository.findByName(name))
-                .orElseThrow(()-> new InvalidResourceException("Skill no encontrada con el nombre " + name + "."));
+                .orElseThrow(() -> new InvalidResourceException("Skill no encontrada con el nombre " + name + "."));
     }
 
     @Override

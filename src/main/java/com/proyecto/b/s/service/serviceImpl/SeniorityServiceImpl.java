@@ -1,7 +1,6 @@
 package com.proyecto.b.s.service.serviceImpl;
 
 import com.proyecto.b.s.dto.response.SeniorityResponseDTO;
-import com.proyecto.b.s.entity.Rol;
 import com.proyecto.b.s.entity.Seniority;
 import com.proyecto.b.s.exception.InvalidResourceException;
 import com.proyecto.b.s.repository.SeniorityRepository;
@@ -44,6 +43,6 @@ public class SeniorityServiceImpl implements SeniorityService {
     public Seniority findByName(String name) {
 
         return Optional.ofNullable(seniorityRepository.findByName(name))
-                .orElseThrow(()-> new InvalidResourceException("Seniority no encontrado con el nombre" + name));
+                .orElseThrow(() -> new InvalidResourceException("Seniority no encontrado con el nombre" + name));
     }
 }

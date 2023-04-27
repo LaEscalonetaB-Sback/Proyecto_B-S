@@ -11,7 +11,6 @@ import java.util.List;
 
 @Service
 public class AnswerServiceImpl implements AnswerService {
-
     private final AnswerRepository answerRepository;
 
     public AnswerServiceImpl(AnswerRepository answerRepository) {
@@ -26,6 +25,7 @@ public class AnswerServiceImpl implements AnswerService {
 
     @Override
     public boolean existById(Long id) {
+
         return answerRepository.existsById(id);
     }
 

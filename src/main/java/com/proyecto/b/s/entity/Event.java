@@ -21,7 +21,7 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @FutureOrPresent(message ="La fecha indicada para el evento no ser anterior al dia de hoy ")
+    @FutureOrPresent(message = "La fecha indicada para el evento no ser anterior al dia de hoy ")
     @Column(nullable = false)
     private LocalDate dateEvent;
 

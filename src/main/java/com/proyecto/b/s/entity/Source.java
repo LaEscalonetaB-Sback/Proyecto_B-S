@@ -1,5 +1,4 @@
 package com.proyecto.b.s.entity;
-//fuente -> source
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;

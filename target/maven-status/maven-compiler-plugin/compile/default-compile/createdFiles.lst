@@ -9,13 +9,10 @@ com\proyecto\b\s\dto\request\personRequestDTO\IndustryForPersonRequestDTO.class
 com\proyecto\b\s\repository\ClientRepository.class
 com\proyecto\b\s\controller\StateController.class
 com\proyecto\b\s\controller\PersonController.class
-com\proyecto\b\s\dto\request\eventRequestDTO\SkillForEventRequestDTO.class
 com\proyecto\b\s\dto\response\eventResponseDTO\SourceForEventResponseDTO.class
-com\proyecto\b\s\dto\request\eventRequestDTO\SourceForEventRequestDTO.class
 com\proyecto\b\s\dto\request\personRequestDTO\StatePersonRequestDTO.class
 com\proyecto\b\s\dto\response\eventResponseDTO\EventOptionForEventResponseDTO.class
 com\proyecto\b\s\utils\HelperValidator.class
-com\proyecto\b\s\dto\request\eventRequestDTO\StateSearchForEventRequestDTO.class
 com\proyecto\b\s\entity\StateSearch.class
 com\proyecto\b\s\dto\request\searchRequestDTO\SeniorityForSearchRequestDTO.class
 com\proyecto\b\s\repository\AnswerRepository.class
@@ -29,11 +26,9 @@ com\proyecto\b\s\dto\request\personRequestDTO\SourceForPersonRequestDTO.class
 com\proyecto\b\s\service\service\SourceService.class
 com\proyecto\b\s\service\serviceImpl\EventServiceImpl.class
 com\proyecto\b\s\entity\Interview.class
-com\proyecto\b\s\dto\request\eventRequestDTO\IndustryForEventRequestDTO.class
 com\proyecto\b\s\dto\response\eventResponseDTO\EventResponseDTO.class
 com\proyecto\b\s\controller\EventController.class
 com\proyecto\b\s\controller\SourceController.class
-com\proyecto\b\s\dto\request\eventRequestDTO\StatePersonForEventRequestDTO.class
 com\proyecto\b\s\dto\response\eventResponseDTO\PersonForEventResponseDTO.class
 com\proyecto\b\s\entity\Skill.class
 com\proyecto\b\s\dto\request\InterviewRequestDTO.class
@@ -61,7 +56,6 @@ com\proyecto\b\s\entity\StateSearch$StateSearchBuilder.class
 com\proyecto\b\s\service\service\IndustryService.class
 com\proyecto\b\s\entity\StatePerson$StatePersonBuilder.class
 com\proyecto\b\s\entity\Skill$SkillBuilder.class
-com\proyecto\b\s\dto\response\eventResponseDTO\RolUserForEventResponseDTO.class
 com\proyecto\b\s\service\serviceImpl\ClientServiceImpl.class
 com\proyecto\b\s\entity\EventOption$EventOptionBuilder.class
 com\proyecto\b\s\dto\response\searchResponseDTO\StateSearchResponseDTO.class
@@ -122,7 +116,6 @@ com\proyecto\b\s\entity\Client.class
 com\proyecto\b\s\dto\request\searchRequestDTO\SearchRequestDTO.class
 com\proyecto\b\s\dto\modelMapper\ModelMapperImpl.class
 com\proyecto\b\s\entity\Interview$InterviewBuilder.class
-com\proyecto\b\s\dto\request\eventRequestDTO\SeniorityForEventRequestDTO.class
 com\proyecto\b\s\dto\request\IndustryRequestDTO.class
 com\proyecto\b\s\dto\response\eventResponseDTO\SkillForEventResponseDTO.class
 com\proyecto\b\s\service\service\ClientService.class
@@ -149,7 +142,6 @@ com\proyecto\b\s\entity\Source.class
 com\proyecto\b\s\service\serviceImpl\StatePersonServiceImpl.class
 com\proyecto\b\s\dto\response\PersonResponseDTO.class
 com\proyecto\b\s\service\serviceImpl\RolServiceImpl.class
-com\proyecto\b\s\dto\request\eventRequestDTO\ClientForEventRequestDTO.class
 com\proyecto\b\s\dto\response\searchResponseDTO\ClientForSearchResponseDTO.class
 com\proyecto\b\s\entity\Search.class
 com\proyecto\b\s\repository\SourceRepository.class
@@ -157,9 +149,7 @@ com\proyecto\b\s\repository\SkillRepository.class
 com\proyecto\b\s\service\serviceImpl\SearchServiceImpl.class
 com\proyecto\b\s\dto\request\searchRequestDTO\StateSearchRequestDTO.class
 com\proyecto\b\s\entity\RolUser$RolUserBuilder.class
-com\proyecto\b\s\dto\request\eventRequestDTO\RolForEventRequestDTO.class
 com\proyecto\b\s\service\service\AnswerService.class
-com\proyecto\b\s\dto\request\eventRequestDTO\RolUserForEventRequestDTO.class
 com\proyecto\b\s\service\service\RolService.class
 com\proyecto\b\s\dto\response\eventResponseDTO\RolForEventResponseDTO.class
 com\proyecto\b\s\service\service\SearchService.class

@@ -35,6 +35,7 @@ public class RolServiceImpl implements RolService {
 
     @Override
     public boolean existById(Long id) {
+
         return rolRepository.existsById(id);
     }
 
@@ -67,8 +68,9 @@ public class RolServiceImpl implements RolService {
 
     @Override
     public Rol findByName(String name) {
+
         return Optional.ofNullable(rolRepository.findByName(name))
-                .orElseThrow(()-> new InvalidResourceException("Rol no encontrado con el nombre " + name + "."));
+                .orElseThrow(() -> new InvalidResourceException("Rol no encontrado con el nombre " + name + "."));
     }
 
     @Override

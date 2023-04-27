@@ -7,6 +7,6 @@ import org.springframework.data.repository.query.Param;
 
 public interface SourceRepository extends JpaRepository<Source, Long> {
 
-@Query ("SELECT s FROM Source s WHERE s.name = :name")
-    Source findByName (@Param("name") String name);
+    @Query("SELECT s FROM Source s WHERE s.name = :name")
+    Source findByName(@Param("name") String name);
 }

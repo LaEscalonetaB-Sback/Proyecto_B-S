@@ -4,7 +4,6 @@ import com.proyecto.b.s.dto.modelMapper.ModelMapperInterface;
 import com.proyecto.b.s.dto.request.ClientRequestDTO;
 import com.proyecto.b.s.dto.response.ClientResponseDTO;
 import com.proyecto.b.s.entity.Client;
-import com.proyecto.b.s.entity.Skill;
 import com.proyecto.b.s.exception.InvalidResourceException;
 import com.proyecto.b.s.repository.ClientRepository;
 import com.proyecto.b.s.service.service.ClientService;
@@ -19,7 +18,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class ClientServiceImpl implements ClientService {
-
     private final ClientRepository clientRepository;
     private final ModelMapperInterface modelMapperInterface;
     private final ModelMapper modelMapper;
@@ -35,13 +33,14 @@ public class ClientServiceImpl implements ClientService {
         if (name == null && cuit == null) {
             List<Client> clientList = clientRepository.findAll();
             HelperValidator.isEmptyList(clientList);
+
             return clientList.stream()
                     .map(client -> modelMapper.map(client, ClientResponseDTO.class))
                     .collect(Collectors.toList());
         } else {
-
             List<Client> clientList = clientRepository.searchBy(name, cuit);
             HelperValidator.isEmptyList(clientList);
+
             return clientList.stream()
                     .map(client -> modelMapper.map(client, ClientResponseDTO.class))
                     .collect(Collectors.toList());
@@ -65,7 +64,7 @@ public class ClientServiceImpl implements ClientService {
     public Client findByName(String name) {
 
         return Optional.ofNullable(clientRepository.findByName(name))
-                .orElseThrow(()-> new InvalidResourceException("Cliente no encontrado con el nombre" + name));
+                .orElseThrow(() -> new InvalidResourceException("Cliente no encontrado con el nombre" + name));
     }
 
     @Override

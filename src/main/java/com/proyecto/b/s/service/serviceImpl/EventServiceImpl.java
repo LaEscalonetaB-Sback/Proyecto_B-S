@@ -87,7 +87,6 @@ public class EventServiceImpl implements EventService {
             Search search = searchService.findById(aux.getId());
             idSearches.add(search);
         }
-
         Event newEvent = modelMapperInterface.eventSaveRequestDtoToEvent(eventRequestDTO);
         newEvent.setPerson(newPerson);
         newEvent.setUser(newUser);
@@ -132,6 +131,7 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public boolean existById(Long id) {
+
         return eventRepository.existsById(id);
     }
 }

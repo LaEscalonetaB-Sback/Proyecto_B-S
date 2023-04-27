@@ -18,5 +18,6 @@ public interface IndustryService {
     IndustryResponseDTO updateIndustry(Long id, IndustryRequestDTO industryRequestDTO) throws Exception;
 
     void deleteIndustry(Long id) throws Exception;
-    public Industry findByName(String name);
+
+    Industry findByName(String name);
 }

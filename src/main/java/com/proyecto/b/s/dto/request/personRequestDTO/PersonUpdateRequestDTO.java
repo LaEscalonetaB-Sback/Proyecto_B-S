@@ -1,7 +1,9 @@
 package com.proyecto.b.s.dto.request.personRequestDTO;
 
-
-import com.proyecto.b.s.dto.request.*;
+import com.proyecto.b.s.dto.request.IndustryRequestDTO;
+import com.proyecto.b.s.dto.request.RolRequestDTO;
+import com.proyecto.b.s.dto.request.SkillRequestDTO;
+import com.proyecto.b.s.dto.request.SourceRequestDTO;
 import lombok.Data;
 
 import java.util.List;
@@ -31,9 +33,6 @@ public class PersonUpdateRequestDTO {
     private List<SkillRequestDTO> skills;
 
     private List<StatePersonRequestDTO> statePeople;
-
-
-
 
 
 }

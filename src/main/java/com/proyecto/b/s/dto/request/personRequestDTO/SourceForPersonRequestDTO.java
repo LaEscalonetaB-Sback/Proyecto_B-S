@@ -1,4 +1,5 @@
 package com.proyecto.b.s.dto.request.personRequestDTO;
+
 import lombok.Data;
 
 @Data

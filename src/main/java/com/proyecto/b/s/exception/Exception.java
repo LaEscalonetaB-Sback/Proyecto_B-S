@@ -40,6 +40,4 @@ public class Exception {
         errorMap.put("Error", ex.getMessage());
         return errorMap;
     }
-
-
 }

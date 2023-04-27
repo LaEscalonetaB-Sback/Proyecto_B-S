@@ -4,7 +4,6 @@ import lombok.Data;
 
 @Data
 public class ClientForEventResponseDTO {
-
     private Long id;
     private String name;
     private Integer cuit;

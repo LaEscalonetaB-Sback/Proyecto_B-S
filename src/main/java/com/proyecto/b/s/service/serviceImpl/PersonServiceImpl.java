@@ -9,7 +9,6 @@ import com.proyecto.b.s.repository.PersonRepository;
 import com.proyecto.b.s.service.service.*;
 import com.proyecto.b.s.utils.HelperValidator;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -39,9 +38,9 @@ public class PersonServiceImpl implements PersonService {
         this.modelMapperInterface = modelMapperInterface;
         this.modelMapper = modelMapper;
         this.skillService = skillService;
-        this.industryService= industryService;
-        this.sourceService= sourceService;
-        this.rolService= rolService;
+        this.industryService = industryService;
+        this.sourceService = sourceService;
+        this.rolService = rolService;
     }
 
     @Override
@@ -49,34 +48,33 @@ public class PersonServiceImpl implements PersonService {
         existPerson(personRequestDto);
         Person person = getPerson(personRequestDto);
         Person savedPerson = personRepository.save(person);
+
         return modelMapperInterface.personToPersonResponseDTO(savedPerson);
     }
 
     private Person getPerson(PersonRequestDTO personRequestDto) {
         List<SkillForPersonRequestDTO> skillsName = personRequestDto.getSkills();
-        List <Skill> skills = new ArrayList<>();
-        for(SkillForPersonRequestDTO aux : skillsName){
+        List<Skill> skills = new ArrayList<>();
+        for (SkillForPersonRequestDTO aux : skillsName) {
             Skill skill = skillService.findByName(aux.getName());
             skills.add(skill);
         }
-
         List<IndustryForPersonRequestDTO> industryName = personRequestDto.getIndustries();
-        List <Industry> industries = new ArrayList<>();
+        List<Industry> industries = new ArrayList<>();
         for (IndustryForPersonRequestDTO aux : industryName) {
             Industry industry = industryService.findByName(aux.getName());
             industries.add(industry);
         }
-
-        List<SourceForPersonRequestDTO> sourceName= personRequestDto.getSources();
-        List <Source> sources = new ArrayList<>();
-        for (SourceForPersonRequestDTO aux: sourceName) {
+        List<SourceForPersonRequestDTO> sourceName = personRequestDto.getSources();
+        List<Source> sources = new ArrayList<>();
+        for (SourceForPersonRequestDTO aux : sourceName) {
             Source source = sourceService.findByName(aux.getName());
             sources.add(source);
         }
-        List <RolForPersonRequestDTO> rolName = personRequestDto.getRoles();
-        List <Rol> roles = new ArrayList<>();
+        List<RolForPersonRequestDTO> rolName = personRequestDto.getRoles();
+        List<Rol> roles = new ArrayList<>();
         for (RolForPersonRequestDTO aux : rolName) {
-            Rol rol = rolService.findByName (aux.getName());
+            Rol rol = rolService.findByName(aux.getName());
             roles.add(rol);
         }
         Person person = modelMapperInterface.personReqDtoToPerson(personRequestDto);
@@ -84,6 +82,7 @@ public class PersonServiceImpl implements PersonService {
         person.setIndustries(industries);
         person.setSources(sources);
         person.setRoles(roles);
+
         return person;
     }
 
@@ -121,11 +120,13 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public boolean existById(Long id) {
+
         return personRepository.existsById(id);
     }
 
     @Override
     public Person findById(Long id) {
+
         return personRepository.findById(id).orElseThrow(() -> new InvalidResourceException("Persona no encontrada con el id: " + id));
     }
 

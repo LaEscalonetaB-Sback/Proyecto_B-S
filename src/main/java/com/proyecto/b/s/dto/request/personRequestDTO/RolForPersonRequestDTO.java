@@ -4,7 +4,6 @@ import lombok.Data;
 
 @Data
 public class RolForPersonRequestDTO {
-
     private Long id;
     private String name;
     //private SeniorityRequestDto seniority;
