@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -23,6 +24,7 @@ class SearchRepositoryTest {
     @DisplayName("Test for exist search")
     @Transactional
     @Test
+    @DirtiesContext
     void testExistSearch() {
         Search search = Search.builder()
                 .position("Java Developer")
@@ -40,6 +42,7 @@ class SearchRepositoryTest {
     @DisplayName("Test for update search")
     @Transactional
     @Test
+    @DirtiesContext
     void checkUpdate() {
         Search search1 = Search.builder()
                 .id(1L)
@@ -63,6 +66,7 @@ class SearchRepositoryTest {
     @DisplayName("Test for save search")
     @Transactional
     @Test
+    @DirtiesContext
     void testSaveSearch() {
         Search search = Search.builder()
                 .position("Java Developer")
@@ -76,6 +80,7 @@ class SearchRepositoryTest {
     @DisplayName("Test for list search empty")
     @Transactional
     @Test
+    @DirtiesContext
     void testListSearchesEmpty() {
         List<Search> searches = searchRepository.findAll();
         assertTrue(searches.isEmpty());
@@ -84,6 +89,7 @@ class SearchRepositoryTest {
     @DisplayName("Test for list search not empty")
     @Transactional
     @Test
+    @DirtiesContext
     void testListSearchesNotEmpty() {
         Search search = Search.builder()
                 .id(1L)
@@ -98,6 +104,7 @@ class SearchRepositoryTest {
     @DisplayName("Test for delete search")
     @Transactional
     @Test
+    @DirtiesContext
     void testDeleteSearch() {
         Search search = Search.builder()
                 .id(1L)

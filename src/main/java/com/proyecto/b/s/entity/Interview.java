@@ -12,6 +12,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @ToString
+@Builder
 @Table(name = "interview")
 public class Interview {
     @Id
