@@ -26,45 +26,38 @@ public class SourceController {
     public ResponseEntity<List<SourceResponseDTO>> find() {
         List<SourceResponseDTO> result = sourceService.list();
 
-        if (result.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.ok(result);
-        }
+        return ResponseEntity.ok(result);
     }
 
     //Encuentra source por id
     @GetMapping("/{id}")
     public ResponseEntity<Source> findOne(@PathVariable Long id) throws Exception {
-        if (!sourceService.existById(id)) {
-            return ResponseEntity.notFound().build();
-        } else {
-            Source source = sourceService.findById(id);
-            return ResponseEntity.ok(source);
-        }
+        Source source = sourceService.findById(id);
+
+        return ResponseEntity.ok(source);
     }
 
     //Crear source
     @PostMapping("/create")
     public ResponseEntity<SourceResponseDTO> create(@RequestBody SourceRequestDTO sourceRequestDTO) {
         SourceResponseDTO result = sourceService.save(sourceRequestDTO);
+
         return ResponseEntity.ok(result);
     }
 
     //Actualizar source
     @PutMapping("/update/{id}")
     public ResponseEntity<SourceResponseDTO> update(@PathVariable Long id, @RequestBody SourceRequestDTO sourceRequestDTO) throws Exception {
-        if (!sourceService.existById(id)) {
-            return ResponseEntity.notFound().build();
-        }
         SourceResponseDTO result = sourceService.update(id, sourceRequestDTO);
+
         return ResponseEntity.ok(result);
     }
 
     //Eliminar source por id
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Skill> delete(@PathVariable Long id) {
+    public ResponseEntity<Skill> delete(@PathVariable Long id) throws Exception{
         sourceService.delete(id);
+
         return ResponseEntity.noContent().build();
     }
 }

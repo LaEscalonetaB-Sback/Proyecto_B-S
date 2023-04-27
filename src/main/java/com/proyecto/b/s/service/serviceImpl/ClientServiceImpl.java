@@ -6,23 +6,20 @@ import com.proyecto.b.s.dto.response.ClientResponseDTO;
 import com.proyecto.b.s.entity.Client;
 import com.proyecto.b.s.repository.ClientRepository;
 import com.proyecto.b.s.service.service.ClientService;
+import com.proyecto.b.s.utils.HelperValidator;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class ClientServiceImpl implements ClientService {
 
-    @Autowired
-    private ClientRepository clientRepository;
-    @Autowired
-    private ModelMapperInterface modelMapperInterface;
-
-    @Autowired
-    private ModelMapper modelMapper;
+    private final ClientRepository clientRepository;
+    private final ModelMapperInterface modelMapperInterface;
+    private final ModelMapper modelMapper;
 
     public ClientServiceImpl(ClientRepository clientRepository, ModelMapperInterface modelMapperInterface, ModelMapper modelMapper) {
         this.clientRepository = clientRepository;
@@ -32,15 +29,16 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public List<ClientResponseDTO> searchClient(String name, Integer cuit) {
-
         if (name == null && cuit == null) {
             List<Client> clientList = clientRepository.findAll();
+            HelperValidator.isEmptyList(clientList);
             return clientList.stream()
                     .map(client -> modelMapper.map(client, ClientResponseDTO.class))
                     .collect(Collectors.toList());
         } else {
 
             List<Client> clientList = clientRepository.searchBy(name, cuit);
+            HelperValidator.isEmptyList(clientList);
             return clientList.stream()
                     .map(client -> modelMapper.map(client, ClientResponseDTO.class))
                     .collect(Collectors.toList());
@@ -54,17 +52,23 @@ public class ClientServiceImpl implements ClientService {
         return clientRepository.save(client);
     }
 
+    @Override
+    public Client findById(Long id) throws Exception {
 
+        return clientRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Cliente no encontrado con id: " + id));
+    }
+
+    @Override
+    public Client findByName(String name) {
+
+        return clientRepository.findByName(name);
+    }
 
     @Override
     public void deleteClient(Long id) throws Exception {
-        Client client = clientRepository.findById(id)
-                .orElseThrow(()-> new Exception("Client not found -" + this.getClass().getName()));
-
+        Client client = findById(id);
         client.setActive(false);
-
         clientRepository.save(client);
-
         modelMapperInterface.clientToClientResponseDTO(client);
     }
 }

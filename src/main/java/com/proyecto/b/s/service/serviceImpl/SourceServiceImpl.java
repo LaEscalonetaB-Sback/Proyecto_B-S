@@ -2,65 +2,64 @@ package com.proyecto.b.s.service.serviceImpl;
 
 import com.proyecto.b.s.dto.request.SourceRequestDTO;
 import com.proyecto.b.s.dto.response.SourceResponseDTO;
+import com.proyecto.b.s.entity.Industry;
 import com.proyecto.b.s.entity.Source;
+import com.proyecto.b.s.exception.InvalidResourceException;
 import com.proyecto.b.s.repository.SourceRepository;
 import com.proyecto.b.s.service.service.SourceService;
+import com.proyecto.b.s.utils.HelperValidator;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SourceServiceImpl implements SourceService {
-
     private final SourceRepository sourceRepository;
-    @Autowired
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
-    public SourceServiceImpl(SourceRepository sourceRepository) {
+    public SourceServiceImpl(SourceRepository sourceRepository, ModelMapper modelMapper) {
         this.sourceRepository = sourceRepository;
+        this.modelMapper = modelMapper;
     }
 
     @Override
     public SourceResponseDTO save(SourceRequestDTO sourceRequestDTO) {
         Source source = modelMapper.map(sourceRequestDTO, Source.class);
         sourceRepository.save(source);
+
         return modelMapper.map(source, SourceResponseDTO.class);
     }
 
     @Override
     public Source findById(Long id) throws Exception {
-        return sourceRepository.getReferenceById(id);
+
+        return sourceRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Source no encontrada con id: " + id));
     }
 
     @Override
-    public SourceResponseDTO update(Long id, SourceRequestDTO sourceRequestDTO) throws EntityNotFoundException {
-        Source source = sourceRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Fuente no encontrada con id: " + id));
+    public SourceResponseDTO update(Long id, SourceRequestDTO sourceRequestDTO) throws Exception {
+        Source source = findById(id);
         String sourceNameOrigin = sourceRequestDTO.getName();
-
         source.setName(sourceNameOrigin);
-
         sourceRepository.save(source);
 
         return modelMapper.map(source, SourceResponseDTO.class);
     }
 
     @Override
-    public void delete(Long id) {
-        Source entity = sourceRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Fuente no encontrada con id: " + id));
-        if (entity == null) {
-            throw new EntityNotFoundException("Fuente no encontrada con id: " + id);
-        } else {
-            sourceRepository.delete(entity);
-        }
+    public void delete(Long id) throws Exception {
+        Source entity = findById(id);
+        sourceRepository.delete(entity);
     }
 
     @Override
     public List<SourceResponseDTO> list() {
         List<Source> sources = sourceRepository.findAll();
+        HelperValidator.isEmptyList(sources);
         List<SourceResponseDTO> sourceResponseDTOS = new ArrayList<>();
 
         for (Source aux : sources) {
@@ -74,5 +73,11 @@ public class SourceServiceImpl implements SourceService {
     @Override
     public boolean existById(Long id) {
         return sourceRepository.existsById(id);
+    }
+
+    @Override
+    public Source findByName(String name) {
+        return Optional.ofNullable(sourceRepository.findByName(name))
+                .orElseThrow(()-> new InvalidResourceException("Fuente no encontrada con el nombre " + name + "."));
     }
 }

@@ -25,45 +25,38 @@ public class SkillController {
     public ResponseEntity<List<SkillResponseDTO>> findInterview() {
         List<SkillResponseDTO> result = skillService.list();
 
-        if (result.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.ok(result);
-        }
+        return ResponseEntity.ok(result);
     }
 
     //Encuentra skill por id
     @GetMapping("/{id}")
     public ResponseEntity<Skill> findOne(@PathVariable Long id) throws Exception {
-        if (!skillService.existById(id)) {
-            return ResponseEntity.notFound().build();
-        } else {
-            Skill skill = skillService.findById(id);
-            return ResponseEntity.ok(skill);
-        }
+        Skill skill = skillService.findById(id);
+
+        return ResponseEntity.ok(skill);
     }
 
     //Crear skill
     @PostMapping("/create")
     public ResponseEntity<SkillResponseDTO> create(@RequestBody SkillRequestDTO skillRequestDTO) {
         SkillResponseDTO result = skillService.save(skillRequestDTO);
+
         return ResponseEntity.ok(result);
     }
 
     //Actualizar skill
     @PutMapping("/update/{id}")
     public ResponseEntity<SkillResponseDTO> update(@PathVariable Long id, @RequestBody SkillRequestDTO skillRequestDTO) throws Exception {
-        if (!skillService.existById(id)) {
-            return ResponseEntity.notFound().build();
-        }
         SkillResponseDTO result = skillService.update(id, skillRequestDTO);
+
         return ResponseEntity.ok(result);
     }
 
     //Eliminar skill por id
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Skill> delete(@PathVariable Long id) {
+    public ResponseEntity<Skill> delete(@PathVariable Long id) throws Exception{
         skillService.delete(id);
+
         return ResponseEntity.noContent().build();
     }
 }

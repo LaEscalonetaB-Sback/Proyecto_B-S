@@ -31,7 +31,7 @@ public class Search {
 
     private String modalityHiring; //modalidadTrabajo
 
-    private String position; //posicion
+    private String nameSearch; //posicion a nombre de busqueda
 
     private String remuneration; //remuneracion
 
