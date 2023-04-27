@@ -89,10 +89,10 @@ public class PersonServiceImpl implements PersonService {
 
     private void existPerson(PersonRequestDTO personRequestDto) {
         Optional<Person> existingPerson = personRepository.findByDniOrCuilOrEmailOrLinkedin(
-                personRequestDto.getDni() != null ? personRequestDto.getDni() : "",
-                personRequestDto.getCuil() != null ? personRequestDto.getCuil() : "",
-                personRequestDto.getEmail() != null ? personRequestDto.getEmail() : "",
-                personRequestDto.getLinkedin() != null ? personRequestDto.getLinkedin() : ""
+                personRequestDto.getDni() != "" ? personRequestDto.getDni() : null,
+                personRequestDto.getCuil() != "" ? personRequestDto.getCuil() : null,
+                personRequestDto.getEmail() != "" ? personRequestDto.getEmail() : null,
+                personRequestDto.getLinkedin() != "" ? personRequestDto.getLinkedin() : null
         );
 
         if (existingPerson.isPresent()) {

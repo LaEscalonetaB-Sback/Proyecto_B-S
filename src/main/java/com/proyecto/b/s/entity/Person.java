@@ -17,7 +17,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-
+@Builder
 @Table(name = "person")
 public class Person {
     @Id
