@@ -2,12 +2,12 @@ C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\controller\EventCon
 C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\controller\IndustryController.java
 C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\request\UserRequestDTO.java
 C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\service\service\AnswerService.java
+C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\service\serviceImpl\SeniorityServiceImpl.java
 C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\Application.java
 C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\service\service\SearchService.java
 C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\controller\SearchController.java
 C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\response\StatePersonResponseDTO.java
 C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\response\searchResponseDTO\ClientForSearchResponseDTO.java
-C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\service\service\StateService.java
 C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\service\service\ClientService.java
 C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\request\eventRequestDTO\InterviewForEventRequestDTO.java
 C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\controller\EventOptionController.java
@@ -17,6 +17,7 @@ C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\request\personR
 C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\request\SkillRequestDTO.java
 C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\entity\Person.java
 C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\service\serviceImpl\SourceServiceImpl.java
+C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\service\service\StatePersonService.java
 C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\response\SeniorityResponseDTO.java
 C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\service\serviceImpl\ClientServiceImpl.java
 C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\security\JWT.java
@@ -41,6 +42,7 @@ C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\response\eventR
 C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\entity\StatePerson.java
 C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\response\eventResponseDTO\SeniorityForEventResponseDTO.java
 C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\repository\SearchRepository.java
+C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\exception\InvalidResourceException.java
 C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\service\service\EventService.java
 C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\response\searchResponseDTO\StateSearchResponseDTO.java
 C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\response\IndustryResponseDTO.java
@@ -48,9 +50,10 @@ C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\service\serviceImpl
 C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\repository\StateSearchRepository.java
 C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\request\eventRequestDTO\IndustryForEventRequestDTO.java
 C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\response\eventResponseDTO\PersonForEventResponseDTO.java
+C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\utils\HelperValidator.java
 C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\request\eventRequestDTO\RolForEventRequestDTO.java
 C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\service\serviceImpl\EventServiceImpl.java
-C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\service\serviceImpl\StateServiceImpl.java
+C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\service\serviceImpl\StateSearchServiceImpl.java
 C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\request\searchRequestDTO\StateSearchRequestDTO.java
 C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\request\RolUserRequestDTO.java
 C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\response\PersonResponseDTO.java
@@ -115,6 +118,7 @@ C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\request\personR
 C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\entity\Source.java
 C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\repository\ClientRepository.java
 C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\request\searchRequestDTO\ClientForSearchRequestDTO.java
+C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\service\service\StateSearchService.java
 C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\service\serviceImpl\EventOptionServiceImpl.java
 C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\request\searchRequestDTO\SeniorityForSearchRequestDTO.java
 C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\controller\PersonController.java
@@ -125,6 +129,7 @@ C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\response\eventR
 C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\service\serviceImpl\PersonServiceImpl.java
 C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\response\SkillResponseDTO.java
 C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\request\eventRequestDTO\EventOptionForEventRequestDTO.java
+C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\service\serviceImpl\StatePersonServiceImpl.java
 C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\repository\RolRepository.java
 C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\service\service\PersonService.java
 C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\request\eventRequestDTO\StateSearchForEventRequestDTO.java
@@ -139,6 +144,7 @@ C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\response\eventR
 C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\service\service\UserService.java
 C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\repository\SkillRepository.java
 C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\service\service\RolService.java
+C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\service\service\SeniorityService.java
 C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\request\eventRequestDTO\EventRequestDTO.java
 C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\request\eventRequestDTO\UserForEventRequestDTO.java
 C:\Proyectos\BYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\service\service\SourceService.java

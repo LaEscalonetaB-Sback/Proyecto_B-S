@@ -1,5 +1,4 @@
 package com.proyecto.b.s.controller;
-//intrevista -> interview
 
 import com.proyecto.b.s.dto.request.InterviewRequestDTO;
 import com.proyecto.b.s.dto.response.InterviewResponseDTO;
@@ -16,7 +15,7 @@ import java.util.Optional;
 @CrossOrigin("*")
 public class InterviewController {
 
-    final private InterviewService interviewService;
+    private final InterviewService interviewService;
 
     public InterviewController(InterviewService interviewService) {
         this.interviewService = interviewService;
@@ -28,17 +27,14 @@ public class InterviewController {
     public ResponseEntity<List<InterviewResponseDTO>> findInterview() {
         List<InterviewResponseDTO> interview = interviewService.listInterview();
 
-        if (interview.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.ok(interview);
-        }
+        return ResponseEntity.ok(interview);
     }
 
     //Encuentra entrevista por id
     @GetMapping("/{id}")
     public ResponseEntity<Interview> findOne(@PathVariable Long id) throws Exception {
         Optional<Interview> SearchOpt = Optional.ofNullable(interviewService.findById(id));
+
         return SearchOpt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
@@ -46,23 +42,23 @@ public class InterviewController {
     @PostMapping("/create")
     public ResponseEntity<InterviewResponseDTO> create(@RequestBody InterviewRequestDTO interviewRequestDto) {
         InterviewResponseDTO result = interviewService.saveInterview(interviewRequestDto);
+
         return ResponseEntity.ok(result);
     }
 
     //Actualizar entrevista
     @PutMapping("/update/{id}")
     public ResponseEntity<InterviewResponseDTO> update(@PathVariable Long id, @RequestBody InterviewRequestDTO interviewRequestDto) throws Exception {
-        if (!interviewService.existById(id)) {
-            return ResponseEntity.notFound().build();
-        }
         InterviewResponseDTO result = interviewService.updateInterview(id, interviewRequestDto);
+
         return ResponseEntity.ok(result);
     }
 
     //Eliminar entrevista por id
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Interview> delete(@PathVariable Long id) {
+    public ResponseEntity<Interview> delete(@PathVariable Long id) throws Exception {
         interviewService.deleteInterview(id);
+
         return ResponseEntity.noContent().build();
     }
 }

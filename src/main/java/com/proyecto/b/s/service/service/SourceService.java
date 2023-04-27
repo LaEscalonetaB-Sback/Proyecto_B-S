@@ -4,7 +4,6 @@ import com.proyecto.b.s.dto.request.SourceRequestDTO;
 import com.proyecto.b.s.dto.response.SourceResponseDTO;
 import com.proyecto.b.s.entity.Source;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 public interface SourceService {
@@ -12,11 +11,12 @@ public interface SourceService {
 
     Source findById(Long id) throws Exception;
 
-    SourceResponseDTO update(Long searchId, SourceRequestDTO sourceRequestDTO) throws EntityNotFoundException;
+    SourceResponseDTO update(Long searchId, SourceRequestDTO sourceRequestDTO) throws Exception;
 
-    void delete(Long id);
+    void delete(Long id) throws Exception;
 
     List<SourceResponseDTO> list();
 
     boolean existById(Long id);
+    Source findByName(String name);
 }

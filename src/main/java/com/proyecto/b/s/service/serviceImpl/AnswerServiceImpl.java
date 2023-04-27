@@ -3,21 +3,25 @@ package com.proyecto.b.s.service.serviceImpl;
 import com.proyecto.b.s.entity.Answer;
 import com.proyecto.b.s.repository.AnswerRepository;
 import com.proyecto.b.s.service.service.AnswerService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.expression.ExpressionException;
+import com.proyecto.b.s.utils.HelperValidator;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Service
 public class AnswerServiceImpl implements AnswerService {
 
-    @Autowired
-    private AnswerRepository answerRepository;
+    private final AnswerRepository answerRepository;
+
+    public AnswerServiceImpl(AnswerRepository answerRepository) {
+        this.answerRepository = answerRepository;
+    }
 
     @Override
     public Answer findById(Long id) throws Exception {
-        return answerRepository.findById(id).orElseThrow(() -> new ExpressionException("Answer not found -" + this.getClass().getName()));
+
+        return answerRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Answer no encontrada con id: " + id));
     }
 
     @Override
@@ -27,7 +31,9 @@ public class AnswerServiceImpl implements AnswerService {
 
     @Override
     public List<Answer> listAnswer() {
-        return answerRepository.findAll();
-    }
+        List<Answer> answerList = answerRepository.findAll();
+        HelperValidator.isEmptyList(answerList);
 
+        return answerList;
+    }
 }

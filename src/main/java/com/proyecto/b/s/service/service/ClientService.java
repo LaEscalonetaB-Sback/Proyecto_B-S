@@ -7,12 +7,13 @@ import com.proyecto.b.s.entity.Client;
 import java.util.List;
 
 public interface ClientService {
-
+    Client findById(Long id) throws Exception;
 
     List<ClientResponseDTO> searchClient(String name, Integer cuit);
 
     Client saveClient(ClientRequestDTO clientRequestDTO);
 
+    Client findByName(String name);
 
     void deleteClient(Long id) throws Exception;
 }

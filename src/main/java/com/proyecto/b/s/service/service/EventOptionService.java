@@ -10,12 +10,14 @@ import java.util.List;
 public interface EventOptionService {
     //List<EventOptionForEventResponseDTO> listEventoption();
     List<Answer> getAnswersByEventOptionName(String eventOptionName);
+
     List<String> getEventOptionNames();
+
     EventOptionForEventResponseDTO saveEventOption(EventOptionForEventRequestDTO eventRequestDTO);
 
     EventOptionForEventResponseDTO updateEventOption(Long eventId, EventOptionForEventRequestDTO eventRequestDTO) throws Exception;
 
-    void deleteEventOption(Long id);
+    void deleteEventOption(Long id) throws Exception;
 
     EventOption findById(Long id) throws Exception;
 

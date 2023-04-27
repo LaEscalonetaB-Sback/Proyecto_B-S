@@ -12,6 +12,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @ToString
+@Builder
 @Table(name = "rol")
 public class Rol {
     @Id

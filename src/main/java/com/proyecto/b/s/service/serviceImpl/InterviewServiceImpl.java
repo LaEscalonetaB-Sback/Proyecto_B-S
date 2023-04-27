@@ -4,35 +4,32 @@ import com.proyecto.b.s.dto.modelMapper.ModelMapperInterface;
 import com.proyecto.b.s.dto.request.InterviewRequestDTO;
 import com.proyecto.b.s.dto.response.InterviewResponseDTO;
 import com.proyecto.b.s.entity.Interview;
+import com.proyecto.b.s.exception.InvalidResourceException;
 import com.proyecto.b.s.repository.InterviewRepository;
 import com.proyecto.b.s.service.service.InterviewService;
+import com.proyecto.b.s.utils.HelperValidator;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class InterviewServiceImpl implements InterviewService {
-    @Autowired
-    InterviewRepository interviewRepository;
+    private final InterviewRepository interviewRepository;
+    private final ModelMapperInterface modelMapperInterface;
+    private final ModelMapper modelMapper;
 
-    @Autowired
-    private ModelMapperInterface modelMapperInterface;
-
-    @Autowired
-    private ModelMapper modelMapper;
-
-    public InterviewServiceImpl(InterviewRepository interviewRepository, ModelMapperInterface modelMapperInterface) {
+    public InterviewServiceImpl(InterviewRepository interviewRepository, ModelMapperInterface modelMapperInterface, ModelMapper modelMapper) {
         this.interviewRepository = interviewRepository;
         this.modelMapperInterface = modelMapperInterface;
+        this.modelMapper = modelMapper;
     }
 
     @Override
     public Interview findById(Long id) throws Exception {
-        return interviewRepository.findById(id).orElseThrow(() -> new Exception("La busqueda no existe"));
+
+        return interviewRepository.findById(id).orElseThrow(() -> new InvalidResourceException("Entrevista no encontrada con id: " + id));
     }
 
     @Override
@@ -43,6 +40,8 @@ public class InterviewServiceImpl implements InterviewService {
     @Override
     public List<InterviewResponseDTO> listInterview() {
         List<Interview> interviewsList = interviewRepository.findAll();
+        HelperValidator.isEmptyList(interviewsList);
+
         return interviewsList.stream()
                 .map(interview -> modelMapper.map(interview, InterviewResponseDTO.class))
                 .collect(Collectors.toList());
@@ -52,27 +51,22 @@ public class InterviewServiceImpl implements InterviewService {
     public InterviewResponseDTO saveInterview(InterviewRequestDTO interviewRequestDTO) {
         Interview newInterview = modelMapperInterface.interviewSaveRequestDtoToInterview(interviewRequestDTO);
         interviewRepository.save(newInterview);
-        InterviewResponseDTO newInterviewResDto = modelMapperInterface.interviewToInterviewResponseDto(newInterview);
 
-        return newInterviewResDto;
+        return modelMapperInterface.interviewToInterviewResponseDto(newInterview);
     }
 
     @Override
     public InterviewResponseDTO updateInterview(Long id, InterviewRequestDTO interviewRequestDTO) throws Exception {
-        Interview updatedInterview = interviewRepository.findById(id).orElseThrow(() -> new Exception("La entrevista no existe"));
+        Interview updatedInterview = findById(id);
         modelMapper.map(interviewRequestDTO, updatedInterview);
         interviewRepository.save(updatedInterview);
 
         return modelMapper.map(updatedInterview, InterviewResponseDTO.class);
-
     }
 
     @Override
-    public void deleteInterview(Long id) {
-        Interview entity = interviewRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Entrevista no encontrada con id: " + id));
-        if (entity == null) {
-            throw new EntityNotFoundException("Entrevista no encontrada con id: " + id);
-        }
+    public void deleteInterview(Long id) throws Exception {
+        Interview entity = findById(id);
         entity.setActive(false);
         interviewRepository.save(entity);
     }
