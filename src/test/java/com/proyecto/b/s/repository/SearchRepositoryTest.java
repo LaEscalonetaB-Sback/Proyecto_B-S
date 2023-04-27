@@ -27,7 +27,7 @@ class SearchRepositoryTest {
     @DirtiesContext
     void testExistSearch() {
         Search search = Search.builder()
-                .position("Java Developer")
+                .nameSearch("Java Developer")
                 .build();
         Search savedSearch = searchRepository.save(search);
         boolean exist = searchRepository.existsById(savedSearch.getId());
@@ -46,7 +46,7 @@ class SearchRepositoryTest {
     void checkUpdate() {
         Search search1 = Search.builder()
                 .id(1L)
-                .position("JAVA")
+                .nameSearch("Java Developer")
                 .build();
 
         searchRepository.save(search1);
@@ -54,13 +54,13 @@ class SearchRepositoryTest {
         Optional<Search> s = searchRepository.findById(1L);
         assertTrue(s.isPresent());
 
-        s.get().setPosition("FULL-STACK");
+        s.get().setNameSearch("FULL-STACK");
         searchRepository.save(s.get());
 
         Optional<Search> updatedSearch = searchRepository.findById(1L);
         assertTrue(updatedSearch.isPresent());
 
-        assertEquals("FULL-STACK", updatedSearch.get().getPosition());
+        assertEquals("FULL-STACK", updatedSearch.get().getNameSearch());
     }
 
     @DisplayName("Test for save search")
@@ -69,7 +69,7 @@ class SearchRepositoryTest {
     @DirtiesContext
     void testSaveSearch() {
         Search search = Search.builder()
-                .position("Java Developer")
+                .nameSearch("Java Developer")
                 .build();
         Search savedSearch = searchRepository.save(search);
 
@@ -93,7 +93,7 @@ class SearchRepositoryTest {
     void testListSearchesNotEmpty() {
         Search search = Search.builder()
                 .id(1L)
-                .position("Java Developer")
+                .nameSearch("Java Developer")
                 .build();
         searchRepository.save(search);
 
@@ -108,7 +108,7 @@ class SearchRepositoryTest {
     void testDeleteSearch() {
         Search search = Search.builder()
                 .id(1L)
-                .position("Java Developer")
+                .nameSearch("Java Developer")
                 .build();
 
         Search savedSearch = searchRepository.save(search);
