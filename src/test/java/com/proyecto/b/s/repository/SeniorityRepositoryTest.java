@@ -1,6 +1,8 @@
 package com.proyecto.b.s.repository;
 
 import com.proyecto.b.s.entity.Interview;
+import com.proyecto.b.s.entity.Rol;
+import com.proyecto.b.s.entity.Seniority;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,108 +21,119 @@ import static org.junit.jupiter.api.Assertions.*;
 class SeniorityRepositoryTest {
     @Autowired
     private SeniorityRepository seniorityRepository;
-    @Test
-    void findByName() {
-    }
-
-    /*@DisplayName("Test for exist Interview")
+    @DisplayName("Test for find by name seniority")
     @Transactional
     @Test
     @DirtiesContext
-    void testExistInterview() {
-        Interview interview = Interview.builder()
+    void findByName() {
+        Seniority seniority = Seniority.builder()
                 .id(1L)
-                .linkMeet("LinkCualquiera.googlemeet.com")
+                .name("Trainee")
                 .build();
-        Interview savedInterview = interviewRepository.save(interview);
-        boolean exist = interviewRepository.existsById(savedInterview.getId());
+        seniorityRepository.save(seniority);
+        Seniority seniorityFind = seniorityRepository.findByName("Trainee");
+
+        assertEquals("Trainee", seniorityFind.getName());
+    }
+
+    @DisplayName("Test for exist Seniority")
+    @Transactional
+    @Test
+    @DirtiesContext
+    void testExistSeniority() {
+        Seniority seniority = Seniority.builder()
+                .id(1L)
+                .name("Trainee")
+                .build();
+        Seniority savedSeniority = seniorityRepository.save(seniority);
+        boolean exist = seniorityRepository.existsById(savedSeniority.getId());
 
         assertTrue(exist);
 
-        boolean notExist = interviewRepository.existsById(-1L);
+        boolean notExist = seniorityRepository.existsById(-1L);
 
         assertFalse(notExist);
     }
 
-    @DisplayName("Test for update Interview")
+    @DisplayName("Test for update Seniority")
     @Transactional
     @Test
     @DirtiesContext
-    void checkUpdateInterview() {
-        Interview interview = Interview.builder()
+    void checkUpdateSeniority() {
+        Seniority seniority = Seniority.builder()
                 .id(1L)
-                .linkMeet("LinkCualquiera.googlemeet.com")
+                .name("Trainee")
                 .build();
 
-        interviewRepository.save(interview);
+        seniorityRepository.save(seniority);
 
-        Optional<Interview> i = interviewRepository.findById(1L);
-        assertTrue(i.isPresent());
+        Optional<Seniority> seniorityOptional = seniorityRepository.findById(1L);
+        assertTrue(seniorityOptional.isPresent());
 
-        i.get().setLinkMeet("CAMBIO-DE-LINK.GOOGLEMEET.COM");
-        interviewRepository.save(i.get());
+        seniorityOptional.get().setName("Senior");
+        seniorityRepository.save(seniorityOptional.get());
 
-        Optional<Interview> updatedInterview = interviewRepository.findById(1L);
-        assertTrue(updatedInterview.isPresent());
+        Optional<Seniority> updatedSeniority = seniorityRepository.findById(1L);
+        assertTrue(updatedSeniority.isPresent());
 
-        assertEquals("CAMBIO-DE-LINK.GOOGLEMEET.COM", updatedInterview.get().getLinkMeet());
+        assertEquals("Senior", updatedSeniority.get().getName());
     }
 
-    @DisplayName("Test for save Interview")
+    @DisplayName("Test for save Seniority")
     @Transactional
     @Test
     @DirtiesContext
-    void testSaveInterview() {
-        Interview interview = Interview.builder()
+    void testSaveSeniority() {
+        Seniority seniority = Seniority.builder()
                 .id(1L)
-                .linkMeet("LinkCualquiera.googlemeet.com")
+                .name("Trainee")
                 .build();
-        Interview savedInterview = interviewRepository.save(interview);
+        Seniority savedSeniority = seniorityRepository.save(seniority);
 
-        assertThat(savedInterview).isNotNull();
-        assertThat(savedInterview.getId()).isNotNull().isPositive();
+        assertThat(savedSeniority).isNotNull();
+        assertThat(savedSeniority.getId()).isNotNull().isPositive();
     }
 
-    @DisplayName("Test for list Interview empty")
+    @DisplayName("Test for list Seniority empty")
     @Transactional
     @Test
     @DirtiesContext
-    void testListInterviewsEmpty() {
-        List<Interview> interviews = interviewRepository.findAll();
-        assertTrue(interviews.isEmpty());
+    void testListSenioritysEmpty() {
+        List<Seniority> seniorities = seniorityRepository.findAll();
+        assertTrue(seniorities.isEmpty());
     }
 
-    @DisplayName("Test for list Interview not empty")
+    @DisplayName("Test for list Seniority not empty")
     @Transactional
     @Test
     @DirtiesContext
-    void testListInterviewsNotEmpty() {
-        Interview interview = Interview.builder()
+    void testListSeniorityNotEmpty() {
+        Seniority seniority = Seniority.builder()
                 .id(1L)
-                .linkMeet("LinkCualquiera.googlemeet.com")
+                .name("Trainee")
                 .build();
-        interviewRepository.save(interview);
+        seniorityRepository.save(seniority);
 
-        List<Interview> interviews = interviewRepository.findAll();
-        assertFalse(interviews.isEmpty());
+        List<Seniority> seniorities = seniorityRepository.findAll();
+        assertFalse(seniorities.isEmpty());
     }
 
-    @DisplayName("Test for delete Interview")
+    @DisplayName("Test for delete Seniority")
     @Transactional
     @Test
     @DirtiesContext
-    void testDeleteInterview() {
-        Interview interview = Interview.builder()
+    void testDeleteSeniority() {
+        Seniority seniority = Seniority.builder()
                 .id(1L)
-                .linkMeet("LinkCualquiera.googlemeet.com")
+                .name("Trainee")
                 .build();
 
-        Interview i = interviewRepository.save(interview);
-        assertNotNull(i);
+        Seniority save = seniorityRepository.save(seniority);
+        assertNotNull(save);
 
-        interviewRepository.delete(i);
+        seniorityRepository.delete(save);
 
-        Optional<Interview> deletedInterview = interviewRepository.findById(1L);
-        assertFalse(deletedInterview.isPresent());
-    }*/
+        Optional<Seniority> deletedSeniority = seniorityRepository.findById(1L);
+        assertFalse(deletedSeniority.isPresent());
+    }
 }
