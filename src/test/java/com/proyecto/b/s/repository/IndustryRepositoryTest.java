@@ -1,7 +1,6 @@
 package com.proyecto.b.s.repository;
 
 import com.proyecto.b.s.entity.Industry;
-import com.proyecto.b.s.entity.Interview;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class IndustryRepositoryTest {
     @Autowired
     private IndustryRepository industryRepository;
+
     @DisplayName("Test for find by name Industry")
     @Transactional
     @Test
@@ -36,104 +36,109 @@ class IndustryRepositoryTest {
         assertEquals("Banca", indus.getName());
     }
 
-    /*@DisplayName("Test for exist Interview")
+    @DisplayName("Test for exist Industry")
     @Transactional
     @Test
     @DirtiesContext
-    void testExistInterview() {
-        Interview interview = Interview.builder()
+    void testExistIndustry() {
+        Industry industry = Industry.builder()
                 .id(1L)
-                .linkMeet("LinkCualquiera.googlemeet.com")
+                .name("Banca")
+                .active(true)
                 .build();
-        Interview savedInterview = interviewRepository.save(interview);
-        boolean exist = interviewRepository.existsById(savedInterview.getId());
+        Industry savedIndustry = industryRepository.save(industry);
+        boolean exist = industryRepository.existsById(savedIndustry.getId());
 
         assertTrue(exist);
 
-        boolean notExist = interviewRepository.existsById(-1L);
+        boolean notExist = industryRepository.existsById(-1L);
 
         assertFalse(notExist);
     }
 
-    @DisplayName("Test for update Interview")
+    @DisplayName("Test for update Industry")
     @Transactional
     @Test
     @DirtiesContext
-    void checkUpdateInterview() {
-        Interview interview = Interview.builder()
+    void checkUpdateIndustry() {
+        Industry industry = Industry.builder()
                 .id(1L)
-                .linkMeet("LinkCualquiera.googlemeet.com")
+                .name("Banca")
+                .active(true)
                 .build();
 
-        interviewRepository.save(interview);
+        industryRepository.save(industry);
 
-        Optional<Interview> i = interviewRepository.findById(1L);
-        assertTrue(i.isPresent());
+        Optional<Industry> industryOptional = industryRepository.findById(1L);
+        assertTrue(industryOptional.isPresent());
 
-        i.get().setLinkMeet("CAMBIO-DE-LINK.GOOGLEMEET.COM");
-        interviewRepository.save(i.get());
+        industryOptional.get().setName("E-comerce");
+        industryRepository.save(industryOptional.get());
 
-        Optional<Interview> updatedInterview = interviewRepository.findById(1L);
-        assertTrue(updatedInterview.isPresent());
+        Optional<Industry> updatedIndustry = industryRepository.findById(1L);
+        assertTrue(updatedIndustry.isPresent());
 
-        assertEquals("CAMBIO-DE-LINK.GOOGLEMEET.COM", updatedInterview.get().getLinkMeet());
+        assertEquals("E-comerce", updatedIndustry.get().getName());
     }
 
-    @DisplayName("Test for save Interview")
+    @DisplayName("Test for save Industry")
     @Transactional
     @Test
     @DirtiesContext
-    void testSaveInterview() {
-        Interview interview = Interview.builder()
+    void testSaveIndustry() {
+        Industry industry = Industry.builder()
                 .id(1L)
-                .linkMeet("LinkCualquiera.googlemeet.com")
+                .name("Banca")
+                .active(true)
                 .build();
-        Interview savedInterview = interviewRepository.save(interview);
+        Industry savedIndustry = industryRepository.save(industry);
 
-        assertThat(savedInterview).isNotNull();
-        assertThat(savedInterview.getId()).isNotNull().isPositive();
+        assertThat(savedIndustry).isNotNull();
+        assertThat(savedIndustry.getId()).isNotNull().isPositive();
     }
 
-    @DisplayName("Test for list Interview empty")
+    @DisplayName("Test for list Industry empty")
     @Transactional
     @Test
     @DirtiesContext
-    void testListInterviewsEmpty() {
-        List<Interview> interviews = interviewRepository.findAll();
-        assertTrue(interviews.isEmpty());
+    void testListIndustrysEmpty() {
+        List<Industry> industries = industryRepository.findAll();
+        assertTrue(industries.isEmpty());
     }
 
-    @DisplayName("Test for list Interview not empty")
+    @DisplayName("Test for list Industry not empty")
     @Transactional
     @Test
     @DirtiesContext
-    void testListInterviewsNotEmpty() {
-        Interview interview = Interview.builder()
+    void testListIndustrysNotEmpty() {
+        Industry industry = Industry.builder()
                 .id(1L)
-                .linkMeet("LinkCualquiera.googlemeet.com")
+                .name("Banca")
+                .active(true)
                 .build();
-        interviewRepository.save(interview);
+        industryRepository.save(industry);
 
-        List<Interview> interviews = interviewRepository.findAll();
-        assertFalse(interviews.isEmpty());
+        List<Industry> industries = industryRepository.findAll();
+        assertFalse(industries.isEmpty());
     }
 
-    @DisplayName("Test for delete Interview")
+    @DisplayName("Test for delete Industry")
     @Transactional
     @Test
     @DirtiesContext
-    void testDeleteInterview() {
-        Interview interview = Interview.builder()
+    void testDeleteIndustry() {
+        Industry industry = Industry.builder()
                 .id(1L)
-                .linkMeet("LinkCualquiera.googlemeet.com")
+                .name("Banca")
+                .active(true)
                 .build();
 
-        Interview i = interviewRepository.save(interview);
-        assertNotNull(i);
+        Industry industry1 = industryRepository.save(industry);
+        assertNotNull(industry1);
 
-        interviewRepository.delete(i);
+        industryRepository.delete(industry1);
 
-        Optional<Interview> deletedInterview = interviewRepository.findById(1L);
-        assertFalse(deletedInterview.isPresent());
-    }*/
+        Optional<Industry> deletedIndustry = industryRepository.findById(1L);
+        assertFalse(deletedIndustry.isPresent());
+    }
 }
