@@ -25,7 +25,7 @@ class IndustryRepositoryTest {
     @Transactional
     @Test
     @DirtiesContext
-    void findByNameIndustry() {
+    void findByName() {
         Industry industry = Industry.builder()
                 .id(1L)
                 .name("Banca")

@@ -1,6 +1,6 @@
 package com.proyecto.b.s.repository;
 
-import com.proyecto.b.s.entity.Interview;
+import com.proyecto.b.s.entity.Rol;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,113 +14,131 @@ import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+
 @SpringBootTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
 class RolRepositoryTest {
     @Autowired
     private RolRepository rolRepository;
-    @Test
-    void findByName() {
-    }
 
-    /*@DisplayName("Test for exist Interview")
+    @DisplayName("Test for find by name Rol")
     @Transactional
     @Test
     @DirtiesContext
-    void testExistInterview() {
-        Interview interview = Interview.builder()
+    void findByName() {
+        Rol rol = Rol.builder()
                 .id(1L)
-                .linkMeet("LinkCualquiera.googlemeet.com")
+                .name("Desarrollador")
+                .active(true)
                 .build();
-        Interview savedInterview = interviewRepository.save(interview);
-        boolean exist = interviewRepository.existsById(savedInterview.getId());
+        rolRepository.save(rol);
+        Rol rolFind = rolRepository.findByName("Desarrollador");
+
+        assertEquals("Desarrollador", rolFind.getName());
+    }
+
+    @DisplayName("Test for exist Rol")
+    @Transactional
+    @Test
+    @DirtiesContext
+    void testExistRol() {
+        Rol rol = Rol.builder()
+                .id(1L)
+                .name("Desarrollador")
+                .active(true)
+                .build();
+        Rol savedRol = rolRepository.save(rol);
+        boolean exist = rolRepository.existsById(savedRol.getId());
 
         assertTrue(exist);
 
-        boolean notExist = interviewRepository.existsById(-1L);
+        boolean notExist = rolRepository.existsById(-1L);
 
         assertFalse(notExist);
     }
 
-    @DisplayName("Test for update Interview")
+    @DisplayName("Test for update Rol")
     @Transactional
     @Test
     @DirtiesContext
-    void checkUpdateInterview() {
-        Interview interview = Interview.builder()
+    void checkUpdateRol() {
+        Rol rol = Rol.builder()
                 .id(1L)
-                .linkMeet("LinkCualquiera.googlemeet.com")
+                .name("Desarrollador")
+                .active(true)
                 .build();
+        rolRepository.save(rol);
 
-        interviewRepository.save(interview);
+        Optional<Rol> rolOptional = rolRepository.findById(1L);
+        assertTrue(rolOptional.isPresent());
 
-        Optional<Interview> i = interviewRepository.findById(1L);
-        assertTrue(i.isPresent());
+        rolOptional.get().setName("ADMINISTRATIVO");
+        rolRepository.save(rolOptional.get());
 
-        i.get().setLinkMeet("CAMBIO-DE-LINK.GOOGLEMEET.COM");
-        interviewRepository.save(i.get());
+        Optional<Rol> updatedRol = rolRepository.findById(1L);
+        assertTrue(updatedRol.isPresent());
 
-        Optional<Interview> updatedInterview = interviewRepository.findById(1L);
-        assertTrue(updatedInterview.isPresent());
-
-        assertEquals("CAMBIO-DE-LINK.GOOGLEMEET.COM", updatedInterview.get().getLinkMeet());
+        assertEquals("ADMINISTRATIVO", updatedRol.get().getName());
     }
 
-    @DisplayName("Test for save Interview")
+    @DisplayName("Test for save Rol")
     @Transactional
     @Test
     @DirtiesContext
-    void testSaveInterview() {
-        Interview interview = Interview.builder()
+    void testSaveRol() {
+        Rol rol = Rol.builder()
                 .id(1L)
-                .linkMeet("LinkCualquiera.googlemeet.com")
+                .name("Desarrollador")
+                .active(true)
                 .build();
-        Interview savedInterview = interviewRepository.save(interview);
+        Rol savedRol = rolRepository.save(rol);
 
-        assertThat(savedInterview).isNotNull();
-        assertThat(savedInterview.getId()).isNotNull().isPositive();
+        assertThat(savedRol).isNotNull();
+        assertThat(savedRol.getId()).isNotNull().isPositive();
     }
 
-    @DisplayName("Test for list Interview empty")
+    @DisplayName("Test for list Rol empty")
     @Transactional
     @Test
     @DirtiesContext
-    void testListInterviewsEmpty() {
-        List<Interview> interviews = interviewRepository.findAll();
-        assertTrue(interviews.isEmpty());
+    void testListRolsEmpty() {
+        List<Rol> rolList = rolRepository.findAll();
+        assertTrue(rolList.isEmpty());
     }
 
-    @DisplayName("Test for list Interview not empty")
+    @DisplayName("Test for list Rol not empty")
     @Transactional
     @Test
     @DirtiesContext
-    void testListInterviewsNotEmpty() {
-        Interview interview = Interview.builder()
+    void testListRolsNotEmpty() {
+        Rol rol = Rol.builder()
                 .id(1L)
-                .linkMeet("LinkCualquiera.googlemeet.com")
+                .name("Desarrollador")
+                .active(true)
                 .build();
-        interviewRepository.save(interview);
+        rolRepository.save(rol);
 
-        List<Interview> interviews = interviewRepository.findAll();
-        assertFalse(interviews.isEmpty());
+        List<Rol> rolList = rolRepository.findAll();
+        assertFalse(rolList.isEmpty());
     }
 
-    @DisplayName("Test for delete Interview")
+    @DisplayName("Test for delete Rol")
     @Transactional
     @Test
     @DirtiesContext
-    void testDeleteInterview() {
-        Interview interview = Interview.builder()
+    void testDeleteRol() {
+        Rol rol = Rol.builder()
                 .id(1L)
-                .linkMeet("LinkCualquiera.googlemeet.com")
+                .name("Desarrollador")
+                .active(true)
                 .build();
 
-        Interview i = interviewRepository.save(interview);
-        assertNotNull(i);
+        Rol rol1 = rolRepository.save(rol);
+        assertNotNull(rol1);
 
-        interviewRepository.delete(i);
+        rolRepository.delete(rol1);
 
-        Optional<Interview> deletedInterview = interviewRepository.findById(1L);
-        assertFalse(deletedInterview.isPresent());
-    }*/
+        Optional<Rol> deletedRol = rolRepository.findById(1L);
+        assertFalse(deletedRol.isPresent());
+    }
 }
