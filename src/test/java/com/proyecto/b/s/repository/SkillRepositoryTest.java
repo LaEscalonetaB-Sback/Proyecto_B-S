@@ -1,6 +1,6 @@
 package com.proyecto.b.s.repository;
 
-import com.proyecto.b.s.entity.Interview;
+import com.proyecto.b.s.entity.Skill;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,113 +14,126 @@ import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+
 @SpringBootTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
 class SkillRepositoryTest {
     @Autowired
     private SkillRepository skillRepository;
-    @Test
-    void findByName() {
-    }
 
-    /*@DisplayName("Test for exist Interview")
+    @DisplayName("Test for find by name Skill")
     @Transactional
     @Test
     @DirtiesContext
-    void testExistInterview() {
-        Interview interview = Interview.builder()
+    void findByName() {
+        Skill skill = Skill.builder()
                 .id(1L)
-                .linkMeet("LinkCualquiera.googlemeet.com")
+                .name("Java")
                 .build();
-        Interview savedInterview = interviewRepository.save(interview);
-        boolean exist = interviewRepository.existsById(savedInterview.getId());
+        skillRepository.save(skill);
+        Skill skillFind = skillRepository.findByName("Java");
+
+        assertEquals("Java", skillFind.getName());
+    }
+
+    @DisplayName("Test for exist Skill")
+    @Transactional
+    @Test
+    @DirtiesContext
+    void testExistSkill() {
+        Skill skill = Skill.builder()
+                .id(1L)
+                .name("Java")
+                .build();
+        Skill savedSkill = skillRepository.save(skill);
+        boolean exist = skillRepository.existsById(savedSkill.getId());
 
         assertTrue(exist);
 
-        boolean notExist = interviewRepository.existsById(-1L);
+        boolean notExist = skillRepository.existsById(-1L);
 
         assertFalse(notExist);
     }
 
-    @DisplayName("Test for update Interview")
+    @DisplayName("Test for update Skill")
     @Transactional
     @Test
     @DirtiesContext
-    void checkUpdateInterview() {
-        Interview interview = Interview.builder()
+    void checkUpdateSkill() {
+        Skill skill = Skill.builder()
                 .id(1L)
-                .linkMeet("LinkCualquiera.googlemeet.com")
+                .name("Java")
                 .build();
 
-        interviewRepository.save(interview);
+        skillRepository.save(skill);
 
-        Optional<Interview> i = interviewRepository.findById(1L);
-        assertTrue(i.isPresent());
+        Optional<Skill> skillOptional = skillRepository.findById(1L);
+        assertTrue(skillOptional.isPresent());
 
-        i.get().setLinkMeet("CAMBIO-DE-LINK.GOOGLEMEET.COM");
-        interviewRepository.save(i.get());
+        skillOptional.get().setName("Angular");
+        skillRepository.save(skillOptional.get());
 
-        Optional<Interview> updatedInterview = interviewRepository.findById(1L);
-        assertTrue(updatedInterview.isPresent());
+        Optional<Skill> updatedSkill = skillRepository.findById(1L);
+        assertTrue(updatedSkill.isPresent());
 
-        assertEquals("CAMBIO-DE-LINK.GOOGLEMEET.COM", updatedInterview.get().getLinkMeet());
+        assertEquals("Angular", updatedSkill.get().getName());
     }
 
-    @DisplayName("Test for save Interview")
+    @DisplayName("Test for save Skill")
     @Transactional
     @Test
     @DirtiesContext
-    void testSaveInterview() {
-        Interview interview = Interview.builder()
+    void testSaveSkill() {
+        Skill skill = Skill.builder()
                 .id(1L)
-                .linkMeet("LinkCualquiera.googlemeet.com")
+                .name("Java")
                 .build();
-        Interview savedInterview = interviewRepository.save(interview);
+        Skill savedSkill = skillRepository.save(skill);
 
-        assertThat(savedInterview).isNotNull();
-        assertThat(savedInterview.getId()).isNotNull().isPositive();
+        assertThat(savedSkill).isNotNull();
+        assertThat(savedSkill.getId()).isNotNull().isPositive();
     }
 
-    @DisplayName("Test for list Interview empty")
+    @DisplayName("Test for list Skill empty")
     @Transactional
     @Test
     @DirtiesContext
-    void testListInterviewsEmpty() {
-        List<Interview> interviews = interviewRepository.findAll();
-        assertTrue(interviews.isEmpty());
+    void testListSkillsEmpty() {
+        List<Skill> skillList = skillRepository.findAll();
+        assertTrue(skillList.isEmpty());
     }
 
-    @DisplayName("Test for list Interview not empty")
+    @DisplayName("Test for list Skill not empty")
     @Transactional
     @Test
     @DirtiesContext
-    void testListInterviewsNotEmpty() {
-        Interview interview = Interview.builder()
+    void testListSkillsNotEmpty() {
+        Skill skill = Skill.builder()
                 .id(1L)
-                .linkMeet("LinkCualquiera.googlemeet.com")
+                .name("Java")
                 .build();
-        interviewRepository.save(interview);
+        skillRepository.save(skill);
 
-        List<Interview> interviews = interviewRepository.findAll();
-        assertFalse(interviews.isEmpty());
+        List<Skill> skills = skillRepository.findAll();
+        assertFalse(skills.isEmpty());
     }
 
-    @DisplayName("Test for delete Interview")
+    @DisplayName("Test for delete Skill")
     @Transactional
     @Test
     @DirtiesContext
-    void testDeleteInterview() {
-        Interview interview = Interview.builder()
+    void testDeleteSkill() {
+        Skill skill = Skill.builder()
                 .id(1L)
-                .linkMeet("LinkCualquiera.googlemeet.com")
+                .name("Java")
                 .build();
 
-        Interview i = interviewRepository.save(interview);
-        assertNotNull(i);
+        Skill save = skillRepository.save(skill);
+        assertNotNull(save);
 
-        interviewRepository.delete(i);
+        skillRepository.delete(save);
 
-        Optional<Interview> deletedInterview = interviewRepository.findById(1L);
-        assertFalse(deletedInterview.isPresent());
-    }*/
+        Optional<Skill> deletedSkill = skillRepository.findById(1L);
+        assertFalse(deletedSkill.isPresent());
+    }
 }

@@ -1,7 +1,5 @@
 package com.proyecto.b.s.repository;
 
-import com.proyecto.b.s.entity.Interview;
-import com.proyecto.b.s.entity.Rol;
 import com.proyecto.b.s.entity.Seniority;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class SeniorityRepositoryTest {
     @Autowired
     private SeniorityRepository seniorityRepository;
+
     @DisplayName("Test for find by name seniority")
     @Transactional
     @Test
