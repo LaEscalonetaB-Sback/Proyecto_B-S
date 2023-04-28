@@ -1,9 +1,11 @@
 com\proyecto\b\s\controller\SkillController.class
+com\proyecto\b\s\service\service\SeniorityService.class
 com\proyecto\b\s\controller\InterviewController.class
 com\proyecto\b\s\dto\request\eventRequestDTO\EventOptionForEventRequestDTO.class
 com\proyecto\b\s\dto\response\eventResponseDTO\ClientForEventResponseDTO.class
 com\proyecto\b\s\controller\SearchController.class
 com\proyecto\b\s\dto\response\eventResponseDTO\StateSearchForEventResponseDTO.class
+com\proyecto\b\s\dto\request\personRequestDTO\IndustryForPersonRequestDTO.class
 com\proyecto\b\s\repository\ClientRepository.class
 com\proyecto\b\s\controller\StateController.class
 com\proyecto\b\s\controller\PersonController.class
@@ -11,6 +13,7 @@ com\proyecto\b\s\dto\request\eventRequestDTO\SkillForEventRequestDTO.class
 com\proyecto\b\s\dto\response\eventResponseDTO\SourceForEventResponseDTO.class
 com\proyecto\b\s\dto\request\eventRequestDTO\SourceForEventRequestDTO.class
 com\proyecto\b\s\dto\response\eventResponseDTO\EventOptionForEventResponseDTO.class
+com\proyecto\b\s\utils\HelperValidator.class
 com\proyecto\b\s\dto\request\eventRequestDTO\StateSearchForEventRequestDTO.class
 com\proyecto\b\s\entity\StateSearch.class
 com\proyecto\b\s\dto\request\searchRequestDTO\SeniorityForSearchRequestDTO.class
@@ -22,6 +25,7 @@ com\proyecto\b\s\exception\Exception.class
 com\proyecto\b\s\service\service\UserService.class
 com\proyecto\b\s\repository\InterviewRepository.class
 com\proyecto\b\s\dto\request\UserRequestDTO.class
+com\proyecto\b\s\dto\request\personRequestDTO\SourceForPersonRequestDTO.class
 com\proyecto\b\s\service\service\SourceService.class
 com\proyecto\b\s\service\serviceImpl\EventServiceImpl.class
 com\proyecto\b\s\entity\Interview.class
@@ -72,6 +76,7 @@ com\proyecto\b\s\dto\response\eventResponseDTO\SearchForEventResponseDTO.class
 com\proyecto\b\s\service\serviceImpl\UserServiceImpl.class
 com\proyecto\b\s\entity\Search$SearchBuilder.class
 com\proyecto\b\s\repository\SeniorityRepository.class
+com\proyecto\b\s\exception\InvalidResourceException.class
 com\proyecto\b\s\service\service\SkillService.class
 com\proyecto\b\s\controller\IndustryController.class
 com\proyecto\b\s\dto\request\eventRequestDTO\PersonForEventRequestDTO.class
@@ -79,6 +84,7 @@ com\proyecto\b\s\dto\request\SourceRequestDTO.class
 com\proyecto\b\s\dto\response\eventResponseDTO\InterviewForEventResponseDTO.class
 com\proyecto\b\s\entity\Industry.class
 com\proyecto\b\s\entity\Seniority.class
+com\proyecto\b\s\service\serviceImpl\StateSearchServiceImpl.class
 com\proyecto\b\s\dto\request\RolRequestDTO.class
 com\proyecto\b\s\dto\request\eventRequestDTO\InterviewForEventRequestDTO.class
 com\proyecto\b\s\service\serviceImpl\EventOptionServiceImpl.class
@@ -86,11 +92,15 @@ com\proyecto\b\s\dto\response\searchResponseDTO\SeniorityForSearchResponseDTO.cl
 com\proyecto\b\s\repository\RolRepository.class
 com\proyecto\b\s\Application.class
 com\proyecto\b\s\service\serviceImpl\AnswerServiceImpl.class
+com\proyecto\b\s\dto\request\personRequestDTO\PersonRequestDTO.class
+com\proyecto\b\s\dto\request\personRequestDTO\SkillForPersonRequestDTO.class
 com\proyecto\b\s\service\service\EventOptionService.class
+com\proyecto\b\s\service\service\StateSearchService.class
 com\proyecto\b\s\service\serviceImpl\SourceServiceImpl.class
 com\proyecto\b\s\service\serviceImpl\SkillServiceImpl.class
 com\proyecto\b\s\dto\request\ClientRequestDTO.class
 com\proyecto\b\s\service\serviceImpl\IndustryServiceImpl.class
+com\proyecto\b\s\dto\request\personRequestDTO\RolForPersonRequestDTO.class
 com\proyecto\b\s\dto\response\searchResponseDTO\SearchResponseDTO.class
 com\proyecto\b\s\entity\EventOption.class
 com\proyecto\b\s\repository\IndustryRepository.class
@@ -119,10 +129,12 @@ com\proyecto\b\s\controller\UserController.class
 com\proyecto\b\s\dto\response\eventResponseDTO\StatePersonForEventResponseDTO.class
 com\proyecto\b\s\entity\StatePerson.class
 com\proyecto\b\s\controller\AnswerController.class
+com\proyecto\b\s\service\serviceImpl\SeniorityServiceImpl.class
 com\proyecto\b\s\dto\request\eventRequestDTO\UserForEventRequestDTO.class
 com\proyecto\b\s\repository\StateSearchRepository.class
 com\proyecto\b\s\dto\response\SourceResponseDTO.class
 com\proyecto\b\s\entity\Source.class
+com\proyecto\b\s\service\serviceImpl\StatePersonServiceImpl.class
 com\proyecto\b\s\dto\response\PersonResponseDTO.class
 com\proyecto\b\s\service\serviceImpl\RolServiceImpl.class
 com\proyecto\b\s\dto\request\eventRequestDTO\ClientForEventRequestDTO.class
