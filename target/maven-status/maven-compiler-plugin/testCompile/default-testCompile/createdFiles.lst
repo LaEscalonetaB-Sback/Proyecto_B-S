@@ -1,0 +1,13 @@
+com\proyecto\b\s\repository\IndustryRepositoryTest.class
+com\proyecto\b\s\ApplicationTests.class
+com\proyecto\b\s\repository\StateSearchRepositoryTest.class
+com\proyecto\b\s\repository\SkillRepositoryTest.class
+com\proyecto\b\s\repository\EventRepositoryTest.class
+com\proyecto\b\s\repository\InterviewRepositoryTest.class
+com\proyecto\b\s\repository\UserRepositoryTest.class
+com\proyecto\b\s\repository\RolRepositoryTest.class
+com\proyecto\b\s\repository\SearchRepositoryTest.class
+com\proyecto\b\s\service\serviceImpl\SearchServiceImplTest.class
+com\proyecto\b\s\repository\SourceRepositoryTest.class
+com\proyecto\b\s\repository\PersonRepositoryTest.class
+com\proyecto\b\s\repository\SeniorityRepositoryTest.class

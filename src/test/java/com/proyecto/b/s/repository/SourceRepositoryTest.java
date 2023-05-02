@@ -1,6 +1,6 @@
 package com.proyecto.b.s.repository;
 
-import com.proyecto.b.s.entity.Interview;
+import com.proyecto.b.s.entity.Source;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,115 +12,128 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 @SpringBootTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class SourceRepositoryTest {
     @Autowired
     private SourceRepository sourceRepository;
-    @Test
-    void findByName() {
-    }
 
-    /*@DisplayName("Test for exist Interview")
+    @DisplayName("Test for find by name Source")
     @Transactional
     @Test
     @DirtiesContext
-    void testExistInterview() {
-        Interview interview = Interview.builder()
+    void findByName() {
+        Source source = Source.builder()
                 .id(1L)
-                .linkMeet("LinkCualquiera.googlemeet.com")
+                .name("Linkedin")
                 .build();
-        Interview savedInterview = interviewRepository.save(interview);
-        boolean exist = interviewRepository.existsById(savedInterview.getId());
+        sourceRepository.save(source);
+        Source sourceFind = sourceRepository.findByName("Linkedin");
+
+        assertEquals("Linkedin", sourceFind.getName());
+    }
+
+    @DisplayName("Test for exist Source")
+    @Transactional
+    @Test
+    @DirtiesContext
+    void testExistSource() {
+        Source source = Source.builder()
+                .id(1L)
+                .name("Linkedin")
+                .build();
+        Source savedSource = sourceRepository.save(source);
+        boolean exist = sourceRepository.existsById(savedSource.getId());
 
         assertTrue(exist);
 
-        boolean notExist = interviewRepository.existsById(-1L);
+        boolean notExist = sourceRepository.existsById(-1L);
 
         assertFalse(notExist);
     }
 
-    @DisplayName("Test for update Interview")
+    @DisplayName("Test for update Source")
     @Transactional
     @Test
     @DirtiesContext
-    void checkUpdateInterview() {
-        Interview interview = Interview.builder()
+    void checkUpdateSource() {
+        Source source = Source.builder()
                 .id(1L)
-                .linkMeet("LinkCualquiera.googlemeet.com")
+                .name("Linkedin")
                 .build();
 
-        interviewRepository.save(interview);
+        sourceRepository.save(source);
 
-        Optional<Interview> i = interviewRepository.findById(1L);
-        assertTrue(i.isPresent());
+        Optional<Source> sourceOptional = sourceRepository.findById(1L);
+        assertTrue(sourceOptional.isPresent());
 
-        i.get().setLinkMeet("CAMBIO-DE-LINK.GOOGLEMEET.COM");
-        interviewRepository.save(i.get());
+        sourceOptional.get().setName("Referenciado");
+        sourceRepository.save(sourceOptional.get());
 
-        Optional<Interview> updatedInterview = interviewRepository.findById(1L);
-        assertTrue(updatedInterview.isPresent());
+        Optional<Source> updatedSource = sourceRepository.findById(1L);
+        assertTrue(updatedSource.isPresent());
 
-        assertEquals("CAMBIO-DE-LINK.GOOGLEMEET.COM", updatedInterview.get().getLinkMeet());
+        assertEquals("Referenciado", updatedSource.get().getName());
     }
 
-    @DisplayName("Test for save Interview")
+    @DisplayName("Test for save Source")
     @Transactional
     @Test
     @DirtiesContext
-    void testSaveInterview() {
-        Interview interview = Interview.builder()
+    void testSaveSource() {
+        Source source = Source.builder()
                 .id(1L)
-                .linkMeet("LinkCualquiera.googlemeet.com")
+                .name("Linkedin")
                 .build();
-        Interview savedInterview = interviewRepository.save(interview);
+        Source savedSource = sourceRepository.save(source);
 
-        assertThat(savedInterview).isNotNull();
-        assertThat(savedInterview.getId()).isNotNull().isPositive();
+        assertThat(savedSource).isNotNull();
+        assertThat(savedSource.getId()).isNotNull().isPositive();
     }
 
-    @DisplayName("Test for list Interview empty")
+    @DisplayName("Test for list Source empty")
     @Transactional
     @Test
     @DirtiesContext
-    void testListInterviewsEmpty() {
-        List<Interview> interviews = interviewRepository.findAll();
-        assertTrue(interviews.isEmpty());
+    void testListSourcesEmpty() {
+        List<Source> sourceList = sourceRepository.findAll();
+        assertTrue(sourceList.isEmpty());
     }
 
-    @DisplayName("Test for list Interview not empty")
+    @DisplayName("Test for list Source not empty")
     @Transactional
     @Test
     @DirtiesContext
-    void testListInterviewsNotEmpty() {
-        Interview interview = Interview.builder()
+    void testListSourcesNotEmpty() {
+        Source source = Source.builder()
                 .id(1L)
-                .linkMeet("LinkCualquiera.googlemeet.com")
+                .name("Linkedin")
                 .build();
-        interviewRepository.save(interview);
+        sourceRepository.save(source);
 
-        List<Interview> interviews = interviewRepository.findAll();
-        assertFalse(interviews.isEmpty());
+        List<Source> sourceList = sourceRepository.findAll();
+        assertFalse(sourceList.isEmpty());
     }
 
-    @DisplayName("Test for delete Interview")
+    @DisplayName("Test for delete Source")
     @Transactional
     @Test
     @DirtiesContext
-    void testDeleteInterview() {
-        Interview interview = Interview.builder()
+    void testDeleteSource() {
+        Source source = Source.builder()
                 .id(1L)
-                .linkMeet("LinkCualquiera.googlemeet.com")
+                .name("Linkedin")
                 .build();
 
-        Interview i = interviewRepository.save(interview);
-        assertNotNull(i);
+        Source sourceSaved = sourceRepository.save(source);
+        assertNotNull(sourceSaved);
 
-        interviewRepository.delete(i);
+        sourceRepository.delete(sourceSaved);
 
-        Optional<Interview> deletedInterview = interviewRepository.findById(1L);
-        assertFalse(deletedInterview.isPresent());
-    }*/
+        Optional<Source> deletedSource = sourceRepository.findById(1L);
+        assertFalse(deletedSource.isPresent());
+    }
 }
