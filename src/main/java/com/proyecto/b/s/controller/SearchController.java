@@ -1,5 +1,4 @@
 package com.proyecto.b.s.controller;
-//busqueda -> search
 
 import com.proyecto.b.s.dto.request.searchRequestDTO.SearchRequestDTO;
 import com.proyecto.b.s.dto.response.searchResponseDTO.SearchResponseDTO;
@@ -48,7 +47,7 @@ public class SearchController {
 
     //Crear busqueda
     @PostMapping("/create")
-    public ResponseEntity<SearchResponseDTO> create(@RequestBody @Valid SearchRequestDTO searchRequestDto) throws Exception{
+    public ResponseEntity<SearchResponseDTO> create(@RequestBody @Valid SearchRequestDTO searchRequestDto) throws Exception {
         SearchResponseDTO result = searchService.saveSearch(searchRequestDto);
         return ResponseEntity.ok(result);
     }
