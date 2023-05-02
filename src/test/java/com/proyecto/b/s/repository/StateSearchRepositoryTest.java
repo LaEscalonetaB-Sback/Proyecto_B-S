@@ -1,6 +1,6 @@
 package com.proyecto.b.s.repository;
 
-import com.proyecto.b.s.entity.Interview;
+import com.proyecto.b.s.entity.StateSearch;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,112 +15,123 @@ import java.util.Optional;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class StateSearchRepositoryTest {
     @Autowired
     private StateSearchRepository stateSearchRepository;
-    @Test
-    void findByName() {
-    }
-
-    /*@DisplayName("Test for exist Interview")
+    @DisplayName("Test for find by name State search")
     @Transactional
     @Test
     @DirtiesContext
-    void testExistInterview() {
-        Interview interview = Interview.builder()
+    void findByName() {
+        StateSearch stateSearch = StateSearch.builder()
                 .id(1L)
-                .linkMeet("LinkCualquiera.googlemeet.com")
+                .name("En curso")
                 .build();
-        Interview savedInterview = interviewRepository.save(interview);
-        boolean exist = interviewRepository.existsById(savedInterview.getId());
+        stateSearchRepository.save(stateSearch);
+        StateSearch stateFind = stateSearchRepository.findByName("En curso");
+
+        assertEquals("En curso", stateFind.getName());
+    }
+
+    @DisplayName("Test for exist StateSearch")
+    @Transactional
+    @Test
+    @DirtiesContext
+    void testExistStateSearch() {
+        StateSearch stateSearch = StateSearch.builder()
+                .id(1L)
+                .name("En curso")
+                .build();
+        StateSearch savedStateSearch = stateSearchRepository.save(stateSearch);
+        boolean exist = stateSearchRepository.existsById(savedStateSearch.getId());
 
         assertTrue(exist);
 
-        boolean notExist = interviewRepository.existsById(-1L);
+        boolean notExist = stateSearchRepository.existsById(-1L);
 
         assertFalse(notExist);
     }
 
-    @DisplayName("Test for update Interview")
+    @DisplayName("Test for update StateSearch")
     @Transactional
     @Test
     @DirtiesContext
-    void checkUpdateInterview() {
-        Interview interview = Interview.builder()
+    void checkUpdateStateSearch() {
+        StateSearch stateSearch = StateSearch.builder()
                 .id(1L)
-                .linkMeet("LinkCualquiera.googlemeet.com")
+                .name("En curso")
                 .build();
 
-        interviewRepository.save(interview);
+        stateSearchRepository.save(stateSearch);
 
-        Optional<Interview> i = interviewRepository.findById(1L);
-        assertTrue(i.isPresent());
+        Optional<StateSearch> stateSearchOptional = stateSearchRepository.findById(1L);
+        assertTrue(stateSearchOptional.isPresent());
 
-        i.get().setLinkMeet("CAMBIO-DE-LINK.GOOGLEMEET.COM");
-        interviewRepository.save(i.get());
+        stateSearchOptional.get().setName("CAMBIO-DE-ESTADO");
+        stateSearchRepository.save(stateSearchOptional.get());
 
-        Optional<Interview> updatedInterview = interviewRepository.findById(1L);
-        assertTrue(updatedInterview.isPresent());
+        Optional<StateSearch> updatedStateSearch = stateSearchRepository.findById(1L);
+        assertTrue(updatedStateSearch.isPresent());
 
-        assertEquals("CAMBIO-DE-LINK.GOOGLEMEET.COM", updatedInterview.get().getLinkMeet());
+        assertEquals("CAMBIO-DE-ESTADO", updatedStateSearch.get().getName());
     }
 
-    @DisplayName("Test for save Interview")
+    @DisplayName("Test for save StateSearch")
     @Transactional
     @Test
     @DirtiesContext
-    void testSaveInterview() {
-        Interview interview = Interview.builder()
+    void testSaveStateSearch() {
+        StateSearch stateSearch = StateSearch.builder()
                 .id(1L)
-                .linkMeet("LinkCualquiera.googlemeet.com")
+                .name("En curso")
                 .build();
-        Interview savedInterview = interviewRepository.save(interview);
+        StateSearch savedStateSearch = stateSearchRepository.save(stateSearch);
 
-        assertThat(savedInterview).isNotNull();
-        assertThat(savedInterview.getId()).isNotNull().isPositive();
+        assertThat(savedStateSearch).isNotNull();
+        assertThat(savedStateSearch.getId()).isNotNull().isPositive();
     }
 
-    @DisplayName("Test for list Interview empty")
+    @DisplayName("Test for list stateSearch empty")
     @Transactional
     @Test
     @DirtiesContext
-    void testListInterviewsEmpty() {
-        List<Interview> interviews = interviewRepository.findAll();
-        assertTrue(interviews.isEmpty());
+    void testListStateSearchEmpty() {
+        List<StateSearch> stateSearchList = stateSearchRepository.findAll();
+        assertTrue(stateSearchList.isEmpty());
     }
 
-    @DisplayName("Test for list Interview not empty")
+    @DisplayName("Test for list stateSearchList not empty")
     @Transactional
     @Test
     @DirtiesContext
-    void testListInterviewsNotEmpty() {
-        Interview interview = Interview.builder()
+    void testListStateSearchNotEmpty() {
+        StateSearch stateSearch = StateSearch.builder()
                 .id(1L)
-                .linkMeet("LinkCualquiera.googlemeet.com")
+                .name("En curso")
                 .build();
-        interviewRepository.save(interview);
+        stateSearchRepository.save(stateSearch);
 
-        List<Interview> interviews = interviewRepository.findAll();
-        assertFalse(interviews.isEmpty());
+        List<StateSearch> stateSearchList = stateSearchRepository.findAll();
+        assertFalse(stateSearchList.isEmpty());
     }
 
-    @DisplayName("Test for delete Interview")
+    @DisplayName("Test for delete StateSearch")
     @Transactional
     @Test
     @DirtiesContext
-    void testDeleteInterview() {
-        Interview interview = Interview.builder()
+    void testDeleteStateSearch() {
+        StateSearch stateSearch = StateSearch.builder()
                 .id(1L)
-                .linkMeet("LinkCualquiera.googlemeet.com")
+                .name("En curso")
                 .build();
 
-        Interview i = interviewRepository.save(interview);
-        assertNotNull(i);
+        StateSearch stateSearchSaved = stateSearchRepository.save(stateSearch);
+        assertNotNull(stateSearchSaved);
 
-        interviewRepository.delete(i);
+        stateSearchRepository.delete(stateSearchSaved);
 
-        Optional<Interview> deletedInterview = interviewRepository.findById(1L);
-        assertFalse(deletedInterview.isPresent());
-    }*/
+        Optional<StateSearch> deletedStateSearch = stateSearchRepository.findById(1L);
+        assertFalse(deletedStateSearch.isPresent());
+    }
 }

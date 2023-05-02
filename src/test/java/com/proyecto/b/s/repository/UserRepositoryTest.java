@@ -1,6 +1,6 @@
 package com.proyecto.b.s.repository;
 
-import com.proyecto.b.s.entity.Interview;
+import com.proyecto.b.s.entity.User;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,109 +16,109 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class UserRepositoryTest {
     @Autowired
     private UserRepository userRepository;
 
-    /*@DisplayName("Test for exist Interview")
+    @DisplayName("Test for exist User")
     @Transactional
     @Test
     @DirtiesContext
-    void testExistInterview() {
-        Interview interview = Interview.builder()
+    void testExistUser() {
+        User user = User.builder()
                 .id(1L)
-                .linkMeet("LinkCualquiera.googlemeet.com")
+                .name("Laura")
                 .build();
-        Interview savedInterview = interviewRepository.save(interview);
-        boolean exist = interviewRepository.existsById(savedInterview.getId());
+        User savedUser = userRepository.save(user);
+        boolean exist = userRepository.existsById(savedUser.getId());
 
         assertTrue(exist);
 
-        boolean notExist = interviewRepository.existsById(-1L);
+        boolean notExist = userRepository.existsById(-1L);
 
         assertFalse(notExist);
     }
 
-    @DisplayName("Test for update Interview")
+    @DisplayName("Test for update User")
     @Transactional
     @Test
     @DirtiesContext
-    void checkUpdateInterview() {
-        Interview interview = Interview.builder()
+    void checkUpdateUser() {
+        User user = User.builder()
                 .id(1L)
-                .linkMeet("LinkCualquiera.googlemeet.com")
+                .name("Laura")
                 .build();
 
-        interviewRepository.save(interview);
+        userRepository.save(user);
 
-        Optional<Interview> i = interviewRepository.findById(1L);
-        assertTrue(i.isPresent());
+        Optional<User> userOptional = userRepository.findById(1L);
+        assertTrue(userOptional.isPresent());
 
-        i.get().setLinkMeet("CAMBIO-DE-LINK.GOOGLEMEET.COM");
-        interviewRepository.save(i.get());
+        userOptional.get().setName("Ana");
+        userRepository.save(userOptional.get());
 
-        Optional<Interview> updatedInterview = interviewRepository.findById(1L);
-        assertTrue(updatedInterview.isPresent());
+        Optional<User> updatedUser = userRepository.findById(1L);
+        assertTrue(updatedUser.isPresent());
 
-        assertEquals("CAMBIO-DE-LINK.GOOGLEMEET.COM", updatedInterview.get().getLinkMeet());
+        assertEquals("Ana", updatedUser.get().getName());
     }
 
-    @DisplayName("Test for save Interview")
+    @DisplayName("Test for save User")
     @Transactional
     @Test
     @DirtiesContext
-    void testSaveInterview() {
-        Interview interview = Interview.builder()
+    void testSaveUser() {
+        User user = User.builder()
                 .id(1L)
-                .linkMeet("LinkCualquiera.googlemeet.com")
+                .name("Laura")
                 .build();
-        Interview savedInterview = interviewRepository.save(interview);
+        User savedUser = userRepository.save(user);
 
-        assertThat(savedInterview).isNotNull();
-        assertThat(savedInterview.getId()).isNotNull().isPositive();
+        assertThat(savedUser).isNotNull();
+        assertThat(savedUser.getId()).isNotNull().isPositive();
     }
 
-    @DisplayName("Test for list Interview empty")
+    @DisplayName("Test for list User empty")
     @Transactional
     @Test
     @DirtiesContext
-    void testListInterviewsEmpty() {
-        List<Interview> interviews = interviewRepository.findAll();
-        assertTrue(interviews.isEmpty());
+    void testListUsersEmpty() {
+        List<User> userList = userRepository.findAll();
+        assertTrue(userList.isEmpty());
     }
 
-    @DisplayName("Test for list Interview not empty")
+    @DisplayName("Test for list User not empty")
     @Transactional
     @Test
     @DirtiesContext
-    void testListInterviewsNotEmpty() {
-        Interview interview = Interview.builder()
+    void testListUsersNotEmpty() {
+        User user = User.builder()
                 .id(1L)
-                .linkMeet("LinkCualquiera.googlemeet.com")
+                .name("Laura")
                 .build();
-        interviewRepository.save(interview);
+        userRepository.save(user);
 
-        List<Interview> interviews = interviewRepository.findAll();
-        assertFalse(interviews.isEmpty());
+        List<User> userList = userRepository.findAll();
+        assertFalse(userList.isEmpty());
     }
 
-    @DisplayName("Test for delete Interview")
+    @DisplayName("Test for delete User")
     @Transactional
     @Test
     @DirtiesContext
-    void testDeleteInterview() {
-        Interview interview = Interview.builder()
+    void testDeleteUser() {
+        User user = User.builder()
                 .id(1L)
-                .linkMeet("LinkCualquiera.googlemeet.com")
+                .name("Laura")
                 .build();
 
-        Interview i = interviewRepository.save(interview);
-        assertNotNull(i);
+        User userSave = userRepository.save(user);
+        assertNotNull(userSave);
 
-        interviewRepository.delete(i);
+        userRepository.delete(userSave);
 
-        Optional<Interview> deletedInterview = interviewRepository.findById(1L);
-        assertFalse(deletedInterview.isPresent());
-    }*/
+        Optional<User> deletedUser = userRepository.findById(1L);
+        assertFalse(deletedUser.isPresent());
+    }
 }
