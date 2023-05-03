@@ -1,9 +1,6 @@
 package com.proyecto.b.s.dto.modelMapper;
 
-import com.proyecto.b.s.dto.request.ClientRequestDTO;
-import com.proyecto.b.s.dto.request.IndustryRequestDTO;
-import com.proyecto.b.s.dto.request.InterviewRequestDTO;
-import com.proyecto.b.s.dto.request.RolRequestDTO;
+import com.proyecto.b.s.dto.request.*;
 import com.proyecto.b.s.dto.request.eventRequestDTO.EventOptionForEventRequestDTO;
 import com.proyecto.b.s.dto.request.eventRequestDTO.EventRequestDTO;
 import com.proyecto.b.s.dto.request.eventRequestDTO.EventUpdateRequestDTO;
@@ -51,6 +48,9 @@ public interface ModelMapperInterface {
 
     Rol rolReqDTOToRol(RolRequestDTO rolRequestDTO);
 
+    Seniority seniorityReqDTOToSeniority(SeniorityRequestDTO seniorityRequestDTO);
+
     RolResponseDTO rolToRolResponseDTO(Rol rol);
 
+    SeniorityResponseDTO seniorityToSeniorityResponseDTO(Seniority seniority);
 }
