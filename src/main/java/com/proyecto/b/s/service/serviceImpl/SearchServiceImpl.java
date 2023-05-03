@@ -110,7 +110,7 @@ public class SearchServiceImpl implements SearchService {
     @Override
     public SearchResponseDTO update(Long searchId, SearchRequestDTO searchRequestDto) throws Exception {
         Search search = findById(searchId);
-        modelMapper.map(searchRequestDto, search);
+        modelMapper.map(search, searchRequestDto);
         searchRepository.save(search);
 
         return modelMapper.map(search, SearchResponseDTO.class);
