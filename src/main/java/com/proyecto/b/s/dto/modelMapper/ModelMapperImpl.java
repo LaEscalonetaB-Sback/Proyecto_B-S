@@ -117,5 +117,14 @@ public class ModelMapperImpl implements ModelMapperInterface {
         return modelMapper.map(rol, RolResponseDTO.class);
     }
 
+    @Override
+    public Seniority seniorityReqDTOToSeniority(SeniorityRequestDTO seniorityRequestDTO) {return modelMapper.map(seniorityRequestDTO, Seniority.class);}
+
+    @Override
+    public SeniorityResponseDTO seniorityToSeniorityResponseDTO(Seniority seniority) {return modelMapper.map(seniority, SeniorityResponseDTO.class);}
+
+
+
+
 
 }

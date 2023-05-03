@@ -3,7 +3,6 @@ package com.proyecto.b.s.dto.request.searchRequestDTO;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -21,20 +20,20 @@ public class SearchRequestDTO {
 
     private String remuneration;
 
-    @NotEmpty(message = "Vacancie cannot be null")
+    @NotEmpty(message = "La vacante no puede estar vacia")
     private String vacancies;
 
     private String observations;
 
-    @NotNull(message = "Seniority cannot be null")
+    @NotEmpty(message = "Debe ingresar un seniority.")
     private SeniorityForSearchRequestDTO seniority;
 
-    @NotNull(message = "Rol cannot be null")
+    @NotEmpty(message = "Debe ingresar un rol.")
     private RolForSearchRequestDTO rol;
 
-    @NotNull(message = "Client cannot be null")
+    @NotEmpty(message = "Debe ingresar un cliente.")
     private ClientForSearchRequestDTO client;
 
-    @NotNull(message = "Skill cannot be null")
+    @NotEmpty(message = "Debe ingresar al menos una skill.")
     private List<SkillForSearchRequestDTO> skills;
 }
