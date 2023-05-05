@@ -2,7 +2,6 @@ package com.proyecto.b.s.repository;
 
 import com.proyecto.b.s.entity.Search;
 import org.springframework.data.jpa.repository.JpaRepository;
-
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -29,4 +28,6 @@ public interface SearchRepository extends JpaRepository<Search, Long> {
                               @Param("seniority") List<String> seniority,
                               @Param("skills") List<String> skills);
 
+    @Query("SELECT s FROM Search s WHERE s.nameSearch = :name")
+    Search findByName(@Param("name") String name);
 }

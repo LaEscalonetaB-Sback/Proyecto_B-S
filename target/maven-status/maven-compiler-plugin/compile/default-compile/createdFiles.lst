@@ -137,6 +137,7 @@ com\proyecto\b\s\repository\PersonRepository.class
 com\proyecto\b\s\entity\Person.class
 com\proyecto\b\s\controller\UserController.class
 com\proyecto\b\s\dto\response\eventResponseDTO\StatePersonForEventResponseDTO.class
+com\proyecto\b\s\controller\SeniorityController.class
 com\proyecto\b\s\entity\Source$SourceBuilder.class
 com\proyecto\b\s\service\service\StatePersonService.class
 com\proyecto\b\s\entity\StatePerson.class

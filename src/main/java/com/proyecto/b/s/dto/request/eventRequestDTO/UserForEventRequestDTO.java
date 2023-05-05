@@ -8,5 +8,5 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UserForEventRequestDTO {
-    private Long id;
+    private String name;
 }

@@ -37,4 +37,7 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
             @Param("skills") List<String> skills);
 
     Optional<Person> findByDniOrCuilOrEmailOrLinkedin(String dni, String cuil, String email, String linkedin);
+
+    @Query("SELECT p FROM Person p WHERE p.name = :name")
+    Person findByName(@Param("name") String name);
 }
