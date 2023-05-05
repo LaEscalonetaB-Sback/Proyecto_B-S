@@ -10,5 +10,4 @@ public interface AnswerService {
     boolean existById(Long id);
 
     List<Answer> listAnswer();
-
 }

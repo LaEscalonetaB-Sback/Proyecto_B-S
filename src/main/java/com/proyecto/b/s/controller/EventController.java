@@ -46,7 +46,7 @@ public class EventController {
 
     //Crear Evento
     @PostMapping("/create")
-    public ResponseEntity<EventResponseDTO> create(@RequestBody EventRequestDTO eventRequestDto) throws Exception{
+    public ResponseEntity<EventResponseDTO> create(@RequestBody EventRequestDTO eventRequestDto) throws Exception {
         EventResponseDTO result = eventService.saveEvent(eventRequestDto);
 
         return ResponseEntity.ok(result);

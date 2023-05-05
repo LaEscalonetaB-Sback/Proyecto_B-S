@@ -55,7 +55,7 @@ public class SourceController {
 
     //Eliminar source por id
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Skill> delete(@PathVariable Long id) throws Exception{
+    public ResponseEntity<Skill> delete(@PathVariable Long id) throws Exception {
         sourceService.delete(id);
 
         return ResponseEntity.noContent().build();

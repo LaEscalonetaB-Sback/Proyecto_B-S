@@ -4,7 +4,6 @@ import com.proyecto.b.s.dto.modelMapper.ModelMapperInterface;
 import com.proyecto.b.s.dto.request.IndustryRequestDTO;
 import com.proyecto.b.s.dto.response.IndustryResponseDTO;
 import com.proyecto.b.s.entity.Industry;
-import com.proyecto.b.s.entity.Skill;
 import com.proyecto.b.s.exception.InvalidResourceException;
 import com.proyecto.b.s.repository.IndustryRepository;
 import com.proyecto.b.s.service.service.IndustryService;
@@ -76,6 +75,6 @@ public class IndustryServiceImpl implements IndustryService {
     @Override
     public Industry findByName(String name) {
         return Optional.ofNullable(industryRepository.findByName(name))
-                .orElseThrow(()-> new InvalidResourceException("Industria no encontrada con el nombre " + name + "."));
+                .orElseThrow(() -> new InvalidResourceException("Industria no encontrada con el nombre " + name + "."));
     }
 }
