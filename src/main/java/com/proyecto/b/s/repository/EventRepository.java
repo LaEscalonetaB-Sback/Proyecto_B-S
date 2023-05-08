@@ -15,11 +15,11 @@ public interface EventRepository extends JpaRepository<Event, Long> {
             + "LEFT JOIN e.search s "
             + "WHERE "
             + "(:date IS NULL OR e.dateEvent = :date) AND "
-            + "(:personId IS NULL OR e.person.id = :personId) AND "
-            + "(:userId IS NULL OR e.user.id = :userId) AND "
-            + "(:searchId IS NULL OR s.id = :searchId)")
+            + "(:personName IS NULL OR e.person.name = :personName) AND "
+            + "(:userName IS NULL OR e.user.name = :userName) AND "
+            + "(:searchName IS NULL OR s.nameSearch = :searchName)")
     List<Event> findEventBy(@Param("date") LocalDate date,
-                            @Param("personId") Long personId,
-                            @Param("userId") Long userId,
-                            @Param("searchId") Long searchId);
+                            @Param("personName") String personName,
+                            @Param("userName") String userName,
+                            @Param("searchName") String searchName);
 }

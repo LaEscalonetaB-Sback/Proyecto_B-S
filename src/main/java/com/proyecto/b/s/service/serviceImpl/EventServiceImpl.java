@@ -48,7 +48,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List<EventResponseDTO> listEvent(LocalDate date, Long person, Long user, Long search) {
+    public List<EventResponseDTO> listEvent(LocalDate date, String person, String user, String search) {
         if (date != null || person != null || user != null || search != null) {
             List<Event> eventList = eventRepository.findEventBy(date, person, user, search);
             HelperValidator.isEmptyList(eventList);
