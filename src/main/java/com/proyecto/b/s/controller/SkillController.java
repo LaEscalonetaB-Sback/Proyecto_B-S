@@ -54,7 +54,7 @@ public class SkillController {
 
     //Eliminar skill por id
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Skill> delete(@PathVariable Long id) throws Exception{
+    public ResponseEntity<Skill> delete(@PathVariable Long id) throws Exception {
         skillService.delete(id);
 
         return ResponseEntity.noContent().build();

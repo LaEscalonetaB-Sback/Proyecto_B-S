@@ -36,6 +36,14 @@ public class PersonController {
         return ResponseEntity.ok(persons);
     }
 
+    //Listar personas activas
+    @GetMapping("/list/active")
+    public ResponseEntity<List<PersonResponseDTO>> listActivePerson() {
+        List<PersonResponseDTO> persons = personService.listAllActive();
+
+        return ResponseEntity.ok(persons);
+    }
+
     //Encontrar por id
     @GetMapping("/{id}")
     public ResponseEntity<Person> findById(@PathVariable Long id) throws Exception {

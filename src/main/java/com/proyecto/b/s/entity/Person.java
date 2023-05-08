@@ -57,7 +57,7 @@ public class Person {
 
     private String remuneration;
 
-    private Boolean active = true;
+    private boolean active = true;
 
     @ManyToMany
     @NotEmpty(message = "Debe ingresar al menos una skill.")

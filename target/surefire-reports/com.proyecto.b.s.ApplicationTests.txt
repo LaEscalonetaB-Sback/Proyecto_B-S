@@ -1,4 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: com.proyecto.b.s.ApplicationTests
 -------------------------------------------------------------------------------
+<<<<<<< HEAD
 Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.869 s - in com.proyecto.b.s.ApplicationTests
+=======
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.688 s - in com.proyecto.b.s.ApplicationTests
+>>>>>>> f376916f555c1bd28c8e00e6b6a953f1c1df93ff

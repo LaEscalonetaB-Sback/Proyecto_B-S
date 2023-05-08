@@ -68,7 +68,7 @@ public class SeniorityServiceImpl implements SeniorityService {
     @Override
     public Seniority findByName(String name) {
         return Optional.ofNullable(seniorityRepository.findByName(name))
-                .orElseThrow(()-> new InvalidResourceException("Seniority no encontrado con el nombre " + name + "."));
+                .orElseThrow(() -> new InvalidResourceException("Seniority no encontrado con el nombre " + name + "."));
     }
 
     @Override

@@ -17,4 +17,6 @@ public interface UserService {
     Boolean validationPassword(UserRequestDTO userDto) throws Exception;
 
     User findById(Long id) throws Exception;
+
+    User findByName(String name);
 }

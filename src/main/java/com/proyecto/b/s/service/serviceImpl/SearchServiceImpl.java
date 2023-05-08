@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -59,6 +60,24 @@ public class SearchServiceImpl implements SearchService {
                     .map(search -> modelMapper.map(search, SearchResponseDTO.class))
                     .collect(Collectors.toList());
         }
+    }
+
+    @Override
+    public Search findByName(String name) {
+
+        return Optional.ofNullable(searchRepository.findByName(name))
+                .orElseThrow(() -> new InvalidResourceException("Busqueda no encontrado con el nombre " + name + "."));
+    }
+
+    @Override
+    public List<SearchResponseDTO> listAllActive() {
+        List<Search> searchList = searchRepository.findAll();
+        HelperValidator.isEmptyList(searchList);
+
+        return searchList.stream()
+                .filter(Search::isActive)
+                .map(search -> modelMapper.map(search, SearchResponseDTO.class))
+                .collect(Collectors.toList());
     }
 
     @Override

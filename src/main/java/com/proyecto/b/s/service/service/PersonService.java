@@ -20,4 +20,8 @@ public interface PersonService {
     PersonResponseDTO update(Long Id, PersonUpdateRequestDTO personRequestDto) throws Exception;
 
     void delete(Long id) throws Exception;
+
+    Person findByName(String name);
+
+    List<PersonResponseDTO> listAllActive();
 }

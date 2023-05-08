@@ -34,6 +34,14 @@ public class SearchController {
         return ResponseEntity.ok(search);
     }
 
+    //Listar busquedas activas
+    @GetMapping("/list/active")
+    public ResponseEntity<List<SearchResponseDTO>> listActiveSearch() {
+        List<SearchResponseDTO> search = searchService.listAllActive();
+
+        return ResponseEntity.ok(search);
+    }
+
     //Encuentra busqueda por id
     @GetMapping("/{id}")
     public ResponseEntity<Search> findOne(@PathVariable Long id) throws Exception {

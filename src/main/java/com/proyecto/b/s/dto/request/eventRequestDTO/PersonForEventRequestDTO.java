@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PersonForEventRequestDTO {
-    private Long id;
+    private String name;
     //   private List<IndustryRequestDTO> industries;
     //   private List<SourceRequestDTO> sources;
     //  private List<RolRequestDTO> roles;

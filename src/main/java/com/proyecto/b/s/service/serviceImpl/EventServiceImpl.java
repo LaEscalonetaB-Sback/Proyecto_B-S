@@ -67,31 +67,31 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public EventResponseDTO saveEvent(EventRequestDTO eventRequestDTO) throws Exception {
+    public EventResponseDTO saveEvent(EventRequestDTO eventRequestDTO) {
         Event newEvent = getEvent(eventRequestDTO);
         eventRepository.save(newEvent);
 
         return modelMapperInterface.eventToEventResponseDto(newEvent);
     }
 
-    private Event getEvent(EventRequestDTO eventRequestDTO) throws Exception {
-        Long idPerson = eventRequestDTO.getPerson().getId();
-        Person newPerson = personService.findById(idPerson);
+    private Event getEvent(EventRequestDTO eventRequestDTO) {
+        String namePerson = eventRequestDTO.getPerson().getName();
+        Person newPerson = personService.findByName(namePerson);
 
-        Long idUser = eventRequestDTO.getUser().getId();
-        User newUser = userService.findById(idUser);
+        String nameUser = eventRequestDTO.getUser().getName();
+        User newUser = userService.findByName(nameUser);
 
-        List<SearchForEventRequestDTO> ids = eventRequestDTO.getSearch();
-        List<Search> idSearches = new ArrayList<>();
-        for (SearchForEventRequestDTO aux : ids) {
-            Search search = searchService.findById(aux.getId());
-            idSearches.add(search);
+        List<SearchForEventRequestDTO> names = eventRequestDTO.getSearch();
+        List<Search> nameSearches = new ArrayList<>();
+        for (SearchForEventRequestDTO aux : names) {
+            Search search = searchService.findByName(aux.getName());
+            nameSearches.add(search);
         }
 
         Event newEvent = modelMapperInterface.eventSaveRequestDtoToEvent(eventRequestDTO);
         newEvent.setPerson(newPerson);
         newEvent.setUser(newUser);
-        newEvent.setSearch(idSearches);
+        newEvent.setSearch(nameSearches);
 
         return newEvent;
     }
@@ -105,8 +105,8 @@ public class EventServiceImpl implements EventService {
     }
 
     private Event getUpdatedEvent(Long eventId, EventUpdateRequestDTO eventUpdateRequestDTO) throws Exception {
-        Long idUser = eventUpdateRequestDTO.getUser().getId();
-        User newUser = userService.findById(idUser);
+        String nameUser = eventUpdateRequestDTO.getUser().getName();
+        User newUser = userService.findByName(nameUser);
 
         Event updatedEvent = findById(eventId);
         modelMapper.map(eventUpdateRequestDTO, Event.class);
