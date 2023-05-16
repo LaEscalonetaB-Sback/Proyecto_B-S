@@ -65,6 +65,16 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
+    public ClientResponseDTO update(Long id, ClientRequestDTO clientRequestDto) throws Exception {
+        Client client = findById(id);
+        String clientNameOrigin = clientRequestDto.getName();
+        client.setName(clientNameOrigin);
+        clientRepository.save(client);
+
+        return modelMapper.map(client, ClientResponseDTO.class);
+    }
+
+    @Override
     public void deleteClient(Long id) throws Exception {
         Client client = findById(id);
         client.setActive(false);

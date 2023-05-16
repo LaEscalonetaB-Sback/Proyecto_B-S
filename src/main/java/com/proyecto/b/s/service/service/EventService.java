@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface EventService {
-    List<EventResponseDTO> listEvent(LocalDate date, Long person, Long user, Long search);
+    List<EventResponseDTO> listEvent(LocalDate date, String person, String user, String search);
 
     EventResponseDTO saveEvent(EventRequestDTO eventRequestDTO) throws Exception;
 

@@ -28,9 +28,9 @@ public class EventController {
     @GetMapping("/list")
     public ResponseEntity<List<EventResponseDTO>> findEvent(
             @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date,
-            @RequestParam(required = false) Long person,
-            @RequestParam(required = false) Long user,
-            @RequestParam(required = false) Long search) {
+            @RequestParam(required = false) String person,
+            @RequestParam(required = false) String user,
+            @RequestParam(required = false) String search) {
         List<EventResponseDTO> event = eventService.listEvent(date, person, user, search);
 
         return ResponseEntity.ok(event);
