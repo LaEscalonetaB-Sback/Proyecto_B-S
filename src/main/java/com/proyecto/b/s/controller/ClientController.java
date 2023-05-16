@@ -36,6 +36,14 @@ public class ClientController {
         return ResponseEntity.ok(clients);
     }
 
+    //Actualizar skill
+    @PutMapping("/update/{id}")
+    public ResponseEntity<ClientResponseDTO> update(@PathVariable Long id, @RequestBody ClientRequestDTO clientRequestDTO) throws Exception {
+        ClientResponseDTO result = clientService.update(id, clientRequestDTO);
+
+        return ResponseEntity.ok(result);
+    }
+
     //Eliminar por id
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<ClientResponseDTO> deleteById(@PathVariable Long id) throws Exception {
