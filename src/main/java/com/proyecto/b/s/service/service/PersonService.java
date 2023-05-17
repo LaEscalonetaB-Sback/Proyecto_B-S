@@ -21,7 +21,7 @@ public interface PersonService {
 
     void delete(Long id) throws Exception;
 
-    Person findByName(String name);
+    Person findByNameAndLastName(String name, String lastName);
 
     List<PersonResponseDTO> listAllActive();
 }
