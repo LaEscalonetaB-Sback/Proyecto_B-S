@@ -15,5 +15,7 @@ public interface ClientService {
 
     Client findByName(String name);
 
+    ClientResponseDTO update(Long id, ClientRequestDTO clientRequestDto) throws Exception;
+
     void deleteClient(Long id) throws Exception;
 }
