@@ -10,8 +10,5 @@ import lombok.Setter;
 @Setter
 public class PersonForEventRequestDTO {
     private String name;
-    //   private List<IndustryRequestDTO> industries;
-    //   private List<SourceRequestDTO> sources;
-    //  private List<RolRequestDTO> roles;
-    //  private List<SkillRequestDTO> skills;
+    private String lastName;
 }

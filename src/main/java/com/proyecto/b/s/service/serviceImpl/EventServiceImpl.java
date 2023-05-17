@@ -48,9 +48,9 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List<EventResponseDTO> listEvent(LocalDate date, String person, String user, String search) {
-        if (date != null || person != null || user != null || search != null) {
-            List<Event> eventList = eventRepository.findEventBy(date, person, user, search);
+    public List<EventResponseDTO> listEvent(LocalDate date, String personName, String personLastName, String user, String search) {
+        if (date != null || personName != null || personLastName != null || user != null || search != null) {
+            List<Event> eventList = eventRepository.findEventBy(date, personName, personLastName, user, search);
             HelperValidator.isEmptyList(eventList);
 
             return eventList.stream()
@@ -76,7 +76,8 @@ public class EventServiceImpl implements EventService {
 
     private Event getEvent(EventRequestDTO eventRequestDTO) {
         String namePerson = eventRequestDTO.getPerson().getName();
-        Person newPerson = personService.findByName(namePerson);
+        String lastNamePerson = eventRequestDTO.getPerson().getLastName();
+        Person newPerson = personService.findByNameAndLastName(namePerson, lastNamePerson);
 
         String nameUser = eventRequestDTO.getUser().getName();
         User newUser = userService.findByName(nameUser);

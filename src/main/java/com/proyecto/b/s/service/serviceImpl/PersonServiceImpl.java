@@ -151,10 +151,10 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public Person findByName(String name) {
+    public Person findByNameAndLastName(String name, String lastName) {
 
-        return Optional.ofNullable(personRepository.findByName(name))
-                .orElseThrow(() -> new InvalidResourceException("Persona no encontrada con el nombre " + name + "."));
+        return Optional.ofNullable(personRepository.findByNameAndLastName(name, lastName))
+                .orElseThrow(() -> new InvalidResourceException("Persona no encontrada con el nombre " + name + lastName + "."));
     }
 
     @Override
