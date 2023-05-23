@@ -14,6 +14,7 @@ import java.util.List;
 public class SearchForEventResponseDTO {
     private Long id;
     private String linkJb;
+    private String nameSearch;
     private LocalDate dateOpening; //fechaApertura
     private String dayJob; //jornadaTrabajo
     private String modalityHiring; //modalidadTrabajo
