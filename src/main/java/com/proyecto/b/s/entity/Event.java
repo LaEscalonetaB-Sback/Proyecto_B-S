@@ -27,16 +27,16 @@ public class Event {
 
     private boolean active = true;
 
-    @OneToMany(cascade = {CascadeType.ALL})
+    @OneToMany
     private List<EventOption> events;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne
     private User user;
 
-    @OneToOne(cascade = {CascadeType.ALL})
+    @OneToOne
     private Person person;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany
     @JsonManagedReference
     @JoinTable(
             name = "event_search",
@@ -45,6 +45,6 @@ public class Event {
     )
     private List<Search> search;
 
-    @OneToMany(cascade = {CascadeType.ALL})
+    @OneToMany
     private List<Interview> interviews;
 }

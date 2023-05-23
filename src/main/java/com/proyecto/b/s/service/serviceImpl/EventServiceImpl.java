@@ -26,6 +26,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class EventServiceImpl implements EventService {
+
     private final EventRepository eventRepository;
     private final UserService userService;
     private final PersonService personService;
