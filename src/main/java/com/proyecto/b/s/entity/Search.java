@@ -58,7 +58,7 @@ public class Search {
     @OneToOne()
     private Client client;
 
-    @ManyToMany()
+    @ManyToMany
     @JoinTable(
             name = "search_state_search",
             joinColumns = @JoinColumn(name = "search_id"),
@@ -68,7 +68,7 @@ public class Search {
     private List<StateSearch> stateSearch;
 
     @NotNull(message = "Skill cannot be null")
-    @ManyToMany()
+    @ManyToMany
     @JoinTable(
             name = "search_skill",
             joinColumns = @JoinColumn(name = "search_id"),

@@ -11,6 +11,8 @@ import java.util.List;
 @Getter
 @Setter
 public class EventResponseDTO {
+    private Long id;
+    private boolean active;
     private LocalDate dateEvent;
     private List<EventOptionForEventResponseDTO> events;
     private UserForEventResponseDTO user;
