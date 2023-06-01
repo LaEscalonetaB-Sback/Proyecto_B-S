@@ -28,6 +28,6 @@ public interface SearchRepository extends JpaRepository<Search, Long> {
                               @Param("seniority") List<String> seniority,
                               @Param("skills") List<String> skills);
 
-    @Query("SELECT s FROM Search s WHERE s.nameSearch = :name")
+    @Query("SELECT s FROM Search s WHERE s.nameSearch = :name AND s.active = true")
     Search findByName(@Param("name") String name);
 }

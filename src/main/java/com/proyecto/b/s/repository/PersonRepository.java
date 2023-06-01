@@ -38,7 +38,7 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
 
     Optional<Person> findByDniOrCuilOrEmailOrLinkedin(String dni, String cuil, String email, String linkedin);
 
-    @Query("SELECT p FROM Person p WHERE p.name = :name AND p.lastName = :lastName")
+    @Query("SELECT p FROM Person p WHERE p.name = :name AND p.lastName = :lastName AND p.active=true")
     Person findByNameAndLastName(@Param("name") String name, @Param("lastName") String lastName);
 
 }

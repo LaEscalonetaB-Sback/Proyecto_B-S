@@ -2,6 +2,7 @@ package com.proyecto.b.s.service.serviceImpl;
 
 import com.proyecto.b.s.dto.modelMapper.ModelMapperInterface;
 import com.proyecto.b.s.dto.request.InterviewRequestDTO;
+import com.proyecto.b.s.dto.request.eventRequestDTO.InterviewForEventRequestDTO;
 import com.proyecto.b.s.dto.response.InterviewResponseDTO;
 import com.proyecto.b.s.entity.Interview;
 import com.proyecto.b.s.exception.InvalidResourceException;
@@ -48,7 +49,7 @@ public class InterviewServiceImpl implements InterviewService {
     }
 
     @Override
-    public InterviewResponseDTO saveInterview(InterviewRequestDTO interviewRequestDTO) {
+    public InterviewResponseDTO saveInterview(InterviewForEventRequestDTO interviewRequestDTO) {
         Interview newInterview = modelMapperInterface.interviewSaveRequestDtoToInterview(interviewRequestDTO);
         interviewRepository.save(newInterview);
 
