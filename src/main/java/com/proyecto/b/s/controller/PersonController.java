@@ -68,6 +68,12 @@ public class PersonController {
         return ResponseEntity.ok(result);
     }
 
+    @PutMapping("/updateState/{Id}")
+    public ResponseEntity<PersonResponseDTO> updatePersonState (@PathVariable Long Id) throws Exception{
+        PersonResponseDTO result = personService.updatePersonState(Id);
+
+        return ResponseEntity.ok(result);
+    }
     //Eliminar por id
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<PersonResponseDTO> deleteById(@PathVariable Long id) throws Exception {

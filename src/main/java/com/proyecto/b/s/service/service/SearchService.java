@@ -12,6 +12,7 @@ public interface SearchService {
     Search findById(Long id) throws Exception;
 
     SearchResponseDTO update(Long searchId, SearchRequestDTO searchRequestDto) throws Exception;
+    public SearchResponseDTO updateSearchState (Long searchId) throws Exception;
 
     boolean existById(Long id);
 

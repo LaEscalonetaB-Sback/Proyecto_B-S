@@ -76,6 +76,7 @@ com\proyecto\b\s\dto\request\SeniorityRequestDTO.class
 com\proyecto\b\s\dto\request\eventRequestDTO\SearchForEventRequestDTO.class
 com\proyecto\b\s\dto\request\personRequestDTO\PersonUpdateRequestDTO.class
 com\proyecto\b\s\dto\request\SkillRequestDTO.class
+com\proyecto\b\s\dto\request\personRequestDTO\PersonUpdateStateRequestDTO.class
 com\proyecto\b\s\dto\response\SkillResponseDTO.class
 com\proyecto\b\s\dto\response\eventResponseDTO\UserForEventResponseDTO.class
 com\proyecto\b\s\dto\response\eventResponseDTO\SearchForEventResponseDTO.class
