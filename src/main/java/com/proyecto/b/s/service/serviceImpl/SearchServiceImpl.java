@@ -1,8 +1,10 @@
 package com.proyecto.b.s.service.serviceImpl;
 
 import com.proyecto.b.s.dto.modelMapper.ModelMapperInterface;
+import com.proyecto.b.s.dto.request.personRequestDTO.PersonUpdateRequestDTO;
 import com.proyecto.b.s.dto.request.searchRequestDTO.SearchRequestDTO;
 import com.proyecto.b.s.dto.request.searchRequestDTO.SkillForSearchRequestDTO;
+import com.proyecto.b.s.dto.response.PersonResponseDTO;
 import com.proyecto.b.s.dto.response.searchResponseDTO.SearchResponseDTO;
 import com.proyecto.b.s.entity.*;
 import com.proyecto.b.s.exception.InvalidResourceException;
@@ -134,7 +136,14 @@ public class SearchServiceImpl implements SearchService {
 
         return modelMapper.map(search, SearchResponseDTO.class);
     }
+    @Override
+    public SearchResponseDTO updateSearchState (Long searchId) throws Exception{
+        Search search = findById(searchId);
+        search.setActive(!search.isActive());
+        searchRepository.save(search);
+        return modelMapperInterface.searchToSearchResponseDTO(search);
 
+    }
     @Override
     public void deleteSearch(Long id) throws Exception {
         Search entity = findById(id);

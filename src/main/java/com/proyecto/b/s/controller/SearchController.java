@@ -1,6 +1,7 @@
 package com.proyecto.b.s.controller;
 
 import com.proyecto.b.s.dto.request.searchRequestDTO.SearchRequestDTO;
+import com.proyecto.b.s.dto.response.PersonResponseDTO;
 import com.proyecto.b.s.dto.response.searchResponseDTO.SearchResponseDTO;
 import com.proyecto.b.s.entity.Search;
 import com.proyecto.b.s.service.service.SearchService;
@@ -65,7 +66,12 @@ public class SearchController {
 
         return ResponseEntity.ok(result);
     }
+    @PutMapping("/updateState/{Id}")
+    public ResponseEntity<SearchResponseDTO> updateSearchState (@PathVariable Long Id) throws Exception{
+        SearchResponseDTO result = searchService.updateSearchState(Id);
 
+        return ResponseEntity.ok(result);
+    }
     //Eliminar busqueda por id
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Search> delete(@PathVariable Long id) throws Exception {

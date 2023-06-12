@@ -4,6 +4,7 @@ import com.proyecto.b.s.dto.request.*;
 import com.proyecto.b.s.dto.request.eventRequestDTO.EventOptionForEventRequestDTO;
 import com.proyecto.b.s.dto.request.eventRequestDTO.EventRequestDTO;
 import com.proyecto.b.s.dto.request.eventRequestDTO.EventUpdateRequestDTO;
+import com.proyecto.b.s.dto.request.eventRequestDTO.InterviewForEventRequestDTO;
 import com.proyecto.b.s.dto.request.personRequestDTO.PersonRequestDTO;
 import com.proyecto.b.s.dto.request.personRequestDTO.PersonUpdateRequestDTO;
 import com.proyecto.b.s.dto.request.searchRequestDTO.SearchRequestDTO;
@@ -24,7 +25,7 @@ public interface ModelMapperInterface {
 
     SearchResponseDTO searchToSearchResponseDTO(Search search);
 
-    Interview interviewSaveRequestDtoToInterview(InterviewRequestDTO interviewRequestDTO);
+    public Interview interviewSaveRequestDtoToInterview(InterviewForEventRequestDTO interviewRequestDTO) ;
 
     InterviewResponseDTO interviewToInterviewResponseDto(Interview interview);
 
