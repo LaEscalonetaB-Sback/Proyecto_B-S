@@ -149,7 +149,13 @@ public class PersonServiceImpl implements PersonService {
         person.setActive(false);
         personRepository.save(person);
     }
-
+    @Override
+    public PersonResponseDTO updatePersonState (Long id) throws Exception {
+        Person person = personRepository.findById(id).orElseThrow(()-> new Exception ("No se encontró ninguna persona con el ID especificado."));
+        person.setActive(!person.isActive());
+        personRepository.save(person);
+        return modelMapperInterface.personToPersonResponseDTO(person);
+    }
     @Override
     public Person findByNameAndLastName(String name, String lastName) {
 
