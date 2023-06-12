@@ -24,4 +24,5 @@ public interface PersonService {
     Person findByNameAndLastName(String name, String lastName);
 
     List<PersonResponseDTO> listAllActive();
+    Person findByEmail(String email);
 }

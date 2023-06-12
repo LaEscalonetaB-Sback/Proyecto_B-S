@@ -167,4 +167,9 @@ public class PersonServiceImpl implements PersonService {
                 .map(search -> modelMapper.map(search, PersonResponseDTO.class))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public Person findByEmail(String email) {
+        return personRepository.findByEmail(email);
+    }
 }

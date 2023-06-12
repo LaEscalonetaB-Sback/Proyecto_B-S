@@ -41,4 +41,6 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
     @Query("SELECT p FROM Person p WHERE p.name = :name AND p.lastName = :lastName")
     Person findByNameAndLastName(@Param("name") String name, @Param("lastName") String lastName);
 
+    @Query("SELECT p FROM Person p WHERE p.email = :email")
+    Person findByEmail(@Param("email") String email);
 }
