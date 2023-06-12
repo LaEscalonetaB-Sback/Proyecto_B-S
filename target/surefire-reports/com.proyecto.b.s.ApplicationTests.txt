@@ -1,16 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.proyecto.b.s.ApplicationTests
 -------------------------------------------------------------------------------
-<<<<<<< HEAD
-<<<<<<< HEAD
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.132 s - in com.proyecto.b.s.ApplicationTests
-=======
-<<<<<<< HEAD
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.132 s - in com.proyecto.b.s.ApplicationTests
-=======
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.907 s - in com.proyecto.b.s.ApplicationTests
->>>>>>> d369f9ba622ac3be90b85ca00c6be7f19afec205
->>>>>>> 0bb8ccef462311e1286f5414779564778573583a
-=======
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 9.492 s - in com.proyecto.b.s.ApplicationTests
->>>>>>> 00e305978ba8e8bceda24919219b99f88152cb3a
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.775 s - in com.proyecto.b.s.ApplicationTests
