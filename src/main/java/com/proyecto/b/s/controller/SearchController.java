@@ -79,4 +79,13 @@ public class SearchController {
 
         return ResponseEntity.noContent().build();
     }
+
+    @DeleteMapping("/deleteComplete/{id}")
+    public ResponseEntity<Search> deleteCompleteByid(@PathVariable Long id) throws Exception {
+        searchService.deleteCompleteSearch(id);
+
+        return ResponseEntity.noContent().build();
+    }
+
+
 }

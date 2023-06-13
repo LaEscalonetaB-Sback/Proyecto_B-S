@@ -127,6 +127,11 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
+    public void deleteCompleteEvent(Long id) throws Exception {
+        eventRepository.deleteById(id);
+    }
+
+    @Override
     public Event findById(Long id) throws Exception {
 
         return eventRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Evento no encontrada con id: " + id));

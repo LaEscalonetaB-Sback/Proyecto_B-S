@@ -18,6 +18,8 @@ public interface SearchService {
 
     void deleteSearch(Long id) throws Exception;
 
+    void deleteCompleteSearch(Long id) throws Exception;
+
     List<SearchResponseDTO> listSearch(String client, String rol, String state, List<String> seniority, List<String> skills);
 
     Search findByName(String name);
