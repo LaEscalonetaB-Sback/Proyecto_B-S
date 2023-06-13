@@ -10,4 +10,6 @@ import org.springframework.stereotype.Repository;
 public interface SkillRepository extends JpaRepository<Skill, Long> {
     @Query("SELECT e FROM Skill e WHERE e.name = :name")
     Skill findByName(@Param("name") String name);
+
+
 }
