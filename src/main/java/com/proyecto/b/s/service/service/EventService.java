@@ -17,6 +17,8 @@ public interface EventService {
 
     void deleteEvent(Long id) throws Exception;
 
+    void deleteCompleteEvent(Long id) throws Exception;
+
     Event findById(Long id) throws Exception;
 
     boolean existById(Long id);

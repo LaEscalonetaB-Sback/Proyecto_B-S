@@ -68,4 +68,10 @@ public class EventController {
 
         return ResponseEntity.noContent().build();
     }
+
+    @DeleteMapping("/deleteComplete/{id}")
+    public ResponseEntity<Event> deleteComplete(@PathVariable Long id) throws Exception {
+        eventService.deleteCompleteEvent(id);
+        return ResponseEntity.noContent().build();
+    }
 }

@@ -81,4 +81,10 @@ public class PersonController {
 
         return ResponseEntity.noContent().build();
     }
+
+    @DeleteMapping("/completeDelete/{id}")
+    public ResponseEntity<PersonResponseDTO> completeDeleteById(@PathVariable Long id) throws Exception{
+        personService.deleteComplete(id);
+        return ResponseEntity.noContent().build();
+    }
 }
