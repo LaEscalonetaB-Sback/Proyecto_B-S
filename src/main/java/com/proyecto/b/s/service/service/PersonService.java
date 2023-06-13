@@ -25,4 +25,6 @@ public interface PersonService {
 
     List<PersonResponseDTO> listAllActive();
     Person findByEmail(String email);
+
+    PersonResponseDTO updatePersonState(Long id) throws Exception;
 }
