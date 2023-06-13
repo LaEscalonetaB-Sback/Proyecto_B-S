@@ -1,10 +1,6 @@
 package com.proyecto.b.s.service.serviceImpl;
 
 import com.proyecto.b.s.dto.modelMapper.ModelMapperInterface;
-import com.proyecto.b.s.dto.request.IndustryRequestDTO;
-import com.proyecto.b.s.dto.request.RolRequestDTO;
-import com.proyecto.b.s.dto.request.SkillRequestDTO;
-import com.proyecto.b.s.dto.request.SourceRequestDTO;
 import com.proyecto.b.s.dto.request.personRequestDTO.*;
 import com.proyecto.b.s.dto.response.PersonResponseDTO;
 import com.proyecto.b.s.entity.*;
@@ -135,82 +131,17 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public PersonResponseDTO update(Long Id, PersonUpdateRequestDTO personRequestDto) throws Exception {
         Person person = findById(Id);
-
-        // Actualizar los atributos individuales
-        person.setName(personRequestDto.getName());
-        person.setLastName(personRequestDto.getLastName());
-        person.setLinkedin(personRequestDto.getLinkedin());
-        person.setRecruiter(personRequestDto.getRecruiter());
-        person.setSeniorityGeneral(personRequestDto.getSeniorityGeneral());
-        person.setDni(personRequestDto.getDni());
-        person.setEmail(personRequestDto.getEmail());
-        person.setCuil(personRequestDto.getCuil());
-        person.setPhoneNumber(personRequestDto.getPhoneNumber());
-        person.setRemuneration(personRequestDto.getRemuneration());
-        person.setActive(personRequestDto.getActive());
-
-        // Actualizar las listas asociadas
-        updateIndustries(person, personRequestDto.getIndustries());
-        updateSources(person, personRequestDto.getSources());
-        updateRoles(person, personRequestDto.getRoles());
-        updateSkills(person, personRequestDto.getSkills());
-
+        modelMapperInterface.personUpdateReqDtoToPerson(personRequestDto);
+        mapPerson(personRequestDto, person);
         personRepository.save(person);
+
         return modelMapperInterface.personToPersonResponseDTO(person);
     }
 
-    private void updateIndustries(Person person, List<IndustryRequestDTO> industries) {
-        // Limpiar las industrias existentes
-        person.getIndustries().clear();
-
-        // Agregar las nuevas industrias
-        for (IndustryRequestDTO industryDto : industries) {
-            Industry industry = new Industry();
-            industry.setId(industryDto.getId());
-            // Puedes establecer más atributos en la entidad Industry según tus necesidades
-
-            // Agregar la nueva industria a la lista de industrias de la persona
-            person.getIndustries().add(industry);
-        }
+    private void mapPerson(PersonUpdateRequestDTO personRequestDto, Person person) {
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.map(personRequestDto, person);
     }
-
-    private void updateSources(Person person, List<SourceRequestDTO> sources) {
-        person.getSources().clear();
-
-        for (SourceRequestDTO sourceDto : sources) {
-            Source source = new Source();
-            source.setId(sourceDto.getId());
-
-            person.getSources().add(source);
-        }
-    }
-
-    private void updateRoles(Person person, List<RolRequestDTO> roles) {
-        person.getRoles().clear();
-
-        for (RolRequestDTO rolesDto : roles) {
-            Rol rol = new Rol();
-            rol.setId(rolesDto.getId());
-
-            person.getRoles().add(rol);
-        }
-    }
-
-    private void updateSkills(Person person, List<SkillRequestDTO> skills) {
-        person.getSkills().clear();
-
-        for (SkillRequestDTO skillDto : skills) {
-            Skill skill = new Skill();
-            skill.setId(skillDto.getId());
-
-            person.getSkills().add(skill);
-        }
-    }
-
-   // private void mapPerson(PersonUpdateRequestDTO personRequestDto, Person person) {
-   //     ModelMapper modelMapper = new ModelMapper();
-   //     modelMapper.map(personRequestDto, person);
-   // }
 
     @Override
     public void delete(Long id) throws Exception {
@@ -231,6 +162,7 @@ public class PersonServiceImpl implements PersonService {
         personRepository.save(person);
         return modelMapperInterface.personToPersonResponseDTO(person);
     }
+
     @Override
     public Person findByNameAndLastName(String name, String lastName) {
 
@@ -247,5 +179,10 @@ public class PersonServiceImpl implements PersonService {
                 .filter(Person::isActive)
                 .map(search -> modelMapper.map(search, PersonResponseDTO.class))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Person findByEmail(String email) {
+        return personRepository.findByEmail(email);
     }
 }

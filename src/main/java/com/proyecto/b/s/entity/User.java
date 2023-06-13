@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -31,4 +32,7 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "rol_id", referencedColumnName = "id")
     )
     private Collection<Rol> roles;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Interview> inverviewList;
 }

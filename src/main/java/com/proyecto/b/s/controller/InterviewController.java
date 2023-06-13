@@ -1,8 +1,7 @@
 package com.proyecto.b.s.controller;
 
-import com.proyecto.b.s.dto.request.InterviewRequestDTO;
-import com.proyecto.b.s.dto.request.eventRequestDTO.InterviewForEventRequestDTO;
-import com.proyecto.b.s.dto.response.InterviewResponseDTO;
+import com.proyecto.b.s.dto.request.interviewRequestDTO.InterviewRequestDTO;
+import com.proyecto.b.s.dto.response.interviewResponseDTO.InterviewResponseDTO;
 import com.proyecto.b.s.entity.Interview;
 import com.proyecto.b.s.service.service.InterviewService;
 import org.springframework.http.ResponseEntity;
@@ -41,7 +40,7 @@ public class InterviewController {
 
     //Crear entrevista
     @PostMapping("/create")
-    public ResponseEntity<InterviewResponseDTO> create(@RequestBody InterviewForEventRequestDTO interviewRequestDto) {
+    public ResponseEntity<InterviewResponseDTO> create(@RequestBody InterviewRequestDTO interviewRequestDto) {
         InterviewResponseDTO result = interviewService.saveInterview(interviewRequestDto);
 
         return ResponseEntity.ok(result);
