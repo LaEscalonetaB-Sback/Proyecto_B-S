@@ -218,6 +218,12 @@ public class PersonServiceImpl implements PersonService {
         person.setActive(false);
         personRepository.save(person);
     }
+
+    @Override
+    public void deleteComplete(Long id) throws Exception {
+        personRepository.deleteById(id);
+    }
+
     @Override
     public PersonResponseDTO updatePersonState (Long id) throws Exception {
         Person person = personRepository.findById(id).orElseThrow(()-> new Exception ("No se encontró ninguna persona con el ID especificado."));
