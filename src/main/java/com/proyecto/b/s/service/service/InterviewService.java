@@ -1,8 +1,7 @@
 package com.proyecto.b.s.service.service;
 
-import com.proyecto.b.s.dto.request.InterviewRequestDTO;
-import com.proyecto.b.s.dto.request.eventRequestDTO.InterviewForEventRequestDTO;
-import com.proyecto.b.s.dto.response.InterviewResponseDTO;
+import com.proyecto.b.s.dto.request.interviewRequestDTO.InterviewRequestDTO;
+import com.proyecto.b.s.dto.response.interviewResponseDTO.InterviewResponseDTO;
 import com.proyecto.b.s.entity.Interview;
 
 import java.util.List;
@@ -14,7 +13,7 @@ public interface InterviewService {
 
     List<InterviewResponseDTO> listInterview();
 
-    public InterviewResponseDTO saveInterview(InterviewForEventRequestDTO interviewRequestDTO);
+    InterviewResponseDTO saveInterview(InterviewRequestDTO interviewRequestDTO);
 
     InterviewResponseDTO updateInterview(Long id, InterviewRequestDTO interviewRequestDTO) throws Exception;
 

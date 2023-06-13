@@ -61,11 +61,4 @@ public class EventOptionController {
         return ResponseEntity.ok(result);
     }
 
-    //Eliminar Evento por id
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Event> delete(@PathVariable Long id) throws Exception {
-        eventOptionService.deleteEventOption(id);
-
-        return ResponseEntity.noContent().build();
-    }
 }

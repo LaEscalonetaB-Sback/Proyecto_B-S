@@ -29,6 +29,4 @@ public class EventOption {
     @JsonManagedReference
     @ManyToMany
     private List<Answer> feedback;
-
-    private boolean active = true;
 }
