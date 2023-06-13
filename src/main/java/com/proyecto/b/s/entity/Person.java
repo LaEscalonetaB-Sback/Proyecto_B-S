@@ -89,14 +89,8 @@ public class Person {
     )
     @JsonManagedReference
     @NotEmpty(message = "Debe ingresar al menos un rol.")
-    private List < Rol> roles;
+    private List <Rol> roles;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(
-            name = "person_statePerson",
-            joinColumns = @JoinColumn(name = "person_id"),
-            inverseJoinColumns = @JoinColumn(name = "statePerson_id")
-    )
-    @JsonManagedReference
-    private List<StatePerson> statePeople; //todo preguntar si depende del evento o es algo particular de la persona
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
+    private List<Interview> interviewList;
 }

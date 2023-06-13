@@ -17,8 +17,6 @@ public interface EventOptionService {
 
     EventOptionForEventResponseDTO updateEventOption(Long eventId, EventOptionForEventRequestDTO eventRequestDTO) throws Exception;
 
-    void deleteEventOption(Long id) throws Exception;
-
     EventOption findById(Long id) throws Exception;
 
     boolean existById(Long id);

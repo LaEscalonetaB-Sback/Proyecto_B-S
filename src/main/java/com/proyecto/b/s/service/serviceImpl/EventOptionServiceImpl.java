@@ -63,13 +63,6 @@ public class EventOptionServiceImpl implements EventOptionService {
     }
 
     @Override
-    public void deleteEventOption(Long id) throws Exception {
-        EventOption entity = findById(id);
-        entity.setActive(false);
-        eventOptionRepository.save(entity);
-    }
-
-    @Override
     public EventOption findById(Long id) throws Exception {
 
         return eventOptionRepository.findById(id).orElseThrow(() -> new InvalidResourceException("Evento no encontrado con id: " + id));

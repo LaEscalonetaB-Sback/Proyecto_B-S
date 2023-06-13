@@ -19,4 +19,5 @@ public interface UserService {
     User findById(Long id) throws Exception;
 
     User findByName(String name);
+    User findByEmail(String email);
 }
