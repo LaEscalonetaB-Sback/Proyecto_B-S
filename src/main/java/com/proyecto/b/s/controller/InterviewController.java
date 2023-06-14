@@ -40,7 +40,7 @@ public class InterviewController {
 
     //Crear entrevista
     @PostMapping("/create")
-    public ResponseEntity<InterviewResponseDTO> create(@RequestBody InterviewRequestDTO interviewRequestDto) {
+    public ResponseEntity<InterviewResponseDTO> create(@RequestBody InterviewRequestDTO interviewRequestDto) throws Exception {
         InterviewResponseDTO result = interviewService.saveInterview(interviewRequestDto);
 
         return ResponseEntity.ok(result);

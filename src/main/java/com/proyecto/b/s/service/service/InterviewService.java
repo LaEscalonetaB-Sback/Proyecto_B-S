@@ -13,7 +13,7 @@ public interface InterviewService {
 
     List<InterviewResponseDTO> listInterview();
 
-    InterviewResponseDTO saveInterview(InterviewRequestDTO interviewRequestDTO);
+    InterviewResponseDTO saveInterview(InterviewRequestDTO interviewRequestDTO) throws Exception;
 
     InterviewResponseDTO updateInterview(Long id, InterviewRequestDTO interviewRequestDTO) throws Exception;
 

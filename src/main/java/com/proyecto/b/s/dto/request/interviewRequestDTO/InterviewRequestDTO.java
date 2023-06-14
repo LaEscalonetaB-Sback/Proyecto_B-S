@@ -15,5 +15,6 @@ public class InterviewRequestDTO {
     private UserForInterviewRequestDTO user;
     private LocalDate dateInterview;
     private LocalTime timeInterview;
+    private EventForInterviewRequestDTO event;
     //private String linkMeet;
 }
