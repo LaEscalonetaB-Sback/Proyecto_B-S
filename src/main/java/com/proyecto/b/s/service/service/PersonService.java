@@ -1,5 +1,6 @@
 package com.proyecto.b.s.service.service;
 
+import com.proyecto.b.s.dto.request.personRequestDTO.PersonListRequestDTO;
 import com.proyecto.b.s.dto.request.personRequestDTO.PersonRequestDTO;
 import com.proyecto.b.s.dto.request.personRequestDTO.PersonUpdateRequestDTO;
 import com.proyecto.b.s.dto.response.PersonResponseDTO;
@@ -19,14 +20,16 @@ public interface PersonService {
 
     PersonResponseDTO update(Long Id, PersonUpdateRequestDTO personRequestDto) throws Exception;
 
-    void delete(Long id) throws Exception;
-
     void deleteComplete(Long id) throws Exception;
+
+    public PersonResponseDTO updatePersonState (Long id) throws Exception;
+
+    void delete(Long id) throws Exception;
 
     Person findByNameAndLastName(String name, String lastName);
 
+    public Person findByFullName(String fullName) throws Exception;
     List<PersonResponseDTO> listAllActive();
-    Person findByEmail(String email);
-
-    PersonResponseDTO updatePersonState(Long id) throws Exception;
+    public Person findByEmail(String email);
+    public List<PersonListRequestDTO> listAllActiveByFullName();
 }

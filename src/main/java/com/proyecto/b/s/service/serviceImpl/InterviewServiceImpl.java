@@ -23,19 +23,18 @@ import java.util.stream.Collectors;
 @Service
 public class InterviewServiceImpl implements InterviewService {
     private final InterviewRepository interviewRepository;
+    private final ModelMapperInterface modelMapperInterface;
+    private final ModelMapper modelMapper;
     private final PersonService personService;
     private final UserService userService;
     private final EventService eventService;
-    private final ModelMapperInterface modelMapperInterface;
-    private final ModelMapper modelMapper;
-
-    public InterviewServiceImpl(InterviewRepository interviewRepository, PersonService personService, UserService userService, EventService eventService, ModelMapperInterface modelMapperInterface, ModelMapper modelMapper) {
+    public InterviewServiceImpl(InterviewRepository interviewRepository, ModelMapperInterface modelMapperInterface, ModelMapper modelMapper, PersonService personService, UserService userService, EventService eventService) {
         this.interviewRepository = interviewRepository;
+        this.modelMapperInterface = modelMapperInterface;
+        this.modelMapper = modelMapper;
         this.personService = personService;
         this.userService = userService;
         this.eventService = eventService;
-        this.modelMapperInterface = modelMapperInterface;
-        this.modelMapper = modelMapper;
     }
 
     @Override
@@ -72,7 +71,7 @@ public class InterviewServiceImpl implements InterviewService {
         String personEmail = interviewRequestDTO.getPerson().getEmail();
         Person person = personService.findByEmail(personEmail);
 
-        String userEmail = interviewRequestDTO.getUser().getEmail();
+        String userEmail = interviewRequestDTO.getUserRecruiter().getEmail();
         User user = userService.findByEmail(userEmail);
 
         Long idEvent = interviewRequestDTO.getEvent().getId();
@@ -87,7 +86,6 @@ public class InterviewServiceImpl implements InterviewService {
         newInterview.setEvent(event);
         return newInterview;
     }
-
     @Override
     public InterviewResponseDTO updateInterview(Long id, InterviewRequestDTO interviewRequestDTO) throws Exception {
         Interview updatedInterview = findById(id);
@@ -108,5 +106,4 @@ public class InterviewServiceImpl implements InterviewService {
     public Interview findByEventId(Long eventId) {
         return interviewRepository.findByEventId(eventId);
     }
-
 }

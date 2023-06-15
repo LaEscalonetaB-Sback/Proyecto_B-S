@@ -28,7 +28,9 @@ public class Interview {
     private LocalTime timeInterview;
     private String linkMeet;
     private boolean active = true;
+
     @OneToOne
-    @JoinColumn(name = "event_id")
+    @JoinColumn (name = "event_id")
     private Event event;
+
 }

@@ -11,6 +11,7 @@ com\proyecto\b\s\controller\StateController.class
 com\proyecto\b\s\controller\PersonController.class
 com\proyecto\b\s\dto\request\eventRequestDTO\SkillForEventRequestDTO.class
 com\proyecto\b\s\dto\response\eventResponseDTO\SourceForEventResponseDTO.class
+com\proyecto\b\s\dto\request\interviewRequestDTO\EventForInterviewRequestDTO.class
 com\proyecto\b\s\dto\request\eventRequestDTO\SourceForEventRequestDTO.class
 com\proyecto\b\s\dto\request\interviewRequestDTO\UserForInterviewRequestDTO.class
 com\proyecto\b\s\dto\request\personRequestDTO\StatePersonRequestDTO.class
@@ -36,6 +37,7 @@ com\proyecto\b\s\dto\response\eventResponseDTO\EventResponseDTO.class
 com\proyecto\b\s\controller\EventController.class
 com\proyecto\b\s\controller\SourceController.class
 com\proyecto\b\s\dto\request\eventRequestDTO\StatePersonForEventRequestDTO.class
+com\proyecto\b\s\dto\response\interviewResponseDTO\EventForInterviewResponseDTO.class
 com\proyecto\b\s\dto\response\interviewResponseDTO\InterviewResponseDTO.class
 com\proyecto\b\s\dto\response\eventResponseDTO\PersonForEventResponseDTO.class
 com\proyecto\b\s\entity\Skill.class
@@ -61,6 +63,7 @@ com\proyecto\b\s\dto\request\RolUserRequestDTO.class
 com\proyecto\b\s\dto\request\searchRequestDTO\SkillForSearchRequestDTO.class
 com\proyecto\b\s\entity\StateSearch$StateSearchBuilder.class
 com\proyecto\b\s\service\service\IndustryService.class
+com\proyecto\b\s\dto\response\eventResponseDTO\PersonForCreateEventResponseDTO.class
 com\proyecto\b\s\entity\Skill$SkillBuilder.class
 com\proyecto\b\s\dto\response\eventResponseDTO\RolUserForEventResponseDTO.class
 com\proyecto\b\s\service\serviceImpl\ClientServiceImpl.class
@@ -136,6 +139,7 @@ com\proyecto\b\s\dto\response\IndustryResponseDTO.class
 com\proyecto\b\s\dto\modelMapper\ModelMapperInterface.class
 com\proyecto\b\s\repository\SearchRepository.class
 com\proyecto\b\s\controller\ClientController.class
+com\proyecto\b\s\dto\request\personRequestDTO\PersonListRequestDTO.class
 com\proyecto\b\s\dto\response\SeniorityResponseDTO.class
 com\proyecto\b\s\service\serviceImpl\InterviewServiceImpl.class
 com\proyecto\b\s\repository\PersonRepository.class

@@ -13,11 +13,9 @@ public interface InterviewService {
 
     List<InterviewResponseDTO> listInterview();
 
-    InterviewResponseDTO saveInterview(InterviewRequestDTO interviewRequestDTO) throws Exception;
-
     InterviewResponseDTO updateInterview(Long id, InterviewRequestDTO interviewRequestDTO) throws Exception;
 
     void deleteInterview(Long id) throws Exception;
-
+    public InterviewResponseDTO saveInterview(InterviewRequestDTO interviewRequestDTO) throws Exception;
     Interview findByEventId(Long eventId);
 }

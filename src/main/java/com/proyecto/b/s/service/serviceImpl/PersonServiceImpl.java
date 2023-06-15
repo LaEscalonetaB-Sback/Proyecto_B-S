@@ -31,13 +31,7 @@ public class PersonServiceImpl implements PersonService {
     private final ModelMapperInterface modelMapperInterface;
     private final ModelMapper modelMapper;
 
-    public PersonServiceImpl(PersonRepository personRepository,
-                             ModelMapperInterface modelMapperInterface,
-                             ModelMapper modelMapper,
-                             SkillService skillService,
-                             IndustryService industryService,
-                             SourceService sourceService,
-                             RolService rolService) {
+    public PersonServiceImpl(PersonRepository personRepository, ModelMapperInterface modelMapperInterface, ModelMapper modelMapper, SkillService skillService, IndustryService industryService, SourceService sourceService, RolService rolService) {
         this.personRepository = personRepository;
         this.modelMapperInterface = modelMapperInterface;
         this.modelMapper = modelMapper;
@@ -56,7 +50,6 @@ public class PersonServiceImpl implements PersonService {
     }
 
     private Person getPerson(PersonRequestDTO personRequestDto) {
-
         String fullName = personRequestDto.getName() + " " + personRequestDto.getLastName();
 
         List<SkillForPersonRequestDTO> skillsName = personRequestDto.getSkills();
@@ -95,12 +88,7 @@ public class PersonServiceImpl implements PersonService {
     }
 
     private void existPerson(PersonRequestDTO personRequestDto) {
-        Optional<Person> existingPerson = personRepository.findByDniOrCuilOrEmailOrLinkedin(
-                personRequestDto.getDni() != "" ? personRequestDto.getDni() : null,
-                personRequestDto.getCuil() != "" ? personRequestDto.getCuil() : null,
-                personRequestDto.getEmail() != "" ? personRequestDto.getEmail() : null,
-                personRequestDto.getLinkedin() != "" ? personRequestDto.getLinkedin() : null
-        );
+        Optional<Person> existingPerson = personRepository.findByDniOrCuilOrEmailOrLinkedin(personRequestDto.getDni() != "" ? personRequestDto.getDni() : null, personRequestDto.getCuil() != "" ? personRequestDto.getCuil() : null, personRequestDto.getEmail() != "" ? personRequestDto.getEmail() : null, personRequestDto.getLinkedin() != "" ? personRequestDto.getLinkedin() : null);
 
         if (existingPerson.isPresent()) {
             throw new RuntimeException("Ya existe una persona con el mismo DNI, CUIL, correo electrónico o LinkedIn: " + existingPerson.get().getName() + " " + existingPerson.get().getLastName());
@@ -113,16 +101,12 @@ public class PersonServiceImpl implements PersonService {
             List<Person> personList = personRepository.findAll();
             HelperValidator.isEmptyList(personList);
 
-            return personList.stream()
-                    .map(person -> modelMapper.map(person, PersonResponseDTO.class))
-                    .collect(Collectors.toList());
+            return personList.stream().map(person -> modelMapper.map(person, PersonResponseDTO.class)).collect(Collectors.toList());
         } else {
             List<Person> personList = personRepository.searchPerson(name, lastName, seniorityGeneral, roles, skills);
             HelperValidator.isEmptyList(personList);
 
-            return personList.stream()
-                    .map(person -> modelMapper.map(person, PersonResponseDTO.class))
-                    .collect(Collectors.toList());
+            return personList.stream().map(person -> modelMapper.map(person, PersonResponseDTO.class)).collect(Collectors.toList());
         }
     }
 
@@ -210,12 +194,12 @@ public class PersonServiceImpl implements PersonService {
             person.getSkills().add(skill);
         }
     }
-        // private void mapPerson(PersonUpdateRequestDTO personRequestDto, Person person) {
-        //     ModelMapper modelMapper = new ModelMapper();
-        //     modelMapper.map(personRequestDto, person);
-        // }
+    // private void mapPerson(PersonUpdateRequestDTO personRequestDto, Person person) {
+    //     ModelMapper modelMapper = new ModelMapper();
+    //     modelMapper.map(personRequestDto, person);
+    // }
 
-        @Override
+    @Override
     public void delete(Long id) throws Exception {
         Person person = findById(id);
         person.setActive(false);
@@ -227,9 +211,10 @@ public class PersonServiceImpl implements PersonService {
         personRepository.deleteById(id);
     }
 
+
     @Override
-    public PersonResponseDTO updatePersonState (Long id) throws Exception {
-        Person person = personRepository.findById(id).orElseThrow(()-> new Exception ("No se encontró ninguna persona con el ID especificado."));
+    public PersonResponseDTO updatePersonState(Long id) throws Exception {
+        Person person = personRepository.findById(id).orElseThrow(() -> new Exception("No se encontró ninguna persona con el ID especificado."));
         person.setActive(!person.isActive());
         personRepository.save(person);
         return modelMapperInterface.personToPersonResponseDTO(person);
@@ -238,8 +223,7 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public Person findByNameAndLastName(String name, String lastName) {
 
-        return Optional.ofNullable(personRepository.findByNameAndLastName(name, lastName))
-                .orElseThrow(() -> new InvalidResourceException("Persona no encontrada con el nombre " + name + lastName + "."));
+        return Optional.ofNullable(personRepository.findByNameAndLastName(name, lastName)).orElseThrow(() -> new InvalidResourceException("Persona no encontrada con el nombre " + name + lastName + "."));
     }
 
     @Override
@@ -247,10 +231,20 @@ public class PersonServiceImpl implements PersonService {
         List<Person> personList = personRepository.findAll();
         HelperValidator.isEmptyList(personList);
 
-        return personList.stream()
-                .filter(Person::isActive)
-                .map(search -> modelMapper.map(search, PersonResponseDTO.class))
-                .collect(Collectors.toList());
+        return personList.stream().filter(Person::isActive).map(search -> modelMapper.map(search, PersonResponseDTO.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<PersonListRequestDTO> listAllActiveByFullName() {
+        List<Person> personList = personRepository.findAll();
+        HelperValidator.isEmptyList(personList);
+
+        return personList.stream().filter(Person::isActive).map(person -> modelMapper.map(person, PersonListRequestDTO.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public Person findByFullName(String fullName) throws Exception {
+        return modelMapper.map(personRepository.findByFullName(fullName), Person.class);
     }
 
     @Override

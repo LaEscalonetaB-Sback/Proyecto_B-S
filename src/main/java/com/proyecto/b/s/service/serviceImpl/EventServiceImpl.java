@@ -76,9 +76,13 @@ public class EventServiceImpl implements EventService {
     }
 
     private Event getEvent(EventRequestDTO eventRequestDTO) {
-        String namePerson = eventRequestDTO.getPerson().getName();
-        String lastNamePerson = eventRequestDTO.getPerson().getLastName();
-        Person newPerson = personService.findByNameAndLastName(namePerson, lastNamePerson);
+        String namePerson = eventRequestDTO.getPerson().getFullName();
+        Person newPerson = null;
+        try {
+            newPerson = personService.findByFullName(namePerson);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         String nameUser = eventRequestDTO.getUser().getName();
         User newUser = userService.findByName(nameUser);
