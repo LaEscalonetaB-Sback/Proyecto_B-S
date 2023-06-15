@@ -2,7 +2,7 @@ package com.proyecto.b.s.service.serviceImpl;
 
 import com.proyecto.b.s.dto.modelMapper.ModelMapperInterface;
 import com.proyecto.b.s.dto.request.interviewRequestDTO.InterviewRequestDTO;
-import com.proyecto.b.s.dto.response.InterviewResponseDTO;
+import com.proyecto.b.s.dto.response.interviewResponseDTO.InterviewResponseDTO;
 import com.proyecto.b.s.entity.Event;
 import com.proyecto.b.s.entity.Interview;
 import com.proyecto.b.s.entity.Person;

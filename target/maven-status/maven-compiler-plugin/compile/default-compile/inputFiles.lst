@@ -10,6 +10,7 @@ C:\Proyectos\BackBYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\service\service
 C:\Proyectos\BackBYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\request\eventRequestDTO\EventUpdateRequestDTO.java
 C:\Proyectos\BackBYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\modelMapper\ModelMapperInterface.java
 C:\Proyectos\BackBYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\request\eventRequestDTO\StateSearchForEventRequestDTO.java
+C:\Proyectos\BackBYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\response\interviewResponseDTO\EventForInterviewResponseDTO.java
 C:\Proyectos\BackBYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\request\interviewRequestDTO\UserForInterviewRequestDTO.java
 C:\Proyectos\BackBYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\response\UserResponseDTO.java
 C:\Proyectos\BackBYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\response\searchResponseDTO\SearchResponseDTO.java
@@ -51,6 +52,7 @@ C:\Proyectos\BackBYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\response\ev
 C:\Proyectos\BackBYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\repository\StateRepository.java
 C:\Proyectos\BackBYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\controller\RolController.java
 C:\Proyectos\BackBYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\entity\User.java
+C:\Proyectos\BackBYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\request\interviewRequestDTO\EventForInterviewRequestDTO.java
 C:\Proyectos\BackBYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\entity\Person.java
 C:\Proyectos\BackBYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\controller\ClientController.java
 C:\Proyectos\BackBYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\response\eventResponseDTO\RolForEventResponseDTO.java
@@ -68,6 +70,7 @@ C:\Proyectos\BackBYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\repository\Even
 C:\Proyectos\BackBYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\response\searchResponseDTO\SeniorityForSearchResponseDTO.java
 C:\Proyectos\BackBYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\service\service\SearchService.java
 C:\Proyectos\BackBYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\response\eventResponseDTO\PersonForEventResponseDTO.java
+C:\Proyectos\BackBYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\request\personRequestDTO\PersonListRequestDTO.java
 C:\Proyectos\BackBYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\request\UserRequestDTO.java
 C:\Proyectos\BackBYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\request\eventRequestDTO\SourceForEventRequestDTO.java
 C:\Proyectos\BackBYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\response\interviewResponseDTO\UserForInterviewResponseDTO.java
@@ -112,6 +115,7 @@ C:\Proyectos\BackBYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\request\sea
 C:\Proyectos\BackBYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\repository\AnswerRepository.java
 C:\Proyectos\BackBYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\service\serviceImpl\SourceServiceImpl.java
 C:\Proyectos\BackBYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\response\SourceResponseDTO.java
+C:\Proyectos\BackBYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\response\eventResponseDTO\PersonForCreateEventResponseDTO.java
 C:\Proyectos\BackBYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\service\serviceImpl\ClientServiceImpl.java
 C:\Proyectos\BackBYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\controller\IndustryController.java
 C:\Proyectos\BackBYS\Proyecto_B-S\src\main\java\com\proyecto\b\s\dto\response\eventResponseDTO\SourceForEventResponseDTO.java

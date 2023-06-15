@@ -19,6 +19,9 @@ public interface PersonService {
     Person findById(Long id) throws Exception;
 
     PersonResponseDTO update(Long Id, PersonUpdateRequestDTO personRequestDto) throws Exception;
+
+    void deleteComplete(Long id) throws Exception;
+
     public PersonResponseDTO updatePersonState (Long id) throws Exception;
 
     void delete(Long id) throws Exception;
