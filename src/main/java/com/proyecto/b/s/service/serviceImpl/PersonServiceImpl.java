@@ -56,6 +56,9 @@ public class PersonServiceImpl implements PersonService {
     }
 
     private Person getPerson(PersonRequestDTO personRequestDto) {
+
+        String fullName = personRequestDto.getName() + " " + personRequestDto.getLastName();
+
         List<SkillForPersonRequestDTO> skillsName = personRequestDto.getSkills();
         List<Skill> skills = new ArrayList<>();
         for (SkillForPersonRequestDTO aux : skillsName) {
@@ -87,6 +90,7 @@ public class PersonServiceImpl implements PersonService {
         person.setIndustries(industries);
         person.setSources(sources);
         person.setRoles(roles);
+        person.setFullName(fullName);
         return person;
     }
 

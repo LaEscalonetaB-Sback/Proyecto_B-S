@@ -32,6 +32,8 @@ public class Person {
     @Pattern(regexp = "[a-zA-Z ]*$", message ="Debe ingresar un apellido sin números." )
     private String lastName;
 
+    private String fullName;
+
     @NotEmpty(message ="El linkedin no puede estar vacio")
     private String linkedin;
 
