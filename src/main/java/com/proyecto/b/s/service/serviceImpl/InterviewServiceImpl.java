@@ -68,10 +68,10 @@ public class InterviewServiceImpl implements InterviewService {
     }
 
     private Interview getInterview(InterviewRequestDTO interviewRequestDTO) throws Exception {
-        String personEmail = interviewRequestDTO.getEmailPerson();
+        String personEmail = interviewRequestDTO.getPerson().getEmail();
         Person person = personService.findByEmail(personEmail);
 
-        String userEmail = interviewRequestDTO.getEmailRecruiter();
+        String userEmail = interviewRequestDTO.getUserRecruiter().getEmail();
         User user = userService.findByEmail(userEmail);
 
         Long idEvent = interviewRequestDTO.getEvent().getId();
