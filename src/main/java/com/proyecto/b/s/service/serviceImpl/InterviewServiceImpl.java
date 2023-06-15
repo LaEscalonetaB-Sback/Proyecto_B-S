@@ -101,4 +101,9 @@ public class InterviewServiceImpl implements InterviewService {
         entity.setActive(false);
         interviewRepository.save(entity);
     }
+
+    @Override
+    public Interview findByEventId(Long eventId) {
+        return interviewRepository.findByEventId(eventId);
+    }
 }
