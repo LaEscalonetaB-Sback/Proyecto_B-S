@@ -3,13 +3,13 @@ package com.proyecto.b.s.service.serviceImpl;
 import com.proyecto.b.s.dto.modelMapper.ModelMapperInterface;
 import com.proyecto.b.s.dto.request.interviewRequestDTO.InterviewRequestDTO;
 import com.proyecto.b.s.dto.response.interviewResponseDTO.InterviewResponseDTO;
+import com.proyecto.b.s.entity.Event;
 import com.proyecto.b.s.entity.Interview;
 import com.proyecto.b.s.entity.Person;
 import com.proyecto.b.s.entity.User;
 import com.proyecto.b.s.exception.InvalidResourceException;
 import com.proyecto.b.s.repository.InterviewRepository;
-import com.proyecto.b.s.repository.PersonRepository;
-import com.proyecto.b.s.repository.UserRepository;
+import com.proyecto.b.s.service.service.EventService;
 import com.proyecto.b.s.service.service.InterviewService;
 import com.proyecto.b.s.service.service.PersonService;
 import com.proyecto.b.s.service.service.UserService;
@@ -23,17 +23,18 @@ import java.util.stream.Collectors;
 @Service
 public class InterviewServiceImpl implements InterviewService {
     private final InterviewRepository interviewRepository;
-    private final PersonService personService;
-    private final UserService userService;
     private final ModelMapperInterface modelMapperInterface;
     private final ModelMapper modelMapper;
-
-    public InterviewServiceImpl(InterviewRepository interviewRepository, PersonService personService, UserService userService, ModelMapperInterface modelMapperInterface, ModelMapper modelMapper) {
+    private final PersonService personService;
+    private final UserService userService;
+    private final EventService eventService;
+    public InterviewServiceImpl(InterviewRepository interviewRepository, ModelMapperInterface modelMapperInterface, ModelMapper modelMapper, PersonService personService, UserService userService, EventService eventService) {
         this.interviewRepository = interviewRepository;
-        this.personService = personService;
-        this.userService = userService;
         this.modelMapperInterface = modelMapperInterface;
         this.modelMapper = modelMapper;
+        this.personService = personService;
+        this.userService = userService;
+        this.eventService = eventService;
     }
 
     @Override
@@ -58,7 +59,7 @@ public class InterviewServiceImpl implements InterviewService {
     }
 
     @Override
-    public InterviewResponseDTO saveInterview(InterviewRequestDTO interviewRequestDTO) {
+    public InterviewResponseDTO saveInterview(InterviewRequestDTO interviewRequestDTO) throws Exception {
         Interview newInterview = getInterview(interviewRequestDTO);
 
         Interview interviewSaved = interviewRepository.save(newInterview);
@@ -66,12 +67,15 @@ public class InterviewServiceImpl implements InterviewService {
         return modelMapperInterface.interviewToInterviewResponseDto(interviewSaved);
     }
 
-    private Interview getInterview(InterviewRequestDTO interviewRequestDTO) {
-        String personEmail = interviewRequestDTO.getPerson().getEmail();
+    private Interview getInterview(InterviewRequestDTO interviewRequestDTO) throws Exception {
+        String personEmail = interviewRequestDTO.getEmailPerson();
         Person person = personService.findByEmail(personEmail);
 
-        String userEmail = interviewRequestDTO.getUser().getEmail();
+        String userEmail = interviewRequestDTO.getEmailRecruiter();
         User user = userService.findByEmail(userEmail);
+
+        Long idEvent = interviewRequestDTO.getEvent().getId();
+        Event event = eventService.findById(idEvent);
 
         Interview newInterview = modelMapper.map(interviewRequestDTO, Interview.class);
 
@@ -79,9 +83,9 @@ public class InterviewServiceImpl implements InterviewService {
 
         newInterview.setPerson(person);
         newInterview.setUser(user);
+        newInterview.setEvent(event);
         return newInterview;
     }
-
     @Override
     public InterviewResponseDTO updateInterview(Long id, InterviewRequestDTO interviewRequestDTO) throws Exception {
         Interview updatedInterview = findById(id);

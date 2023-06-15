@@ -1,5 +1,6 @@
 package com.proyecto.b.s.controller;
 
+import com.proyecto.b.s.dto.request.personRequestDTO.PersonListRequestDTO;
 import com.proyecto.b.s.dto.request.personRequestDTO.PersonRequestDTO;
 import com.proyecto.b.s.dto.request.personRequestDTO.PersonUpdateRequestDTO;
 import com.proyecto.b.s.dto.response.PersonResponseDTO;
@@ -44,6 +45,13 @@ public class PersonController {
         return ResponseEntity.ok(persons);
     }
 
+    @GetMapping("/list/activeEvent")
+    public ResponseEntity<List<PersonListRequestDTO>> listActivePersonForEvent() {
+        List<PersonListRequestDTO> people = personService.listAllActiveByFullName();
+
+        return ResponseEntity.ok(people);
+    }
+
     //Encontrar por id
     @GetMapping("/{id}")
     public ResponseEntity<Person> findById(@PathVariable Long id) throws Exception {
@@ -69,11 +77,12 @@ public class PersonController {
     }
 
     @PutMapping("/updateState/{Id}")
-    public ResponseEntity<PersonResponseDTO> updatePersonState (@PathVariable Long Id) throws Exception{
+    public ResponseEntity<PersonResponseDTO> updatePersonState(@PathVariable Long Id) throws Exception {
         PersonResponseDTO result = personService.updatePersonState(Id);
 
         return ResponseEntity.ok(result);
     }
+
     //Eliminar por id
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<PersonResponseDTO> deleteById(@PathVariable Long id) throws Exception {

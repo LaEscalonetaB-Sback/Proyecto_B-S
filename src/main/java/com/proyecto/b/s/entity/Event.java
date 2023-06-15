@@ -45,6 +45,9 @@ public class Event {
     )
     private List<Search> search;
 
-    @OneToMany
-    private List<Interview> interviews;
+
+    @OneToOne (
+            mappedBy = "event"
+    )
+    private Interview interview;
 }
