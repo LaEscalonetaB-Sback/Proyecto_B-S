@@ -33,18 +33,6 @@ public class InterviewController {
         return ResponseEntity.ok(interview);
     }
 
-    //Busca entrevista segun el id del evento
-    @GetMapping("/event/{eventId}")
-    public ResponseEntity<InterviewResponseDTO> getEntrevistaByEventoId(@PathVariable Long eventId) {
-        Interview interview = interviewService.findByEventId(eventId);
-        InterviewResponseDTO responseDTO = modelMapper.map(interview, InterviewResponseDTO.class);
-        if (interview != null) {
-            return ResponseEntity.ok(responseDTO);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
     //Encuentra entrevista por id
     @GetMapping("/{id}")
     public ResponseEntity<Interview> findOne(@PathVariable Long id) throws Exception {
@@ -76,6 +64,7 @@ public class InterviewController {
 
         return ResponseEntity.noContent().build();
     }
+
     //Busca entrevista segun el id del evento
     @GetMapping("/event/{eventId}")
     public ResponseEntity<InterviewResponseDTO> getEntrevistaByEventoId(@PathVariable Long eventId) {

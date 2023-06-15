@@ -28,6 +28,7 @@ public class InterviewServiceImpl implements InterviewService {
     private final PersonService personService;
     private final UserService userService;
     private final EventService eventService;
+
     public InterviewServiceImpl(InterviewRepository interviewRepository, ModelMapperInterface modelMapperInterface, ModelMapper modelMapper, PersonService personService, UserService userService, EventService eventService) {
         this.interviewRepository = interviewRepository;
         this.modelMapperInterface = modelMapperInterface;
@@ -86,6 +87,7 @@ public class InterviewServiceImpl implements InterviewService {
         newInterview.setEvent(event);
         return newInterview;
     }
+
     @Override
     public InterviewResponseDTO updateInterview(Long id, InterviewRequestDTO interviewRequestDTO) throws Exception {
         Interview updatedInterview = findById(id);

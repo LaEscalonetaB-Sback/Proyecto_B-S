@@ -2,6 +2,7 @@ package com.proyecto.b.s.controller;
 
 import com.proyecto.b.s.dto.request.searchRequestDTO.SearchRequestDTO;
 import com.proyecto.b.s.dto.response.PersonResponseDTO;
+import com.proyecto.b.s.dto.response.searchResponseDTO.SearchListResponseDTO;
 import com.proyecto.b.s.dto.response.searchResponseDTO.SearchResponseDTO;
 import com.proyecto.b.s.entity.Search;
 import com.proyecto.b.s.service.service.SearchService;
@@ -37,8 +38,8 @@ public class SearchController {
 
     //Listar busquedas activas
     @GetMapping("/list/active")
-    public ResponseEntity<List<SearchResponseDTO>> listActiveSearch() {
-        List<SearchResponseDTO> search = searchService.listAllActive();
+    public ResponseEntity<List<SearchListResponseDTO>> listActiveSearch() {
+        List<SearchListResponseDTO> search = searchService.listAllActive();
 
         return ResponseEntity.ok(search);
     }
