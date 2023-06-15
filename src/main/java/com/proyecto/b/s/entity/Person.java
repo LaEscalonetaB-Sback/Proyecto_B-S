@@ -32,6 +32,8 @@ public class Person {
     @Pattern(regexp = "[a-zA-Z ]*$", message ="Debe ingresar un apellido sin números." )
     private String lastName;
 
+    private String fullName;
+
     @NotEmpty(message ="El linkedin no puede estar vacio")
     private String linkedin;
 
@@ -57,7 +59,7 @@ public class Person {
 
     private String remuneration;
 
-    private boolean active = true;
+    private boolean active = false;
 
     @ManyToMany
     @NotEmpty(message = "Debe ingresar al menos una skill.")

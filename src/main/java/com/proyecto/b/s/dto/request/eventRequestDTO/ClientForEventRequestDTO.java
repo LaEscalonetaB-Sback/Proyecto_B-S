@@ -7,5 +7,4 @@ import lombok.Data;
 public class ClientForEventRequestDTO {
 
     private String name;
-    private Integer cuit;
 }

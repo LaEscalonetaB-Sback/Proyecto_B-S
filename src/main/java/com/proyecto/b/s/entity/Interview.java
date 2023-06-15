@@ -18,9 +18,18 @@ public class Interview {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String emailPerson;
-    private String emailRecruiter;
+    @ManyToOne
+    @JoinColumn(name = "person_id")
+    private Person person;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
     private LocalDate dateInterview;
     private String linkMeet;
     private boolean active = true;
+
+    @OneToOne
+    @JoinColumn (name = "event_id")
+    private Event event;
+
 }

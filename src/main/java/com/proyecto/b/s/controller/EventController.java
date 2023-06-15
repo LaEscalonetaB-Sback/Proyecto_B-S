@@ -5,6 +5,7 @@ import com.proyecto.b.s.dto.request.eventRequestDTO.EventUpdateRequestDTO;
 import com.proyecto.b.s.dto.response.eventResponseDTO.EventResponseDTO;
 import com.proyecto.b.s.entity.Event;
 import com.proyecto.b.s.service.service.EventService;
+import lombok.AllArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,12 +17,13 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/bs/event")
 @CrossOrigin("*")
+@AllArgsConstructor
 public class EventController {
     private final EventService eventService;
 
-    public EventController(EventService eventService) {
-        this.eventService = eventService;
-    }
+//    public EventController(EventService eventService) {
+//        this.eventService = eventService;
+//    }
 
     //CRUD
     //Lista de Evento
@@ -36,6 +38,7 @@ public class EventController {
 
         return ResponseEntity.ok(event);
     }
+
 
     //Encuentra Evento por id
     @GetMapping("/{id}")

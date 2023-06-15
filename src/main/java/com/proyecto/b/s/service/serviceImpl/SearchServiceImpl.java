@@ -146,8 +146,9 @@ public class SearchServiceImpl implements SearchService {
     }
     @Override
     public void deleteSearch(Long id) throws Exception {
-        Search entity = findById(id);
-        entity.setActive(false);
-        searchRepository.save(entity);
+//        Search entity = findById(id);
+//        entity.setActive(false);
+//        searchRepository.save(entity);
+        searchRepository.deleteById(id);
     }
 }
