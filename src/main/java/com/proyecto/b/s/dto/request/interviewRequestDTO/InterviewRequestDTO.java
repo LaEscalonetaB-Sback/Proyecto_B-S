@@ -5,15 +5,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 
 @Data
 @Setter
 @Getter
 public class InterviewRequestDTO {
-    private PersonForInterviewRequestDTO person;
-    private UserForInterviewRequestDTO user;
+    private EventForInterviewRequestDTO event;
+    private String emailPerson;
+    private String emailRecruiter;
     private LocalDate dateInterview;
-    private LocalTime timeInterview;
-    //private String linkMeet;
+    private String linkMeet;
 }

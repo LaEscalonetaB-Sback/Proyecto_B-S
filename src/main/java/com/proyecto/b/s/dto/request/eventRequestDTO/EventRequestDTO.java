@@ -1,5 +1,6 @@
 package com.proyecto.b.s.dto.request.eventRequestDTO;
 
+import com.proyecto.b.s.dto.request.ClientRequestDTO;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -15,6 +16,8 @@ public class EventRequestDTO {
     private UserForEventRequestDTO user;
 
     private PersonForEventRequestDTO person;
+
+    private ClientForEventRequestDTO client;
 
     private List<SearchForEventRequestDTO> search;
 

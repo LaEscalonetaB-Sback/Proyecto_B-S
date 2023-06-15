@@ -9,6 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PersonForEventRequestDTO {
-    private String name;
-    private String lastName;
+
+    private String fullName;
+
 }
