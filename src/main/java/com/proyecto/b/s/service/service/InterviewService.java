@@ -17,4 +17,5 @@ public interface InterviewService {
 
     void deleteInterview(Long id) throws Exception;
     public InterviewResponseDTO saveInterview(InterviewRequestDTO interviewRequestDTO) throws Exception;
+    Interview findByEventId(Long eventId);
 }
