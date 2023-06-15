@@ -18,4 +18,6 @@ public interface InterviewService {
     InterviewResponseDTO updateInterview(Long id, InterviewRequestDTO interviewRequestDTO) throws Exception;
 
     void deleteInterview(Long id) throws Exception;
+
+    Interview findByEventId(Long eventId);
 }

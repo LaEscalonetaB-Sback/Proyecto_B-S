@@ -4,6 +4,7 @@ import com.proyecto.b.s.dto.request.interviewRequestDTO.InterviewRequestDTO;
 import com.proyecto.b.s.dto.response.interviewResponseDTO.InterviewResponseDTO;
 import com.proyecto.b.s.entity.Interview;
 import com.proyecto.b.s.service.service.InterviewService;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,9 +17,11 @@ import java.util.Optional;
 public class InterviewController {
 
     private final InterviewService interviewService;
+    private final ModelMapper modelMapper;
 
-    public InterviewController(InterviewService interviewService) {
+    public InterviewController(InterviewService interviewService, ModelMapper modelMapper) {
         this.interviewService = interviewService;
+        this.modelMapper = modelMapper;
     }
 
     //CRUD
@@ -28,6 +31,18 @@ public class InterviewController {
         List<InterviewResponseDTO> interview = interviewService.listInterview();
 
         return ResponseEntity.ok(interview);
+    }
+
+    //Busca entrevista segun el id del evento
+    @GetMapping("/event/{eventId}")
+    public ResponseEntity<InterviewResponseDTO> getEntrevistaByEventoId(@PathVariable Long eventId) {
+        Interview interview = interviewService.findByEventId(eventId);
+        InterviewResponseDTO responseDTO = modelMapper.map(interview, InterviewResponseDTO.class);
+        if (interview != null) {
+            return ResponseEntity.ok(responseDTO);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     //Encuentra entrevista por id
