@@ -18,5 +18,6 @@ public class EventResponseDTO {
     private UserForEventResponseDTO user;
     private PersonForEventResponseDTO person;
     private List<SearchForEventResponseDTO> search;
+//    private ClientForEventResponseDTO client;
     private String observations;
 }
