@@ -37,18 +37,18 @@ public class StatePersonServiceImpl implements StatePersonService {
     public List<StatePerson> list() {
         return statePersonRepository.findAll();
     }
-    @Transactional
     @Override
     public PersonResponseDTO updatePersonActiveStatus(Long id, StatePersonRequestDTO nameState) {
         Optional<Person> optionalPerson = personRepository.findById(id);
         if (optionalPerson.isPresent()) {
             Person person = optionalPerson.get();
             StatePerson state = statePersonRepository.findByName(nameState.getName());
-            if (state != null) {
+            if (state.getName().equals("Pasa a entrevista")) {
                 person.setStatePerson(state);
                 //person.setActive(state.isActive());
                 person.setActive(true);
                 //person.isActive();
+                //statePersonRepository.save(state);
                 personRepository.save(person);
                 return modelMapper.map(person, PersonResponseDTO.class);
             } else {
