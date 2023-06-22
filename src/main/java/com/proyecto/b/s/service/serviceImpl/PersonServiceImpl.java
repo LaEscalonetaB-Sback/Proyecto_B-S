@@ -6,6 +6,7 @@ import com.proyecto.b.s.dto.request.RolRequestDTO;
 import com.proyecto.b.s.dto.request.SkillRequestDTO;
 import com.proyecto.b.s.dto.request.SourceRequestDTO;
 import com.proyecto.b.s.dto.request.personRequestDTO.*;
+import com.proyecto.b.s.dto.response.PersonListResponseDTO;
 import com.proyecto.b.s.dto.response.PersonResponseDTO;
 import com.proyecto.b.s.entity.*;
 import com.proyecto.b.s.exception.InvalidResourceException;
@@ -235,11 +236,11 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public List<PersonListRequestDTO> listAllActiveByFullName() {
+    public List<PersonListResponseDTO> listAllActiveByFullName() {
         List<Person> personList = personRepository.findAll();
         HelperValidator.isEmptyList(personList);
 
-        return personList.stream().filter(Person::isActive).map(person -> modelMapper.map(person, PersonListRequestDTO.class)).collect(Collectors.toList());
+        return personList.stream().filter(Person::isActive).map(person -> modelMapper.map(person, PersonListResponseDTO.class)).collect(Collectors.toList());
     }
 
     @Override

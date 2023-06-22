@@ -1,6 +1,6 @@
 package com.proyecto.b.s.service.service;
 
-import com.proyecto.b.s.dto.request.personRequestDTO.PersonListRequestDTO;
+import com.proyecto.b.s.dto.response.PersonListResponseDTO;
 import com.proyecto.b.s.dto.request.personRequestDTO.PersonRequestDTO;
 import com.proyecto.b.s.dto.request.personRequestDTO.PersonUpdateRequestDTO;
 import com.proyecto.b.s.dto.response.PersonResponseDTO;
@@ -31,5 +31,5 @@ public interface PersonService {
     public Person findByFullName(String fullName) throws Exception;
     List<PersonResponseDTO> listAllActive();
     public Person findByEmail(String email);
-    public List<PersonListRequestDTO> listAllActiveByFullName();
+    public List<PersonListResponseDTO> listAllActiveByFullName();
 }
