@@ -40,7 +40,7 @@ public class StatePersonController {
     //Actualizar person
     @PutMapping("/updateActive/{idPerson}")
     public ResponseEntity<PersonResponseDTO> updateActivePerson(@PathVariable Long idPerson, @RequestBody String nameState) throws Exception {
-        Person result = statePersonService.updatePersonActiveStatus(idPerson, nameState);
+        PersonResponseDTO result = statePersonService.updatePersonActiveStatus(idPerson, nameState);
 
         return ResponseEntity.ok(result);
     }
