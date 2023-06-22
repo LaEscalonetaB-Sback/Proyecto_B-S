@@ -21,6 +21,8 @@ public class PersonResponseDTO {
     private String remuneration;
     private Boolean active;
 
+    private List<StatePersonResponseDTO> statePerson;
+
     private List<IndustryResponseDTO> industries;
 
     private List<SourceResponseDTO> sources;

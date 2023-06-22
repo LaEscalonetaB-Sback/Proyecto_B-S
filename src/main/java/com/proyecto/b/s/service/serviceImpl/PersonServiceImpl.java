@@ -10,6 +10,7 @@ import com.proyecto.b.s.dto.response.PersonResponseDTO;
 import com.proyecto.b.s.entity.*;
 import com.proyecto.b.s.exception.InvalidResourceException;
 import com.proyecto.b.s.repository.PersonRepository;
+import com.proyecto.b.s.repository.StatePersonRepository;
 import com.proyecto.b.s.service.service.*;
 import com.proyecto.b.s.utils.HelperValidator;
 import org.modelmapper.ModelMapper;
@@ -28,10 +29,12 @@ public class PersonServiceImpl implements PersonService {
     private final IndustryService industryService;
     private final SourceService sourceService;
     private final RolService rolService;
+    // TODO: 21/6/2023 cambiarlo al repository
+    private final StatePersonRepository statePersonRepository;
     private final ModelMapperInterface modelMapperInterface;
     private final ModelMapper modelMapper;
 
-    public PersonServiceImpl(PersonRepository personRepository, ModelMapperInterface modelMapperInterface, ModelMapper modelMapper, SkillService skillService, IndustryService industryService, SourceService sourceService, RolService rolService) {
+    public PersonServiceImpl(PersonRepository personRepository, ModelMapperInterface modelMapperInterface, ModelMapper modelMapper, SkillService skillService, IndustryService industryService, SourceService sourceService, RolService rolService, StatePersonRepository statePersonRepository) {
         this.personRepository = personRepository;
         this.modelMapperInterface = modelMapperInterface;
         this.modelMapper = modelMapper;
@@ -39,6 +42,7 @@ public class PersonServiceImpl implements PersonService {
         this.industryService = industryService;
         this.sourceService = sourceService;
         this.rolService = rolService;
+        this.statePersonRepository = statePersonRepository;
     }
 
     @Override
@@ -78,12 +82,16 @@ public class PersonServiceImpl implements PersonService {
             Rol rol = rolService.findByName(aux.getName());
             roles.add(rol);
         }
+
+        StatePerson sp = statePersonRepository.getReferenceById(1L);
+
         Person person = modelMapperInterface.personReqDtoToPerson(personRequestDto);
         person.setSkills(skills);
         person.setIndustries(industries);
         person.setSources(sources);
         person.setRoles(roles);
         person.setFullName(fullName);
+        person.setStateList(sp);
         return person;
     }
 
@@ -211,7 +219,7 @@ public class PersonServiceImpl implements PersonService {
         personRepository.deleteById(id);
     }
 
-
+    // TODO: 21/6/2023 Modificar person state para que cuando se cambie el StatePerson se setee false o true a la persona
     @Override
     public PersonResponseDTO updatePersonState(Long id) throws Exception {
         Person person = personRepository.findById(id).orElseThrow(() -> new Exception("No se encontró ninguna persona con el ID especificado."));
