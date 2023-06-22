@@ -1,5 +1,6 @@
 package com.proyecto.b.s.controller;
 
+import com.proyecto.b.s.dto.request.personRequestDTO.StatePersonRequestDTO;
 import com.proyecto.b.s.dto.response.PersonResponseDTO;
 import com.proyecto.b.s.entity.Person;
 import com.proyecto.b.s.entity.StatePerson;
@@ -39,7 +40,7 @@ public class StatePersonController {
 
     //Actualizar person
     @PutMapping("/updateActive/{idPerson}")
-    public ResponseEntity<PersonResponseDTO> updateActivePerson(@PathVariable Long idPerson, @RequestBody String nameState) throws Exception {
+    public ResponseEntity<PersonResponseDTO> updateActivePerson(@PathVariable Long idPerson, @RequestBody StatePersonRequestDTO nameState) throws Exception {
         PersonResponseDTO result = statePersonService.updatePersonActiveStatus(idPerson, nameState);
 
         return ResponseEntity.ok(result);

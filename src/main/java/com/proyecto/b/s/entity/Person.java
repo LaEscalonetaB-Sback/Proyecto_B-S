@@ -96,7 +96,7 @@ public class Person {
     @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
     private List<Interview> interviewList;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "state_id")
-    private StatePerson stateList;
+    private StatePerson statePerson;
 }

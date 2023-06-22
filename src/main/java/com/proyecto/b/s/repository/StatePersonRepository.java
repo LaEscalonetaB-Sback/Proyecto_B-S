@@ -11,8 +11,10 @@ import java.util.Optional;
 
 @Repository
 public interface StatePersonRepository extends JpaRepository<StatePerson, Long> {
-    @Query("SELECT p FROM Person p JOIN p.stateList s WHERE s.name = :stateName")
+    @Query("SELECT p FROM Person p JOIN p.statePerson s WHERE s.name = :stateName")
     Person findByStateName(@Param("stateName") String stateName);
+    @Query("SELECT s FROM StatePerson s WHERE s.name = :name")
+    StatePerson findByName(@Param("name") String name);
     //@Query("SELECT s FROM StatePerson s WHERE s.id = :id")
     //Optional<StatePerson> findById(Long id);
 

@@ -1,8 +1,10 @@
 package com.proyecto.b.s.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -17,4 +19,7 @@ public class StatePerson {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    @OneToMany(mappedBy = "statePerson")
+    @JsonBackReference
+    private List<Person> persons;
 }

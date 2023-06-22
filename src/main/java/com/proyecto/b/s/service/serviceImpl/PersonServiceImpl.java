@@ -91,7 +91,7 @@ public class PersonServiceImpl implements PersonService {
         person.setSources(sources);
         person.setRoles(roles);
         person.setFullName(fullName);
-        person.setStateList(sp);
+        person.setStatePerson(sp);
         return person;
     }
 

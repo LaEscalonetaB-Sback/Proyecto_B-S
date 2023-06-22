@@ -19,9 +19,9 @@ public class PersonResponseDTO {
     private String cuil;
     private String phoneNumber;
     private String remuneration;
-    private Boolean active;
+    private boolean active;
 
-    private List<StatePersonResponseDTO> statePerson;
+    private StatePersonResponseDTO statePerson;
 
     private List<IndustryResponseDTO> industries;
 
