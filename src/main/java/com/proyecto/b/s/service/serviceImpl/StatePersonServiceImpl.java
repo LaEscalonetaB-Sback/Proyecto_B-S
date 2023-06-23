@@ -37,25 +37,37 @@ public class StatePersonServiceImpl implements StatePersonService {
     public List<StatePerson> list() {
         return statePersonRepository.findAll();
     }
+
+    @Transactional
     @Override
     public PersonResponseDTO updatePersonActiveStatus(Long id, StatePersonRequestDTO nameState) {
         Optional<Person> optionalPerson = personRepository.findById(id);
         if (optionalPerson.isPresent()) {
             Person person = optionalPerson.get();
             StatePerson state = statePersonRepository.findByName(nameState.getName());
-            if (state.getName().equals("Pasa a entrevista")) {
-                person.setStatePerson(state);
-                //person.setActive(state.isActive());
-                person.setActive(true);
-                //person.isActive();
-                //statePersonRepository.save(state);
-                personRepository.save(person);
-                return modelMapper.map(person, PersonResponseDTO.class);
-            } else {
-                throw new NotFoundException("El estado con el nombre " + nameState.getName() + " no existe.");
+
+            switch (state.getName()) {
+                case "Pasa a entrevista":
+                    person.setStatePerson(state);
+                    person.setActive(true);
+                    break;
+                case "Aguardando respuesta":
+                case "Desinteresado":
+                case "No evalua":
+                case "Excede banda":
+                case "Reciclaje":
+                    person.setStatePerson(state);
+                    person.setActive(false);
+                    break;
+                default:
+                    throw new NotFoundException("El estado con el nombre " + nameState.getName() + " no existe.");
             }
+
+            personRepository.save(person);
+            return modelMapper.map(person, PersonResponseDTO.class);
         } else {
             throw new NotFoundException("La persona con el ID " + id + " no existe.");
         }
     }
+
 }

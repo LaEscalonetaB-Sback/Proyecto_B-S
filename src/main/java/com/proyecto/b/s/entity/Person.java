@@ -97,6 +97,7 @@ public class Person {
     private List<Interview> interviewList;
 
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "state_id")
     private StatePerson statePerson;
 }
