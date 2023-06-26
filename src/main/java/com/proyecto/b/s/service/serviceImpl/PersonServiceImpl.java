@@ -83,7 +83,8 @@ public class PersonServiceImpl implements PersonService {
             roles.add(rol);
         }
 
-        StatePerson sp = statePersonRepository.getReferenceById(1L);
+        Optional<StatePerson> optionalStatePerson = statePersonRepository.findById(1L);
+        StatePerson statePerson = optionalStatePerson.get();
 
         Person person = modelMapperInterface.personReqDtoToPerson(personRequestDto);
         person.setSkills(skills);
@@ -91,7 +92,7 @@ public class PersonServiceImpl implements PersonService {
         person.setSources(sources);
         person.setRoles(roles);
         person.setFullName(fullName);
-        person.setStatePerson(sp);
+        person.setStatePerson(statePerson);
         return person;
     }
 

@@ -28,7 +28,7 @@ public class SkillServiceImpl implements SkillService {
 
     @Override
     public List<SkillResponseDTO> list() {
-        List<Skill> skills = skillRepository.findAll();
+        List<Skill> skills = skillRepository.findAllByOrderByNameAsc();
         HelperValidator.isEmptyList(skills);
 
         List<SkillResponseDTO> skillResponseDTOS = new ArrayList<>();
