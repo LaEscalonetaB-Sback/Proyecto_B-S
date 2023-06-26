@@ -45,7 +45,6 @@ public class Event {
     )
     private List<Search> search;
 
-
     @OneToOne (
             mappedBy = "event"
     )
