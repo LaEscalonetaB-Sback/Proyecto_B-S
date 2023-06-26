@@ -1,8 +1,13 @@
 package com.proyecto.b.s.service.serviceImpl;
 
 import com.proyecto.b.s.dto.modelMapper.ModelMapperInterface;
+import com.proyecto.b.s.dto.request.RolRequestDTO;
+import com.proyecto.b.s.dto.request.SkillRequestDTO;
+import com.proyecto.b.s.dto.request.personRequestDTO.PersonUpdateRequestDTO;
 import com.proyecto.b.s.dto.request.searchRequestDTO.SearchRequestDTO;
+import com.proyecto.b.s.dto.request.searchRequestDTO.SearchUpdateRequestDTO;
 import com.proyecto.b.s.dto.request.searchRequestDTO.SkillForSearchRequestDTO;
+import com.proyecto.b.s.dto.response.PersonResponseDTO;
 import com.proyecto.b.s.dto.response.searchResponseDTO.SearchListResponseDTO;
 import com.proyecto.b.s.dto.response.searchResponseDTO.SearchResponseDTO;
 import com.proyecto.b.s.entity.*;
@@ -128,12 +133,40 @@ public class SearchServiceImpl implements SearchService {
     }
 
     @Override
-    public SearchResponseDTO update(Long searchId, SearchRequestDTO searchRequestDto) throws Exception {
-        Search search = findById(searchId);
-        modelMapper.map(searchRequestDto, search);
-        searchRepository.save(search);
+    public SearchResponseDTO update(Long Id, SearchUpdateRequestDTO searchRequestDto) throws Exception {
+        Search search = findById(Id);
 
+        // Actualizar los atributos individuales
+        search.setLinkJb(searchRequestDto.getLinkJb());
+        search.setDayJob(searchRequestDto.getDayJob());
+        search.setModalityHiring(searchRequestDto.getModalityHiring());
+        search.setNameSearch(searchRequestDto.getNameSearch());
+        search.setRemuneration(searchRequestDto.getRemuneration());
+        search.setVacancies(searchRequestDto.getVacancies());
+        search.setObservations(searchRequestDto.getObservations());
+
+        Rol rol = rolService.findByName(searchRequestDto.getRol().getName());
+        search.setRol(rol);
+
+        Seniority seniority = seniorityService.findByName(searchRequestDto.getSeniority().getName());
+        search.setSeniority(seniority);
+
+        // Actualizar las listas asociadas
+        updateSkills(search, searchRequestDto.getSkills());
+
+        searchRepository.save(search);
         return modelMapper.map(search, SearchResponseDTO.class);
+    }
+
+    private void updateSkills(Search search, List<SkillForSearchRequestDTO> skills) {
+        search.getSkills().clear();
+
+        for (SkillForSearchRequestDTO skillDto : skills) {
+            Skill skill = new Skill();
+            skill.setId(skillDto.getId());
+
+            search.getSkills().add(skill);
+        }
     }
 
     @Override

@@ -29,7 +29,6 @@ public class PersonServiceImpl implements PersonService {
     private final IndustryService industryService;
     private final SourceService sourceService;
     private final RolService rolService;
-    // TODO: 21/6/2023 cambiarlo al repository
     private final StatePersonRepository statePersonRepository;
     private final ModelMapperInterface modelMapperInterface;
     private final ModelMapper modelMapper;

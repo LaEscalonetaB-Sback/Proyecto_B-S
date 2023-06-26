@@ -1,6 +1,7 @@
 package com.proyecto.b.s.service.service;
 
 import com.proyecto.b.s.dto.request.searchRequestDTO.SearchRequestDTO;
+import com.proyecto.b.s.dto.request.searchRequestDTO.SearchUpdateRequestDTO;
 import com.proyecto.b.s.dto.response.searchResponseDTO.SearchListResponseDTO;
 import com.proyecto.b.s.dto.response.searchResponseDTO.SearchResponseDTO;
 import com.proyecto.b.s.entity.Search;
@@ -12,7 +13,7 @@ public interface SearchService {
 
     Search findById(Long id) throws Exception;
 
-    SearchResponseDTO update(Long searchId, SearchRequestDTO searchRequestDto) throws Exception;
+    SearchResponseDTO update(Long searchId, SearchUpdateRequestDTO searchRequestDto) throws Exception;
 
     public SearchResponseDTO updateSearchState(Long searchId) throws Exception;
 
