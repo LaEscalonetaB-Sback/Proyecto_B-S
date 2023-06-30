@@ -31,5 +31,5 @@ public class PersonResponseDTO {
 
     private List<SkillResponseDTO> skills;
 
-    private List<StatePersonResponseDTO> statePeople;
+    //private List<StatePersonResponseDTO> statePeople;
 }

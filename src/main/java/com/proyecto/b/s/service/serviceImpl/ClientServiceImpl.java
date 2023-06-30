@@ -30,7 +30,7 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public List<ClientResponseDTO> searchClient(String name, Integer cuit) {
         if (name == null && cuit == null) {
-            List<Client> clientList = clientRepository.findAll();
+            List<Client> clientList = clientRepository.findAllByOrderByNameAsc();
             HelperValidator.isEmptyList(clientList);
             return clientList.stream()
                     .map(client -> modelMapper.map(client, ClientResponseDTO.class))

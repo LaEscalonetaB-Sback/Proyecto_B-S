@@ -10,4 +10,6 @@ public interface AnswerService {
     boolean existById(Long id);
 
     List<Answer> listAnswer();
+
+    Answer findByName(String name);
 }

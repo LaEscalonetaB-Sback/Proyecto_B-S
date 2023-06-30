@@ -41,6 +41,7 @@ public class StatePersonServiceImpl implements StatePersonService {
     @Transactional
     @Override
     public PersonResponseDTO updatePersonActiveStatus(Long id, StatePersonRequestDTO nameState) {
+        // TODO: 29/6/2023 cambiar person repository por el service
         Optional<Person> optionalPerson = personRepository.findById(id);
         if (optionalPerson.isPresent()) {
             Person person = optionalPerson.get();

@@ -1,6 +1,7 @@
 package com.proyecto.b.s.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -24,4 +25,13 @@ public class Answer {
     @ManyToMany(mappedBy = "feedback")
     @JsonBackReference
     private List<EventOption> eventOptions;
+
+    @JoinTable(
+            name = "answer_response",
+            joinColumns = @JoinColumn(name = "answer_id"),
+            inverseJoinColumns = @JoinColumn(name = "response_id")
+    )
+    @JsonManagedReference
+    @ManyToMany()
+    private List<Response> responses;
 }
