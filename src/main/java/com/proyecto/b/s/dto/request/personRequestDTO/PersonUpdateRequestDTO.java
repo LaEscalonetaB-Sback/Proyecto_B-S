@@ -19,7 +19,6 @@ public class PersonUpdateRequestDTO {
     private String cuil;
     private String phoneNumber;
     private String remuneration;
-    private Boolean active;
 
 
     private List<IndustryRequestDTO> industries;
@@ -29,11 +28,5 @@ public class PersonUpdateRequestDTO {
     private List<RolRequestDTO> roles;
 
     private List<SkillRequestDTO> skills;
-
-    private List<StatePersonRequestDTO> statePeople;
-
-
-
-
 
 }

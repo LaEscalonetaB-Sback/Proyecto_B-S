@@ -15,6 +15,7 @@ import com.proyecto.b.s.utils.HelperValidator;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -135,7 +136,6 @@ public class PersonServiceImpl implements PersonService {
         person.setCuil(personRequestDto.getCuil());
         person.setPhoneNumber(personRequestDto.getPhoneNumber());
         person.setRemuneration(personRequestDto.getRemuneration());
-        person.setActive(personRequestDto.getActive());
 
         // Actualizar las listas asociadas
         updateIndustries(person, personRequestDto.getIndustries());
@@ -194,10 +194,6 @@ public class PersonServiceImpl implements PersonService {
             person.getSkills().add(skill);
         }
     }
-    // private void mapPerson(PersonUpdateRequestDTO personRequestDto, Person person) {
-    //     ModelMapper modelMapper = new ModelMapper();
-    //     modelMapper.map(personRequestDto, person);
-    // }
 
     @Override
     public void delete(Long id) throws Exception {
