@@ -13,8 +13,10 @@ import java.util.List;
 public class InterviewForEventRequestDTO {
 
     private List<String> emailPerson;
+    // TODO: 3/7/2023 Admitir uno o mas emails
     private String emailRecruiter;
     private LocalDate dateInterview;
     private LocalDate hour;
+    // TODO: 3/7/2023 conexion con google meet
     private String linkMeet;
 }

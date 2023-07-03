@@ -69,9 +69,11 @@ public class InterviewServiceImpl implements InterviewService {
     }
 
     private Interview getInterview(InterviewRequestDTO interviewRequestDTO) throws Exception {
+        // TODO: 3/7/2023 setear email automaticamente del candidato de la lista
         String personEmail = interviewRequestDTO.getPerson().getEmail();
         Person person = personService.findByEmail(personEmail);
 
+        // TODO: 3/7/2023 setear email automaticamente del usuario logeado
         String userEmail = interviewRequestDTO.getUserRecruiter().getEmail();
         User user = userService.findByEmail(userEmail);
 

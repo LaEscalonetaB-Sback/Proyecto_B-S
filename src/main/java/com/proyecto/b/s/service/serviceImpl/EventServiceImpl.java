@@ -64,6 +64,7 @@ public class EventServiceImpl implements EventService {
         }
     }
 
+    // TODO: 3/7/2023 Eliminar el crear evento con recruiter, setear automaticamente el usuario logeado
     @Override
     public EventResponseDTO saveEvent(EventRequestDTO eventRequestDTO) {
         Event newEvent = getEvent(eventRequestDTO);
@@ -83,6 +84,7 @@ public class EventServiceImpl implements EventService {
         AnswerRequestDTO answer = eventRequestDTO.getEvents().getFeedback();
         personService.changeStatePerson(newPerson.getId(), answer);
 
+        // TODO: 3/7/2023 Setear automaticamente usuario
         String nameUser = eventRequestDTO.getUser().getName();
         User newUser = userService.findByName(nameUser);
 
