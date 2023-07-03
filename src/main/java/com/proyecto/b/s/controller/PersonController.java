@@ -49,8 +49,8 @@ public class PersonController {
 
     //Listar activos
     @GetMapping("/list/activeEvent")
-    public ResponseEntity<List<PersonListResponseDTO>> listActivePersonForEvent() {
-        List<PersonListResponseDTO> people = personService.listAllActiveByFullName();
+    public ResponseEntity<List<PersonListRequestDTO>> listActivePersonForEvent() {
+        List<PersonListRequestDTO> people = personService.listAllActiveByFullName();
 
         return ResponseEntity.ok(people);
     }

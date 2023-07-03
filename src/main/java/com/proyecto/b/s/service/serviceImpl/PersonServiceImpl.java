@@ -309,11 +309,11 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public List<PersonListResponseDTO> listAllActiveByFullName() {
+    public List<PersonListRequestDTO> listAllActiveByFullName() {
         List<Person> personList = personRepository.findAll();
         HelperValidator.isEmptyList(personList);
 
-        return personList.stream().filter(Person::isActive).map(person -> modelMapper.map(person, PersonListResponseDTO.class)).collect(Collectors.toList());
+        return personList.stream().filter(Person::isActive).map(person -> modelMapper.map(person, PersonListRequestDTO.class)).collect(Collectors.toList());
     }
 
     @Override
