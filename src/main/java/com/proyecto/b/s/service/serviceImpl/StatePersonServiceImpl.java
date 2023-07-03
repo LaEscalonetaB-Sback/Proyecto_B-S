@@ -48,7 +48,7 @@ public class StatePersonServiceImpl implements StatePersonService {
             StatePerson state = statePersonRepository.findByName(nameState.getName());
 
             switch (state.getName()) {
-                case "Pasa a entrevista":
+                case "Pasa entrevista":
                     person.setStatePerson(state);
                     person.setActive(true);
                     break;
@@ -57,6 +57,7 @@ public class StatePersonServiceImpl implements StatePersonService {
                 case "No evalua":
                 case "Excede banda":
                 case "Reciclaje":
+                case "Contratado":
                     person.setStatePerson(state);
                     person.setActive(false);
                     break;

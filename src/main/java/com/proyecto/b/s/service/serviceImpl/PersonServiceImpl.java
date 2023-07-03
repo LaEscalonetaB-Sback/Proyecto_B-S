@@ -44,7 +44,7 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public PersonResponseDTO changeStatePerson(Long id, AnswerRequestDTO answerRequestDTO) {
+    public Person changeStatePerson(Long id, AnswerRequestDTO answerRequestDTO) {
         Person person = findById(id);
         String nameAnswer = answerRequestDTO.getName();
         Answer answer = answerService.findByName(nameAnswer);
@@ -94,7 +94,7 @@ public class PersonServiceImpl implements PersonService {
         person.setStatePerson(state);
         personRepository.save(person);
 
-        return modelMapper.map(person, PersonResponseDTO.class);
+        return person;
     }
 
     @Override
