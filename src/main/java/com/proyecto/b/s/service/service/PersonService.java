@@ -10,7 +10,7 @@ import com.proyecto.b.s.entity.Person;
 import java.util.List;
 
 public interface PersonService {
-    PersonResponseDTO changeStatePerson(Long id, AnswerRequestDTO name);
+    Person changeStatePerson(Long id, AnswerRequestDTO name);
 
     PersonResponseDTO create(PersonRequestDTO personRequestDto) throws Exception;
 

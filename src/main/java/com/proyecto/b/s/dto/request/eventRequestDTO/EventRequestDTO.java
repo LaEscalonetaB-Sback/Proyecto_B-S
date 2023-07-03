@@ -16,7 +16,7 @@ public class EventRequestDTO {
 
     private PersonForEventRequestDTO person;
 
-    private ClientForEventRequestDTO client;
+    //private ClientForEventRequestDTO client;
 
     private List<SearchForEventRequestDTO> search;
 

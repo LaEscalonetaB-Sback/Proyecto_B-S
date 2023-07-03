@@ -85,12 +85,12 @@ public class PersonController {
         return ResponseEntity.ok(result);
     }
 
-    @PutMapping("/updateStateAnswer/{id}")
+    /*@PutMapping("/updateStateAnswer/{id}")
     public ResponseEntity<PersonResponseDTO> changePersonStateByAnswer(@PathVariable Long id, @RequestBody AnswerRequestDTO answerRequestDTO) throws Exception {
         PersonResponseDTO result = personService.changeStatePerson(id, answerRequestDTO);
 
         return ResponseEntity.ok(result);
-    }
+    }*/
 
     //Eliminar por id
     @DeleteMapping("/delete/{id}")
