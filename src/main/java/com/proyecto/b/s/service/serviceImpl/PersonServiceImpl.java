@@ -1,15 +1,13 @@
 package com.proyecto.b.s.service.serviceImpl;
 
 import com.proyecto.b.s.dto.modelMapper.ModelMapperInterface;
-import com.proyecto.b.s.dto.request.IndustryRequestDTO;
-import com.proyecto.b.s.dto.request.RolRequestDTO;
-import com.proyecto.b.s.dto.request.SkillRequestDTO;
-import com.proyecto.b.s.dto.request.SourceRequestDTO;
+import com.proyecto.b.s.dto.request.*;
 import com.proyecto.b.s.dto.request.personRequestDTO.*;
 import com.proyecto.b.s.dto.response.PersonResponseDTO;
 import com.proyecto.b.s.entity.*;
 import com.proyecto.b.s.exception.InvalidResourceException;
 import com.proyecto.b.s.repository.PersonRepository;
+import com.proyecto.b.s.repository.StatePersonRepository;
 import com.proyecto.b.s.service.service.*;
 import com.proyecto.b.s.utils.HelperValidator;
 import org.modelmapper.ModelMapper;
@@ -29,10 +27,12 @@ public class PersonServiceImpl implements PersonService {
     private final IndustryService industryService;
     private final SourceService sourceService;
     private final RolService rolService;
+    private final AnswerService answerService;
+    private final StatePersonRepository statePersonRepository;
     private final ModelMapperInterface modelMapperInterface;
     private final ModelMapper modelMapper;
 
-    public PersonServiceImpl(PersonRepository personRepository, ModelMapperInterface modelMapperInterface, ModelMapper modelMapper, SkillService skillService, IndustryService industryService, SourceService sourceService, RolService rolService) {
+    public PersonServiceImpl(PersonRepository personRepository, ModelMapperInterface modelMapperInterface, ModelMapper modelMapper, SkillService skillService, IndustryService industryService, SourceService sourceService, RolService rolService, AnswerService answerService, StatePersonRepository statePersonRepository) {
         this.personRepository = personRepository;
         this.modelMapperInterface = modelMapperInterface;
         this.modelMapper = modelMapper;
@@ -40,6 +40,62 @@ public class PersonServiceImpl implements PersonService {
         this.industryService = industryService;
         this.sourceService = sourceService;
         this.rolService = rolService;
+        this.answerService = answerService;
+        this.statePersonRepository = statePersonRepository;
+    }
+
+    @Override
+    public PersonResponseDTO changeStatePerson(Long id, AnswerRequestDTO answerRequestDTO) {
+        Person person = findById(id);
+        String nameAnswer = answerRequestDTO.getName();
+        Answer answer = answerService.findByName(nameAnswer);
+
+        StatePerson state;
+
+        switch (answer.getName()) {
+            case "Excede banda":
+                state = statePersonRepository.findByName("Excede banda");
+                break;
+            case "Acepta propuesta":
+                state = statePersonRepository.findByName("Contratado");
+                break;
+            case "Reagendar":
+            case "Esperando respuesta":
+                state = statePersonRepository.findByName("Aguardando respuesta");
+                break;
+            case "Entrevista agendada":
+            case "Siguiente etapa":
+                person.setActive(true);
+                state = statePersonRepository.findByName("Pasa entrevista");
+                break;
+            case "Reciclaje":
+            case "Busqueda cerrada":
+                state = statePersonRepository.findByName("Reciclaje");
+                break;
+            case "No se ajusta al perfil":
+            case "No cumple con seniority":
+            case "Candidato no recomendable":
+                state = statePersonRepository.findByName("No evalua");
+                break;
+            case "No se presento":
+            case "Desinteresado":
+            case "Rechaza propuesta":
+            case "Desinteresado proyecto":
+            case "Desinteresado propuesta":
+            case "Desinteresado G&L":
+            case "Desinteresado salario":
+            case "Desinteres/Sin respuesta":
+                state = statePersonRepository.findByName("Desinteresado");
+                break;
+            default:
+                // Manejar el caso por defecto si no se encuentra un estado correspondiente
+                throw new IllegalArgumentException("Estado no válido: " + answer.getName());
+        }
+
+        person.setStatePerson(state);
+        personRepository.save(person);
+
+        return modelMapper.map(person, PersonResponseDTO.class);
     }
 
     @Override
@@ -79,12 +135,17 @@ public class PersonServiceImpl implements PersonService {
             Rol rol = rolService.findByName(aux.getName());
             roles.add(rol);
         }
+
+        Optional<StatePerson> optionalStatePerson = statePersonRepository.findById(1L);
+        StatePerson statePerson = optionalStatePerson.get();
+
         Person person = modelMapperInterface.personReqDtoToPerson(personRequestDto);
         person.setSkills(skills);
         person.setIndustries(industries);
         person.setSources(sources);
         person.setRoles(roles);
         person.setFullName(fullName);
+        person.setStatePerson(statePerson);
         return person;
     }
 
@@ -206,7 +267,6 @@ public class PersonServiceImpl implements PersonService {
     public void deleteComplete(Long id) throws Exception {
         personRepository.deleteById(id);
     }
-
 
     @Override
     public PersonResponseDTO updatePersonState(Long id) throws Exception {

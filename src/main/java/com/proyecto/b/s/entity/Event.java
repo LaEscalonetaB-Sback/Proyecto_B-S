@@ -26,7 +26,7 @@ public class Event {
     private LocalDate dateEvent;
 
     private boolean active = true;
-
+e
     @OneToMany
     private List<EventOption> events;
 
@@ -44,7 +44,6 @@ public class Event {
             inverseJoinColumns = @JoinColumn(name = "search_id")
     )
     private List<Search> search;
-
 
     @OneToOne (
             mappedBy = "event"

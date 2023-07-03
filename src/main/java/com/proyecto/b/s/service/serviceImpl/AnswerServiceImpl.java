@@ -36,4 +36,9 @@ public class AnswerServiceImpl implements AnswerService {
 
         return answerList;
     }
+
+    @Override
+    public Answer findByName(String name) {
+        return answerRepository.findByName(name);
+    }
 }

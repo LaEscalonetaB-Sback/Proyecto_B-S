@@ -57,7 +57,7 @@ public class SourceServiceImpl implements SourceService {
 
     @Override
     public List<SourceResponseDTO> list() {
-        List<Source> sources = sourceRepository.findAll();
+        List<Source> sources = sourceRepository.findAllByOrderByNameAsc();
         HelperValidator.isEmptyList(sources);
         List<SourceResponseDTO> sourceResponseDTOS = new ArrayList<>();
 

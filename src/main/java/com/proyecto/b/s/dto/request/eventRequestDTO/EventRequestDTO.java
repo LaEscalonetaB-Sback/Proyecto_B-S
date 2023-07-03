@@ -1,6 +1,5 @@
 package com.proyecto.b.s.dto.request.eventRequestDTO;
 
-import com.proyecto.b.s.dto.request.ClientRequestDTO;
 import lombok.Data;
 
 import java.time.LocalDate;

@@ -1,18 +1,14 @@
 package com.proyecto.b.s.repository;
 
-import com.proyecto.b.s.entity.Rol;
+import com.proyecto.b.s.entity.StatePerson;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
-public interface RolRepository extends JpaRepository<Rol, Long> {
+public interface StatePersonRepository extends JpaRepository<StatePerson, Long> {
+    @Query("SELECT s FROM StatePerson s WHERE s.name = :name")
+    StatePerson findByName(@Param("name") String name);
 
-    List<Rol> findAllByOrderByNameAsc();
-
-    @Query("SELECT r FROM Rol r WHERE r.name = :name")
-    Rol findByName(@Param("name") String name);
 }

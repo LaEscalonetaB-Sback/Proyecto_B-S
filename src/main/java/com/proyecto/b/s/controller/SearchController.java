@@ -1,7 +1,8 @@
 package com.proyecto.b.s.controller;
 
 import com.proyecto.b.s.dto.request.searchRequestDTO.SearchRequestDTO;
-import com.proyecto.b.s.dto.response.PersonResponseDTO;
+import com.proyecto.b.s.dto.request.searchRequestDTO.SearchUpdateRequestDTO;
+import com.proyecto.b.s.dto.response.searchResponseDTO.SearchListResponseDTO;
 import com.proyecto.b.s.dto.response.searchResponseDTO.SearchResponseDTO;
 import com.proyecto.b.s.entity.Search;
 import com.proyecto.b.s.service.service.SearchService;
@@ -37,8 +38,8 @@ public class SearchController {
 
     //Listar busquedas activas
     @GetMapping("/list/active")
-    public ResponseEntity<List<SearchResponseDTO>> listActiveSearch() {
-        List<SearchResponseDTO> search = searchService.listAllActive();
+    public ResponseEntity<List<SearchListResponseDTO>> listActiveSearch() {
+        List<SearchListResponseDTO> search = searchService.listAllActive();
 
         return ResponseEntity.ok(search);
     }
@@ -61,17 +62,19 @@ public class SearchController {
 
     //Actualizar busqueda
     @PutMapping("/update/{searchId}")
-    public ResponseEntity<SearchResponseDTO> update(@PathVariable Long searchId, @RequestBody SearchRequestDTO searchRequestDto) throws Exception {
+    public ResponseEntity<SearchResponseDTO> update(@PathVariable Long searchId, @RequestBody SearchUpdateRequestDTO searchRequestDto) throws Exception {
         SearchResponseDTO result = searchService.update(searchId, searchRequestDto);
 
         return ResponseEntity.ok(result);
     }
+
     @PutMapping("/updateState/{Id}")
-    public ResponseEntity<SearchResponseDTO> updateSearchState (@PathVariable Long Id) throws Exception{
+    public ResponseEntity<SearchResponseDTO> updateSearchState(@PathVariable Long Id) throws Exception {
         SearchResponseDTO result = searchService.updateSearchState(Id);
 
         return ResponseEntity.ok(result);
     }
+
     //Eliminar busqueda por id
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Search> delete(@PathVariable Long id) throws Exception {
@@ -86,6 +89,5 @@ public class SearchController {
 
         return ResponseEntity.noContent().build();
     }
-
 
 }
