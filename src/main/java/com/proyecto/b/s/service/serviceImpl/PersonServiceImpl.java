@@ -56,27 +56,32 @@ public class PersonServiceImpl implements PersonService {
         switch (answer.getName()) {
             case "Excede banda":
                 state = statePersonRepository.findByName("Excede banda");
+                person.setActive(false);
                 break;
             case "Acepta propuesta":
                 state = statePersonRepository.findByName("Contratado");
+                person.setActive(false);
                 break;
             case "Reagendar":
             case "Esperando respuesta":
                 state = statePersonRepository.findByName("Aguardando respuesta");
+                person.setActive(false);
                 break;
             case "Entrevista agendada":
             case "Siguiente etapa":
-                person.setActive(true);
                 state = statePersonRepository.findByName("Pasa entrevista");
+                person.setActive(true);
                 break;
             case "Reciclaje":
             case "Busqueda cerrada":
                 state = statePersonRepository.findByName("Reciclaje");
+                person.setActive(false);
                 break;
             case "No se ajusta al perfil":
             case "No cumple con seniority":
             case "Candidato no recomendable":
                 state = statePersonRepository.findByName("No evalua");
+                person.setActive(false);
                 break;
             case "No se presento":
             case "Desinteresado":
@@ -87,6 +92,7 @@ public class PersonServiceImpl implements PersonService {
             case "Desinteresado salario":
             case "Desinteres/Sin respuesta":
                 state = statePersonRepository.findByName("Desinteresado");
+                person.setActive(false);
                 break;
             default:
                 // Manejar el caso por defecto si no se encuentra un estado correspondiente
