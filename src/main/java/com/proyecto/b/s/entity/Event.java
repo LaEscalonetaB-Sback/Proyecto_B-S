@@ -26,7 +26,7 @@ public class Event {
     private LocalDate dateEvent;
 
     private boolean active = true;
-e
+
     @OneToMany
     private List<EventOption> events;
 
