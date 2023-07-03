@@ -1,5 +1,6 @@
 package com.proyecto.b.s.exception;
 
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.persistence.NonUniqueResultException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -41,5 +43,15 @@ public class Exception {
         return errorMap;
     }
 
-
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(IncorrectResultSizeDataAccessException.class)
+    @ResponseBody
+    public Map <String,String> handleNonUniqueResultException (NonUniqueResultException ex) {
+        Map<String, String> errorMap = new HashMap<>();
+        errorMap.put("Error", ex.getMessage());
+        return errorMap;
+    }
+//    public void handleNonUniqueResultException(NonUniqueResultException ex) {
+//        throw new InvalidResourceException("Ocurrió un error debido a una consulta que no devolvió un resultado único.");
+//    }
 }

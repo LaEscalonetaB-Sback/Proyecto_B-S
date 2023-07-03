@@ -2,6 +2,7 @@ package com.proyecto.b.s.controller;
 
 import com.proyecto.b.s.dto.request.AnswerRequestDTO;
 import com.proyecto.b.s.dto.request.personRequestDTO.PersonListRequestDTO;
+import com.proyecto.b.s.dto.response.PersonListResponseDTO;
 import com.proyecto.b.s.dto.request.personRequestDTO.PersonRequestDTO;
 import com.proyecto.b.s.dto.request.personRequestDTO.PersonUpdateRequestDTO;
 import com.proyecto.b.s.dto.response.PersonResponseDTO;
@@ -48,8 +49,8 @@ public class PersonController {
 
     //Listar activos
     @GetMapping("/list/activeEvent")
-    public ResponseEntity<List<PersonListRequestDTO>> listActivePersonForEvent() {
-        List<PersonListRequestDTO> people = personService.listAllActiveByFullName();
+    public ResponseEntity<List<PersonListResponseDTO>> listActivePersonForEvent() {
+        List<PersonListResponseDTO> people = personService.listAllActiveByFullName();
 
         return ResponseEntity.ok(people);
     }

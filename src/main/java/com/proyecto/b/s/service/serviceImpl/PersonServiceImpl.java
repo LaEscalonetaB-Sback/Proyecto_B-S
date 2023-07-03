@@ -3,6 +3,7 @@ package com.proyecto.b.s.service.serviceImpl;
 import com.proyecto.b.s.dto.modelMapper.ModelMapperInterface;
 import com.proyecto.b.s.dto.request.*;
 import com.proyecto.b.s.dto.request.personRequestDTO.*;
+import com.proyecto.b.s.dto.response.PersonListResponseDTO;
 import com.proyecto.b.s.dto.response.PersonResponseDTO;
 import com.proyecto.b.s.entity.*;
 import com.proyecto.b.s.exception.InvalidResourceException;
@@ -13,6 +14,7 @@ import com.proyecto.b.s.utils.HelperValidator;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -156,6 +158,17 @@ public class PersonServiceImpl implements PersonService {
         }
     }
 
+    private void existPersonEdit(PersonUpdateRequestDTO personRequestDto, Long Id) {
+        Optional<Person> result = personRepository.findById(Id);
+
+        Optional<Person> existingPerson = null;
+        try {
+            existingPerson = personRepository.findByDniOrCuilOrEmailOrLinkedin(personRequestDto.getDni() != "" ? personRequestDto.getDni() : null, personRequestDto.getCuil() != "" ? personRequestDto.getCuil() : null, personRequestDto.getEmail() != "" ? personRequestDto.getEmail() : null, personRequestDto.getLinkedin() != "" ? personRequestDto.getLinkedin() : null);
+        } catch (Exception ex) {
+            throw new InvalidResourceException("No se puede editar los datos con datos de otra persona.");
+        }
+    }
+
     @Override
     public List<PersonResponseDTO> search(String name, String lastName, List<String> seniorityGeneral, List<String> roles, List<String> skills) {
         if (name == null && lastName == null && seniorityGeneral == null && roles == null && skills == null) {
@@ -180,11 +193,12 @@ public class PersonServiceImpl implements PersonService {
     public Person findById(Long id) {
         return personRepository.findById(id).orElseThrow(() -> new InvalidResourceException("Persona no encontrada con el id: " + id));
     }
-
+    @Transactional
     @Override
     public PersonResponseDTO update(Long Id, PersonUpdateRequestDTO personRequestDto) throws Exception {
-        Person person = findById(Id);
 
+        Person person = findById(Id);
+        this.existPersonEdit(personRequestDto,Id);
         // Actualizar los atributos individuales
         person.setName(personRequestDto.getName());
         person.setLastName(personRequestDto.getLastName());
@@ -295,11 +309,11 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public List<PersonListRequestDTO> listAllActiveByFullName() {
+    public List<PersonListResponseDTO> listAllActiveByFullName() {
         List<Person> personList = personRepository.findAll();
         HelperValidator.isEmptyList(personList);
 
-        return personList.stream().filter(Person::isActive).map(person -> modelMapper.map(person, PersonListRequestDTO.class)).collect(Collectors.toList());
+        return personList.stream().filter(Person::isActive).map(person -> modelMapper.map(person, PersonListResponseDTO.class)).collect(Collectors.toList());
     }
 
     @Override
