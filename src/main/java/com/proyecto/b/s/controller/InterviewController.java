@@ -64,6 +64,7 @@ public class InterviewController {
 
         return ResponseEntity.noContent().build();
     }
+
     //Busca entrevista segun el id del evento
     @GetMapping("/event/{eventId}")
     public ResponseEntity<InterviewResponseDTO> getEntrevistaByEventoId(@PathVariable Long eventId) {

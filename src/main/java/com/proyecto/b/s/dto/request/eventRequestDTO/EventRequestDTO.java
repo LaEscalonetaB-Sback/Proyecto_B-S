@@ -1,6 +1,5 @@
 package com.proyecto.b.s.dto.request.eventRequestDTO;
 
-import com.proyecto.b.s.dto.request.ClientRequestDTO;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -13,11 +12,12 @@ public class EventRequestDTO {
 
     private EventOptionForEventRequestDTO events;
 
+    // TODO: 3/7/2023 eliminar del request
     private UserForEventRequestDTO user;
 
     private PersonForEventRequestDTO person;
 
-    private ClientForEventRequestDTO client;
+    //private ClientForEventRequestDTO client;
 
     private List<SearchForEventRequestDTO> search;
 
@@ -25,4 +25,8 @@ public class EventRequestDTO {
 
     // TODO: 14/4/2023 Enlazar el google meet para crear la entrevista
     // private List<InterviewRequestDTO> interviews;
+
+    private String event;
+
+    private String answer;
 }

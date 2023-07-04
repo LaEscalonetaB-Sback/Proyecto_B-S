@@ -11,8 +11,8 @@ import java.time.LocalDate;
 @Getter
 public class InterviewRequestDTO {
     private EventForInterviewRequestDTO event;
-    private String emailPerson;
-    private String emailRecruiter;
+    private PersonForInterviewRequestDTO person;
+    private UserForInterviewRequestDTO userRecruiter;
     private LocalDate dateInterview;
     private String linkMeet;
 }

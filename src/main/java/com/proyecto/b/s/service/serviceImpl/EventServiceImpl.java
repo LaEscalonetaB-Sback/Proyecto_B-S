@@ -1,19 +1,16 @@
 package com.proyecto.b.s.service.serviceImpl;
 
 import com.proyecto.b.s.dto.modelMapper.ModelMapperInterface;
+import com.proyecto.b.s.dto.request.AnswerRequestDTO;
+import com.proyecto.b.s.dto.request.eventRequestDTO.EventOptionForEventRequestDTO;
 import com.proyecto.b.s.dto.request.eventRequestDTO.EventRequestDTO;
 import com.proyecto.b.s.dto.request.eventRequestDTO.EventUpdateRequestDTO;
 import com.proyecto.b.s.dto.request.eventRequestDTO.SearchForEventRequestDTO;
+import com.proyecto.b.s.dto.response.eventResponseDTO.EventOptionForEventResponseDTO;
 import com.proyecto.b.s.dto.response.eventResponseDTO.EventResponseDTO;
-import com.proyecto.b.s.entity.Event;
-import com.proyecto.b.s.entity.Person;
-import com.proyecto.b.s.entity.Search;
-import com.proyecto.b.s.entity.User;
+import com.proyecto.b.s.entity.*;
 import com.proyecto.b.s.repository.EventRepository;
-import com.proyecto.b.s.service.service.EventService;
-import com.proyecto.b.s.service.service.PersonService;
-import com.proyecto.b.s.service.service.SearchService;
-import com.proyecto.b.s.service.service.UserService;
+import com.proyecto.b.s.service.service.*;
 import com.proyecto.b.s.utils.HelperValidator;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -31,21 +28,25 @@ public class EventServiceImpl implements EventService {
     private final UserService userService;
     private final PersonService personService;
     private final SearchService searchService;
+    private final AnswerService answerService;
     private final ModelMapperInterface modelMapperInterface;
     private final ModelMapper modelMapper;
+    private final EventOptionService eventOptionService;
 
     public EventServiceImpl(UserService userService,
                             PersonService personService,
                             SearchService searchService,
                             EventRepository eventRepository,
-                            ModelMapperInterface modelMapperInterface,
-                            ModelMapper modelMapper) {
+                            AnswerService answerService, ModelMapperInterface modelMapperInterface,
+                            ModelMapper modelMapper, EventOptionService eventOptionService) {
         this.userService = userService;
         this.personService = personService;
         this.searchService = searchService;
         this.eventRepository = eventRepository;
+        this.answerService = answerService;
         this.modelMapperInterface = modelMapperInterface;
         this.modelMapper = modelMapper;
+        this.eventOptionService = eventOptionService;
     }
 
     @Override
@@ -75,6 +76,7 @@ public class EventServiceImpl implements EventService {
         return modelMapperInterface.eventToEventResponseDto(newEvent);
     }
 
+
     private Event getEvent(EventRequestDTO eventRequestDTO) {
         String namePerson = eventRequestDTO.getPerson().getFullName();
         Person newPerson = null;
@@ -83,9 +85,12 @@ public class EventServiceImpl implements EventService {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        AnswerRequestDTO answer = eventRequestDTO.getEvents().getFeedback();
+        personService.changeStatePerson(newPerson.getId(), answer);
 
         String nameUser = eventRequestDTO.getUser().getName();
         User newUser = userService.findByName(nameUser);
+
 
         List<SearchForEventRequestDTO> names = eventRequestDTO.getSearch();
         List<Search> nameSearches = new ArrayList<>();
@@ -98,7 +103,14 @@ public class EventServiceImpl implements EventService {
         newEvent.setPerson(newPerson);
         newEvent.setUser(newUser);
         newEvent.setSearch(nameSearches);
+        newEvent.setEvent(eventRequestDTO.getEvents().getName());
+        newEvent.setAnswer(eventRequestDTO.getEvents().getFeedback().getName());
 
+        List<EventOption> events = new ArrayList<>();
+
+        EventOptionForEventResponseDTO savedEventOption = eventOptionService.save(eventRequestDTO.getEvents()); // Guardar el EventOption antes de asignarlo al evento
+        events.add(modelMapper.map(savedEventOption,EventOption.class));
+        newEvent.setEvents(events);
         return newEvent;
     }
 

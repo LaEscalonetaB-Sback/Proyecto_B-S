@@ -1,12 +1,16 @@
 package com.proyecto.b.s.service.serviceImpl;
 
 import com.proyecto.b.s.dto.modelMapper.ModelMapperInterface;
+import com.proyecto.b.s.dto.request.RolRequestDTO;
 import com.proyecto.b.s.dto.request.eventRequestDTO.EventOptionForEventRequestDTO;
+import com.proyecto.b.s.dto.response.RolResponseDTO;
 import com.proyecto.b.s.dto.response.eventResponseDTO.EventOptionForEventResponseDTO;
 import com.proyecto.b.s.entity.Answer;
 import com.proyecto.b.s.entity.EventOption;
+import com.proyecto.b.s.entity.Rol;
 import com.proyecto.b.s.exception.InvalidResourceException;
 import com.proyecto.b.s.repository.EventOptionRepository;
+import com.proyecto.b.s.repository.EventRepository;
 import com.proyecto.b.s.service.service.EventOptionService;
 import com.proyecto.b.s.utils.HelperValidator;
 import org.modelmapper.ModelMapper;
@@ -72,4 +76,12 @@ public class EventOptionServiceImpl implements EventOptionService {
     public boolean existById(Long id) {
         return eventOptionRepository.existsById(id);
     }
+
+    @Override
+    public EventOptionForEventResponseDTO save (EventOptionForEventRequestDTO event){
+        EventOption result = modelMapper.map(event,EventOption.class);
+        eventOptionRepository.save(result);
+        return modelMapper.map(result, EventOptionForEventResponseDTO.class);
+    }
+
 }
