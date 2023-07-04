@@ -20,4 +20,5 @@ public interface EventOptionService {
     EventOption findById(Long id) throws Exception;
 
     boolean existById(Long id);
+    public EventOptionForEventResponseDTO save (EventOptionForEventRequestDTO event);
 }

@@ -2,9 +2,11 @@ package com.proyecto.b.s.service.serviceImpl;
 
 import com.proyecto.b.s.dto.modelMapper.ModelMapperInterface;
 import com.proyecto.b.s.dto.request.AnswerRequestDTO;
+import com.proyecto.b.s.dto.request.eventRequestDTO.EventOptionForEventRequestDTO;
 import com.proyecto.b.s.dto.request.eventRequestDTO.EventRequestDTO;
 import com.proyecto.b.s.dto.request.eventRequestDTO.EventUpdateRequestDTO;
 import com.proyecto.b.s.dto.request.eventRequestDTO.SearchForEventRequestDTO;
+import com.proyecto.b.s.dto.response.eventResponseDTO.EventOptionForEventResponseDTO;
 import com.proyecto.b.s.dto.response.eventResponseDTO.EventResponseDTO;
 import com.proyecto.b.s.entity.*;
 import com.proyecto.b.s.repository.EventRepository;
@@ -29,13 +31,14 @@ public class EventServiceImpl implements EventService {
     private final AnswerService answerService;
     private final ModelMapperInterface modelMapperInterface;
     private final ModelMapper modelMapper;
+    private final EventOptionService eventOptionService;
 
     public EventServiceImpl(UserService userService,
                             PersonService personService,
                             SearchService searchService,
                             EventRepository eventRepository,
                             AnswerService answerService, ModelMapperInterface modelMapperInterface,
-                            ModelMapper modelMapper) {
+                            ModelMapper modelMapper, EventOptionService eventOptionService) {
         this.userService = userService;
         this.personService = personService;
         this.searchService = searchService;
@@ -43,6 +46,7 @@ public class EventServiceImpl implements EventService {
         this.answerService = answerService;
         this.modelMapperInterface = modelMapperInterface;
         this.modelMapper = modelMapper;
+        this.eventOptionService = eventOptionService;
     }
 
     @Override
@@ -72,6 +76,7 @@ public class EventServiceImpl implements EventService {
         return modelMapperInterface.eventToEventResponseDto(newEvent);
     }
 
+
     private Event getEvent(EventRequestDTO eventRequestDTO) {
         String namePerson = eventRequestDTO.getPerson().getFullName();
         Person newPerson = null;
@@ -86,6 +91,7 @@ public class EventServiceImpl implements EventService {
         String nameUser = eventRequestDTO.getUser().getName();
         User newUser = userService.findByName(nameUser);
 
+
         List<SearchForEventRequestDTO> names = eventRequestDTO.getSearch();
         List<Search> nameSearches = new ArrayList<>();
         for (SearchForEventRequestDTO aux : names) {
@@ -97,6 +103,8 @@ public class EventServiceImpl implements EventService {
         newEvent.setPerson(newPerson);
         newEvent.setUser(newUser);
         newEvent.setSearch(nameSearches);
+        newEvent.setEvent(eventRequestDTO.getEvents().getName());
+        newEvent.setAnswer(eventRequestDTO.getEvents().getFeedback().getName());
 
         return newEvent;
     }

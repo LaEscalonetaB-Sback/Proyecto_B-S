@@ -49,4 +49,8 @@ public class Event {
             mappedBy = "event"
     )
     private Interview interview;
+
+    private String event;
+
+    private String answer;
 }

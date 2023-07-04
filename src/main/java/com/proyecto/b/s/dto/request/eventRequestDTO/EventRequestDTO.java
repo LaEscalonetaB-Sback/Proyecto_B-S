@@ -24,4 +24,8 @@ public class EventRequestDTO {
 
     // TODO: 14/4/2023 Enlazar el google meet para crear la entrevista
     // private List<InterviewRequestDTO> interviews;
+
+    private String event;
+
+    private String answer;
 }
