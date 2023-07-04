@@ -24,14 +24,17 @@ public interface PersonService {
 
     void deleteComplete(Long id) throws Exception;
 
-    PersonResponseDTO updatePersonState (Long id) throws Exception;
+    PersonResponseDTO updatePersonState(Long id) throws Exception;
 
     void delete(Long id) throws Exception;
 
     Person findByNameAndLastName(String name, String lastName);
 
     Person findByFullName(String fullName) throws Exception;
+
     List<PersonResponseDTO> listAllActive();
+
     Person findByEmail(String email);
+
     List<PersonListRequestDTO> listAllActiveByFullName();
 }

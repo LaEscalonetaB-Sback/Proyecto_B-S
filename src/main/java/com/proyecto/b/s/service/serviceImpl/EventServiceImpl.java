@@ -5,6 +5,7 @@ import com.proyecto.b.s.dto.request.AnswerRequestDTO;
 import com.proyecto.b.s.dto.request.eventRequestDTO.EventRequestDTO;
 import com.proyecto.b.s.dto.request.eventRequestDTO.EventUpdateRequestDTO;
 import com.proyecto.b.s.dto.request.eventRequestDTO.SearchForEventRequestDTO;
+import com.proyecto.b.s.dto.response.eventResponseDTO.EventOptionForEventResponseDTO;
 import com.proyecto.b.s.dto.response.eventResponseDTO.EventResponseDTO;
 import com.proyecto.b.s.entity.*;
 import com.proyecto.b.s.repository.EventRepository;
@@ -29,13 +30,14 @@ public class EventServiceImpl implements EventService {
     private final AnswerService answerService;
     private final ModelMapperInterface modelMapperInterface;
     private final ModelMapper modelMapper;
+    private final EventOptionService eventOptionService;
 
     public EventServiceImpl(UserService userService,
                             PersonService personService,
                             SearchService searchService,
                             EventRepository eventRepository,
                             AnswerService answerService, ModelMapperInterface modelMapperInterface,
-                            ModelMapper modelMapper) {
+                            ModelMapper modelMapper, EventOptionService eventOptionService) {
         this.userService = userService;
         this.personService = personService;
         this.searchService = searchService;
@@ -43,6 +45,7 @@ public class EventServiceImpl implements EventService {
         this.answerService = answerService;
         this.modelMapperInterface = modelMapperInterface;
         this.modelMapper = modelMapper;
+        this.eventOptionService = eventOptionService;
     }
 
     @Override
@@ -86,6 +89,7 @@ public class EventServiceImpl implements EventService {
         String nameUser = eventRequestDTO.getUser().getName();
         User newUser = userService.findByName(nameUser);
 
+
         List<SearchForEventRequestDTO> names = eventRequestDTO.getSearch();
         List<Search> nameSearches = new ArrayList<>();
         for (SearchForEventRequestDTO aux : names) {
@@ -98,6 +102,11 @@ public class EventServiceImpl implements EventService {
         newEvent.setUser(newUser);
         newEvent.setSearch(nameSearches);
 
+        List<EventOption> events = new ArrayList<>();
+
+        EventOptionForEventResponseDTO savedEventOption = eventOptionService.save(eventRequestDTO.getEvents()); // Guardar el EventOption antes de asignarlo al evento
+        events.add(modelMapper.map(savedEventOption,EventOption.class));
+        newEvent.setEvents(events);
         return newEvent;
     }
 

@@ -12,4 +12,6 @@ public class InterviewResponseDTO {
     private UserForInterviewResponseDTO user;
     private LocalDate dateInterview;
     private LocalTime timeInterview;
+
+    // TODO: 3/7/2023 retornar tambien emails
 }

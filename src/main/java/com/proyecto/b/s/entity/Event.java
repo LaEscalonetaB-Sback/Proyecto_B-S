@@ -27,7 +27,7 @@ public class Event {
 
     private boolean active = true;
 
-    @OneToMany
+    @ElementCollection
     private List<EventOption> events;
 
     @ManyToOne

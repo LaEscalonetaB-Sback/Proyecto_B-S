@@ -12,6 +12,7 @@ public class EventRequestDTO {
 
     private EventOptionForEventRequestDTO events;
 
+    // TODO: 3/7/2023 eliminar del request
     private UserForEventRequestDTO user;
 
     private PersonForEventRequestDTO person;

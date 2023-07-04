@@ -72,4 +72,11 @@ public class EventOptionServiceImpl implements EventOptionService {
     public boolean existById(Long id) {
         return eventOptionRepository.existsById(id);
     }
+
+    @Override
+    public EventOptionForEventResponseDTO save (EventOptionForEventRequestDTO event){
+        EventOption result = modelMapper.map(event,EventOption.class);
+        eventOptionRepository.save(result);
+        return modelMapper.map(result, EventOptionForEventResponseDTO.class);
+    }
 }

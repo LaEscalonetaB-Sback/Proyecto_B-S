@@ -3,6 +3,7 @@ package com.proyecto.b.s.service.serviceImpl;
 import com.proyecto.b.s.dto.modelMapper.ModelMapperInterface;
 import com.proyecto.b.s.dto.request.*;
 import com.proyecto.b.s.dto.request.personRequestDTO.*;
+import com.proyecto.b.s.dto.response.PersonListResponseDTO;
 import com.proyecto.b.s.dto.response.PersonResponseDTO;
 import com.proyecto.b.s.entity.*;
 import com.proyecto.b.s.exception.InvalidResourceException;
@@ -55,27 +56,32 @@ public class PersonServiceImpl implements PersonService {
         switch (answer.getName()) {
             case "Excede banda":
                 state = statePersonRepository.findByName("Excede banda");
+                person.setActive(false);
                 break;
             case "Acepta propuesta":
                 state = statePersonRepository.findByName("Contratado");
+                person.setActive(false);
                 break;
             case "Reagendar":
             case "Esperando respuesta":
                 state = statePersonRepository.findByName("Aguardando respuesta");
+                person.setActive(false);
                 break;
             case "Entrevista agendada":
             case "Siguiente etapa":
-                person.setActive(true);
                 state = statePersonRepository.findByName("Pasa entrevista");
+                person.setActive(true);
                 break;
             case "Reciclaje":
             case "Busqueda cerrada":
                 state = statePersonRepository.findByName("Reciclaje");
+                person.setActive(false);
                 break;
             case "No se ajusta al perfil":
             case "No cumple con seniority":
             case "Candidato no recomendable":
                 state = statePersonRepository.findByName("No evalua");
+                person.setActive(false);
                 break;
             case "No se presento":
             case "Desinteresado":
@@ -86,6 +92,7 @@ public class PersonServiceImpl implements PersonService {
             case "Desinteresado salario":
             case "Desinteres/Sin respuesta":
                 state = statePersonRepository.findByName("Desinteresado");
+                person.setActive(false);
                 break;
             default:
                 // Manejar el caso por defecto si no se encuentra un estado correspondiente
@@ -157,6 +164,17 @@ public class PersonServiceImpl implements PersonService {
         }
     }
 
+    private void existPersonEdit(PersonUpdateRequestDTO personRequestDto, Long Id) {
+        Optional<Person> result = personRepository.findById(Id);
+
+        Optional<Person> existingPerson = null;
+        try {
+            existingPerson = personRepository.findByDniOrCuilOrEmailOrLinkedin(personRequestDto.getDni() != "" ? personRequestDto.getDni() : null, personRequestDto.getCuil() != "" ? personRequestDto.getCuil() : null, personRequestDto.getEmail() != "" ? personRequestDto.getEmail() : null, personRequestDto.getLinkedin() != "" ? personRequestDto.getLinkedin() : null);
+        } catch (Exception ex) {
+            throw new InvalidResourceException("No se puede editar los datos con datos de otra persona.");
+        }
+    }
+
     @Override
     public List<PersonResponseDTO> search(String name, String lastName, List<String> seniorityGeneral, List<String> roles, List<String> skills) {
         if (name == null && lastName == null && seniorityGeneral == null && roles == null && skills == null) {
@@ -181,11 +199,12 @@ public class PersonServiceImpl implements PersonService {
     public Person findById(Long id) {
         return personRepository.findById(id).orElseThrow(() -> new InvalidResourceException("Persona no encontrada con el id: " + id));
     }
-
+    @Transactional
     @Override
     public PersonResponseDTO update(Long Id, PersonUpdateRequestDTO personRequestDto) throws Exception {
-        Person person = findById(Id);
 
+        Person person = findById(Id);
+        this.existPersonEdit(personRequestDto,Id);
         // Actualizar los atributos individuales
         person.setName(personRequestDto.getName());
         person.setLastName(personRequestDto.getLastName());

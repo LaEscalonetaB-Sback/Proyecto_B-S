@@ -2,6 +2,7 @@ package com.proyecto.b.s.controller;
 
 import com.proyecto.b.s.dto.request.AnswerRequestDTO;
 import com.proyecto.b.s.dto.request.personRequestDTO.PersonListRequestDTO;
+import com.proyecto.b.s.dto.response.PersonListResponseDTO;
 import com.proyecto.b.s.dto.request.personRequestDTO.PersonRequestDTO;
 import com.proyecto.b.s.dto.request.personRequestDTO.PersonUpdateRequestDTO;
 import com.proyecto.b.s.dto.response.PersonResponseDTO;
