@@ -27,7 +27,7 @@ public class Event {
 
     private boolean active = true;
 
-    @ElementCollection
+    @OneToMany
     private List<EventOption> events;
 
     @ManyToOne
@@ -49,4 +49,8 @@ public class Event {
             mappedBy = "event"
     )
     private Interview interview;
+
+    private String event;
+
+    private String answer;
 }

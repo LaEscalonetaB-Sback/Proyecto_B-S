@@ -2,6 +2,7 @@ package com.proyecto.b.s.service.serviceImpl;
 
 import com.proyecto.b.s.dto.modelMapper.ModelMapperInterface;
 import com.proyecto.b.s.dto.request.AnswerRequestDTO;
+import com.proyecto.b.s.dto.request.eventRequestDTO.EventOptionForEventRequestDTO;
 import com.proyecto.b.s.dto.request.eventRequestDTO.EventRequestDTO;
 import com.proyecto.b.s.dto.request.eventRequestDTO.EventUpdateRequestDTO;
 import com.proyecto.b.s.dto.request.eventRequestDTO.SearchForEventRequestDTO;
@@ -75,6 +76,7 @@ public class EventServiceImpl implements EventService {
         return modelMapperInterface.eventToEventResponseDto(newEvent);
     }
 
+
     private Event getEvent(EventRequestDTO eventRequestDTO) {
         String namePerson = eventRequestDTO.getPerson().getFullName();
         Person newPerson = null;
@@ -101,6 +103,8 @@ public class EventServiceImpl implements EventService {
         newEvent.setPerson(newPerson);
         newEvent.setUser(newUser);
         newEvent.setSearch(nameSearches);
+        newEvent.setEvent(eventRequestDTO.getEvents().getName());
+        newEvent.setAnswer(eventRequestDTO.getEvents().getFeedback().getName());
 
         List<EventOption> events = new ArrayList<>();
 

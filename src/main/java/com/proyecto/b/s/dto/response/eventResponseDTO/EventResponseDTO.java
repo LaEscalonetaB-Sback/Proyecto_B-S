@@ -20,4 +20,6 @@ public class EventResponseDTO {
     private List<SearchForEventResponseDTO> search;
 //    private ClientForEventResponseDTO client;
     private String observations;
+    private String event;
+    private String answer;
 }

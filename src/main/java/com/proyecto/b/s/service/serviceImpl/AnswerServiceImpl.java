@@ -1,9 +1,13 @@
 package com.proyecto.b.s.service.serviceImpl;
 
+import com.proyecto.b.s.dto.request.AnswerRequestDTO;
+import com.proyecto.b.s.dto.request.eventRequestDTO.EventOptionForEventRequestDTO;
+import com.proyecto.b.s.dto.response.eventResponseDTO.EventOptionForEventResponseDTO;
 import com.proyecto.b.s.entity.Answer;
 import com.proyecto.b.s.repository.AnswerRepository;
 import com.proyecto.b.s.service.service.AnswerService;
 import com.proyecto.b.s.utils.HelperValidator;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -13,9 +17,11 @@ import java.util.List;
 public class AnswerServiceImpl implements AnswerService {
 
     private final AnswerRepository answerRepository;
+    private final ModelMapper modelMapper;
 
-    public AnswerServiceImpl(AnswerRepository answerRepository) {
+    public AnswerServiceImpl(AnswerRepository answerRepository, ModelMapper modelMapper) {
         this.answerRepository = answerRepository;
+        this.modelMapper = modelMapper;
     }
 
     @Override
@@ -40,5 +46,12 @@ public class AnswerServiceImpl implements AnswerService {
     @Override
     public Answer findByName(String name) {
         return answerRepository.findByName(name);
+    }
+
+    @Override
+    public AnswerRequestDTO save(AnswerRequestDTO event) {
+        Answer result = modelMapper.map(event,Answer.class);
+        answerRepository.save(result);
+        return modelMapper.map(result, AnswerRequestDTO.class);
     }
 }
