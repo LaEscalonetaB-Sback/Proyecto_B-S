@@ -95,4 +95,9 @@ public class Person {
 
     @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
     private List<Interview> interviewList;
+
+    @ManyToOne
+    @JsonManagedReference
+    @JoinColumn(name = "state_id")
+    private StatePerson statePerson;
 }

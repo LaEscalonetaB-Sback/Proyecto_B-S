@@ -40,7 +40,7 @@ public class RolServiceImpl implements RolService {
 
     @Override
     public List<RolResponseDTO> listRol() {
-        List<Rol> rolList = rolRepository.findAll();
+        List<Rol> rolList = rolRepository.findAllByOrderByNameAsc();
         HelperValidator.isEmptyList(rolList);
 
         return rolList.stream()

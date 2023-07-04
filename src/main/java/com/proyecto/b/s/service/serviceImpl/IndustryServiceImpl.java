@@ -40,7 +40,7 @@ public class IndustryServiceImpl implements IndustryService {
 
     @Override
     public List<IndustryResponseDTO> listIndustry() {
-        List<Industry> industryList = industryRepository.findAll();
+        List<Industry> industryList = industryRepository.findAllByOrderByNameAsc();
         HelperValidator.isEmptyList(industryList);
 
         return industryList.stream()

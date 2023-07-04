@@ -10,6 +10,9 @@ import java.util.List;
 
 @Repository
 public interface ClientRepository extends JpaRepository<Client, Long> {
+
+    List<Client> findAllByOrderByNameAsc();
+
     @Query("SELECT c FROM Client c WHERE c.name = :name")
     Client findByName(@Param("name") String name);
 

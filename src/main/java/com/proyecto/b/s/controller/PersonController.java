@@ -1,6 +1,8 @@
 package com.proyecto.b.s.controller;
 
+import com.proyecto.b.s.dto.request.AnswerRequestDTO;
 import com.proyecto.b.s.dto.request.personRequestDTO.PersonListRequestDTO;
+import com.proyecto.b.s.dto.response.PersonListResponseDTO;
 import com.proyecto.b.s.dto.request.personRequestDTO.PersonRequestDTO;
 import com.proyecto.b.s.dto.request.personRequestDTO.PersonUpdateRequestDTO;
 import com.proyecto.b.s.dto.response.PersonResponseDTO;
@@ -45,6 +47,7 @@ public class PersonController {
         return ResponseEntity.ok(persons);
     }
 
+    //Listar activos
     @GetMapping("/list/activeEvent")
     public ResponseEntity<List<PersonListRequestDTO>> listActivePersonForEvent() {
         List<PersonListRequestDTO> people = personService.listAllActiveByFullName();
@@ -82,6 +85,13 @@ public class PersonController {
 
         return ResponseEntity.ok(result);
     }
+
+    /*@PutMapping("/updateStateAnswer/{id}")
+    public ResponseEntity<PersonResponseDTO> changePersonStateByAnswer(@PathVariable Long id, @RequestBody AnswerRequestDTO answerRequestDTO) throws Exception {
+        PersonResponseDTO result = personService.changeStatePerson(id, answerRequestDTO);
+
+        return ResponseEntity.ok(result);
+    }*/
 
     //Eliminar por id
     @DeleteMapping("/delete/{id}")
